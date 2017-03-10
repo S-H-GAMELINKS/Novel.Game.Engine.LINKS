@@ -7823,12 +7823,4 @@ int CONFIG(){
 	return 0;
 }
 
-//フルスクリーン/ウインドウ切り替え
-//int WindowChange_full_window() {
-
-//	if (CheckHitKey(KEY_INPUT_F11) == 1 && GetWindowModeFlag() == TRUE) {
-//		MATERIAL_LOAD();
-//		ChangeWindowMode(FALSE);
-//	}
-//
 
