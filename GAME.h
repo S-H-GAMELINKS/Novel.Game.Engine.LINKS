@@ -1,0 +1,72 @@
+
+//各素材データ読込関数
+int MATERIAL_LOAD();
+
+//スクリプト読込関数
+int SCRIPT_READ();
+
+//矢印キー操作関数
+int MoveKey(int KeyStateBuf[]);
+
+//タイトルメニューカーソル関数
+void title(int Cr, int y);
+
+//セーブロードメニューカーソル関数
+void SAVE_LOAD_MENU(int Cr, int SAVE_y);
+
+//ゲームメニューカーソル関数
+void GAME_MENU_CURSOR(int Cr, int GAME_y);
+
+//セーブデータロード関数
+int SAVEDATA_LOAD();
+
+//SKIP_READ LOAD関数
+int SKIP_READ_LOAD();
+
+//SKIP_READ SAVE関数
+int SKIP_READ_SAVE();
+
+//CONFIG_SAVE関数
+int CONFIG_SAVE();
+
+//CONFIG_LOAD関数
+int CONFIG_LOAD();
+
+//クイックセーブ
+int QUICKSAVE_SAVE();
+
+//クイックロード
+int QUICKSAVE_LOAD();
+
+//セーブ・ロード・スキップ・オート他 ゲームメニュー
+int GAMEMENU();
+
+//選択肢機能
+void sentakusi(int Cr, int y);
+
+// 改行関数
+int Kaigyou(void);
+
+//スクリプトタグ処理関数
+int SCRIPT_OUTPUT();
+
+//終了ウインドウ
+int GAME_FINISH();
+
+//初期化
+int FORMAT();
+
+//スクリーンショット機能
+int SCREENSHOT();
+
+//マウス操作
+int Mouse_Move();
+
+//コンフィグ(タイトル画面)
+int CONFIG();
+
+//フルスクリーン/ウインドウ切り替え
+//int WindowChange_full_window();
+
+
+
