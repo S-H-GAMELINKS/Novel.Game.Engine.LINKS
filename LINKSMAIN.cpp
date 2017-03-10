@@ -24,6 +24,8 @@ extern unsigned int Cr;
 //エンドフラグ
 extern int EndFlag;
 
+
+
 //既読スキップ変数
 extern int LINKS;
 extern int A;
