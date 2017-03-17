@@ -1,4 +1,4 @@
-
+//ライブラリとヘッダの読み込み
 #include "DxLib.h"
 #include "DEF.h"
 

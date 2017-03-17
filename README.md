@@ -23,6 +23,10 @@ URL:http://dixq.net/forum/viewforum.php?f=3
 
 この場を借りて感謝いたします。
 
+また、ノベルゲームエンジン「LINKS」はDXライブラリを使用して制作しています。
+
+DX Library Copyright (C) 2001-2017 Takumi Yamada.
+
 
 以下は、DXライブラリにて使用されている各ライブラリの著作権表記となります。
 
