@@ -37,6 +37,9 @@
     <None Include="LICENSE" />
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="タグ一覧.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4406CD72-6E10-4A84-8225-85C67F86E4CA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
