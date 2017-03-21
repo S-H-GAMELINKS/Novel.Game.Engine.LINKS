@@ -20,11 +20,9 @@ URL:http://dixq.net/forum/viewforum.php?f=3
 
 「LINKS」開発にあたっては上記の素晴らしいサイトにて
 公開されているソースコードを参考にさせていただきました。
-
 この場を借りて感謝いたします。
 
 また、ノベルゲームエンジン「LINKS」はDXライブラリを使用して制作しています。
-
 DX Library Copyright (C) 2001-2017 Takumi Yamada.
 
 
