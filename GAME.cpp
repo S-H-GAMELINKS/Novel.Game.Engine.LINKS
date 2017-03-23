@@ -4190,6 +4190,20 @@ void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
 
 }
 
+//スクリプトタグ処理(SE)
+void SCRIPT_OUTPUT_SOUNDEFFECT() {
+
+	// 音量の設定
+	ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
+
+	//SEの再生
+	PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
+
+	//文字を進める
+	CP++;
+
+}
+
 //スクリプトタグ処理(メイン)関数
 int SCRIPT_OUTPUT() {
 
@@ -5959,180 +5973,168 @@ int SCRIPT_OUTPUT() {
 		//SE01再生文字
 	case 'k':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE01読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[0];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE02再生文字
 	case 'l':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE02読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[1];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE03再生文字
 	case 'm':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE03読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[2];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE04再生文字
 	case 'n':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE04読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[3];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE05再生文字
 	case 'o':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE05読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[4];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE06再生文字
 	case 'p':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE06読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[5];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE07再生文字
 	case 'q':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE07読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[6];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE08再生文字
 	case 'r':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE08読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[7];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE09再生文字
 	case 's':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE09読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[8];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE10再生文字
 	case 't':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE10読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[9];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE11再生文字
 	case 'u':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE11読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[10];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
 		//SE12再生文字
 	case 'v':
 
+		//以前のSEが再生されていれば停止
 		StopSoundMem(SOUNDEFFECT);
 
+		//SE12読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[11];
 
-		// 音量の設定
-		ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
-
-		PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-		CP++;
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 
 		break;
 
@@ -7575,13 +7577,10 @@ int CONFIG(){
 
 			SetDrawScreen(DX_SCREEN_FRONT);
 
-
 		}
 	}
 
 	WaitTimer(300);
-
-
 
 	return 0;
 }
