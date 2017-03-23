@@ -4150,6 +4150,30 @@ void SCRIPT_OUTPUT_CHARACTER() {
 		DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
 	}
 
+	//文字を進める
+	CP++;
+
+}
+
+//スクリプトタグ処理(背景)
+void SCRIPT_OUTPUT_BACKGROUND() {
+
+	// 読みこんだグラフィックを画面左上に描画
+	DrawGraph(0, 0, BACKGROUND, TRUE);
+
+	//ウインドウ風時の処理
+	if (soundnovel_winownovel == 1) {
+
+		//ウインドウの色選択
+		int	Window_Color = GetColor(0, 0, 0);
+
+		//ウインドウの描画
+		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+	}
+
+	//文字を進める
+	CP++;
+
 }
 
 //スクリプトタグ処理(メイン)関数
@@ -5483,9 +5507,6 @@ int SCRIPT_OUTPUT() {
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
 
-		//文字を進める
-		CP++;
-
 		break;
 
 		//キャラ02読込（画面に出力）
@@ -5496,9 +5517,6 @@ int SCRIPT_OUTPUT() {
 
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
-
-		//文字を進める
-		CP++;
 
 		break;
 
@@ -5511,9 +5529,6 @@ int SCRIPT_OUTPUT() {
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
 
-		//文字を進める
-		CP++;
-
 		break;
 
 		//キャラ04読込（画面に出力）
@@ -5524,9 +5539,6 @@ int SCRIPT_OUTPUT() {
 
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
-
-		//文字を進める
-		CP++;
 
 		break;
 
@@ -5539,9 +5551,6 @@ int SCRIPT_OUTPUT() {
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
 
-		//文字を進める
-		CP++;
-
 		break;
 
 		//キャラ06読込（画面に出力）
@@ -5552,9 +5561,6 @@ int SCRIPT_OUTPUT() {
 
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
-
-		//文字を進める
-		CP++;
 
 		break;
 
@@ -5567,9 +5573,6 @@ int SCRIPT_OUTPUT() {
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
 
-		//文字を進める
-		CP++;
-
 		break;
 
 		//キャラ08読込（画面に出力）
@@ -5580,9 +5583,6 @@ int SCRIPT_OUTPUT() {
 
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
-
-		//文字を進める
-		CP++;
 
 		break;
 
@@ -5595,9 +5595,6 @@ int SCRIPT_OUTPUT() {
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
 
-		//文字を進める
-		CP++;
-
 		break;
 
 		//キャラ10読込（画面に出力）
@@ -5608,9 +5605,6 @@ int SCRIPT_OUTPUT() {
 
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
-
-		//文字を進める
-		CP++;
 
 		break;
 
@@ -5623,9 +5617,6 @@ int SCRIPT_OUTPUT() {
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
 
-		//文字を進める
-		CP++;
-
 		break;
 
 		//キャラ12読込（画面に出力）
@@ -5637,9 +5628,6 @@ int SCRIPT_OUTPUT() {
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER();
 
-		//文字を進める
-		CP++;
-
 		break;
 
 		//********************キャラクター画像読込文字(ここまで)****************************************//
@@ -5649,19 +5637,11 @@ int SCRIPT_OUTPUT() {
 		//背景01読込（画面に出力）
 	case 'M':
 
+		//背景01読込
 		BACKGROUND = BACKGROUND_LOAD[0];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
- 			
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5670,17 +5650,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[1];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5689,17 +5660,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[2];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5708,17 +5670,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[3];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5727,17 +5680,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[4];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5746,17 +5690,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[5];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5765,17 +5700,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[6];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5784,17 +5710,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[7];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5803,17 +5720,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[8];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5822,17 +5730,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[9];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5841,17 +5740,8 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[10];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
@@ -5860,22 +5750,12 @@ int SCRIPT_OUTPUT() {
 
 		BACKGROUND = BACKGROUND_LOAD[11];
 
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-		
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-		
-		CP++;
+		//背景描画
+		SCRIPT_OUTPUT_BACKGROUND();
 
 		break;
 
 		//********************背景画像読込文字(ここまで)****************************************//
-
 
 		//********************BGM再生文字(ここから)****************************************//
 
