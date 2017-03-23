@@ -4126,7 +4126,33 @@ int GAME_FINISH() {
 	return 0;
 }
 
-//スクリプトタグ処理関数
+//スクリプトタグ処理(立ち絵)
+void SCRIPT_OUTPUT_CHARACTER() {
+
+	//サウンドノベル風時の処理
+	if (soundnovel_winownovel == 0) {
+		//背景画像を切り抜き、立ち絵の上にペースト
+		CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
+		DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+
+		// 読みこんだグラフィックを画面左上に描画
+		DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
+
+	}
+
+	//ウインドウ風時の処理
+	if (soundnovel_winownovel == 1) {
+		//背景画像を切り抜き、立ち絵の上にペースト
+		CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
+		DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
+
+		// 読みこんだグラフィックを画面左上に描画
+		DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
+	}
+
+}
+
+//スクリプトタグ処理(メイン)関数
 int SCRIPT_OUTPUT() {
 
 	char  Moji;
@@ -5451,372 +5477,168 @@ int SCRIPT_OUTPUT() {
 		//キャラ01読込（画面に出力）
 	case 'A':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ01読込
+		CHARACTER = CHARACTER_LOAD[0];
 
-			CHARACTER = CHARACTER_LOAD[0];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[0];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ02読込（画面に出力）
 	case 'B':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ02読込
+		CHARACTER = CHARACTER_LOAD[1];
 
-			CHARACTER = CHARACTER_LOAD[1];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[1];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ03読込（画面に出力）
 	case 'C':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ03読込
+		CHARACTER = CHARACTER_LOAD[2];
 
-			CHARACTER = CHARACTER_LOAD[2];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[2];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ04読込（画面に出力）
 	case 'D':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ04読込
+		CHARACTER = CHARACTER_LOAD[3];
 
-			CHARACTER = CHARACTER_LOAD[3];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[3];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ05読込（画面に出力）
 	case 'E':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ05読込
+		CHARACTER = CHARACTER_LOAD[4];
 
-			CHARACTER = CHARACTER_LOAD[4];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[4];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ06読込（画面に出力）
 	case 'F':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ06読込
+		CHARACTER = CHARACTER_LOAD[5];
 
-			CHARACTER = CHARACTER_LOAD[5];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[5];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ07読込（画面に出力）
 	case 'G':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ07読込
+		CHARACTER = CHARACTER_LOAD[6];
 
-			CHARACTER = CHARACTER_LOAD[6];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[6];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ08読込（画面に出力）
 	case 'H':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ08読込
+		CHARACTER = CHARACTER_LOAD[7];
 
-			CHARACTER = CHARACTER_LOAD[7];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[7];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ09読込（画面に出力）
 	case 'I':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ09読込
+		CHARACTER = CHARACTER_LOAD[8];
 
-			CHARACTER = CHARACTER_LOAD[8];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[8];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ10読込（画面に出力）
 	case 'J':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ10読込
+		CHARACTER = CHARACTER_LOAD[9];
 
-			CHARACTER = CHARACTER_LOAD[9];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[9];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ11読込（画面に出力）
 	case 'K':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ11読込
+		CHARACTER = CHARACTER_LOAD[10];
 
-			CHARACTER = CHARACTER_LOAD[10];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[10];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
 		//キャラ12読込（画面に出力）
 	case 'L':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		//キャラ02読込
+		CHARACTER = CHARACTER_LOAD[11];
 
-			CHARACTER = CHARACTER_LOAD[11];
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER();
 
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			//背景画像を切り抜き、立ち絵の上にペースト
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CHARACTER = CHARACTER_LOAD[11];
-
-			// 読みこんだグラフィックを画面左上に描画
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			CP++;
-		}
+		//文字を進める
+		CP++;
 
 		break;
 
