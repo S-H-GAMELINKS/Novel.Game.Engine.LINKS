@@ -4176,6 +4176,20 @@ void SCRIPT_OUTPUT_BACKGROUND() {
 
 }
 
+//ÉXÉNÉäÉvÉgÉ^ÉOèàóù(BGM)
+void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
+
+	// âπó ÇÃê›íË
+	ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
+
+	//BGMçƒê∂
+	PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
+
+	//ï∂éöÇêiÇﬂÇÈ
+	CP++;
+
+}
+
 //ÉXÉNÉäÉvÉgÉ^ÉOèàóù(ÉÅÉCÉì)ä÷êî
 int SCRIPT_OUTPUT() {
 
@@ -5648,6 +5662,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi02ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'N':
 
+		//îwåi02ì«çû
 		BACKGROUND = BACKGROUND_LOAD[1];
 
 		//îwåiï`âÊ
@@ -5658,6 +5673,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi03ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'O':
 
+		//îwåi03ì«çû
 		BACKGROUND = BACKGROUND_LOAD[2];
 
 		//îwåiï`âÊ
@@ -5668,6 +5684,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi04ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'P':
 
+		//îwåi04ì«çû
 		BACKGROUND = BACKGROUND_LOAD[3];
 
 		//îwåiï`âÊ
@@ -5678,6 +5695,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi05ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'Q':
 
+		//îwåi05ì«çû
 		BACKGROUND = BACKGROUND_LOAD[4];
 
 		//îwåiï`âÊ
@@ -5688,6 +5706,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi06ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'R':
 
+		//îwåi06ì«çû
 		BACKGROUND = BACKGROUND_LOAD[5];
 
 		//îwåiï`âÊ
@@ -5698,6 +5717,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi07ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'S':
 
+		//îwåi07ì«çû
 		BACKGROUND = BACKGROUND_LOAD[6];
 
 		//îwåiï`âÊ
@@ -5708,6 +5728,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi08ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'T':
 
+		//îwåi08ì«çû
 		BACKGROUND = BACKGROUND_LOAD[7];
 
 		//îwåiï`âÊ
@@ -5718,6 +5739,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi09ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'U':
 
+		//îwåi09ì«çû
 		BACKGROUND = BACKGROUND_LOAD[8];
 
 		//îwåiï`âÊ
@@ -5728,6 +5750,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi10ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'V':
 
+		//îwåi10ì«çû
 		BACKGROUND = BACKGROUND_LOAD[9];
 
 		//îwåiï`âÊ
@@ -5738,6 +5761,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi11ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'W':
 
+		//îwåi11ì«çû
 		BACKGROUND = BACKGROUND_LOAD[10];
 
 		//îwåiï`âÊ
@@ -5748,6 +5772,7 @@ int SCRIPT_OUTPUT() {
 		//îwåi12ì«çûÅiâÊñ Ç…èoóÕÅj
 	case 'X':
 
+		//îwåi12ì«çû
 		BACKGROUND = BACKGROUND_LOAD[11];
 
 		//îwåiï`âÊ
@@ -5762,180 +5787,168 @@ int SCRIPT_OUTPUT() {
 		//BGM01çƒê∂ï∂éö
 	case 'Y':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM01ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[0];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM02çƒê∂ï∂éö
 	case 'Z':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM02ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[1];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM03çƒê∂ï∂éö
 	case 'a':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM03ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[2];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM04çƒê∂ï∂éö
 	case 'b':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM04ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[3];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM05çƒê∂ï∂éö
 	case 'c':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM05ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[4];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM06çƒê∂ï∂éö
 	case 'd':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM06ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[5];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM07çƒê∂ï∂éö
 	case 'e':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM07ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[6];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM08çƒê∂ï∂éö
 	case 'f':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM09ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[7];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM09çƒê∂ï∂éö
 	case 'g':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM09ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[8];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM10çƒê∂ï∂éö
 	case 'h':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM10ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[9];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM11çƒê∂ï∂éö
 	case 'i':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM11ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[10];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
 		//BGM12çƒê∂ï∂éö
 	case 'j':
 
+		//à»ëOÇÃBGMÇÃçƒê∂í‚é~
 		StopSoundMem(BACKGROUNDMUSIC);
 
+		//BGM12ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[11];
 
-		// âπó ÇÃê›íË
-		ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-		PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		CP++;
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 
 		break;
 
