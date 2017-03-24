@@ -1736,12 +1736,49 @@ int CONFIG() {
 	return 0;
 }
 
-//セーブ・ロード・スキップ・オート他 ゲームメニュー
+//ゲームメニュー項目描画関数
+void GAMEMENU_DRAW() {
+
+	//各メニュー描画
+	DrawString(SAVE_NAME_X, GAMEMENU_y, "セーブ", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 2, "ロード", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 3, "セーブデータ削除", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 4, "既読スキップ", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 5, "スキップ", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 6, "オート", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 7, "オート/スキップ停止", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "バックログ参照", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 9, "設定", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 10, "タイトルに戻る", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 11, "ゲームに戻る", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 12, "ゲーム終了", Cr);
+
+}
+
+//ゲームメニュー(キー操作)
+void GAMEMENU_KEY_MOVE() {
+
+	if (Key[KEY_INPUT_DOWN] == 1) {
+		ClearDrawScreen();
+		GAME_y += GAMEMENU_y;
+		if (GAME_y == (GAMEMENU_y * 13))
+			GAME_y = GAMEMENU_y;
+	}
+
+	if (Key[KEY_INPUT_UP] == 1) {
+		ClearDrawScreen();
+		GAME_y -= GAMEMENU_y;
+		if (GAME_y == (GAMEMENU_y - GAMEMENU_y))
+			GAME_y = (GAMEMENU_y * 12);
+	}
+}
+
+//ゲームメニュー
 int GAMEMENU() {
 
 	//ゲームメニューを開く
 	if (CheckHitKey(KEY_INPUT_BACK) == 1 || (GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
-
+		
 		GAMEMENU_COUNT = 0;
 		ClearDrawScreen();
 		StopSoundMem(BACKGROUNDMUSIC);
@@ -1752,24 +1789,8 @@ int GAMEMENU() {
 		//ゲームメニューループ
 		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && GAMEMENU_COUNT == 0) {
 
-			//各メニュー描画
-			DrawString(SAVE_NAME_X, GAMEMENU_y, "セーブ", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 2, "ロード", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 3, "セーブデータ削除", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 4, "既読スキップ", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 5, "スキップ", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 6, "オート", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 7, "オート/スキップ停止", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "バックログ参照", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 9, "設定", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 10, "タイトルに戻る", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 11, "ゲームに戻る", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 12, "ゲーム終了", Cr);
-
-			//キー操作関連
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			ClearDrawScreen();
+			//ゲームメニューの描画
+			GAMEMENU_DRAW();
 
 			//カーソル描画
 			GAME_MENU_CURSOR(Cr, GAME_y);
@@ -1777,19 +1798,10 @@ int GAMEMENU() {
 			//マウス操作
 			Mouse_Move();
 
-			if (Key[KEY_INPUT_DOWN] == 1) {
-				ClearDrawScreen();
-				GAME_y += GAMEMENU_y;
-				if (GAME_y == (GAMEMENU_y * 13))
-					GAME_y = GAMEMENU_y;
-			}
+			//画面クリア処理
+			SetDrawScreen(DX_SCREEN_BACK);
 
-			if (Key[KEY_INPUT_UP] == 1) {
-				ClearDrawScreen();
-				GAME_y -= GAMEMENU_y;
-				if (GAME_y == (GAMEMENU_y - GAMEMENU_y))
-					GAME_y = (GAMEMENU_y * 12);
-			}
+			ClearDrawScreen();
 
 			SetDrawScreen(DX_SCREEN_FRONT);
 
