@@ -171,7 +171,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 				if (y == GAMELOAD && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == GAMELOAD && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 					ClearDrawScreen();
-					SaveFlag = 2;
 					SAVEDATA_LOAD();
 					break;
 				}
