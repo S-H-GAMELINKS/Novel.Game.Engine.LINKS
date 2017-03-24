@@ -491,14 +491,8 @@ void GAME_MENU_CURSOR(int Cr, int GAME_y) {
 	DrawString(SAVE_X - (CURSOR * 6), GAME_y, "■", Cr);
 }
 
-//マウス操作
-int Mouse_Move() {
-
-	//マウスの位置情報変数
-	int MouseX, MouseY;
-
-	//マウスの位置を取得
-	GetMousePoint(&MouseX, &MouseY);
+//マウス操作(タイトルメニュー)
+void Mouse_Move_TITLE(int MouseY) {
 
 	//タイトルメニュー
 	if (EndFlag == 99) {
@@ -517,9 +511,12 @@ int Mouse_Move() {
 
 		if (MouseY >= 450)
 			y = 450;
-
 	}
+}
 
+//マウス操作(ゲームメニュー)
+void Mouse_Move_GAME(int MouseY) {
+	
 	//ゲームメニュー
 	if (EndFlag != 99 && GAMEMENU_COUNT == 0 && Config == 0) {
 
@@ -559,8 +556,11 @@ int Mouse_Move() {
 		if (MouseY >= 360)
 			GAME_y = 360;
 	}
-	
-	//セーブ画面関連
+}
+
+//マウス操作(セーブ画面関連)
+void Mouse_Move_SAVE(int MouseY) {
+
 	if (GAMEMENU_COUNT == 0 && EndFlag != 99 || EndFlag == 99) {
 
 		if (MouseY <= 199)
@@ -574,18 +574,26 @@ int Mouse_Move() {
 
 		if (MouseY >= 400)
 			SAVE_y = 400;
-
 	}
+}
+
+//マウス操作(選択肢画面)
+void Mouse_Move_CHOICE(int MouseY) {
 
 	//選択肢画面
 	if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
 
-			if (MouseY <= 229)
-				y = 200;
+		if (MouseY <= 229)
+			y = 200;
 
-			if (MouseY >= 230)
-				y = 230;
+		if (MouseY >= 230)
+			y = 230;
 	}
+
+}
+
+//マウス操作(コンフィグ)
+void Mouse_Move_CONFIG(int MouseY) {
 
 	//コンフィグ画面
 	if (Config == 1) {
@@ -614,9 +622,33 @@ int Mouse_Move() {
 		if (MouseY >= 240)
 			GAME_y = 240;
 	}
+}
+
+//マウス操作
+int Mouse_Move() {
+
+	//マウスの位置情報変数
+	int MouseX, MouseY;
+
+	//マウスの位置を取得
+	GetMousePoint(&MouseX, &MouseY);
+
+	//タイトルメニュー
+	Mouse_Move_TITLE(MouseY);
+
+	//ゲームメニュー
+	Mouse_Move_GAME(MouseY);
+
+	//セーブ画面関連
+	Mouse_Move_SAVE(MouseY);
+	
+	//選択肢画面
+	Mouse_Move_CHOICE(MouseY);
+
+	//コンフィgン画面
+	Mouse_Move_CONFIG(MouseY);
 
 	return 0;
-
 }
 
 //セーブデータロード関数
@@ -3559,7 +3591,6 @@ int GAME_FINISH() {
 		);
 
 		if (SAVE == IDYES) {
-
 			QUICKSAVE_SAVE();
 			EndFlag = 99999;
 		}
@@ -6994,13 +7025,13 @@ int CONFIG(){
 				WaitTimer(300);
 			}
 
+			//マウス操作関連
+			Mouse_Move();
+
 			//キー操作関連
 			SetDrawScreen(DX_SCREEN_BACK);
 
 			ClearDrawScreen();
-
-			//マウス操作関連
-			Mouse_Move();
 
 			//キー操作関連
 			if (Key[KEY_INPUT_DOWN] == 1) {
