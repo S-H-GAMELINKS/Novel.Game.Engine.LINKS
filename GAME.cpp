@@ -1369,6 +1369,366 @@ int QUICKSAVE_LOAD() {
 
 }
 
+//コンフィグ(キー操作)
+void CONFIG_KEY_MOVE() {
+
+	//キー操作関連
+	if (Key[KEY_INPUT_DOWN] == 1) {
+		ClearDrawScreen();
+		GAME_y += GAMEMENU_y;
+		if (GAME_y == (GAMEMENU_y * 9))
+			GAME_y = GAMEMENU_y;
+	}
+
+	if (Key[KEY_INPUT_UP] == 1) {
+		ClearDrawScreen();
+		GAME_y -= GAMEMENU_y;
+		if (GAME_y == (GAMEMENU_y - GAMEMENU_y))
+			GAME_y = (GAMEMENU_y * 8);
+	}
+}
+
+//コンフィグ(BGM音量調節)
+void BGM_VOL_CHANGE() {
+
+	//ＢＧＭ音量調整
+	if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		WaitTimer(300);
+
+		BGM_VOL += 10;
+		BGM_VOL_COUNT += 1;
+
+		if (BGM_VOL_COUNT >= 10) {
+			BGM_VOL = 100;
+			BGM_VOL_COUNT = 10;
+		}
+	}
+
+	if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+		WaitTimer(300);
+
+		BGM_VOL -= 10;
+		BGM_VOL_COUNT -= 1;
+
+		if (BGM_VOL_COUNT <= 0) {
+			BGM_VOL = 0;
+			BGM_VOL_COUNT = 0;
+		}
+	}
+
+}
+
+//コンフィグ(SE音量調整)
+void SE_VOL_CHANGE() {
+
+	//ＳＥ音量調整
+	if (GAME_y == GAMEMENU_y * 2 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		WaitTimer(300);
+
+		SE_VOL += 10;
+		SE_VOL_COUNT += 1;
+
+		if (SE_VOL_COUNT >= 10) {
+			SE_VOL = 100;
+			SE_VOL_COUNT = 10;
+		}
+	}
+
+	if (GAME_y == GAMEMENU_y * 2 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 2 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+		WaitTimer(300);
+
+		SE_VOL -= 10;
+		SE_VOL_COUNT -= 1;
+
+		if (SE_VOL_COUNT <= 0) {
+			SE_VOL = 0;
+			SE_VOL_COUNT = 0;
+		}
+	}
+}
+
+//コンフィグ(オート速度調整)
+void AUTO_SPEED_CHANGE() {
+
+	//オート速度調整
+	if (GAME_y == GAMEMENU_y * 3 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 3 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		WaitTimer(300);
+
+		AUTO_SPEED += 10;
+		AUTO_SPEED_COUNT += 1;
+
+		if (AUTO_SPEED_COUNT >= 10) {
+			AUTO_SPEED = 100;
+			AUTO_SPEED_COUNT = 10;
+		}
+	}
+
+	if (GAME_y == GAMEMENU_y * 3 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 3 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+		WaitTimer(300);
+
+		AUTO_SPEED -= 10;
+		AUTO_SPEED_COUNT -= 1;
+
+		if (AUTO_SPEED_COUNT <= 0) {
+			AUTO_SPEED = 0;
+			AUTO_SPEED_COUNT = 0;
+		}
+	}
+}
+
+//コンフィグ(スキップ速度調整)
+void SKIP_SPEED_CHANGE() {
+	
+	//スキップ速度調整
+	if (GAME_y == GAMEMENU_y * 4 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 4 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		WaitTimer(300);
+
+		SKIP_SPEED += 10;
+		SKIP_SPEED_COUNT += 1;
+
+		if (SKIP_SPEED_COUNT >= 10) {
+			SKIP_SPEED = 100;
+			SKIP_SPEED_COUNT = 10;
+		}
+	}
+
+	if (GAME_y == GAMEMENU_y * 4 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 4 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+		WaitTimer(300);
+
+		SKIP_SPEED -= 10;
+		SKIP_SPEED_COUNT -= 1;
+
+		if (SKIP_SPEED_COUNT <= 0) {
+			SKIP_SPEED = 0;
+			SKIP_SPEED_COUNT = 0;
+		}
+
+	}
+}
+
+//コンフィグ(文字描画)
+void STRING_SPEED_CHANGE() {
+
+	//文字描画速度調整
+	if (GAME_y == GAMEMENU_y * 5 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 5 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		WaitTimer(300);
+
+		STRING_SPEED += 10;
+		STRING_SPEED_COUNT += 1;
+
+		if (STRING_SPEED_COUNT >= 10) {
+			STRING_SPEED = 100;
+			STRING_SPEED_COUNT = 10;
+		}
+	}
+
+	if (GAME_y == GAMEMENU_y * 5 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 5 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+		WaitTimer(300);
+
+		STRING_SPEED -= 10;
+		STRING_SPEED_COUNT -= 1;
+
+		if (STRING_SPEED_COUNT <= 0) {
+			STRING_SPEED = 0;
+			STRING_SPEED_COUNT = 0;
+		}
+
+	}
+}
+
+//コンフィグ(サウンドノベル風とウインドウ風)
+void SOUNDNOVEL_WINDOWNOVEL_CHANGE() {
+
+	//サウンドノベル風とウインドウ風の切り替え
+	if (GAME_y == GAMEMENU_y * 6 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 6 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		WaitTimer(300);
+		soundnovel_winownovel = 0;
+	}
+
+	if (GAME_y == GAMEMENU_y * 6 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 6 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+		WaitTimer(300);
+		soundnovel_winownovel = 1;
+	}
+}
+
+//非アクティブ時の処理設定
+void WINDOWACTIVE() {
+
+	//非アクティブ時の処理の切り替え
+	if (GAME_y == GAMEMENU_y * 7 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 7 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		WaitTimer(300);
+		WindowActive = FALSE;
+
+		//非アクティブ状態ではゲームを実行しない
+		SetAlwaysRunFlag(WindowActive);
+	}
+
+	if (GAME_y == GAMEMENU_y * 7 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 7 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+		WaitTimer(300);
+		WindowActive = TRUE;
+
+		//非アクティブ状態でもゲームを実行
+		SetAlwaysRunFlag(WindowActive);
+	}
+}
+
+//各種設定情報描画
+void CONFIG_MENU() {
+
+	//セーブデータ名描画
+	DrawString(SAVE_NAME_X, GAMEMENU_y, "ＢＧＭ音量", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 2, "ＳＥ音量", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 3, "オート速度", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 4, "スキップ速度", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 5, "文字描画速度", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 6, "描画方法", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 7, "非アクティブ時", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "メニューに戻る", Cr);
+
+	//BGM音量目盛り描画
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, Cr, "%d", BGM_VOL);
+
+	//SE音量目盛り描画
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, Cr, "%d", SE_VOL);
+
+	//オート速度目盛り描画
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, Cr, "%d", AUTO_SPEED);
+
+	//スキップ速度目盛り描画
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, Cr, "%d", SKIP_SPEED);
+
+	//文字描画速度目盛り描画
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, Cr, "%d", STRING_SPEED);
+
+	//サウンドノベル風
+	if (soundnovel_winownovel == 0)
+		DrawString(SAVE_NAME_X + CURSOR * 6, GAMEMENU_y * 6, "サウンドノベル風", Cr);
+
+	//ウインドウ風
+	if (soundnovel_winownovel == 1)
+		DrawString(SAVE_NAME_X + CURSOR * 6, GAMEMENU_y * 6, "ウインドウ風", Cr);
+
+	//非アクティブ時の処理
+	if (WindowActive == TRUE)
+		DrawString(SAVE_NAME_X + CURSOR * 7, GAMEMENU_y * 7, "処理", Cr);
+
+	if (WindowActive == FALSE)
+		DrawString(SAVE_NAME_X + CURSOR * 7, GAMEMENU_y * 7, "未処理", Cr);
+}
+
+//コンフィグ
+int CONFIG() {
+
+	SAVE = MessageBox(
+		NULL,
+		"設定を変更しますか？",
+		"ノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+
+	if (SAVE == IDYES) {
+
+		Config = 1;
+
+		GAME_y = GAMEMENU_y;
+
+		ClearDrawScreen();
+
+		WaitTimer(300);
+
+		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && Config == 1) {
+
+			GAME_MENU_CURSOR(Cr, GAME_y);
+
+			//各種設定情報描画
+			CONFIG_MENU();
+
+			//BGM音量調節
+			BGM_VOL_CHANGE();
+
+			//SE音量調整
+			SE_VOL_CHANGE();
+
+			//オート速度調整
+			AUTO_SPEED_CHANGE();
+
+			//スキップ速度調整
+			SKIP_SPEED_CHANGE();
+
+			//文字列描画速度
+			STRING_SPEED_CHANGE();
+
+			//サウンドノベル風とウインドウ風描画設定
+			SOUNDNOVEL_WINDOWNOVEL_CHANGE();
+
+			//非アクティブ時の処理設定
+			WINDOWACTIVE();
+
+			//タイトルに戻る/ゲームメニューに戻る
+			if (GAME_y == GAMEMENU_y * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+				//タイトルに戻る
+				if (EndFlag == 99) {
+					SAVE = MessageBox(
+						NULL,
+						"タイトルに戻りますか？",
+						"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+						MB_YESNO
+					);
+				}
+
+				//ゲームメニューに戻る
+				if (EndFlag != 99) {
+					SAVE = MessageBox(
+						NULL,
+						"ゲームメニューに戻りますか？",
+						"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+						MB_YESNO
+					);
+				}
+
+				if (SAVE == IDYES) {
+					WaitTimer(300);
+					ClearDrawScreen();
+					GAME_y = GAMEMENU_y;
+					Config = 0;
+					break;
+				}
+
+				WaitTimer(300);
+			}
+
+			//マウス操作関連
+			Mouse_Move();
+
+			//キー操作関連
+			SetDrawScreen(DX_SCREEN_BACK);
+
+			ClearDrawScreen();
+
+			SetDrawScreen(DX_SCREEN_FRONT);
+		}
+	}
+
+	WaitTimer(300);
+
+	return 0;
+}
+
 //セーブ・ロード・スキップ・オート他 ゲームメニュー
 int GAMEMENU() {
 
@@ -2905,436 +3265,10 @@ int GAMEMENU() {
 			//設定
 			if (GAME_y == (GAMEMENU_y * 9) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 9) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-				SAVE = MessageBox(
-					NULL,
-					"設定を変更しますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-					);
-
-				if (SAVE == IDYES) {
-
-					Config = 1;
-
-					GAME_y = GAMEMENU_y;
-
-					ClearDrawScreen();
-
-					WaitTimer(300);
-
-					while (ProcessMessage() == 0 && MoveKey(Key) == 0 && Config == 1) {
-
-						GAME_MENU_CURSOR(Cr, GAME_y);
-
-						//セーブデータ名描画
-						DrawString(SAVE_NAME_X, GAMEMENU_y, "ＢＧＭ音量", Cr);
-						DrawString(SAVE_NAME_X, GAMEMENU_y * 2, "ＳＥ音量", Cr);
-						DrawString(SAVE_NAME_X, GAMEMENU_y * 3, "オート速度", Cr);
-						DrawString(SAVE_NAME_X, GAMEMENU_y * 4, "スキップ速度", Cr);
-						DrawString(SAVE_NAME_X, GAMEMENU_y * 5, "文字描画速度", Cr);
-						DrawString(SAVE_NAME_X, GAMEMENU_y * 6, "描画方法", Cr);
-						DrawString(SAVE_NAME_X, GAMEMENU_y * 7, "非アクティブ時", Cr);
-						DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "メニューに戻る", Cr);
-
-						//目盛り描画
-
-						if (BGM_VOL_COUNT == 10)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■■■■■", Cr);
-
-						if (BGM_VOL_COUNT == 9)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■■■■", Cr);
-
-						if (BGM_VOL_COUNT == 8)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■■■", Cr);
-
-						if (BGM_VOL_COUNT == 7)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■■", Cr);
-
-						if (BGM_VOL_COUNT == 6)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■", Cr);
-
-						if (BGM_VOL_COUNT == 5)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■", Cr);
-
-						if (BGM_VOL_COUNT == 4)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■", Cr);
-
-						if (BGM_VOL_COUNT == 3)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■", Cr);
-
-						if (BGM_VOL_COUNT == 2)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■", Cr);
-
-						if (BGM_VOL_COUNT == 1)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■", Cr);
-
-						if (BGM_VOL_COUNT == 0)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "", Cr);
-
-						if (SE_VOL_COUNT == 10)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■■■■■", Cr);
-
-						if (SE_VOL_COUNT == 9)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■■■■", Cr);
-
-						if (SE_VOL_COUNT == 8)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■■■", Cr);
-
-						if (SE_VOL_COUNT == 7)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■■", Cr);
-
-						if (SE_VOL_COUNT == 6)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■", Cr);
-
-						if (SE_VOL_COUNT == 5)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■", Cr);
-
-						if (SE_VOL_COUNT == 4)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■", Cr);
-
-						if (SE_VOL_COUNT == 3)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■", Cr);
-
-						if (SE_VOL_COUNT == 2)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■", Cr);
-
-						if (SE_VOL_COUNT == 1)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■", Cr);
-
-						if (SE_VOL_COUNT == 0)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "", Cr);
-
-						if (AUTO_SPEED_COUNT == 10)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■■■■■", Cr);
-
-						if (AUTO_SPEED_COUNT == 9)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■■■■", Cr);
-
-						if (AUTO_SPEED_COUNT == 8)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■■■", Cr);
-
-						if (AUTO_SPEED_COUNT == 7)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■■", Cr);
-
-						if (AUTO_SPEED_COUNT == 6)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■", Cr);
-
-						if (AUTO_SPEED_COUNT == 5)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■", Cr);
-
-						if (AUTO_SPEED_COUNT == 4)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■", Cr);
-
-						if (AUTO_SPEED_COUNT == 3)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■", Cr);
-
-						if (AUTO_SPEED_COUNT == 2)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■", Cr);
-
-						if (AUTO_SPEED_COUNT == 1)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■", Cr);
-
-						if (AUTO_SPEED_COUNT == 0)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "", Cr);
-
-						if (SKIP_SPEED_COUNT == 10)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■■■■■", Cr);
-
-						if (SKIP_SPEED_COUNT == 9)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■■■■", Cr);
-
-						if (SKIP_SPEED_COUNT == 8)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■■■", Cr);
-
-						if (SKIP_SPEED_COUNT == 7)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■■", Cr);
-
-						if (SKIP_SPEED_COUNT == 6)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■", Cr);
-
-						if (SKIP_SPEED_COUNT == 5)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■", Cr);
-
-						if (SKIP_SPEED_COUNT == 4)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■", Cr);
-
-						if (SKIP_SPEED_COUNT == 3)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■", Cr);
-
-						if (SKIP_SPEED_COUNT == 2)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■", Cr);
-
-						if (SKIP_SPEED_COUNT == 1)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■", Cr);
-
-						if (SKIP_SPEED_COUNT == 0)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "", Cr);
-
-
-						if (STRING_SPEED_COUNT == 10)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■■■■■", Cr);
-
-						if (STRING_SPEED_COUNT == 9)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■■■■", Cr);
-
-						if (STRING_SPEED_COUNT == 8)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■■■", Cr);
-
-						if (STRING_SPEED_COUNT == 7)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■■", Cr);
-
-						if (STRING_SPEED_COUNT == 6)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■", Cr);
-
-						if (STRING_SPEED_COUNT == 5)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■", Cr);
-
-						if (STRING_SPEED_COUNT == 4)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■", Cr);
-
-						if (STRING_SPEED_COUNT == 3)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■", Cr);
-
-						if (STRING_SPEED_COUNT == 2)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■", Cr);
-
-						if (STRING_SPEED_COUNT == 1)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■", Cr);
-
-						if (STRING_SPEED_COUNT == 0)
-							DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "", Cr);
-
-						if (soundnovel_winownovel == 0)
-							DrawString(SAVE_NAME_X + CURSOR * 6, GAMEMENU_y * 6, "サウンドノベル風", Cr);
-
-						if (soundnovel_winownovel == 1)
-							DrawString(SAVE_NAME_X + CURSOR * 6, GAMEMENU_y * 6, "ウインドウ風", Cr);
-
-						if (WindowActive == TRUE)
-							DrawString(SAVE_NAME_X + CURSOR * 7, GAMEMENU_y * 7, "処理", Cr);
-
-						if (WindowActive == FALSE)
-							DrawString(SAVE_NAME_X + CURSOR * 7, GAMEMENU_y * 7, "未処理", Cr);
-
-						//ＢＧＭ音量調整
-						if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-							WaitTimer(300);
-
-							BGM_VOL += 10;
-							BGM_VOL_COUNT += 1;
-
-							if (BGM_VOL_COUNT >= 10) {
-								BGM_VOL = 100;
-								BGM_VOL_COUNT = 10;
-							}
-						}
-
-						if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-							WaitTimer(300);
-
-							BGM_VOL -= 10;
-							BGM_VOL_COUNT -= 1;
-
-							if (BGM_VOL_COUNT <= 0) {
-								BGM_VOL = 0;
-								BGM_VOL_COUNT = 0;
-							}
-						}
-
-						//ＳＥ音量調整
-						if (GAME_y == GAMEMENU_y * 2 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-							WaitTimer(300);
-
-							SE_VOL += 10;
-							SE_VOL_COUNT += 1;
-
-							if (SE_VOL_COUNT >= 10) {
-								SE_VOL = 100;
-								SE_VOL_COUNT = 10;
-							}
-						}
-
-						if (GAME_y == GAMEMENU_y * 2 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 2 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-							WaitTimer(300);
-
-							SE_VOL -= 10;
-							SE_VOL_COUNT -= 1;
-
-							if (SE_VOL_COUNT <= 0) {
-								SE_VOL = 0;
-								SE_VOL_COUNT = 0;
-							}
-						}
-
-						//オート速度調整
-						if (GAME_y == GAMEMENU_y * 3 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 3 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-							WaitTimer(300);
-
-							AUTO_SPEED += 10;
-							AUTO_SPEED_COUNT += 1;
-
-							if (AUTO_SPEED_COUNT >= 10) {
-								AUTO_SPEED = 100;
-								AUTO_SPEED_COUNT = 10;
-							}
-						}
-
-						if (GAME_y == GAMEMENU_y * 3 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 3 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-							WaitTimer(300);
-
-							AUTO_SPEED -= 10;
-							AUTO_SPEED_COUNT -= 1;
-
-							if (AUTO_SPEED_COUNT <= 0) {
-								AUTO_SPEED = 0;
-								AUTO_SPEED_COUNT = 0;
-							}
-						}
-
-						//スキップ速度調整
-						if (GAME_y == GAMEMENU_y * 4 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 4 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-							WaitTimer(300);
-
-							SKIP_SPEED += 10;
-							SKIP_SPEED_COUNT += 1;
-
-							if (SKIP_SPEED_COUNT >= 10) {
-								SKIP_SPEED = 100;
-								SKIP_SPEED_COUNT = 10;
-							}
-						}
-
-						if (GAME_y == GAMEMENU_y * 4 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 4 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-							WaitTimer(300);
-
-							SKIP_SPEED -= 10;
-							SKIP_SPEED_COUNT -= 1;
-
-							if (SKIP_SPEED_COUNT <= 0) {
-								SKIP_SPEED = 0;
-								SKIP_SPEED_COUNT = 0;
-							}
-
-						}
-
-						//文字描画速度調整
-						if (GAME_y == GAMEMENU_y * 5 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 5 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-							WaitTimer(300);
-
-							STRING_SPEED += 10;
-							STRING_SPEED_COUNT += 1;
-
-							if (STRING_SPEED_COUNT >= 10) {
-								STRING_SPEED = 100;
-								STRING_SPEED_COUNT = 10;
-							}
-						}
-
-						if (GAME_y == GAMEMENU_y * 5 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 5 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-							WaitTimer(300);
-
-							STRING_SPEED -= 10;
-							STRING_SPEED_COUNT -= 1;
-
-							if (STRING_SPEED_COUNT <= 0) {
-								STRING_SPEED = 0;
-								STRING_SPEED_COUNT = 0;
-							}
-
-						}
-
-						//サウンドノベル風とウインドウ風の切り替え
-						if (GAME_y == GAMEMENU_y * 6 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 6 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-							WaitTimer(300);
-							soundnovel_winownovel = 0;
-						}
-
-						if (GAME_y == GAMEMENU_y * 6 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 6 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-							WaitTimer(300);
-							soundnovel_winownovel = 1;
-						}
-
-						//非アクティブ時の処理の切り替え
-						if (GAME_y == GAMEMENU_y * 7 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 7 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-							WaitTimer(300);
-							WindowActive = FALSE;
-
-							//非アクティブ状態では処理を実行しない
-							SetAlwaysRunFlag(WindowActive);
-						}
-
-						if (GAME_y == GAMEMENU_y * 7 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 7 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-							WaitTimer(300);
-							WindowActive = TRUE;
-
-							//非アクティブ状態でもゲームを実行
-							SetAlwaysRunFlag(WindowActive);
-						}
-
-						//メニューに戻る
-						if (GAME_y == GAMEMENU_y * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-							SAVE = MessageBox(
-								NULL,
-								"メニューに戻りますか？",
-								"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-								MB_YESNO
-								);
-
-							if (SAVE == IDYES) {
-								WaitTimer(300);
-								ClearDrawScreen();
-								GAME_y = GAMEMENU_y;
-								Config = 0;
-								break;
-							}
-
-							WaitTimer(300);
-						}
-
-						//キー操作関連
-						SetDrawScreen(DX_SCREEN_BACK);
-
-						ClearDrawScreen();
-
-						Mouse_Move();
-
-						if (Key[KEY_INPUT_DOWN] == 1) {
-							ClearDrawScreen();
-							GAME_y += GAMEMENU_y;
-							if (GAME_y == (GAMEMENU_y * 9))
-								GAME_y = GAMEMENU_y;
-						}
-
-						if (Key[KEY_INPUT_UP] == 1) {
-							ClearDrawScreen();
-							GAME_y -= GAMEMENU_y;
-							if (GAME_y == (GAMEMENU_y - GAMEMENU_y))
-								GAME_y = (GAMEMENU_y * 8);
-						}
-
-						SetDrawScreen(DX_SCREEN_FRONT);
-
-
-					}
-				}
+				//設定画面の呼び出し
+				CONFIG();
 
 				WaitTimer(300);
-
 			}
 
 			//タイトルに戻る
@@ -6619,441 +6553,4 @@ int SCREENSHOT() {
 
 	return 0;
 		
-}
-
-//コンフィグ(タイトル画面)
-int CONFIG(){
-
-
-	SAVE = MessageBox(
-		NULL,
-		"設定を変更しますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
-
-	if (SAVE == IDYES) {
-
-		Config = 1;
-
-		GAME_y = GAMEMENU_y;
-
-		ClearDrawScreen();
-
-		WaitTimer(300);
-
-		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && Config == 1) {
-
-			GAME_MENU_CURSOR(Cr, GAME_y);
-
-			//セーブデータ名描画
-			DrawString(SAVE_NAME_X, GAMEMENU_y, "ＢＧＭ音量", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 2, "ＳＥ音量", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 3, "オート速度", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 4, "スキップ速度", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 5, "文字描画速度", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 6, "描画方法", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 7, "非アクティブ時", Cr);
-			DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "メニューに戻る", Cr);
-
-			//目盛り描画
-
-			if (BGM_VOL_COUNT == 10)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■■■■■", Cr);
-
-			if (BGM_VOL_COUNT == 9)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■■■■", Cr);
-
-			if (BGM_VOL_COUNT == 8)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■■■", Cr);
-
-			if (BGM_VOL_COUNT == 7)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■■", Cr);
-
-			if (BGM_VOL_COUNT == 6)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■■", Cr);
-
-			if (BGM_VOL_COUNT == 5)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■■", Cr);
-
-			if (BGM_VOL_COUNT == 4)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■■", Cr);
-
-			if (BGM_VOL_COUNT == 3)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■■", Cr);
-
-			if (BGM_VOL_COUNT == 2)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■■", Cr);
-
-			if (BGM_VOL_COUNT == 1)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "■", Cr);
-
-			if (BGM_VOL_COUNT == 0)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, "", Cr);
-
-			if (SE_VOL_COUNT == 10)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■■■■■", Cr);
-
-			if (SE_VOL_COUNT == 9)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■■■■", Cr);
-
-			if (SE_VOL_COUNT == 8)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■■■", Cr);
-
-			if (SE_VOL_COUNT == 7)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■■", Cr);
-
-			if (SE_VOL_COUNT == 6)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■■", Cr);
-
-			if (SE_VOL_COUNT == 5)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■■", Cr);
-
-			if (SE_VOL_COUNT == 4)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■■", Cr);
-
-			if (SE_VOL_COUNT == 3)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■■", Cr);
-
-			if (SE_VOL_COUNT == 2)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■■", Cr);
-
-			if (SE_VOL_COUNT == 1)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "■", Cr);
-
-			if (SE_VOL_COUNT == 0)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, "", Cr);
-
-			if (AUTO_SPEED_COUNT == 10)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■■■■■", Cr);
-
-			if (AUTO_SPEED_COUNT == 9)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■■■■", Cr);
-
-			if (AUTO_SPEED_COUNT == 8)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■■■", Cr);
-
-			if (AUTO_SPEED_COUNT == 7)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■■", Cr);
-
-			if (AUTO_SPEED_COUNT == 6)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■■", Cr);
-
-			if (AUTO_SPEED_COUNT == 5)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■■", Cr);
-
-			if (AUTO_SPEED_COUNT == 4)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■■", Cr);
-
-			if (AUTO_SPEED_COUNT == 3)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■■", Cr);
-
-			if (AUTO_SPEED_COUNT == 2)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■■", Cr);
-
-			if (AUTO_SPEED_COUNT == 1)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "■", Cr);
-
-			if (AUTO_SPEED_COUNT == 0)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, "", Cr);
-
-			if (SKIP_SPEED_COUNT == 10)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■■■■■", Cr);
-
-			if (SKIP_SPEED_COUNT == 9)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■■■■", Cr);
-
-			if (SKIP_SPEED_COUNT == 8)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■■■", Cr);
-
-			if (SKIP_SPEED_COUNT == 7)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■■", Cr);
-
-			if (SKIP_SPEED_COUNT == 6)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■■", Cr);
-
-			if (SKIP_SPEED_COUNT == 5)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■■", Cr);
-
-			if (SKIP_SPEED_COUNT == 4)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■■", Cr);
-
-			if (SKIP_SPEED_COUNT == 3)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■■", Cr);
-
-			if (SKIP_SPEED_COUNT == 2)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■■", Cr);
-
-			if (SKIP_SPEED_COUNT == 1)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "■", Cr);
-
-			if (SKIP_SPEED_COUNT == 0)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, "", Cr);
-
-			if (STRING_SPEED_COUNT == 10)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■■■■■", Cr);
-
-			if (STRING_SPEED_COUNT == 9)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■■■■", Cr);
-
-			if (STRING_SPEED_COUNT == 8)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■■■", Cr);
-
-			if (STRING_SPEED_COUNT == 7)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■■", Cr);
-
-			if (STRING_SPEED_COUNT == 6)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■■", Cr);
-
-			if (STRING_SPEED_COUNT == 5)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■■", Cr);
-
-			if (STRING_SPEED_COUNT == 4)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■■", Cr);
-
-			if (STRING_SPEED_COUNT == 3)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■■", Cr);
-
-			if (STRING_SPEED_COUNT == 2)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■■", Cr);
-
-			if (STRING_SPEED_COUNT == 1)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "■", Cr);
-
-			if (STRING_SPEED_COUNT == 0)
-				DrawString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, "", Cr);
-
-			if (soundnovel_winownovel == 0)
-				DrawString(SAVE_NAME_X + CURSOR * 6, GAMEMENU_y * 6, "サウンドノベル風", Cr);
-
-			if (soundnovel_winownovel == 1)
-				DrawString(SAVE_NAME_X + CURSOR * 6, GAMEMENU_y * 6, "ウインドウ風", Cr);
-
-			if (WindowActive == TRUE)
-				DrawString(SAVE_NAME_X + CURSOR * 7, GAMEMENU_y * 7, "処理", Cr);
-
-			if (WindowActive == FALSE)
-				DrawString(SAVE_NAME_X + CURSOR * 7, GAMEMENU_y * 7, "未処理", Cr);
-
-			//ＢＧＭ音量調整
-			if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				WaitTimer(300);
-
-				BGM_VOL += 10;
-				BGM_VOL_COUNT += 1;
-
-				if (BGM_VOL_COUNT >= 10) {
-					BGM_VOL = 100;
-					BGM_VOL_COUNT = 10;
-				}
-			}
-
-			if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-				WaitTimer(300);
-
-				BGM_VOL -= 10;
-				BGM_VOL_COUNT -= 1;
-
-				if (BGM_VOL_COUNT <= 0) {
-					BGM_VOL = 0;
-					BGM_VOL_COUNT = 0;
-				}
-			}
-
-			//ＳＥ音量調整
-			if (GAME_y == GAMEMENU_y * 2 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				WaitTimer(300);
-
-				SE_VOL += 10;
-				SE_VOL_COUNT += 1;
-
-				if (SE_VOL_COUNT >= 10) {
-					SE_VOL = 100;
-					SE_VOL_COUNT = 10;
-				}
-			}
-
-			if (GAME_y == GAMEMENU_y * 2 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 2 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-				WaitTimer(300);
-
-				SE_VOL -= 10;
-				SE_VOL_COUNT -= 1;
-
-				if (SE_VOL_COUNT <= 0) {
-					SE_VOL = 0;
-					SE_VOL_COUNT = 0;
-				}
-			}
-
-			//オート速度調整
-			if (GAME_y == GAMEMENU_y * 3 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 3 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				WaitTimer(300);
-
-				AUTO_SPEED += 10;
-				AUTO_SPEED_COUNT += 1;
-
-				if (AUTO_SPEED_COUNT >= 10) {
-					AUTO_SPEED = 100;
-					AUTO_SPEED_COUNT = 10;
-				}
-			}
-
-			if (GAME_y == GAMEMENU_y * 3 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 3 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-				WaitTimer(300);
-
-				AUTO_SPEED -= 10;
-				AUTO_SPEED_COUNT -= 1;
-
-				if (AUTO_SPEED_COUNT <= 0) {
-					AUTO_SPEED = 0;
-					AUTO_SPEED_COUNT = 0;
-				}
-			}
-
-			//スキップ速度調整
-			if (GAME_y == GAMEMENU_y * 4 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 4 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				WaitTimer(300);
-
-				SKIP_SPEED += 10;
-				SKIP_SPEED_COUNT += 1;
-
-				if (SKIP_SPEED_COUNT >= 10) {
-					SKIP_SPEED = 100;
-					SKIP_SPEED_COUNT = 10;
-				}
-			}
-
-			if (GAME_y == GAMEMENU_y * 4 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 4 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-				WaitTimer(300);
-
-				SKIP_SPEED -= 10;
-				SKIP_SPEED_COUNT -= 1;
-
-				if (SKIP_SPEED_COUNT <= 0) {
-					SKIP_SPEED = 0;
-					SKIP_SPEED_COUNT = 0;
-				}
-
-			}
-
-			//文字描画速度調整
-			if (GAME_y == GAMEMENU_y * 5 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 5 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				WaitTimer(300);
-
-				STRING_SPEED += 10;
-				STRING_SPEED_COUNT += 1;
-
-				if (STRING_SPEED_COUNT >= 10) {
-					STRING_SPEED = 100;
-					STRING_SPEED_COUNT = 10;
-				}
-			}
-
-			if (GAME_y == GAMEMENU_y * 5 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 5 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-				WaitTimer(300);
-
-				STRING_SPEED -= 10;
-				STRING_SPEED_COUNT -= 1;
-
-				if (STRING_SPEED_COUNT <= 0) {
-					STRING_SPEED = 0;
-					STRING_SPEED_COUNT = 0;
-				}
-
-			}
-
-			//サウンドノベル風とウインドウ風の切り替え
-			if (GAME_y == GAMEMENU_y * 6 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 6 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				WaitTimer(300);
-				soundnovel_winownovel = 0;
-			}
-
-			if (GAME_y == GAMEMENU_y * 6 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 6 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-				WaitTimer(300);
-				soundnovel_winownovel = 1;
-			}
-
-			//非アクティブ時の処理の切り替え
-			if (GAME_y == GAMEMENU_y * 7 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 7 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				WaitTimer(300);
-				WindowActive = FALSE;
-
-				//非アクティブ状態ではゲームを実行しない
-				SetAlwaysRunFlag(WindowActive);
-			}
-
-			if (GAME_y == GAMEMENU_y * 7 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 7 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-				WaitTimer(300);
-				WindowActive = TRUE;
-
-				//非アクティブ状態でもゲームを実行
-				SetAlwaysRunFlag(WindowActive);
-			}
-
-			//タイトルに戻る
-			if (GAME_y == GAMEMENU_y * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				SAVE = MessageBox(
-					NULL,
-					"タイトルに戻りますか？",
-					"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
-
-				if (SAVE == IDYES) {
-					WaitTimer(300);
-					ClearDrawScreen();
-					GAME_y = GAMEMENU_y;
-					Config = 0;
-					break;
-				}
-
-				WaitTimer(300);
-			}
-
-			//マウス操作関連
-			Mouse_Move();
-
-			//キー操作関連
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			ClearDrawScreen();
-
-			//キー操作関連
-			if (Key[KEY_INPUT_DOWN] == 1) {
-				ClearDrawScreen();
-				GAME_y += GAMEMENU_y;
-				if (GAME_y == (GAMEMENU_y * 9))
-					GAME_y = GAMEMENU_y;
-			}
-
-			if (Key[KEY_INPUT_UP] == 1) {
-				ClearDrawScreen();
-				GAME_y -= GAMEMENU_y;
-				if (GAME_y == (GAMEMENU_y - GAMEMENU_y))
-					GAME_y = (GAMEMENU_y * 8);
-			}
-
-			SetDrawScreen(DX_SCREEN_FRONT);
-
-		}
-	}
-
-	WaitTimer(300);
-
-	return 0;
 }
