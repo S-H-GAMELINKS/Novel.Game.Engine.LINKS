@@ -1630,6 +1630,44 @@ void CONFIG_MENU() {
 		DrawString(SAVE_NAME_X + CURSOR * 7, GAMEMENU_y * 7, "未処理", Cr);
 }
 
+//コンフィグ(タイトル/ゲームメニューへ戻る)
+void CONFIG_TITLE_BACK() {
+
+	//タイトルに戻る/ゲームメニューに戻る
+	if (GAME_y == GAMEMENU_y * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//タイトルに戻る
+		if (EndFlag == 99) {
+			SAVE = MessageBox(
+				NULL,
+				"タイトルに戻りますか？",
+				"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+				MB_YESNO
+			);
+		}
+
+		//ゲームメニューに戻る
+		if (EndFlag != 99) {
+			SAVE = MessageBox(
+				NULL,
+				"ゲームメニューに戻りますか？",
+				"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+				MB_YESNO
+			);
+		}
+
+		if (SAVE == IDYES) {
+			WaitTimer(300);
+			ClearDrawScreen();
+			GAME_y = GAMEMENU_y;
+			Config = 0;
+		}
+
+		WaitTimer(300);
+	}
+
+}
+
 //コンフィグ
 int CONFIG() {
 
@@ -1678,39 +1716,8 @@ int CONFIG() {
 			//非アクティブ時の処理設定
 			WINDOWACTIVE();
 
-			//タイトルに戻る/ゲームメニューに戻る
-			if (GAME_y == GAMEMENU_y * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//タイトルに戻る
-				if (EndFlag == 99) {
-					SAVE = MessageBox(
-						NULL,
-						"タイトルに戻りますか？",
-						"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-						MB_YESNO
-					);
-				}
-
-				//ゲームメニューに戻る
-				if (EndFlag != 99) {
-					SAVE = MessageBox(
-						NULL,
-						"ゲームメニューに戻りますか？",
-						"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-						MB_YESNO
-					);
-				}
-
-				if (SAVE == IDYES) {
-					WaitTimer(300);
-					ClearDrawScreen();
-					GAME_y = GAMEMENU_y;
-					Config = 0;
-					break;
-				}
-
-				WaitTimer(300);
-			}
+			//タイトルに戻る
+			CONFIG_TITLE_BACK();
 
 			//マウス操作関連
 			Mouse_Move();
