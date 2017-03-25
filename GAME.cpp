@@ -651,6 +651,16 @@ int Mouse_Move() {
 	return 0;
 }
 
+//画面クリア処理関数
+void SCREEN_CLEAR() {
+
+	//画面処理
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	ClearDrawScreen();
+
+	SetDrawScreen(DX_SCREEN_FRONT);
+}
 
 //セーブデータ一覧描画
 void SAVEDATA_DRAW() {
@@ -717,12 +727,8 @@ int SAVEDATA_LOAD() {
 			//マウス操作
 			Mouse_Move();
 
-			//画面処理
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			ClearDrawScreen();
-
-			SetDrawScreen(DX_SCREEN_FRONT);
+			//画面クリア処理
+			SCREEN_CLEAR();
 
 			//セーブデータ１のロード
 			if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
@@ -1834,11 +1840,7 @@ int SAVEDATA_SAVE() {
 			SAVEDATA_KEY_MOVE();
 
 			//画面クリア処理
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			ClearDrawScreen();
-
-			SetDrawScreen(DX_SCREEN_FRONT);
+			SCREEN_CLEAR();
 
 			//セーブデータ１にセーブ
 			if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
@@ -2311,11 +2313,7 @@ int GAMEMENU() {
 			Mouse_Move();
 
 			//画面クリア処理
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			ClearDrawScreen();
-
-			SetDrawScreen(DX_SCREEN_FRONT);
+			SCREEN_CLEAR();
 
 			//セーブ
 
@@ -3545,7 +3543,6 @@ int Kaigyou(void)
 		// 描画列を最初に戻す
 		DrawPointX = 0;
 	}
-
 
 	// 終了
 	return 0;
