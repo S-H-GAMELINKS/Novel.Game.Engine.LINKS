@@ -518,7 +518,7 @@ void Mouse_Move_TITLE(int MouseY) {
 void Mouse_Move_GAME(int MouseY) {
 	
 	//ゲームメニュー
-	if (EndFlag != 99 && GAMEMENU_COUNT == 0 && Config == 0) {
+	if (EndFlag == 99 || EndFlag != 99 && GAMEMENU_COUNT == 0 && Config == 0) {
 
 		if (MouseY <= 59)
 			GAME_y = 30;
@@ -645,7 +645,7 @@ int Mouse_Move() {
 	//選択肢画面
 	Mouse_Move_CHOICE(MouseY);
 
-	//コンフィgン画面
+	//コンフィグ画面
 	Mouse_Move_CONFIG(MouseY);
 
 	return 0;
@@ -2025,6 +2025,7 @@ int SAVEDATA_LOAD() {
 	//セーブ画面ループ
 	SAVE_LOOP();
 
+	return 0;
 }
 
 //セーブデータ削除処理
@@ -2366,6 +2367,7 @@ int SAVEDATA_DELETE() {
 		}
 	}
 
+	return 0;
 }
 
 //ゲームメニュー
