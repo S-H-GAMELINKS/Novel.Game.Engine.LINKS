@@ -170,7 +170,7 @@ typedef struct {
 }ConfigData_t;
 
 //各素材データ読込関数
-int MATERIAL_LOAD() {
+void MATERIAL_LOAD() {
 
 	//サウンドデータの読み込み形式
 	SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
@@ -239,8 +239,6 @@ int MATERIAL_LOAD() {
 
 	//タイトルメニュー背景画像読込
 	TITLE = LoadGraph("DATA/BACKGROUND/TITLE.png");
-
-	return 0;
 }
 
 //スクリプト配列流しこみ関数
@@ -1189,14 +1187,11 @@ void CONFIG_TITLE_BACK() {
 			GAME_y = GAMEMENU_y;
 			Config = 0;
 		}
-
-		WaitTimer(300);
 	}
-
 }
 
 //コンフィグ
-int CONFIG() {
+void CONFIG() {
 
 	SAVE = MessageBox(
 		NULL,
@@ -1249,18 +1244,10 @@ int CONFIG() {
 			//マウス操作関連
 			Mouse_Move();
 
-			//キー操作関連
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			ClearDrawScreen();
-
-			SetDrawScreen(DX_SCREEN_FRONT);
+			//画面クリア処理
+			SCREEN_CLEAR();
 		}
 	}
-
-	WaitTimer(300);
-
-	return 0;
 }
 
 //ゲームメニュー項目描画関数
@@ -1345,13 +1332,11 @@ void SAVEDATA_SCREENSHOT_READ() {
 	WaitTimer(600);
 }
 
-//セーブ後の処理(サウンドノベル風)
-void SAVE_SOUNDNOVEL() {
+//各処理後のゲーム画面の描画(サウンドノベル風)
+void SOUNDNOVEL() {
 
-	//サウンドノベル風描画時の処理
 	if (soundnovel_winownovel == 0) {
 
-		SaveFlag = 0;
 		ClearDrawScreen();
 
 		//背景の表示
@@ -1381,20 +1366,15 @@ void SAVE_SOUNDNOVEL() {
 			SP = 0;
 			CP = 0;
 		}
-
-		SAVE_CHOICE = 0;
-
-		GAMEMENU_COUNT = 1;
 	}
 }
 
-//セーブ後の処理(ウインドウ風)
-void SAVE_WINDOWNOVEL() {
+//各処理後のゲーム画面の描画(ウインドウ風)
+void WINDOWNOVEL() {
 
 	//ウインドウ風描画時の処理
 	if (soundnovel_winownovel == 1) {
 
-		SaveFlag = 0;
 		ClearDrawScreen();
 
 		//背景の表示
@@ -1428,11 +1408,29 @@ void SAVE_WINDOWNOVEL() {
 			SP = 0;
 			CP = 0;
 		}
-
-		SAVE_CHOICE = 0;
-
-		GAMEMENU_COUNT = 1;
 	}
+}
+
+//セーブ後の処理(サウンドノベル風)
+void SAVE_SOUNDNOVEL() {
+
+	//サウンドノベル風描画時の処理
+	SOUNDNOVEL();
+
+	SAVE_CHOICE = 0;
+
+	GAMEMENU_COUNT = 1;
+}
+
+//セーブ後の処理(ウインドウ風)
+void SAVE_WINDOWNOVEL() {
+
+	//ウインドウ風描画時の処理
+	WINDOWNOVEL();
+
+	SAVE_CHOICE = 0;
+
+	GAMEMENU_COUNT = 1;
 }
 
 //セーブ後のメッセージ
@@ -1680,18 +1678,13 @@ void SAVEDATA_SAVE_LOOP() {
 }
 
 //セーブデータセーブ関数
-int SAVEDATA_SAVE() {
+void SAVEDATA_SAVE() {
 
-	//セーブデータ・セーブ画面
-	if (SaveFlag == 1) {
+	//セーブデータのスクリーンショットの読み込み
+	SAVEDATA_SCREENSHOT_READ();
 
-		//セーブデータのスクリーンショットの読み込み
-		SAVEDATA_SCREENSHOT_READ();
-
-
-	}
-
-	return 0;
+	//セーブデータ・セーブ画面ループ
+	SAVEDATA_SAVE_LOOP();
 }
 
 //ロード後のメッセージ
@@ -1708,102 +1701,25 @@ void LOAD_MESSAGE() {
 //ロード後の処理(サウンドノベル風)
 void LOAD_SOUNDNOVEL() {
 
-	//サウンドノベル風描画の処理
-	if (soundnovel_winownovel == 0) {
+	//サウンドノベル風描画時の処理
+	SOUNDNOVEL();
 
-		ClearDrawScreen();
-		GAMEMENU_COUNT = 1;
+	GAMEMENU_COUNT = 1;
 
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-
-			// 音量の設定
-			ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 0;
-		DrawPointX = 0;
-
-		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
-		}
-
-		if (SP == 0) {
-			SP = 0;
-			CP = 0;
-		}
-
-		//ロード後のメッセージ
-		LOAD_MESSAGE();
-
-		WaitTimer(300);
-	}
+	//ロード後のメッセージ
+	LOAD_MESSAGE();
 }
 
 //ロード後の処理(ウインドウ風)
 void LOAD_WINDOWNOVEL() {
 
 	//ウインドウ風描画時の処理
-	if (soundnovel_winownovel == 1) {
+	WINDOWNOVEL();
 
-		ClearDrawScreen();
-		GAMEMENU_COUNT = 1;
+	GAMEMENU_COUNT = 1;
 
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-
-			// 音量の設定
-			ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 400;
-		DrawPointX = 0;
-
-		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
-		}
-
-		if (SP == 0) {
-			SP = 0;
-			CP = 0;
-		}
-
-		//ロード後のメッセージ
-		LOAD_MESSAGE();
-
-		WaitTimer(300);
-	}
-
+	//ロード後のメッセージ
+	LOAD_MESSAGE();
 }
 
 //セーブデータ1のロード
@@ -2020,78 +1936,6 @@ int SAVEDATA_LOAD() {
 	return 0;
 }
 
-//削除後の処理(サウンドノベル風)
-void DELETE_SOUNDNOVEL() {
-
-	//削除後の処理(サウンドノベル風)
-	if (soundnovel_winownovel == 0) {
-
-		GAMEMENU_COUNT = 1;
-		SaveFlag = 0;
-		ClearDrawScreen();
-
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 0;
-		DrawPointX = 0;
-		SP = SP - 1;
-		CP = EOF;
-
-		WaitTimer(300);
-	}
-}
-
-//削除後の処理(ウインドウ風)
-void DELETE_WINDOWNOVEL() {
-
-	//削除後の処理(ウインドウ風)
-	if (soundnovel_winownovel == 1) {
-
-		GAMEMENU_COUNT = 1;
-		SaveFlag = 0;
-		ClearDrawScreen();
-
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 400;
-		DrawPointX = 0;
-		SP = SP - 1;
-		CP = EOF;
-
-		WaitTimer(300);
-	}
-}
-
 //削除後のメッセージ
 void DELETE_MESSAGE() {
 
@@ -2101,6 +1945,32 @@ void DELETE_MESSAGE() {
 		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
 		MB_OK
 	);
+}
+
+//削除後の処理(サウンドノベル風)
+void DELETE_SOUNDNOVEL() {
+
+	//サウンドノベル風描画時の処理
+	SOUNDNOVEL();
+
+	GAMEMENU_COUNT = 1;
+	
+	SaveFlag = 0;
+
+	//削除後のメッセージ
+	DELETE_MESSAGE();
+}
+
+//削除後の処理(ウインドウ風)
+void DELETE_WINDOWNOVEL() {
+
+	//削除後の処理(ウインドウ風)
+	WINDOWNOVEL();
+
+	GAMEMENU_COUNT = 1;
+
+	//削除後のメッセージ
+	DELETE_MESSAGE();
 }
 
 //セーブデータ1削除
@@ -2120,9 +1990,6 @@ void SAVEDATA_1_DELETE(){
 
 		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP1.png";
 		remove(SAVE_DATA_DELETE);
-
-		//削除後のメッセージ
-		DELETE_MESSAGE();
 
 		//削除後の処理(サウンドノベル風)
 		DELETE_SOUNDNOVEL();
@@ -2150,9 +2017,6 @@ void SAVEDATA_2_DELETE() {
 		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP2.png";
 		remove(SAVE_DATA_DELETE);
 
-		//削除後のメッセージ
-		DELETE_MESSAGE();
-
 		//削除後の処理(サウンドノベル風)
 		DELETE_SOUNDNOVEL();
 
@@ -2179,9 +2043,6 @@ void SAVEDATA_3_DELETE() {
 
 		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP3.png";
 		remove(SAVE_DATA_DELETE);
-
-		//削除後のメッセージ
-		DELETE_MESSAGE();
 
 		//削除後の処理(サウンドノベル風)
 		DELETE_SOUNDNOVEL();
@@ -2260,19 +2121,13 @@ void SAVEDATA_DELETE_LOOP() {
 }
 
 //セーブデータ削除処理
-int SAVEDATA_DELETE() {
+void SAVEDATA_DELETE() {
 
-	//セーブデータ・削除画面
-	if (SaveFlag == 3) {
+	//セーブ時のスクリーンショット読込
+	SAVEDATA_SCREENSHOT_READ();
 
-		//セーブ時のスクリーンショット読込
-		SAVEDATA_SCREENSHOT_READ();
-
-		//セーブデータ削除画面ループ
-		SAVEDATA_DELETE_LOOP();
-	}
-
-	return 0;
+	//セーブデータ削除画面ループ
+	SAVEDATA_DELETE_LOOP();
 }
 
 //既読スキップメッセージ
@@ -2289,44 +2144,10 @@ void SKIP_READ_MESSAGE() {
 //既読スキップ後の処理(サウンドノベル風)
 void SKIP_READ_SOUNDNOVEL() {
 
-	//既読スキップ後の処理(サウンドノベル風)
-	if (soundnovel_winownovel == 0) {
-		ClearDrawScreen();
-		GAMEMENU_COUNT = 1;
+	//サウンドノベル風描画時の処理
+	SOUNDNOVEL();
 
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-
-			// 音量の設定
-			ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 0;
-		DrawPointX = 0;
-
-		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
-		}
-
-		if (SP == 0) {
-			SP = 0;
-			CP = 0;
-		}
-	}
-
+	GAMEMENU_COUNT = 1;
 }
 
 //既読スキップ後の処理(ウインドウ風)
@@ -2477,13 +2298,10 @@ int GAMEMENU() {
 
 				if (SAVE == IDYES) {
 					ClearDrawScreen();
-					SaveFlag = 1;
 					SAVE_y = SAVE_Y;
 
 					//セーブデータセーブ処理
 					SAVEDATA_SAVE();
-
-					break;
 				}
 			}
 
@@ -2504,8 +2322,6 @@ int GAMEMENU() {
 
 					//セーブデータロード処理
 					SAVEDATA_LOAD();
-
-					break;
 				}
 			}
 
@@ -2522,13 +2338,10 @@ int GAMEMENU() {
 				if (SAVE == IDYES) {
 
 					ClearDrawScreen();
-					SaveFlag = 3;
 					SAVE_y = SAVE_Y;
 
 					//セーブデータ削除処理
 					SAVEDATA_DELETE();
-
-					break;
 				}
 			}
 
@@ -2540,8 +2353,6 @@ int GAMEMENU() {
 
 				//既読済みの部分を判定して、スキップ
 				SKIP_READ_CHECK();
-
-				break;
 			}
 
 			//スキップ
@@ -2943,8 +2754,6 @@ int GAMEMENU() {
 						}
 					}
 				}
-
-				WaitTimer(300);
 			}
 
 			//設定
@@ -2952,8 +2761,6 @@ int GAMEMENU() {
 
 				//設定画面の呼び出し
 				CONFIG();
-
-				WaitTimer(300);
 			}
 
 			//タイトルに戻る

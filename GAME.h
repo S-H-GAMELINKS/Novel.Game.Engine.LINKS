@@ -1,6 +1,6 @@
 
 //各素材データ読込関数
-int MATERIAL_LOAD();
+void MATERIAL_LOAD();
 
 //スクリプト読込関数
 int SCRIPT_READ();
@@ -63,10 +63,6 @@ int SCREENSHOT();
 int Mouse_Move();
 
 //コンフィグ(タイトル画面)
-int CONFIG();
-
-//フルスクリーン/ウインドウ切り替え
-//int WindowChange_full_window();
-
+void CONFIG();
 
 
