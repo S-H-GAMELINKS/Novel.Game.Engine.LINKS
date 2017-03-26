@@ -2438,6 +2438,74 @@ void GAMEMENU_TITLE_BACK() {
 	}
 }
 
+//ゲームに戻る
+void GAMEMENU_GAME_BACK() {
+
+	SAVE = MessageBox(
+		NULL,
+		"ゲームに戻りますか？",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+
+	if (SAVE == IDYES) {
+
+		GAMEMENU_COUNT = 1;
+
+		//サウンドノベル風描画時の処理
+		SOUNDNOVEL();
+
+		//ウインドウ風描画時の処理
+		WINDOWNOVEL();
+	}
+}
+
+//ゲーム終了
+void GAMEMENU_GAME_FINISH() {
+
+	SAVE = MessageBox(
+		NULL,
+		"終了しますか？",
+		"ノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+
+	if (SAVE == IDYES) {
+
+		//クイックセーブ
+		QUICKSAVE_SAVE();
+
+		EndFlag = 99999;
+
+		GAMEMENU_COUNT = 1;
+	}
+}
+
+
+//終了ウインドウ
+int GAME_FINISH() {
+
+	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {
+
+		SAVE = MessageBox(
+			NULL,
+			"終了しますか？",
+			"ノベルゲームエンジン「LINKS」",
+			MB_YESNO
+		);
+
+		if (SAVE == IDYES) {
+			QUICKSAVE_SAVE();
+			EndFlag = 99999;
+
+			if (GAMEMENU_COUNT == 0)
+				GAMEMENU_COUNT = 1;
+		}
+	}
+
+	return 0;
+}
+
 //ゲームメニュー
 int GAMEMENU() {
 
@@ -2578,126 +2646,19 @@ int GAMEMENU() {
 			//ゲームに戻る
 			if (GAME_y == (GAMEMENU_y * 11) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 11) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-				SAVE = MessageBox(
-					NULL,
-					"ゲームに戻りますか？",
-					"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-					MB_YESNO
-					);
-
-				if (SAVE == IDYES) {
-
-					if (soundnovel_winownovel == 0) {
-						ClearDrawScreen();
-						GAMEMENU_COUNT = 1;
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-
-							// 音量の設定
-							ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 0;
-						DrawPointX = 0;
-
-						if (SP != 0) {
-							SP = SP - 1;
-							CP = EOF;
-						}
-
-						if (SP == 0) {
-							SP = 0;
-							CP = 0;
-						}
-
-						WaitTimer(300);
-
-						break;
-					}
-
-					if (soundnovel_winownovel == 1) {
-
-						ClearDrawScreen();
-						GAMEMENU_COUNT = 1;
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						int	Window_Color = GetColor(0, 0, 0);
-
-						DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-
-							// 音量の設定
-							ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 400;
-						DrawPointX = 0;
-
-						if (SP != 0) {
-							SP = SP - 1;
-							CP = EOF;
-						}
-
-						if (SP == 0) {
-							SP = 0;
-							CP = 0;
-						}
-
-						WaitTimer(300);
-
-						break;
-					}
-
-				}
+				//ゲームに戻る
+				GAMEMENU_GAME_BACK();
 			}
 
 			//ゲーム終了
 			if (GAME_y == (GAMEMENU_y * 12) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 12) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-				SAVE = MessageBox(
-					NULL,
-					"終了しますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-					);
-				
-				if (SAVE == IDYES) {
-
-					//クイックセーブ
-					QUICKSAVE_SAVE();
-
-					EndFlag = 99999;
-					break;
-				}
-
-				WaitTimer(300);
+				//ゲーム終了
+				GAMEMENU_GAME_FINISH();
 			}
+
+			//エスケープでゲーム終了
+			GAME_FINISH();
 
 			if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {
 
@@ -2780,27 +2741,6 @@ int Kaigyou(void)
 	}
 
 	// 終了
-	return 0;
-}
-
-//終了ウインドウ
-int GAME_FINISH() {
-
-	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {
-
-		SAVE = MessageBox(
-			NULL,
-			"終了しますか？",
-			"ノベルゲームエンジン「LINKS」",
-			MB_YESNO
-		);
-
-		if (SAVE == IDYES) {
-			QUICKSAVE_SAVE();
-			EndFlag = 99999;
-		}
-	}
-
 	return 0;
 }
 
