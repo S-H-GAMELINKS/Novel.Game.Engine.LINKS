@@ -2215,10 +2215,10 @@ void SKIP_READ_CHECK() {
 	if (SAVE == IDYES) {
 
 		//既読スキップ後の処理(サウンドノベル風)
-		void SKIP_READ_SOUNDNOVEL();
+		SKIP_READ_SOUNDNOVEL();
 
 		//既読スキップ後の処理(ウインドウ風)
-		void SKIP_READ_WINDOWNOVEL();
+		SKIP_READ_WINDOWNOVEL();
 	}
 }
 
