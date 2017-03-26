@@ -2144,56 +2144,20 @@ void SKIP_READ_MESSAGE() {
 //既読スキップ後の処理(サウンドノベル風)
 void SKIP_READ_SOUNDNOVEL() {
 
+	GAMEMENU_COUNT = 1;
+
 	//サウンドノベル風描画時の処理
 	SOUNDNOVEL();
 
-	GAMEMENU_COUNT = 1;
 }
 
 //既読スキップ後の処理(ウインドウ風)
 void SKIP_READ_WINDOWNOVEL() {
 
+	GAMEMENU_COUNT = 1;
+
 	//既読スキップ後の処理(ウインドウ風)
-	if (soundnovel_winownovel == 1) {
-		ClearDrawScreen();
-		GAMEMENU_COUNT = 1;
-
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-
-			// 音量の設定
-			ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 400;
-		DrawPointX = 0;
-
-		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
-		}
-
-		if (SP == 0) {
-			SP = 0;
-			CP = 0;
-		}
-	}
+	WINDOWNOVEL();
 }
 
 //既読スキップ判定
@@ -2258,6 +2222,29 @@ void SKIP_READ_CHECK() {
 	}
 }
 
+//スキップ処理
+void SKIP_START() {
+
+	SAVE = MessageBox(
+		NULL,
+		"スキップを実行しますか？",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+
+	if (SAVE == IDYES) {
+
+		skip_auto = 2;
+		GAMEMENU_COUNT = 1;
+
+		//サウンドノベル風描画時の処理
+		SOUNDNOVEL();
+
+		//ウインドウ風描画時の処理
+		WINDOWNOVEL();
+	}
+}
+
 //ゲームメニュー
 int GAMEMENU() {
 
@@ -2268,8 +2255,6 @@ int GAMEMENU() {
 		ClearDrawScreen();
 		StopSoundMem(BACKGROUNDMUSIC);
 		GAME_y = GAMEMENU_y;
-
-		WaitTimer(300);
 
 		//ゲームメニューループ
 		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && GAMEMENU_COUNT == 0) {
@@ -2358,104 +2343,8 @@ int GAMEMENU() {
 			//スキップ
 			if (GAME_y == (GAMEMENU_y * 5) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 5) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-				SAVE = MessageBox(
-					NULL,
-					"スキップを実行しますか？",
-					"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-					MB_YESNO
-					);
-				if (SAVE == IDYES) {
-
-					if (soundnovel_winownovel == 0) {
-						ClearDrawScreen();
-						skip_auto = 2;
-						GAMEMENU_COUNT = 1;
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-
-							// 音量の設定
-							ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 0;
-						DrawPointX = 0;
-
-						if (SP != 0) {
-							SP = SP - 1;
-							CP = EOF;
-						}
-
-						if (SP == 0) {
-							SP = 0;
-							CP = 0;
-						}
-
-						WaitTimer(300);
-
-						break;
-					}
-
-					if (soundnovel_winownovel == 1) {
-						ClearDrawScreen();
-						skip_auto = 2;
-						GAMEMENU_COUNT = 1;
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						int	Window_Color = GetColor(0, 0, 0);
-
-						DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-
-							// 音量の設定
-							ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 400;
-						DrawPointX = 0;
-
-						if (SP != 0) {
-							SP = SP - 1;
-							CP = EOF;
-						}
-
-						if (SP == 0) {
-							SP = 0;
-							CP = 0;
-						}
-
-						WaitTimer(300);
-
-						break;
-					}
-				}
-
-				WaitTimer(300);
+				//スキップ処理
+				SKIP_START();
 			}
 
 			//オート
