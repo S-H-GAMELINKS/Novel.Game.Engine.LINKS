@@ -1609,6 +1609,76 @@ int SAVEDATA_3_SAVE() {
 	return 0;
 }
 
+//セーブデータ・セーブ画面ループ
+void SAVEDATA_SAVE_LOOP() {
+
+	//セーブデータ・セーブ画面ループ
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
+
+		//背景描画
+		DrawGraph(0, 0, SAVETITLE, TRUE);
+
+		//カーソル描画
+		SAVE_LOAD_MENU(Cr, SAVE_y);
+
+		//セーブ画面描画
+		SAVEDATA_DRAW();
+
+		//マウス操作
+		Mouse_Move();
+
+		//キー操作関連
+		SAVEDATA_KEY_MOVE();
+
+		//画面クリア処理
+		SCREEN_CLEAR();
+
+		//セーブデータ１にセーブ
+		if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+			//セーブデータ１にセーブ
+			SAVEDATA_1_SAVE();
+
+			break;
+		}
+
+		//セーブデータ２にセーブ
+		if (SAVE_y == (SAVE_Y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+			//セーブデータ２にセーブ
+			SAVEDATA_2_SAVE();
+
+			break;
+		}
+
+		//セーブデータ３にセーブ
+		if (SAVE_y == (SAVE_Y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+			//セーブデータ３にセーブ
+			SAVEDATA_3_SAVE();
+
+			break;
+		}
+
+		//メニュー画面に戻る
+		if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+			SAVE = MessageBox(
+				NULL,
+				"メニューに戻りますか？",
+				"ノベルゲームエンジン「LINKS」",
+				MB_YESNO
+			);
+
+			if (SAVE == IDYES) {
+
+				ClearDrawScreen();
+				break;
+			}
+		}
+	}
+
+}
+
 //セーブデータセーブ関数
 int SAVEDATA_SAVE() {
 
@@ -1618,78 +1688,7 @@ int SAVEDATA_SAVE() {
 		//セーブデータのスクリーンショットの読み込み
 		SAVEDATA_SCREENSHOT_READ();
 
-		//セーブ画面ループ
-		while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
 
-			//背景描画
-			DrawGraph(0, 0, SAVETITLE, TRUE);
-
-			//カーソル描画
-			SAVE_LOAD_MENU(Cr, SAVE_y);
-
-			//セーブ画面描画
-			SAVEDATA_DRAW();
-
-			//マウス操作
-			Mouse_Move();
-
-			//キー操作関連
-			SAVEDATA_KEY_MOVE();
-
-			//画面クリア処理
-			SCREEN_CLEAR();
-
-			//セーブデータ１にセーブ
-			if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				//セーブデータ１にセーブ
-				SAVEDATA_1_SAVE();
-
-				WaitTimer(300);
-				
-				break;
-			}
-
-			//セーブデータ２にセーブ
-			if (SAVE_y == (SAVE_Y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				//セーブデータ２にセーブ
-				SAVEDATA_2_SAVE();
-
-				WaitTimer(300);
-
-				break;
-			}
-
-			//セーブデータ３にセーブ
-			if (SAVE_y == (SAVE_Y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				//セーブデータ３にセーブ
-				SAVEDATA_3_SAVE();
-
-				WaitTimer(300);
-
-				break;
-			}
-
-			//メニュー画面に戻る
-			if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-				SAVE = MessageBox(
-					NULL,
-					"メニューに戻りますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
-
-				if (SAVE == IDYES) {
-
-					ClearDrawScreen();
-					WaitTimer(300);
-
-					break;
-				}
-			}
-		}
 	}
 
 	return 0;
@@ -1943,8 +1942,8 @@ int SAVEDATA_3_LOAD() {
 	}
 }
 
-//セーブ画面ループ
-void SAVE_LOOP() {
+//セーブデータ・ロード画面ループ
+void SAVEDATA_LOAD_LOOP() {
 
 	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
 
@@ -1969,8 +1968,6 @@ void SAVE_LOOP() {
 			//セーブデータ１をロード
 			SAVEDATA_1_LOAD();
 
-			WaitTimer(300);
-
 			break;
 		}
 
@@ -1980,8 +1977,6 @@ void SAVE_LOOP() {
 			//セーブデータ2をロード
 			SAVEDATA_2_LOAD();
 
-			WaitTimer(300);
-
 			break;
 		}
 
@@ -1990,8 +1985,6 @@ void SAVE_LOOP() {
 
 			//セーブデータ2をロード
 			SAVEDATA_3_LOAD();
-
-			WaitTimer(300);
 
 			break;
 		}
@@ -2009,7 +2002,6 @@ void SAVE_LOOP() {
 			if (SAVE == IDYES) {
 				EndFlag = 99;
 				SaveFlag = 0;
-				WaitTimer(600);
 				break;
 			}
 		}
@@ -2022,10 +2014,249 @@ int SAVEDATA_LOAD() {
 	//セーブデータのスクリーンショット読込
 	SAVEDATA_SCREENSHOT_READ();
 
-	//セーブ画面ループ
-	SAVE_LOOP();
+	//セーブデータ・ロード画面ループ
+	SAVEDATA_LOAD_LOOP();
 
 	return 0;
+}
+
+//削除後の処理(サウンドノベル風)
+void DELETE_SOUNDNOVEL() {
+
+	//削除後の処理(サウンドノベル風)
+	if (soundnovel_winownovel == 0) {
+
+		GAMEMENU_COUNT = 1;
+		SaveFlag = 0;
+		ClearDrawScreen();
+
+		//背景の表示
+		if (BACKGROUND != 0) {
+			DrawGraph(0, 0, BACKGROUND, TRUE);
+		}
+
+		//立ち絵の表示
+		if (CHARACTER != 0) {
+			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
+		}
+
+		//ＢＧＭの再生
+		if (BACKGROUNDMUSIC != 0) {
+			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
+		}
+
+		DrawPointY = 0;
+		DrawPointX = 0;
+		SP = SP - 1;
+		CP = EOF;
+
+		WaitTimer(300);
+	}
+}
+
+//削除後の処理(ウインドウ風)
+void DELETE_WINDOWNOVEL() {
+
+	//削除後の処理(ウインドウ風)
+	if (soundnovel_winownovel == 1) {
+
+		GAMEMENU_COUNT = 1;
+		SaveFlag = 0;
+		ClearDrawScreen();
+
+		//背景の表示
+		if (BACKGROUND != 0) {
+			DrawGraph(0, 0, BACKGROUND, TRUE);
+		}
+
+		int	Window_Color = GetColor(0, 0, 0);
+
+		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+
+		//立ち絵の表示
+		if (CHARACTER != 0) {
+			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
+		}
+
+		//ＢＧＭの再生
+		if (BACKGROUNDMUSIC != 0) {
+			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
+		}
+
+		DrawPointY = 400;
+		DrawPointX = 0;
+		SP = SP - 1;
+		CP = EOF;
+
+		WaitTimer(300);
+	}
+}
+
+//削除後のメッセージ
+void DELETE_MESSAGE() {
+
+	MessageBox(
+		NULL,
+		"削除しました！",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_OK
+	);
+}
+
+//セーブデータ1削除
+void SAVEDATA_1_DELETE(){
+
+	SAVE = MessageBox(
+		NULL,
+		"セーブデータ1を削除しますか？",
+		"ノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+
+	if (SAVE == IDYES) {
+
+		SAVE_DATA_DELETE = "DATA/SAVE/SAVEDATA1.dat";
+		remove(SAVE_DATA_DELETE);
+
+		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP1.png";
+		remove(SAVE_DATA_DELETE);
+
+		//削除後のメッセージ
+		DELETE_MESSAGE();
+
+		//削除後の処理(サウンドノベル風)
+		DELETE_SOUNDNOVEL();
+
+		//削除後の処理(ウインドウ風)
+		DELETE_WINDOWNOVEL();
+	}
+}
+
+//セーブデータ2削除
+void SAVEDATA_2_DELETE() {
+
+	SAVE = MessageBox(
+		NULL,
+		"セーブデータ2を削除しますか？",
+		"ノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+
+	if (SAVE == IDYES) {
+
+		SAVE_DATA_DELETE = "DATA/SAVE/SAVEDATA2.dat";
+		remove(SAVE_DATA_DELETE);
+
+		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP2.png";
+		remove(SAVE_DATA_DELETE);
+
+		//削除後のメッセージ
+		DELETE_MESSAGE();
+
+		//削除後の処理(サウンドノベル風)
+		DELETE_SOUNDNOVEL();
+
+		//削除後の処理(ウインドウ風)
+		DELETE_WINDOWNOVEL();
+	}
+
+}
+
+//セーブデータ3削除
+void SAVEDATA_3_DELETE() {
+
+	SAVE = MessageBox(
+		NULL,
+		"セーブデータ3を削除しますか？",
+		"ノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+
+	if (SAVE == IDYES) {
+
+		SAVE_DATA_DELETE = "DATA/SAVE/SAVEDATA3.dat";
+		remove(SAVE_DATA_DELETE);
+
+		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP3.png";
+		remove(SAVE_DATA_DELETE);
+
+		//削除後のメッセージ
+		DELETE_MESSAGE();
+
+		//削除後の処理(サウンドノベル風)
+		DELETE_SOUNDNOVEL();
+
+		//削除後の処理(ウインドウ風)
+		DELETE_WINDOWNOVEL();
+	}
+
+}
+
+//セーブデータ削除画面ループ
+void SAVEDATA_DELETE_LOOP() {
+
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
+
+		//背景描画
+		DrawGraph(0, 0, SAVETITLE, TRUE);
+
+		//カーソル描画
+		SAVE_LOAD_MENU(Cr, SAVE_y);
+
+		//セーブデータ一覧描画
+		SAVEDATA_DRAW();
+
+		//マウス操作
+		Mouse_Move();
+
+		//キー操作関連
+		SAVEDATA_KEY_MOVE();
+
+		//画面クリア処理
+		SCREEN_CLEAR();
+
+		if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+			//セーブデータ1削除処理
+			SAVEDATA_1_DELETE();
+
+			break;
+		}
+
+		if (SAVE_y == (SAVE_Y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+			//セーブデータ2削除処理
+			SAVEDATA_2_DELETE();
+
+			break;
+		}
+
+		if (SAVE_y == (SAVE_Y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+			//セーブデータ3削除処理
+			SAVEDATA_3_DELETE();
+
+			break;
+		}
+
+		if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+			SAVE = MessageBox(
+				NULL,
+				"メニューに戻りますか？",
+				"ノベルゲームエンジン「LINKS」",
+				MB_YESNO
+			);
+
+			if (SAVE == IDYES) {
+
+				SaveFlag = 0;
+				ClearDrawScreen();
+
+				break;
+			}
+		}
+	}
 }
 
 //セーブデータ削除処理
@@ -2037,334 +2268,8 @@ int SAVEDATA_DELETE() {
 		//セーブ時のスクリーンショット読込
 		SAVEDATA_SCREENSHOT_READ();
 
-		while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
-
-			//背景描画
-			DrawGraph(0, 0, SAVETITLE, TRUE);
-
-			//カーソル描画
-			SAVE_LOAD_MENU(Cr, SAVE_y);
-
-			//セーブデータ一覧描画
-			SAVEDATA_DRAW();
-
-			//マウス操作
-			Mouse_Move();
-
-			//キー操作関連
-			SAVEDATA_KEY_MOVE();
-
-			//画面クリア処理
-			SCREEN_CLEAR();
-
-			if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				SAVE = MessageBox(
-					NULL,
-					"セーブデータ1を削除しますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
-
-				if (SAVE == IDYES) {
-
-					SAVE_DATA_DELETE = "DATA/SAVE/SAVEDATA1.dat";
-					remove(SAVE_DATA_DELETE);
-
-					SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP1.png";
-					remove(SAVE_DATA_DELETE);
-
-					MessageBox(
-						NULL,
-						"削除しました！",
-						"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-						MB_OK
-					);
-
-					if (soundnovel_winownovel == 0) {
-
-						GAMEMENU_COUNT = 1;
-						SaveFlag = 0;
-						ClearDrawScreen();
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 0;
-						DrawPointX = 0;
-						SP = SP - 1;
-						CP = EOF;
-
-						WaitTimer(300);
-
-						break;
-					}
-
-
-					if (soundnovel_winownovel == 1) {
-
-						GAMEMENU_COUNT = 1;
-						SaveFlag = 0;
-						ClearDrawScreen();
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						int	Window_Color = GetColor(0, 0, 0);
-
-						DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 400;
-						DrawPointX = 0;
-						SP = SP - 1;
-						CP = EOF;
-
-						WaitTimer(300);
-
-						break;
-					}
-
-
-				}
-
-				WaitTimer(300);
-			}
-
-			if (SAVE_y == (SAVE_Y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				SAVE = MessageBox(
-					NULL,
-					"セーブデータ2を削除しますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
-
-				if (SAVE == IDYES) {
-
-					SAVE_DATA_DELETE = "DATA/SAVE/SAVEDATA2.dat";
-					remove(SAVE_DATA_DELETE);
-
-					SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP2.png";
-					remove(SAVE_DATA_DELETE);
-
-					MessageBox(
-						NULL,
-						"削除しました！",
-						"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-						MB_OK
-					);
-
-					if (soundnovel_winownovel == 0) {
-
-						GAMEMENU_COUNT = 1;
-						SaveFlag = 0;
-						ClearDrawScreen();
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 0;
-						DrawPointX = 0;
-						SP = SP - 1;
-						CP = EOF;
-
-						WaitTimer(300);
-
-						break;
-					}
-
-					if (soundnovel_winownovel == 1) {
-
-						GAMEMENU_COUNT = 1;
-						SaveFlag = 0;
-						ClearDrawScreen();
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						int	Window_Color = GetColor(0, 0, 0);
-
-						DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 400;
-						DrawPointX = 0;
-						SP = SP - 1;
-						CP = EOF;
-
-						WaitTimer(300);
-
-						break;
-					}
-
-				}
-
-				WaitTimer(300);
-			}
-
-			if (SAVE_y == (SAVE_Y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				SAVE = MessageBox(
-					NULL,
-					"セーブデータ3を削除しますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
-
-				if (SAVE == IDYES) {
-
-					SAVE_DATA_DELETE = "DATA/SAVE/SAVEDATA3.dat";
-					remove(SAVE_DATA_DELETE);
-
-					SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP3.png";
-					remove(SAVE_DATA_DELETE);
-
-					MessageBox(
-						NULL,
-						"削除しました！",
-						"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-						MB_OK
-					);
-
-					if (soundnovel_winownovel == 0) {
-
-						GAMEMENU_COUNT = 1;
-						SaveFlag = 0;
-						ClearDrawScreen();
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 0;
-						DrawPointX = 0;
-						SP = SP - 1;
-						CP = EOF;
-
-						WaitTimer(300);
-
-						break;
-					}
-
-					if (soundnovel_winownovel == 1) {
-
-						GAMEMENU_COUNT = 1;
-						SaveFlag = 0;
-						ClearDrawScreen();
-
-						//背景の表示
-						if (BACKGROUND != 0) {
-							DrawGraph(0, 0, BACKGROUND, TRUE);
-						}
-
-						int	Window_Color = GetColor(0, 0, 0);
-
-						DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-						//立ち絵の表示
-						if (CHARACTER != 0) {
-							DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-						}
-
-						//ＢＧＭの再生
-						if (BACKGROUNDMUSIC != 0) {
-							PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-						}
-
-						DrawPointY = 400;
-						DrawPointX = 0;
-						SP = SP - 1;
-						CP = EOF;
-
-						WaitTimer(300);
-
-						break;
-					}
-				}
-
-				WaitTimer(300);
-			}
-
-			if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				SAVE = MessageBox(
-					NULL,
-					"メニューに戻りますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
-
-				if (SAVE == IDYES) {
-
-					SaveFlag = 0;
-					ClearDrawScreen();
-
-					WaitTimer(300);
-
-					break;
-				}
-
-				WaitTimer(300);
-			}
-		}
+		//セーブデータ削除画面ループ
+		SAVEDATA_DELETE_LOOP();
 	}
 
 	return 0;
