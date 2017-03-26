@@ -2413,6 +2413,31 @@ void BACKLOG_DRAW() {
 	}
 }
 
+//タイトルに戻る
+void GAMEMENU_TITLE_BACK() {
+
+	SAVE = MessageBox(
+		NULL,
+		"タイトル画面に戻りますか？",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+
+	if (SAVE == IDYES) {
+
+		ClearDrawScreen();
+
+		GAMEMENU_COUNT = 1;
+		EndFlag = 99;
+		y = MENUY;
+		skip_auto = 0;
+		SaveFlag = 0;
+		CHARACTER = 0;
+		BACKGROUND = 0;
+		BACKGROUNDMUSIC = 0;
+	}
+}
+
 //ゲームメニュー
 int GAMEMENU() {
 
@@ -2546,31 +2571,8 @@ int GAMEMENU() {
 			//タイトルに戻る
 			if (GAME_y == (GAMEMENU_y * 10) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 10) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-				SAVE = MessageBox(
-					NULL,
-					"タイトル画面に戻りますか？",
-					"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-					MB_YESNO
-					);
-
-				if (SAVE == IDYES) {
-					ClearDrawScreen();
-					GAMEMENU_COUNT = 1;
-					EndFlag = 99;
-					y = MENUY;
-					skip_auto = 0;
-					SaveFlag = 0;
-					CHARACTER = 0;
-					BACKGROUND = 0;
-					BACKGROUNDMUSIC = 0;
-
-					WaitTimer(300);
-
-					break;
-				}
-
-				WaitTimer(300);
-
+				//タイトルに戻る
+				GAMEMENU_TITLE_BACK();
 			}
 
 			//ゲームに戻る
@@ -2673,8 +2675,6 @@ int GAMEMENU() {
 					}
 
 				}
-
-				WaitTimer(300);
 			}
 
 			//ゲーム終了
