@@ -1411,11 +1411,36 @@ void WINDOWNOVEL() {
 	}
 }
 
+//セーブ前のメッセージ
+void SAVEDATA_SAVE_MESSAGE() {
+
+	SAVE = MessageBox(
+		NULL,
+		"セーブ画面に移行しますか？",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+}
+
+//セーブ後のメッセージ
+void SAVE_MESSAGE() {
+
+	MessageBox(
+		NULL,
+		"セーブしました！",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_OK
+	);
+}
+
 //セーブ後の処理(サウンドノベル風)
 void SAVE_SOUNDNOVEL() {
 
 	//サウンドノベル風描画時の処理
 	SOUNDNOVEL();
+
+	//セーブ後のメッセージ
+	SAVE_MESSAGE();
 
 	SAVE_CHOICE = 0;
 
@@ -1428,20 +1453,12 @@ void SAVE_WINDOWNOVEL() {
 	//ウインドウ風描画時の処理
 	WINDOWNOVEL();
 
+	//セーブ後のメッセージ
+	SAVE_MESSAGE();
+
 	SAVE_CHOICE = 0;
 
 	GAMEMENU_COUNT = 1;
-}
-
-//セーブ後のメッセージ
-void SAVE_MESSAGE() {
-
-	MessageBox(
-		NULL,
-		"セーブしました！",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_OK
-	);
 }
 
 //セーブデータ１にセーブ
@@ -1485,9 +1502,6 @@ int SAVEDATA_1_SAVE() {
 		}
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
-
-		//セーブ後のメッセージ
-		SAVE_MESSAGE();
 
 		//サウンドノベル風描画時の処理
 		SAVE_SOUNDNOVEL();
@@ -1540,9 +1554,6 @@ int SAVEDATA_2_SAVE() {
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 
-		//セーブ後のメッセージ
-		SAVE_MESSAGE();
-
 		//サウンドノベル風描画時の処理
 		SAVE_SOUNDNOVEL();
 
@@ -1594,9 +1605,6 @@ int SAVEDATA_3_SAVE() {
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 
-		//セーブ後のメッセージ
-		SAVE_MESSAGE();
-
 		//サウンドノベル風描画時の処理
 		SAVE_SOUNDNOVEL();
 
@@ -1610,81 +1618,93 @@ int SAVEDATA_3_SAVE() {
 //セーブデータ・セーブ画面ループ
 void SAVEDATA_SAVE_LOOP() {
 
-	//セーブデータ・セーブ画面ループ
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
+		//セーブデータ・セーブ画面ループ
+		while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
 
-		//背景描画
-		DrawGraph(0, 0, SAVETITLE, TRUE);
+			//背景描画
+			DrawGraph(0, 0, SAVETITLE, TRUE);
 
-		//カーソル描画
-		SAVE_LOAD_MENU(Cr, SAVE_y);
+			//カーソル描画
+			SAVE_LOAD_MENU(Cr, SAVE_y);
 
-		//セーブ画面描画
-		SAVEDATA_DRAW();
+			//セーブ画面描画
+			SAVEDATA_DRAW();
 
-		//マウス操作
-		Mouse_Move();
+			//マウス操作
+			Mouse_Move();
 
-		//キー操作関連
-		SAVEDATA_KEY_MOVE();
+			//キー操作関連
+			SAVEDATA_KEY_MOVE();
 
-		//画面クリア処理
-		SCREEN_CLEAR();
-
-		//セーブデータ１にセーブ
-		if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+			//画面クリア処理
+			SCREEN_CLEAR();
 
 			//セーブデータ１にセーブ
-			SAVEDATA_1_SAVE();
+			if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
-			break;
-		}
-
-		//セーブデータ２にセーブ
-		if (SAVE_y == (SAVE_Y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-			//セーブデータ２にセーブ
-			SAVEDATA_2_SAVE();
-
-			break;
-		}
-
-		//セーブデータ３にセーブ
-		if (SAVE_y == (SAVE_Y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-			//セーブデータ３にセーブ
-			SAVEDATA_3_SAVE();
-
-			break;
-		}
-
-		//メニュー画面に戻る
-		if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-			SAVE = MessageBox(
-				NULL,
-				"メニューに戻りますか？",
-				"ノベルゲームエンジン「LINKS」",
-				MB_YESNO
-			);
-
-			if (SAVE == IDYES) {
-
-				ClearDrawScreen();
+				//セーブデータ１にセーブ
+				SAVEDATA_1_SAVE();
 				break;
 			}
-		}
-	}
 
+			//セーブデータ２にセーブ
+			if (SAVE_y == (SAVE_Y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+				//セーブデータ２にセーブ
+				SAVEDATA_2_SAVE();
+				break;
+			}
+
+			//セーブデータ３にセーブ
+			if (SAVE_y == (SAVE_Y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
+				//セーブデータ３にセーブ
+				SAVEDATA_3_SAVE();
+				break;
+			}
+
+			//メニュー画面に戻る
+			if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+				SAVE = MessageBox(
+					NULL,
+					"メニューに戻りますか？",
+					"ノベルゲームエンジン「LINKS」",
+					MB_YESNO
+				);
+
+				if (SAVE == IDYES) {
+
+					ClearDrawScreen();
+					break;
+				}
+			}
+		}
 }
 
 //セーブデータセーブ関数
 void SAVEDATA_SAVE() {
 
-	//セーブデータのスクリーンショットの読み込み
-	SAVEDATA_SCREENSHOT_READ();
+	if (SAVE == IDYES) {
+		ClearDrawScreen();
+		SAVE_y = SAVE_Y;
 
-	//セーブデータ・セーブ画面ループ
-	SAVEDATA_SAVE_LOOP();
+		//セーブデータのスクリーンショットの読み込み
+		SAVEDATA_SCREENSHOT_READ();
+
+		//セーブデータ・セーブ画面ループ
+		SAVEDATA_SAVE_LOOP();
+	}
+}
+
+//ロード前のメッセージ
+void SAVEDATA_LOAD_MESSAGE() {
+
+	SAVE = MessageBox(
+		NULL,
+		"ロード画面に移行しますか？",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
 }
 
 //ロード後のメッセージ
@@ -1883,7 +1903,6 @@ void SAVEDATA_LOAD_LOOP() {
 
 			//セーブデータ１をロード
 			SAVEDATA_1_LOAD();
-
 			break;
 		}
 
@@ -1892,7 +1911,6 @@ void SAVEDATA_LOAD_LOOP() {
 
 			//セーブデータ2をロード
 			SAVEDATA_2_LOAD();
-
 			break;
 		}
 
@@ -1901,7 +1919,6 @@ void SAVEDATA_LOAD_LOOP() {
 
 			//セーブデータ2をロード
 			SAVEDATA_3_LOAD();
-
 			break;
 		}
 
@@ -1927,13 +1944,30 @@ void SAVEDATA_LOAD_LOOP() {
 //セーブデータロード関数
 int SAVEDATA_LOAD() {
 
-	//セーブデータのスクリーンショット読込
-	SAVEDATA_SCREENSHOT_READ();
 
-	//セーブデータ・ロード画面ループ
-	SAVEDATA_LOAD_LOOP();
+	if (SAVE == IDYES) {
 
+		ClearDrawScreen();
+		SAVE_y = SAVE_Y;
+
+		//セーブデータのスクリーンショット読込
+		SAVEDATA_SCREENSHOT_READ();
+
+		//セーブデータ・ロード画面ループ
+		SAVEDATA_LOAD_LOOP();
+	}
 	return 0;
+}
+
+//削除前のメッセージ
+void SAVEDATA_DELETE_MESSAGE() {
+
+	SAVE = MessageBox(
+		NULL,
+		"セーブデータ削除画面に移行しますか？",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
 }
 
 //削除後のメッセージ
@@ -2123,11 +2157,17 @@ void SAVEDATA_DELETE_LOOP() {
 //セーブデータ削除処理
 void SAVEDATA_DELETE() {
 
-	//セーブ時のスクリーンショット読込
-	SAVEDATA_SCREENSHOT_READ();
+	if (SAVE == IDYES) {
 
-	//セーブデータ削除画面ループ
-	SAVEDATA_DELETE_LOOP();
+		ClearDrawScreen();
+		SAVE_y = SAVE_Y;
+
+		//セーブ時のスクリーンショット読込
+		SAVEDATA_SCREENSHOT_READ();
+
+		//セーブデータ削除画面ループ
+		SAVEDATA_DELETE_LOOP();
+	}
 }
 
 //既読スキップメッセージ
@@ -2481,7 +2521,6 @@ void GAMEMENU_GAME_FINISH() {
 	}
 }
 
-
 //終了ウインドウ
 int GAME_FINISH() {
 
@@ -2504,6 +2543,109 @@ int GAME_FINISH() {
 	}
 
 	return 0;
+}
+
+//各ゲームメニュー選択時処理
+void GAMEMENU_CHOICE() {
+
+	//セーブ
+	if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//セーブ前のメッセージ
+		SAVEDATA_SAVE_MESSAGE();
+
+		//セーブデータセーブ処理
+		SAVEDATA_SAVE();
+	}
+
+	//ロード
+	if (GAME_y == (GAMEMENU_y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 2) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//ロード前のメッセージ
+		SAVEDATA_LOAD_MESSAGE();
+
+		//セーブデータロード処理
+		SAVEDATA_LOAD();
+	}
+
+	//セーブデータ削除
+	if (GAME_y == (GAMEMENU_y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 3) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//削除前のメッセージ
+		SAVEDATA_DELETE_MESSAGE();
+
+		//セーブデータ削除処理
+		SAVEDATA_DELETE();
+	}
+
+	//既読スキップ
+	if (GAME_y == (GAMEMENU_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//既読データの読み込み
+		SKIP_READ_LOAD();
+
+		//既読済みの部分を判定して、スキップ
+		SKIP_READ_CHECK();
+	}
+
+	//スキップ
+	if (GAME_y == (GAMEMENU_y * 5) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 5) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//スキップ処理
+		SKIP_START();
+	}
+
+	//オート
+	if (GAME_y == (GAMEMENU_y * 6) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 6) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//オート処理
+		AUTO_START();
+	}
+
+	//オート/スキップ停止
+	if (GAME_y == (GAMEMENU_y * 7) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 7) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//オート/スキップ停止処理
+		AUTO_SKIP_STOP();
+	}
+
+	//バックログ参照
+	if (GAME_y == (GAMEMENU_y * 8) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 8) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//バックログ参照
+		BACKLOG_DRAW();
+	}
+
+	//設定
+	if (GAME_y == (GAMEMENU_y * 9) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 9) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//設定画面の呼び出し
+		CONFIG();
+	}
+
+	//タイトルに戻る
+	if (GAME_y == (GAMEMENU_y * 10) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 10) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//タイトルに戻る
+		GAMEMENU_TITLE_BACK();
+	}
+
+	//ゲームに戻る
+	if (GAME_y == (GAMEMENU_y * 11) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 11) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//ゲームに戻る
+		GAMEMENU_GAME_BACK();
+	}
+
+	//ゲーム終了
+	if (GAME_y == (GAMEMENU_y * 12) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 12) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		//ゲーム終了
+		GAMEMENU_GAME_FINISH();
+	}
+
+	//エスケープでゲーム終了
+	GAME_FINISH();
 }
 
 //ゲームメニュー
@@ -2532,151 +2674,8 @@ int GAMEMENU() {
 			//画面クリア処理
 			SCREEN_CLEAR();
 
-			//セーブ
-			if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				SAVE = MessageBox(
-					NULL,
-					"セーブ画面に移行しますか？",
-					"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
-
-				if (SAVE == IDYES) {
-					ClearDrawScreen();
-					SAVE_y = SAVE_Y;
-
-					//セーブデータセーブ処理
-					SAVEDATA_SAVE();
-				}
-			}
-
-			//ロード
-			if (GAME_y == (GAMEMENU_y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 2) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				SAVE = MessageBox(
-					NULL,
-					"ロード画面に移行しますか？",
-					"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-					MB_YESNO
-					);
-
-				if (SAVE == IDYES) {
-
-					ClearDrawScreen();
-					SAVE_y = SAVE_Y;
-
-					//セーブデータロード処理
-					SAVEDATA_LOAD();
-				}
-			}
-
-			//セーブデータ削除
-			if (GAME_y == (GAMEMENU_y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 3) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				SAVE = MessageBox(
-					NULL,
-					"セーブデータ削除画面に移行しますか？",
-					"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-					MB_YESNO
-					);
-
-				if (SAVE == IDYES) {
-
-					ClearDrawScreen();
-					SAVE_y = SAVE_Y;
-
-					//セーブデータ削除処理
-					SAVEDATA_DELETE();
-				}
-			}
-
-			//既読スキップ
-			if (GAME_y == (GAMEMENU_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//既読データの読み込み
-				SKIP_READ_LOAD();
-
-				//既読済みの部分を判定して、スキップ
-				SKIP_READ_CHECK();
-			}
-
-			//スキップ
-			if (GAME_y == (GAMEMENU_y * 5) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 5) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//スキップ処理
-				SKIP_START();
-			}
-
-			//オート
-			if (GAME_y == (GAMEMENU_y * 6) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 6) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//オート処理
-				AUTO_START();
-			}
-
-			//オート/スキップ停止
-			if (GAME_y == (GAMEMENU_y * 7) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 7) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//オート/スキップ停止処理
-				AUTO_SKIP_STOP();
-			}
-
-			//バックログ参照
-			if (GAME_y == (GAMEMENU_y * 8) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 8) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//バックログ参照
-				BACKLOG_DRAW();
-			}
-
-			//設定
-			if (GAME_y == (GAMEMENU_y * 9) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 9) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//設定画面の呼び出し
-				CONFIG();
-			}
-
-			//タイトルに戻る
-			if (GAME_y == (GAMEMENU_y * 10) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 10) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//タイトルに戻る
-				GAMEMENU_TITLE_BACK();
-			}
-
-			//ゲームに戻る
-			if (GAME_y == (GAMEMENU_y * 11) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 11) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//ゲームに戻る
-				GAMEMENU_GAME_BACK();
-			}
-
-			//ゲーム終了
-			if (GAME_y == (GAMEMENU_y * 12) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 12) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//ゲーム終了
-				GAMEMENU_GAME_FINISH();
-			}
-
-			//エスケープでゲーム終了
-			GAME_FINISH();
-
-			if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {
-
-				SAVE = MessageBox(
-					NULL,
-					"終了しますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-					);
-
-				if (SAVE == IDYES) {
-
-					EndFlag = 99999;
-					break;
-				}
-
-				WaitTimer(300);
-			}
+			//各ゲームメニュー選択時処理
+			GAMEMENU_CHOICE();
 		}
 	}
 
