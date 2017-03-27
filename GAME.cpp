@@ -2751,8 +2751,8 @@ int Kaigyou(void)
 	return 0;
 }
 
-//スクリプトタグ処理(立ち絵)
-void SCRIPT_OUTPUT_CHARACTER() {
+//スクリプトタグ処理(立ち絵描画)
+void SCRIPT_OUTPUT_CHARACTER_DRAW() {
 
 	//サウンドノベル風時の処理
 	if (soundnovel_winownovel == 0) {
@@ -2780,7 +2780,7 @@ void SCRIPT_OUTPUT_CHARACTER() {
 
 }
 
-//スクリプトタグ処理(背景)
+//スクリプトタグ処理(背景描画)
 void SCRIPT_OUTPUT_BACKGROUND() {
 
 	// 読みこんだグラフィックを画面左上に描画
@@ -2801,7 +2801,7 @@ void SCRIPT_OUTPUT_BACKGROUND() {
 
 }
 
-//スクリプトタグ処理(BGM)
+//スクリプトタグ処理(BGM再生)
 void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
 
 	// 音量の設定
@@ -2815,7 +2815,7 @@ void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
 
 }
 
-//スクリプトタグ処理(SE)
+//スクリプトタグ処理(SE再生)
 void SCRIPT_OUTPUT_SOUNDEFFECT() {
 
 	// 音量の設定
@@ -2826,6 +2826,413 @@ void SCRIPT_OUTPUT_SOUNDEFFECT() {
 
 	//文字を進める
 	CP++;
+
+}
+
+//セーブデータ用スクリーンショット保存
+void SAVESNAP() {
+
+	//セーブデータ用スクリーンショット保存
+	if (SAVESNAP_HANDLE1 == 1) {
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP1.png", 0);
+		SAVESNAP_HANDLE1 = 0;
+	}
+
+	if (SAVESNAP_HANDLE2 == 1) {
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP2.png", 0);
+		SAVESNAP_HANDLE2 = 0;
+	}
+
+	if (SAVESNAP_HANDLE3 == 1) {
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP3.png", 0);
+		SAVESNAP_HANDLE3 = 0;
+	}
+}
+
+//スクリプトタグ処理(クリック待ち)
+void SCRIPT_UTPUT_KEYWAIT() {
+
+	//スキップ・オート変数がＯＦＦの場合
+	if (skip_auto == 0) {
+
+		//セーブデータ用スクリーンショット保存
+		SAVESNAP();
+
+		// ボタン押し待ちおよび参照文字位置を一つ進める
+		WaitKey();
+
+		//エンターキーで次へ
+		if (CheckHitKey(KEY_INPUT_RETURN) == 1 || (GetMouseInput() & MOUSE_INPUT_LEFT) == 1)
+			CP++;
+	}
+
+	//スキップ・オート変数がＯＮの場合（オートモード）
+	if (skip_auto == 1) {
+
+		//セーブデータ用スクリーンショット保存
+		SAVESNAP();
+
+		//少し待って、次の文字列を描画
+		WaitTimer(1800 * AUTO_SPEED / 100);
+		CP++;
+	}
+
+	//スキップ・オート変数がＯＮの場合(スキップ)
+	if (skip_auto == 2) {
+
+		//セーブデータ用スクリーンショット保存
+		SAVESNAP();
+
+		CP++;
+	}
+
+}
+
+//バックログ取得関数1
+void BACKLOG_GET_1() {
+
+	if (BACKLOG_COUNT == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数2
+void BACKLOG_GET_2() {
+
+	if (BACKLOG_COUNT == 2) {
+
+		BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数3
+void BACKLOG_GET_3() {
+
+	if (BACKLOG_COUNT == 3) {
+
+		BACKLOG_BACKGROUND = BACKLOG[1];
+
+		BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数4
+void BACKLOG_GET_4() {
+
+	if (BACKLOG_COUNT == 4) {
+
+		BACKLOG_BACKGROUND = BACKLOG[2];
+
+		BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[1];
+
+		BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数5
+void BACKLOG_GET_5() {
+
+	if (BACKLOG_COUNT == 5) {
+
+		BACKLOG_BACKGROUND = BACKLOG[3];
+
+		BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[2];
+
+		BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[1];
+
+		BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数6
+void BACKLOG_GET_6() {
+
+	if (BACKLOG_COUNT == 6) {
+
+		BACKLOG_BACKGROUND = BACKLOG[4];
+
+		BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[3];
+
+		BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[2];
+
+		BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[1];
+
+		BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数7
+void BACKLOG_GET_7() {
+
+	if (BACKLOG_COUNT == 7) {
+
+		BACKLOG_BACKGROUND = BACKLOG[5];
+
+		BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[4];
+
+		BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[3];
+
+		BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[2];
+
+		BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[1];
+
+		BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数8
+void BACKLOG_GET_8() {
+
+	if (BACKLOG_COUNT == 8) {
+
+		BACKLOG_BACKGROUND = BACKLOG[6];
+
+		BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[5];
+
+		BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[4];
+
+		BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[3];
+
+		BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[2];
+
+		BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[1];
+
+		BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数9
+void BACKLOG_GET_9() {
+
+	if (BACKLOG_COUNT == 9) {
+
+		BACKLOG_BACKGROUND = BACKLOG[7];
+
+		BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[6];
+
+		BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[5];
+
+		BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[4];
+
+		BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[3];
+
+		BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[2];
+
+		BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[1];
+
+		BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数10
+void BACKLOG_GET_10() {
+
+	if (BACKLOG_COUNT >= 10) {
+
+		BACKLOG_BACKGROUND = BACKLOG[8];
+
+		BACKLOG[9] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[7];
+
+		BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[6];
+
+		BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[5];
+
+		BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[4];
+
+		BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[3];
+
+		BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[2];
+
+		BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG_BACKGROUND = BACKLOG[1];
+
+		BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
+
+		BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
+
+		BACKLOG[0] = BACKLOG_HANDLE;
+	}
+}
+
+//バックログ取得関数(メイン)
+void BACKLOG_GET() {
+
+	//バックログ取得関数1
+	BACKLOG_GET_1();
+
+	//バックログ取得関数2
+	BACKLOG_GET_2();
+
+	//バックログ取得関数3
+	BACKLOG_GET_3();
+
+	//バックログ取得関数4
+	BACKLOG_GET_4();
+
+	//バックログ取得関数5
+	BACKLOG_GET_5();
+
+	//バックログ取得関数6
+	BACKLOG_GET_6();
+
+	//バックログ取得関数7
+	BACKLOG_GET_7();
+
+	//バックログ取得関数8
+	BACKLOG_GET_8();
+
+	//バックログ取得関数9
+	BACKLOG_GET_9();
+
+	//バックログ取得関数10
+	BACKLOG_GET_10();
+}
+
+//スクリプトタグ処理(ゲーム画面のクリア処理)
+void SCRIPT_OUTPUT_SCREENCLEAR() {
+
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	BACKLOG_COUNT++;
+
+	//バックログ取得関数
+	BACKLOG_GET();
+
+	// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+	ClearDrawScreen();
+	DrawPointY = 0;
+	DrawPointX = 0;
+	CHARACTER = 0;
+	BACKGROUND = 0;
+	CP++;
+
+	SetDrawScreen(DX_SCREEN_FRONT);
 
 }
 
@@ -2848,438 +3255,21 @@ int SCRIPT_OUTPUT() {
 		// 改行処理および参照文字位置を一つ進める
 		Kaigyou();
 		CP++;
-
 		break;
 
 		// ボタン押し待ち文字
 	case '1':
 
-		//スキップ・オート変数がＯＦＦの場合
-		if (skip_auto == 0) {
-
-			//セーブデータ用スクリーンショット保存
-			if (SAVESNAP_HANDLE1 == 1) {
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP1.png", 0);
-				SAVESNAP_HANDLE1 = 0;
-			}
-
-			if (SAVESNAP_HANDLE2 == 1) {
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP2.png", 0);
-				SAVESNAP_HANDLE2 = 0;
-			}
-
-			if (SAVESNAP_HANDLE3 == 1) {
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP3.png", 0);
-				SAVESNAP_HANDLE3 = 0;
-			}
-
-			// ボタン押し待ちおよび参照文字位置を一つ進める
-			WaitKey();
-
-			//エンターキーで次へ
-			if (CheckHitKey(KEY_INPUT_RETURN) == 1 || (GetMouseInput() & MOUSE_INPUT_LEFT) == 1)
-				CP++;
-		}
-
-		//スキップ・オート変数がＯＮの場合（オートモード）
-		if (skip_auto == 1) {
-
-			//セーブデータ用スクリーンショット保存
-			if (SAVESNAP_HANDLE1 == 1) {
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP1.png", 0);
-				SAVESNAP_HANDLE1 = 0;
-			}
-
-			if (SAVESNAP_HANDLE2 == 1) {
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP2.png", 0);
-				SAVESNAP_HANDLE2 = 0;
-			}
-
-			if (SAVESNAP_HANDLE3 == 1) {
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP3.png", 0);
-				SAVESNAP_HANDLE3 = 0;
-			}
-
-			//少し待って、次の文字列を描画
-			WaitTimer(1800 * AUTO_SPEED / 100);
-			CP++;
-		}
-
-		//スキップ・オート変数がＯＮの場合(スキップ)
-		if (skip_auto == 2) {
-
-			//セーブデータ用スクリーンショット保存
-			if (SAVESNAP_HANDLE1 == 1) {
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP1.png", 0);
-				SAVESNAP_HANDLE1 = 0;
-			}
-
-			if (SAVESNAP_HANDLE2 == 1) {
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP2.png", 0);
-				SAVESNAP_HANDLE2 = 0;
-			}
-
-			if (SAVESNAP_HANDLE3 == 1) {
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP3.png", 0);
-				SAVESNAP_HANDLE3 = 0;
-			}
-
-			CP++;
-		}
-
+		//クリック待ち処理
+		SCRIPT_UTPUT_KEYWAIT();
 		break;
 
 		// クリア文字
 	case '2':
 
+		//ゲーム画面のクリア処理
+		SCRIPT_OUTPUT_SCREENCLEAR();
 
-		SetDrawScreen(DX_SCREEN_BACK);
-
-		BACKLOG_COUNT++;
-
-		if (BACKLOG_COUNT == 1) {
-
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-		}
-
-		if (BACKLOG_COUNT == 2) {
-
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-		}
-
-		if (BACKLOG_COUNT == 3) {
-		
-			BACKLOG_BACKGROUND = BACKLOG[1];
-
-			BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-		}
-
-		if (BACKLOG_COUNT == 4) {
-
-			BACKLOG_BACKGROUND = BACKLOG[2];
-
-			BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[1];
-
-			BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-		}
-
-		if (BACKLOG_COUNT == 5) {
-
-			BACKLOG_BACKGROUND = BACKLOG[3];
-
-			BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[2];
-
-			BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[1];
-
-			BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-		}
-
-		if (BACKLOG_COUNT == 6) {
-
-			BACKLOG_BACKGROUND = BACKLOG[4];
-
-			BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[3];
-
-			BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[2];
-
-			BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[1];
-
-			BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-		}
-
-		if (BACKLOG_COUNT == 7) {
-
-			BACKLOG_BACKGROUND = BACKLOG[5];
-
-			BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[4];
-
-			BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[3];
-
-			BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[2];
-
-			BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[1];
-
-			BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-		}
-
-		if (BACKLOG_COUNT == 8) {
-
-			BACKLOG_BACKGROUND = BACKLOG[6];
-
-			BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[5];
-
-			BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[4];
-
-			BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[3];
-
-			BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[2];
-
-			BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[1];
-
-			BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-		}
-
-		if (BACKLOG_COUNT == 9) {
-
-			BACKLOG_BACKGROUND = BACKLOG[7];
-
-			BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[6];
-
-			BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[5];
-
-			BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[4];
-
-			BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[3];
-
-			BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[2];
-
-			BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[1];
-
-			BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-		}
-
-		if (BACKLOG_COUNT >= 10) {
-
-			BACKLOG_BACKGROUND = BACKLOG[8];
-
-			BACKLOG[9] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[7];
-
-			BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[6];
-
-			BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[5];
-
-			BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[4];
-
-			BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[3];
-
-			BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[2];
-
-			BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG_BACKGROUND = BACKLOG[1];
-
-			BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-			BACKLOG[0] = BACKLOG_HANDLE;
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-		}
-
-		SetDrawScreen(DX_SCREEN_FRONT);
-			
 		break;
 
 		//少し待つ
@@ -3294,7 +3284,7 @@ int SCRIPT_OUTPUT() {
 		//スキップ時、3秒待たずに次へ
 		if (skip_auto == 2)
 			CP++;
-		
+
 		break;
 
 		//ゲームオーバー
@@ -3367,7 +3357,7 @@ int SCRIPT_OUTPUT() {
 					int	Window_Color = GetColor(0, 0, 0);
 
 					DrawGraph(0, 0, BACKGROUND, TRUE);
-					
+
 					DrawBox(0, 400, 640, 480, Window_Color, TRUE);
 
 					DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
@@ -3684,331 +3674,8 @@ int SCRIPT_OUTPUT() {
 
 			sentakusi(Cr, y);
 
-			if (BACKLOG_COUNT == 1) {
-
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-			}
-
-			if (BACKLOG_COUNT == 2) {
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-			}
-
-			if (BACKLOG_COUNT == 3) {
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 4) {
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 5) {
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 6) {
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 7) {
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 8) {
-
-				BACKLOG_BACKGROUND = BACKLOG[6];
-
-				BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 9) {
-
-				BACKLOG_BACKGROUND = BACKLOG[7];
-
-				BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[6];
-
-				BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT >= 10) {
-
-				BACKLOG_BACKGROUND = BACKLOG[8];
-
-				BACKLOG[9] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[7];
-
-				BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[6];
-
-				BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
+			//バックログ取得
+			BACKLOG_GET();
 
 			SetDrawScreen(DX_SCREEN_FRONT);
 
@@ -4147,10 +3814,6 @@ int SCRIPT_OUTPUT() {
 
 		break;
 
-		//********************演出文字(ここまで)****************************************//
-
-		//********************キャラクター画像読込文字(ここから)****************************************//
-
 		//キャラ01読込（画面に出力）
 	case 'A':
 
@@ -4158,8 +3821,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[0];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ02読込（画面に出力）
@@ -4169,8 +3831,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[1];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ03読込（画面に出力）
@@ -4180,8 +3841,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[2];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ04読込（画面に出力）
@@ -4191,8 +3851,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[3];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ05読込（画面に出力）
@@ -4202,8 +3861,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[4];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ06読込（画面に出力）
@@ -4213,8 +3871,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[5];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ07読込（画面に出力）
@@ -4224,8 +3881,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[6];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ08読込（画面に出力）
@@ -4235,8 +3891,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[7];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ09読込（画面に出力）
@@ -4246,8 +3901,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[8];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ10読込（画面に出力）
@@ -4257,8 +3911,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[9];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ11読込（画面に出力）
@@ -4268,8 +3921,7 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[10];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//キャラ12読込（画面に出力）
@@ -4279,11 +3931,9 @@ int SCRIPT_OUTPUT() {
 		CHARACTER = CHARACTER_LOAD[11];
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER();
-
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
-		//********************キャラクター画像読込文字(ここまで)****************************************//
 
 		//********************背景画像読込文字(ここから)****************************************//
 
@@ -4828,7 +4478,6 @@ int SCRIPT_OUTPUT() {
 		// 参照文字位置を２バイト勧める
 		CP += 2;
 
-
 		// カーソルを一文字文進める
 		DrawPointX++;
 
@@ -4861,331 +4510,16 @@ int SCRIPT_OUTPUT() {
 
 			BACKLOG_COUNT++;
 
-			if (BACKLOG_COUNT == 1) {
-
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-			}
-
-			if (BACKLOG_COUNT == 2) {
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-			}
-
-			if (BACKLOG_COUNT == 3) {
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 4) {
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-			
-			if (BACKLOG_COUNT == 5) {
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 6) {
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 7) {
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 8) {
-
-				BACKLOG_BACKGROUND = BACKLOG[6];
-
-				BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 9) {
-
-				BACKLOG_BACKGROUND = BACKLOG[7];
-
-				BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[6];
-
-				BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT >= 10) {
-
-				BACKLOG_BACKGROUND = BACKLOG[8];
-
-				BACKLOG[9] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[7];
-
-				BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[6];
-
-				BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
+			//バックログ取得
+			BACKLOG_GET();
+
+			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+			ClearDrawScreen();
+			DrawPointY = 0;
+			DrawPointX = 0;
+			CHARACTER = 0;
+			BACKGROUND = 0;
+			CP++;
 
 			SetDrawScreen(DX_SCREEN_FRONT);
 
@@ -5196,345 +4530,30 @@ int SCRIPT_OUTPUT() {
 			DrawPointX = 0;
 
 			if (BACKGROUND != 0)
-			DrawGraph(0, 0, BACKGROUND, TRUE);
+				DrawGraph(0, 0, BACKGROUND, TRUE);
 
 			if (CHARACTER != 0)
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
+				DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
 		}
 
 		//ウインドウ風時の改ページ処理
-		if (soundnovel_winownovel == 1 && DrawPointY > 479 ) {
+		if (soundnovel_winownovel == 1 && DrawPointY > 479) {
 
 
 			SetDrawScreen(DX_SCREEN_BACK);
 
 			BACKLOG_COUNT++;
 
-			if (BACKLOG_COUNT == 1) {
-
-				SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-			}
-
-			if (BACKLOG_COUNT == 2) {
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-			}
-
-			if (BACKLOG_COUNT == 3) {
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 4) {
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 5) {
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 6) {
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 7) {
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 8) {
-
-				BACKLOG_BACKGROUND = BACKLOG[6];
-
-				BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT == 9) {
-
-				BACKLOG_BACKGROUND = BACKLOG[7];
-
-				BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[6];
-
-				BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
-
-			if (BACKLOG_COUNT >= 10) {
-
-				BACKLOG_BACKGROUND = BACKLOG[8];
-
-				BACKLOG[9] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[7];
-
-				BACKLOG[8] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[6];
-
-				BACKLOG[7] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[5];
-
-				BACKLOG[6] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[4];
-
-				BACKLOG[5] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[3];
-
-				BACKLOG[4] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[2];
-
-				BACKLOG[3] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG_BACKGROUND = BACKLOG[1];
-
-				BACKLOG[2] = DerivationGraph(0, 0, 640, 480, BACKLOG_BACKGROUND);
-
-				BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG_HANDLE = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-
-				BACKLOG[0] = BACKLOG_HANDLE;
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-				ClearDrawScreen();
-				DrawPointY = 0;
-				DrawPointX = 0;
-				CHARACTER = 0;
-				BACKGROUND = 0;
-				CP++;
-
-			}
+			//バックログ取得
+			BACKLOG_GET();
+
+			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+			ClearDrawScreen();
+			DrawPointY = 0;
+			DrawPointX = 0;
+			CHARACTER = 0;
+			BACKGROUND = 0;
+			CP++;
 
 			SetDrawScreen(DX_SCREEN_FRONT);
 
@@ -5545,7 +4564,7 @@ int SCRIPT_OUTPUT() {
 			DrawPointX = 0;
 
 			if (BACKGROUND != 0)
-			DrawGraph(0, 0, BACKGROUND, TRUE);
+				DrawGraph(0, 0, BACKGROUND, TRUE);
 
 			if (soundnovel_winownovel == 1) {
 
@@ -5555,11 +4574,12 @@ int SCRIPT_OUTPUT() {
 			}
 
 			if (CHARACTER != 0)
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
+				DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
 		}
 
 		break;
 	}
+
 
 	return 0;
 }
