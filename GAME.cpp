@@ -1439,9 +1439,6 @@ void SAVE_SOUNDNOVEL() {
 	//サウンドノベル風描画時の処理
 	SOUNDNOVEL();
 
-	//セーブ後のメッセージ
-	SAVE_MESSAGE();
-
 	SAVE_CHOICE = 0;
 
 	GAMEMENU_COUNT = 1;
@@ -1452,9 +1449,6 @@ void SAVE_WINDOWNOVEL() {
 
 	//ウインドウ風描画時の処理
 	WINDOWNOVEL();
-
-	//セーブ後のメッセージ
-	SAVE_MESSAGE();
 
 	SAVE_CHOICE = 0;
 
@@ -1502,6 +1496,9 @@ int SAVEDATA_1_SAVE() {
 		}
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
+
+		//セーブ後のメッセージ
+		SAVE_MESSAGE();
 
 		//サウンドノベル風描画時の処理
 		SAVE_SOUNDNOVEL();
@@ -1554,6 +1551,9 @@ int SAVEDATA_2_SAVE() {
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 
+	   //セーブ後のメッセージ
+		SAVE_MESSAGE();
+
 		//サウンドノベル風描画時の処理
 		SAVE_SOUNDNOVEL();
 
@@ -1604,6 +1604,9 @@ int SAVEDATA_3_SAVE() {
 		}
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
+
+	   //セーブ後のメッセージ
+		SAVE_MESSAGE();
 
 		//サウンドノベル風描画時の処理
 		SAVE_SOUNDNOVEL();
@@ -1725,9 +1728,6 @@ void LOAD_SOUNDNOVEL() {
 	SOUNDNOVEL();
 
 	GAMEMENU_COUNT = 1;
-
-	//ロード後のメッセージ
-	LOAD_MESSAGE();
 }
 
 //ロード後の処理(ウインドウ風)
@@ -1737,9 +1737,6 @@ void LOAD_WINDOWNOVEL() {
 	WINDOWNOVEL();
 
 	GAMEMENU_COUNT = 1;
-
-	//ロード後のメッセージ
-	LOAD_MESSAGE();
 }
 
 //セーブデータ1のロード
@@ -1775,6 +1772,9 @@ int SAVEDATA_1_LOAD() {
 		BACKGROUND = Data.BG;
 		BACKGROUNDMUSIC = Data.BGM;
 		SAVE_CHOICE = Data.SAVE_CHOICE;
+
+		//ロード後のメッセージ
+		LOAD_MESSAGE();
 
 		//ロード後の処理(サウンドノベル風)
 		LOAD_SOUNDNOVEL();
@@ -1822,6 +1822,9 @@ int SAVEDATA_2_LOAD() {
 		BACKGROUNDMUSIC = Data.BGM;
 		SAVE_CHOICE = Data.SAVE_CHOICE;
 
+		//ロード後のメッセージ
+		LOAD_MESSAGE();
+
 		//ロード後の処理(サウンドノベル風)
 		LOAD_SOUNDNOVEL();
 
@@ -1867,6 +1870,9 @@ int SAVEDATA_3_LOAD() {
 		BACKGROUND = Data.BG;
 		BACKGROUNDMUSIC = Data.BGM;
 		SAVE_CHOICE = Data.SAVE_CHOICE;
+
+		//ロード後のメッセージ
+		LOAD_MESSAGE();
 
 		//ロード後の処理(サウンドノベル風)
 		LOAD_SOUNDNOVEL();
@@ -1990,9 +1996,6 @@ void DELETE_SOUNDNOVEL() {
 	GAMEMENU_COUNT = 1;
 	
 	SaveFlag = 0;
-
-	//削除後のメッセージ
-	DELETE_MESSAGE();
 }
 
 //削除後の処理(ウインドウ風)
@@ -2002,9 +2005,6 @@ void DELETE_WINDOWNOVEL() {
 	WINDOWNOVEL();
 
 	GAMEMENU_COUNT = 1;
-
-	//削除後のメッセージ
-	DELETE_MESSAGE();
 }
 
 //セーブデータ1削除
@@ -2024,6 +2024,9 @@ void SAVEDATA_1_DELETE(){
 
 		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP1.png";
 		remove(SAVE_DATA_DELETE);
+
+		//削除後のメッセージ
+		DELETE_MESSAGE();
 
 		//削除後の処理(サウンドノベル風)
 		DELETE_SOUNDNOVEL();
@@ -2051,6 +2054,9 @@ void SAVEDATA_2_DELETE() {
 		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP2.png";
 		remove(SAVE_DATA_DELETE);
 
+		//削除後のメッセージ
+		DELETE_MESSAGE();
+
 		//削除後の処理(サウンドノベル風)
 		DELETE_SOUNDNOVEL();
 
@@ -2077,6 +2083,9 @@ void SAVEDATA_3_DELETE() {
 
 		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP3.png";
 		remove(SAVE_DATA_DELETE);
+
+		//削除後のメッセージ
+		DELETE_MESSAGE();
 
 		//削除後の処理(サウンドノベル風)
 		DELETE_SOUNDNOVEL();
@@ -2680,7 +2689,6 @@ int GAMEMENU() {
 	}
 
 	return 0;
-
 }
 
 //選択肢機能
