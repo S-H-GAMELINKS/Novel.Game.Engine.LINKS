@@ -765,7 +765,6 @@ int SKIP_READ_LOAD()
 	L = Data.L;
 	M = Data.M;
 	N = Data.N;
-
 }
 
 //SKIP_READ SAVE関数
@@ -845,7 +844,6 @@ int QUICKSAVE_SAVE(){
 	fclose(fp);//ファイルを閉じる
 
 	return 0;
-
 }
 
 //クイックロード
@@ -1113,7 +1111,12 @@ void CONFIG_MENU() {
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 5, "文字描画速度", Cr);
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 6, "描画方法", Cr);
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 7, "非アクティブ時", Cr);
-	DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "メニューに戻る", Cr);
+
+	if (EndFlag != 99)
+		DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "メニューに戻る", Cr);
+
+	if (EndFlag == 99)
+		DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "タイトルに戻る", Cr);
 
 	//BGM音量目盛り描画
 	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, Cr, "%d", BGM_VOL);
@@ -3768,7 +3771,7 @@ void SCRIPT_OUTPUT_STRING_DRAW_SPEED() {
 	}
 }
 
-//文字列の描画速度
+//文字列の改行
 void SCRIPT_OUTPUT_STRING_KAIGYO() {
 
 	// 画面からはみ出たら改行する
