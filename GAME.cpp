@@ -430,6 +430,85 @@ int SCRIPT_READ() {
 
 }
 
+//各処理後のゲーム画面の描画(サウンドノベル風)
+void SOUNDNOVEL() {
+
+	if (soundnovel_winownovel == 0) {
+
+		ClearDrawScreen();
+
+		//背景の表示
+		if (BACKGROUND != 0) {
+			DrawGraph(0, 0, BACKGROUND, TRUE);
+		}
+
+		//立ち絵の表示
+		if (CHARACTER != 0) {
+			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
+		}
+
+		//ＢＧＭの再生
+		if (BACKGROUNDMUSIC != 0) {
+			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
+		}
+
+		DrawPointY = 0;
+		DrawPointX = 0;
+
+		if (SP != 0) {
+			SP = SP - 1;
+			CP = EOF;
+		}
+
+		if (SP == 0) {
+			SP = 0;
+			CP = 0;
+		}
+	}
+}
+
+//各処理後のゲーム画面の描画(ウインドウ風)
+void WINDOWNOVEL() {
+
+	//ウインドウ風描画時の処理
+	if (soundnovel_winownovel == 1) {
+
+		ClearDrawScreen();
+
+		//背景の表示
+		if (BACKGROUND != 0) {
+			DrawGraph(0, 0, BACKGROUND, TRUE);
+		}
+
+		int	Window_Color = GetColor(0, 0, 0);
+
+		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+
+		//立ち絵の表示
+		if (CHARACTER != 0) {
+			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
+		}
+
+		//ＢＧＭの再生
+		if (BACKGROUNDMUSIC != 0) {
+			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
+		}
+
+		DrawPointY = 400;
+		DrawPointX = 0;
+
+		if (SP != 0) {
+			SP = SP - 1;
+			CP = EOF;
+		}
+
+		if (SP == 0) {
+			SP = 0;
+			CP = 0;
+		}
+	}
+}
+
 //矢印キー操作関数
 int MoveKey(int KeyStateBuf[]) {
 
@@ -788,110 +867,22 @@ int QUICKSAVE_LOAD() {
 	BACKGROUNDMUSIC = Data.BGM;
 	SAVE_CHOICE = Data.SAVE_CHOICE;
 
-	//サウンドノベル風描画の処理
-	if (soundnovel_winownovel == 0) {
-
-		ClearDrawScreen();
-		GAMEMENU_COUNT = 1;
-
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-
-			// 音量の設定
-			ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 0;
-		DrawPointX = 0;
-
-		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
-		}
-
-		if (SP == 0) {
-			SP = 0;
-			CP = 0;
-		}
-
-		MessageBox(
-			NULL,
-			"ロードしました！",
-			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
-
-		WaitTimer(300);
-	}
+	//サウンドノベル風描画時の処理
+	SOUNDNOVEL();
 
 	//ウインドウ風描画時の処理
-	if (soundnovel_winownovel == 1) {
+	WINDOWNOVEL();
 
-		ClearDrawScreen();
-		GAMEMENU_COUNT = 1;
-
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-
-			// 音量の設定
-			ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
-
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 400;
-		DrawPointX = 0;
-
-		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
-		}
-
-		if (SP == 0) {
-			SP = 0;
-			CP = 0;
-		}
-
-		MessageBox(
-			NULL,
-			"ロードしました！",
-			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
-
-		WaitTimer(300);
-	}
+	MessageBox(
+		NULL,
+		"ロードしました！",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_OK
+	);
 
 	fclose(fp);
 
 	return 0;
-
 }
 
 //コンフィグ(キー操作)
@@ -1330,85 +1321,6 @@ void SAVEDATA_SCREENSHOT_READ() {
 	SAVETITLE = LoadGraph("DATA/BACKGROUND/SAVE.png");
 
 	WaitTimer(600);
-}
-
-//各処理後のゲーム画面の描画(サウンドノベル風)
-void SOUNDNOVEL() {
-
-	if (soundnovel_winownovel == 0) {
-
-		ClearDrawScreen();
-
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 0;
-		DrawPointX = 0;
-
-		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
-		}
-
-		if (SP == 0) {
-			SP = 0;
-			CP = 0;
-		}
-	}
-}
-
-//各処理後のゲーム画面の描画(ウインドウ風)
-void WINDOWNOVEL() {
-
-	//ウインドウ風描画時の処理
-	if (soundnovel_winownovel == 1) {
-
-		ClearDrawScreen();
-
-		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-		}
-
-		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
-
-		DrawPointY = 400;
-		DrawPointX = 0;
-
-		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
-		}
-
-		if (SP == 0) {
-			SP = 0;
-			CP = 0;
-		}
-	}
 }
 
 //セーブ前のメッセージ
