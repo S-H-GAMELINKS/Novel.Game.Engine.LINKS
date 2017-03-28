@@ -3828,7 +3828,7 @@ void SCRIPT_OUTPUT_STRING_DRAW() {
 }
 
 //文字列の描画速度
-void SCRIPT_OUTPUT_STRING_DRAW() {
+void SCRIPT_OUTPUT_STRING_DRAW_SPEED() {
 
 	//スキップ・オート変数がＯＦＦの場合
 	if (skip_auto == 0) {
@@ -3859,7 +3859,6 @@ void SCRIPT_OUTPUT_STRING_KAIGYO() {
 
 //サウンドノベル風時の改ページ処理
 void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
-
 
 	//サウンドノベル風時の改ページ処理
 	if (soundnovel_winownovel == 0 && DrawPointY * MOJI_SIZE + MOJI_SIZE > CHARACTERY + MOJI_SIZE) {
@@ -4623,7 +4622,7 @@ int SCRIPT_OUTPUT() {
 		SCRIPT_OUTPUT_STRING_DRAW();
 
 		//文字列の描画速度
-		SCRIPT_OUTPUT_STRING_DRAW();
+		SCRIPT_OUTPUT_STRING_DRAW_SPEED();
 
 		//文字列の描画速度
 		SCRIPT_OUTPUT_STRING_KAIGYO();
