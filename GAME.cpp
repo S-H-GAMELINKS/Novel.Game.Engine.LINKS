@@ -4656,193 +4656,258 @@ int FORMAT() {
 	return 0;
 }
 
+//スクリーンショット取得後の処理
+void SCREEN_SHOT_COUNT() {
+
+	WaitTimer(300);
+	SCREENSHOT_COUNT++;
+}
+
+//スクリーンショット01取得機能
+void SCREENSHOT_01() {
+
+	//スクリーンショット０１取得
+	if (SCREENSHOT_COUNT == 0 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT01.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット０１を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
+//スクリーンショット02取得機能
+void SCREENSHOT_02() {
+
+	//スクリーンショット０２取得
+	if (SCREENSHOT_COUNT == 1 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT02.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット０２を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
+//スクリーンショット03取得機能
+void SCREENSHOT_03() {
+
+	//スクリーンショット０３取得
+	if (SCREENSHOT_COUNT == 2 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT03.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット０３を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
+//スクリーンショット04取得機能
+void SCREENSHOT_04() {
+
+	//スクリーンショット０４取得
+	if (SCREENSHOT_COUNT == 3 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT04.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット０４を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
+//スクリーンショット05取得機能
+void SCREENSHOT_05() {
+
+	//スクリーンショット０５取得
+	if (SCREENSHOT_COUNT == 4 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT05.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット０５を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
+//スクリーンショット06取得機能
+void SCREENSHOT_06() {
+
+	//スクリーンショット０６取得
+	if (SCREENSHOT_COUNT == 5 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT06.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット０６を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
+//スクリーンショット07取得機能
+void SCREENSHOT_07() {
+
+	//スクリーンショット０７取得
+	if (SCREENSHOT_COUNT == 6 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT07.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット０７を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
+//スクリーンショット08取得機能
+void SCREENSHOT_08() {
+
+	//スクリーンショット０８取得
+	if (SCREENSHOT_COUNT == 7 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT08.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット０８を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
+//スクリーンショット09取得機能
+void SCREENSHOT_09() {
+
+	//スクリーンショット０９取得
+	if (SCREENSHOT_COUNT == 8 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT09.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット０９を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
+//スクリーンショット10取得機能
+void SCREENSHOT_10() {
+
+	//スクリーンショット１０取得
+	if (SCREENSHOT_COUNT == 9 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT10.png", 0);
+
+		MessageBox(
+			NULL,
+			"スクリーンショット１０を取得しました！",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		//スクリーンショット取得後の処理
+		SCREEN_SHOT_COUNT();
+	}
+}
+
 //スクリーンショット機能
 int SCREENSHOT() {
-	
-		//スクリーンショット０１取得
-		if (SCREENSHOT_COUNT == 0 && CheckHitKey(KEY_INPUT_F12) == 1) {
+
+	//スクリーンショット01取得機能
+	SCREENSHOT_01();
+
+	//スクリーンショット02取得機能
+	SCREENSHOT_02();
+
+	//スクリーンショット03取得機能
+	SCREENSHOT_03();
+
+	//スクリーンショット04取得機能
+	SCREENSHOT_04();
+
+	//スクリーンショット05取得機能
+	SCREENSHOT_05();
+
+	//スクリーンショット06取得機能
+	SCREENSHOT_06();
+
+	//スクリーンショット07取得機能
+	SCREENSHOT_07();
+
+	//スクリーンショット08取得機能
+	SCREENSHOT_08();
+
+	//スクリーンショット09取得機能
+	SCREENSHOT_09();
+
+	//スクリーンショット10取得機能
+	SCREENSHOT_10();
+
+	//スクリーンショット取得限界メッセージ
+	if (SCREENSHOT_COUNT >= 10 && CheckHitKey(KEY_INPUT_F12) == 1) {
 			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT01.png", 0);
+		MessageBox(
+			NULL,
+			"これ以上スクリーンショットを取得できません",
+			"ノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
 
-			MessageBox(
-				NULL,
-				"スクリーンショット０１を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
+		WaitTimer(300);
+	}
 
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット０２取得
-		if (SCREENSHOT_COUNT == 1 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT02.png", 0);
-
-			MessageBox(
-				NULL,
-				"スクリーンショット０２を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット０３取得
-		if (SCREENSHOT_COUNT == 2 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT03.png", 0);
-
-			MessageBox(
-				NULL,
-				"スクリーンショット０３を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット０４取得
-		if (SCREENSHOT_COUNT == 3 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT04.png", 0);
-
-			MessageBox(
-				NULL,
-				"スクリーンショット０４を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット０５取得
-		if (SCREENSHOT_COUNT == 4 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT05.png", 0);
-
-			MessageBox(
-				NULL,
-				"スクリーンショット０５を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット０６取得
-		if (SCREENSHOT_COUNT == 5 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT06.png", 0);
-
-			MessageBox(
-				NULL,
-				"スクリーンショット０６を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット０７取得
-		if (SCREENSHOT_COUNT == 6 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT07.png", 0);
-
-			MessageBox(
-				NULL,
-				"スクリーンショット０７を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット０８取得
-		if (SCREENSHOT_COUNT == 7 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT08.png", 0);
-
-			MessageBox(
-				NULL,
-				"スクリーンショット０８を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット０９取得
-		if (SCREENSHOT_COUNT == 8 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT09.png", 0);
-
-			MessageBox(
-				NULL,
-				"スクリーンショット０９を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット１０取得
-		if (SCREENSHOT_COUNT == 9 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT10.png", 0);
-
-			MessageBox(
-				NULL,
-				"スクリーンショット１０を取得しました！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-			SCREENSHOT_COUNT++;
-
-		}
-
-		//スクリーンショット取得限界メッセージ
-		if (SCREENSHOT_COUNT >= 10 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
-			MessageBox(
-				NULL,
-				"これ以上スクリーンショットを取得できません",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
-
-			WaitTimer(300);
-
-		}
-
-	return 0;
-		
+	return 0;		
 }
