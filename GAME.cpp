@@ -3799,6 +3799,145 @@ void SCRIPT_OUTPUT_CHARACTER_NAME() {
 	}
 }
 
+//文字列の描画
+void SCRIPT_OUTPUT_STRING_DRAW() {
+
+	// １文字分抜き出す
+	OneMojiBuf[0] = String[SP][CP];
+	OneMojiBuf[1] = String[SP][CP + 1];
+	OneMojiBuf[2] = '\0';
+
+	if (soundnovel_winownovel == 1 && DrawPointY <= 399)
+		DrawPointY = 400;
+
+	if (soundnovel_winownovel == 0) {
+		// １文字描画
+		DrawString(DrawPointX * MOJI_SIZE, DrawPointY * MOJI_SIZE, OneMojiBuf, GetColor(255, 255, 255));
+	}
+
+	if (soundnovel_winownovel == 1) {
+		// １文字描画
+		DrawString(DrawPointX * MOJI_SIZE, DrawPointY, OneMojiBuf, GetColor(255, 255, 255));
+	}
+
+	// 参照文字位置を２バイト勧める
+	CP += 2;
+
+	// カーソルを一文字文進める
+	DrawPointX++;
+}
+
+//文字列の描画速度
+void SCRIPT_OUTPUT_STRING_DRAW() {
+
+	//スキップ・オート変数がＯＦＦの場合
+	if (skip_auto == 0) {
+		// 少し待つ
+		WaitTimer(30 * STRING_SPEED / 100);
+	}
+
+	//スキップ・オート変数がＯＮの場合(オートモード)
+	if (skip_auto == 1) {
+		// 少し待つ
+		WaitTimer(30 * AUTO_SPEED / 100);
+	}
+
+	//スキップ・オート変数がＯＮの場合（スキップ）
+	if (skip_auto == 2) {
+		//速く処理
+		WaitTimer(10 * SKIP_SPEED / 100);
+	}
+}
+
+//文字列の描画速度
+void SCRIPT_OUTPUT_STRING_KAIGYO() {
+
+	// 画面からはみ出たら改行する
+	if (DrawPointX * MOJI_SIZE + MOJI_SIZE > 640)
+		Kaigyou();
+}
+
+//サウンドノベル風時の改ページ処理
+void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
+
+
+	//サウンドノベル風時の改ページ処理
+	if (soundnovel_winownovel == 0 && DrawPointY * MOJI_SIZE + MOJI_SIZE > CHARACTERY + MOJI_SIZE) {
+
+		SetDrawScreen(DX_SCREEN_BACK);
+
+		BACKLOG_COUNT++;
+
+		//バックログ取得
+		BACKLOG_GET();
+
+		// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+		ClearDrawScreen();
+		DrawPointY = 0;
+		DrawPointX = 0;
+		CHARACTER = 0;
+		BACKGROUND = 0;
+		CP++;
+
+		SetDrawScreen(DX_SCREEN_FRONT);
+
+		WaitTimer(300);
+		ClearDrawScreen();
+		DrawPointY = 0;
+		DrawPointX = 0;
+
+		if (BACKGROUND != 0)
+			DrawGraph(0, 0, BACKGROUND, TRUE);
+
+		if (CHARACTER != 0)
+			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
+	}
+}
+
+//ウインドウ風時の改ページ処理
+void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
+
+	//ウインドウ風時の改ページ処理
+	if (soundnovel_winownovel == 1 && DrawPointY > 479) {
+
+
+		SetDrawScreen(DX_SCREEN_BACK);
+
+		BACKLOG_COUNT++;
+
+		//バックログ取得
+		BACKLOG_GET();
+
+		// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+		ClearDrawScreen();
+		DrawPointY = 0;
+		DrawPointX = 0;
+		CHARACTER = 0;
+		BACKGROUND = 0;
+		CP++;
+
+		SetDrawScreen(DX_SCREEN_FRONT);
+
+		WaitTimer(300);
+		ClearDrawScreen();
+		DrawPointY = 400;
+		DrawPointX = 0;
+
+		if (BACKGROUND != 0)
+			DrawGraph(0, 0, BACKGROUND, TRUE);
+
+		if (soundnovel_winownovel == 1) {
+
+			int	Window_Color = GetColor(0, 0, 0);
+
+			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+		}
+
+		if (CHARACTER != 0)
+			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
+	}
+}
+
 //スクリプトタグ処理(メイン)関数
 int SCRIPT_OUTPUT() {
 
@@ -4478,133 +4617,24 @@ int SCRIPT_OUTPUT() {
 		CP++;
 		break;
 
-		//********************動画読込文字(ここまで)****************************************//
-
 	default:	// その他の文字
 
-				// １文字分抜き出す
-		OneMojiBuf[0] = String[SP][CP];
-		OneMojiBuf[1] = String[SP][CP + 1];
-		OneMojiBuf[2] = '\0';
+		//文字列の描画処理
+		SCRIPT_OUTPUT_STRING_DRAW();
 
-		if (soundnovel_winownovel == 1 && DrawPointY <= 399)
-			DrawPointY = 400;
+		//文字列の描画速度
+		SCRIPT_OUTPUT_STRING_DRAW();
 
-		if (soundnovel_winownovel == 0) {
-			// １文字描画
-			DrawString(DrawPointX * MOJI_SIZE, DrawPointY * MOJI_SIZE, OneMojiBuf, GetColor(255, 255, 255));
-		}
-
-		if (soundnovel_winownovel == 1) {
-			// １文字描画
-			DrawString(DrawPointX * MOJI_SIZE, DrawPointY, OneMojiBuf, GetColor(255, 255, 255));
-		}
-
-		// 参照文字位置を２バイト勧める
-		CP += 2;
-
-		// カーソルを一文字文進める
-		DrawPointX++;
-
-		//スキップ・オート変数がＯＦＦの場合
-		if (skip_auto == 0) {
-			// 少し待つ
-			WaitTimer(30 * STRING_SPEED / 100);
-		}
-
-		//スキップ・オート変数がＯＮの場合(オートモード)
-		if (skip_auto == 1) {
-			// 少し待つ
-			WaitTimer(30 * AUTO_SPEED / 100);
-		}
-
-		//スキップ・オート変数がＯＮの場合（スキップ）
-		if (skip_auto == 2) {
-			//速く処理
-			WaitTimer(10 * SKIP_SPEED / 100);
-		}
-
-		// 画面からはみ出たら改行する
-		if (DrawPointX * MOJI_SIZE + MOJI_SIZE > 640)
-			Kaigyou();
+		//文字列の描画速度
+		SCRIPT_OUTPUT_STRING_KAIGYO();
 
 		//サウンドノベル風時の改ページ処理
-		if (soundnovel_winownovel == 0 && DrawPointY * MOJI_SIZE + MOJI_SIZE > CHARACTERY + MOJI_SIZE) {
-
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			BACKLOG_COUNT++;
-
-			//バックログ取得
-			BACKLOG_GET();
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-			SetDrawScreen(DX_SCREEN_FRONT);
-
-
-			WaitTimer(300);
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-
-			if (BACKGROUND != 0)
-				DrawGraph(0, 0, BACKGROUND, TRUE);
-
-			if (CHARACTER != 0)
-				DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-		}
+		SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL();
 
 		//ウインドウ風時の改ページ処理
-		if (soundnovel_winownovel == 1 && DrawPointY > 479) {
-
-
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			BACKLOG_COUNT++;
-
-			//バックログ取得
-			BACKLOG_GET();
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-			SetDrawScreen(DX_SCREEN_FRONT);
-
-
-			WaitTimer(300);
-			ClearDrawScreen();
-			DrawPointY = 400;
-			DrawPointX = 0;
-
-			if (BACKGROUND != 0)
-				DrawGraph(0, 0, BACKGROUND, TRUE);
-
-			if (soundnovel_winownovel == 1) {
-
-				int	Window_Color = GetColor(0, 0, 0);
-
-				DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-			}
-
-			if (CHARACTER != 0)
-				DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-		}
-
+		SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL();
 		break;
 	}
-
 	return 0;
 }
 
