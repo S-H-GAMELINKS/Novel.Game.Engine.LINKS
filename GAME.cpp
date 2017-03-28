@@ -3236,6 +3236,569 @@ void SCRIPT_OUTPUT_SCREENCLEAR() {
 
 }
 
+//スクリプトタグ処理(少し待つ)
+void SCRIPT_OUTPUT_WAIT() {
+
+	//オート又は通常時、3秒待つ
+	if (skip_auto != 2) {
+		WaitTimer(1800);
+		CP++;
+	}
+
+	//スキップ時、3秒待たずに次へ
+	if (skip_auto == 2)
+		CP++;
+}
+
+//スクリプトタグ処理(ゲームオーバー)
+void SCRIPT_OUTPUT_GAMEOVER() {
+
+	BACKGROUND = GAMEOVER;
+	DrawGraph(0, 0, BACKGROUND, TRUE);
+
+	if (soundnovel_winownovel == 1) {
+
+		int	Window_Color = GetColor(0, 0, 0);
+
+		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+	}
+
+	CP++;
+}
+
+//スクリプトタグ処理(エンディング)
+void SCRIPT_OUTPUT_ENDING() {
+
+	PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
+	CP++;
+}
+
+//スクリプトタグ処理(BGM再生終了)
+void SCRIPT_OUTPUT_BGMSTOP() {
+
+	StopSoundMem(BACKGROUNDMUSIC);
+	BACKGROUNDMUSIC = 0;
+	CP++;
+}
+
+//スクリプトタグ処理(SE再生終了)
+void SCRIPT_OUTPUT_SESTOP() {
+
+	StopSoundMem(SOUNDEFFECT);
+	CP++;
+}
+
+//選択肢ループ用描画処理(サウンドノベル風)
+void SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL() {
+
+	if (soundnovel_winownovel == 0) {
+
+		DrawGraph(0, 0, BACKGROUND, TRUE);
+
+		DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
+	}
+}
+
+//選択肢ループ湯描画処理(ウインドウ風)
+void SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL() {
+
+	if (soundnovel_winownovel == 1) {
+
+		int	Window_Color = GetColor(0, 0, 0);
+
+		DrawGraph(0, 0, BACKGROUND, TRUE);
+
+		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+
+		DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
+	}
+}
+
+//選択肢ファイルの読み込み(描画用)
+void SCRIPT_OUTPUT_CHOICE_READ() {
+
+	if (EndFlag == 1) {
+		//選択肢Aを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/A.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Bを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/B.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 2) {
+		//選択肢Cを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/C.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Dを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/D.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 3) {
+		//選択肢Eを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/E.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Fを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/F.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 4) {
+		//選択肢Gを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/G.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Hを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/H.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 5) {
+		//選択肢Iを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/I.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Jを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/J.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 6) {
+		//選択肢Kを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/K.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Lを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/L.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 7) {
+		//選択肢Mを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/M.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Nを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/N.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+}
+
+//セーブデータ用スクリーンショット取得(選択肢画面)
+void SCRIPT_OUTPUT_CHOICE_LOOP_SAVESNAP() {
+
+	if (SAVESNAP_CHOICE == 1) {
+
+		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP_CHOICE.png", 0);
+
+		SAVESNAP_CHOICE = LoadGraph("DATA/SAVE/SAVESNAP_CHOICE.png", 0);
+	}
+}
+
+//キー操作(選択肢画面用)
+void SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE() {
+
+	if (Key[KEY_INPUT_DOWN] == 1) {
+		ClearDrawScreen();
+		y += CURSOR;
+		if (y == (SENTAKUSI2 + CURSOR))                         // y座標が260なら(選択が一番下なら)
+			y = SENTAKUSI1;                        // 選択座標を一番上に
+	}
+	if (Key[KEY_INPUT_UP] == 1) {
+		ClearDrawScreen();
+		y -= CURSOR;
+		if (y == (SENTAKUSI1 - CURSOR))
+			y = SENTAKUSI2;
+	}
+}
+
+//選択後の分岐処理(選択肢↑)
+void SCRIPT_OUTPUT_CHOICE_BRANCH_UP() {
+
+	if (EndFlag == 1) {
+		EndFlag = 2;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 2) {
+		EndFlag = 4;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 3) {
+		EndFlag = 6;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 4) {
+		EndFlag = 8;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 5) {
+		EndFlag = 10;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 6) {
+		EndFlag = 12;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 7) {
+		EndFlag = 14;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+}
+
+//選択後の分岐処理(選択肢↓)
+void SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN() {
+
+	if (EndFlag == 1) {
+		EndFlag = 3;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 2) {
+		EndFlag = 5;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 3) {
+		EndFlag = 7;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 4) {
+		EndFlag = 9;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 5) {
+		EndFlag = 11;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 6) {
+		EndFlag = 13;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+
+	if (EndFlag == 7) {
+		EndFlag = 15;
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+	}
+}
+
+//選択肢ループ
+void SCRIPT_OUTPUT_CHOICE_LOOP() {
+
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag != 99 && EndFlag != 99999) {
+
+		//選択肢ループ用描画処理(サウンドノベル風)
+		SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL();
+
+		//選択肢ループ用描画処理(ウインドウノベル風)
+		SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL();
+		
+		//選択肢ファイルの読み込み(描画用
+		SCRIPT_OUTPUT_CHOICE_READ();
+
+		sentakusi(Cr, y);
+
+		//ゲームメニュー
+		GAMEMENU();
+
+		//ゲーム終了
+		GAME_FINISH();
+
+		//セーブデータ用スクリーンショット取得
+		SCRIPT_OUTPUT_CHOICE_LOOP_SAVESNAP();
+
+		//マウス操作
+		Mouse_Move();
+
+		//キー操作関連
+		SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE();
+
+		//画面クリア処理
+		SCREEN_CLEAR();
+
+		if (y == SENTAKUSI1 && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == SENTAKUSI1 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+			//選択後の分岐処理(選択肢↑)
+			SCRIPT_OUTPUT_CHOICE_BRANCH_UP();
+			CP++;
+			break;
+		}
+
+		if (y == SENTAKUSI2 && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == SENTAKUSI2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+			//選択後の分岐処理(選択肢↑)
+			SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN();
+			CP++;
+			break;
+		}
+
+	}
+}
+
+//選択肢時のバックログ取得(選択肢の読み込み)
+void SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ() {
+
+	if (EndFlag == 2 || EndFlag == 3) {
+		//選択肢Aを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/A.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Bを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/B.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 4 || EndFlag == 5) {
+		//選択肢Cを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/C.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Dを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/D.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 6 || EndFlag == 7) {
+		//選択肢Eを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/E.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Fを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/F.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 8 || EndFlag == 9) {
+		//選択肢Gを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/G.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Hを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/H.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 10 || EndFlag == 11) {
+		//選択肢Iを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/I.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Jを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/J.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 12 || EndFlag == 13) {
+		//選択肢Kを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/K.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Lを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/L.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+
+	if (EndFlag == 14 || EndFlag == 15) {
+		//選択肢Mを開く
+		Choice1 = FileRead_open("DATA/STR/CHOICE/M.txt");
+		FileRead_gets(ChoiceA, RETU, Choice1);
+
+		//選択肢Nを開く
+		Choice2 = FileRead_open("DATA/STR/CHOICE/N.txt");
+		FileRead_gets(ChoiceB, RETU, Choice2);
+	}
+}
+
+//選択肢時のバックログ取得
+void SCRIPT_OUTPUT_CHOICE_BACKLOG() {
+
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	//選択肢ループ用描画処理(サウンドノベル風)
+	SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL();
+
+	//選択肢ループ用描画処理(サウンドノベル風)
+	SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL();
+
+	//選択肢時のバックログ取得(選択肢の読み込み)
+	SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ();
+
+	//選択肢の描画
+	sentakusi(Cr, y);
+
+	//バックログ取得
+	BACKLOG_GET();
+
+	// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+	ClearDrawScreen();
+	DrawPointY = 0;
+	DrawPointX = 0;
+	CHARACTER = 0;
+	BACKGROUND = 0;
+	CP++;
+
+	SetDrawScreen(DX_SCREEN_FRONT);
+}
+
+//スクリプトタグ処理(選択肢処理)
+void SCRIPT_OUTPUT_CHOICE() {
+
+	y = SENTAKUSIY;
+
+	if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
+
+		SAVE_CHOICE = 1;
+		SAVESNAP_CHOICE = 1;
+
+		BACKLOG_COUNT++;
+
+		//選択肢ループ
+		SCRIPT_OUTPUT_CHOICE_LOOP();
+
+		//選択肢時のバックログ取得
+		SCRIPT_OUTPUT_CHOICE_BACKLOG();
+	}
+
+	if (EndFlag == 8 || EndFlag == 9 || EndFlag == 10 || EndFlag == 11 || EndFlag == 12 || EndFlag == 13 || EndFlag == 14 || EndFlag == 15)
+		CP++;
+}
+
+//スクリプトタグ処理(終了文字)
+void SCRIPT_OUTPUT_END() {
+
+	if (EndFlag == 1)
+		LINKS = 1;
+
+	if (EndFlag == 2)
+		A = 1;
+
+	if (EndFlag == 3)
+		B = 1;
+
+	if (EndFlag == 4)
+		C = 1;
+
+	if (EndFlag == 5)
+		D = 1;
+
+	if (EndFlag == 6)
+		E = 1;
+
+	if (EndFlag == 7)
+		F = 1;
+
+	if (EndFlag == 8)
+		G = 1;
+
+	if (EndFlag == 9)
+		H = 1;
+
+	if (EndFlag == 10)
+		I = 1;
+
+	if (EndFlag == 11)
+		J = 1;
+
+	if (EndFlag == 12)
+		K = 1;
+
+	if (EndFlag == 13)
+		L = 1;
+
+	if (EndFlag == 14)
+		M = 1;
+
+	if (EndFlag == 15)
+		N = 1;
+
+	SKIP_READ_SAVE();
+
+	// 終了フラグを立てるおよび参照文字位置を一つ進める
+	EndFlag = 99999;
+	CP++;
+}
+
+//立ち絵クリア処理
+void SCRIPT_OUTPUT_CHARACTER_REMOVE() {
+
+	//サウンドノベル風時の処理
+	if (soundnovel_winownovel == 0) {
+		CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
+		DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
+		CP++;
+	}
+
+	//ウインドウ風時の処理
+	if (soundnovel_winownovel == 1) {
+		CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
+		DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
+		CP++;
+	}
+}
+
+//キャラクター名描画処理
+void SCRIPT_OUTPUT_CHARACTER_NAME() {
+
+	//サウンドノベル風時の処理
+	if (soundnovel_winownovel == 0) {
+		SP++;
+		CP++;
+	}
+
+	//ウインドウ風時の処理
+	if (soundnovel_winownovel == 1) {
+
+		//キャラクター名を読み込む
+		CHARACTER_NAME[0] = String[SP][CP + 1];
+		CHARACTER_NAME[1] = String[SP][CP + 2];
+		CHARACTER_NAME[2] = String[SP][CP + 3];
+		CHARACTER_NAME[3] = String[SP][CP + 4];
+		CHARACTER_NAME[4] = String[SP][CP + 5];
+		CHARACTER_NAME[5] = String[SP][CP + 6];
+		CHARACTER_NAME[6] = String[SP][CP + 7];
+		CHARACTER_NAME[7] = String[SP][CP + 8];
+		CHARACTER_NAME[8] = String[SP][CP + 9];
+		CHARACTER_NAME[9] = '\0';
+
+		//キャラクター名の背景
+		int	Window_Color = GetColor(0, 0, 0);
+
+		DrawBox(30, 360, 150, 385, Window_Color, TRUE);
+
+		// １文字描画
+		DrawString(30, 360, CHARACTER_NAME, GetColor(255, 255, 255));
+
+		SP++;
+		CP++;
+	}
+}
+
 //スクリプトタグ処理(メイン)関数
 int SCRIPT_OUTPUT() {
 
@@ -3246,9 +3809,6 @@ int SCRIPT_OUTPUT() {
 
 	switch (Moji)
 	{
-
-		//********************演出文字(ここから)****************************************//
-
 		// 改行文字
 	case '0':
 
@@ -3269,549 +3829,69 @@ int SCRIPT_OUTPUT() {
 
 		//ゲーム画面のクリア処理
 		SCRIPT_OUTPUT_SCREENCLEAR();
-
 		break;
 
 		//少し待つ
 	case '3':
 
-		//オート又は通常時、3秒待つ
-		if (skip_auto != 2) {
-			WaitTimer(1800);
-			CP++;
-		}
-
-		//スキップ時、3秒待たずに次へ
-		if (skip_auto == 2)
-			CP++;
-
+		//スクリプトタグ処理(少し待つ)
+		SCRIPT_OUTPUT_WAIT();
 		break;
 
 		//ゲームオーバー
 	case '4':
 
-		BACKGROUND = GAMEOVER;
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-
-		if (soundnovel_winownovel == 1) {
-
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-		}
-
-		CP++;
+		//ゲームオーバー画面処理
+		SCRIPT_OUTPUT_GAMEOVER();
 		break;
 
 		//エンディング
 	case '5':
 
-		PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
-		CP++;
-
+		//エンディング再生
+		SCRIPT_OUTPUT_ENDING();
 		break;
 
 		//BGMの再生を止める
 	case '6':
 
-		StopSoundMem(BACKGROUNDMUSIC);
-		BACKGROUNDMUSIC = 0;
-		CP++;
-
+		//BGMの再生を止める
+		SCRIPT_OUTPUT_BGMSTOP();
 		break;
 
 		//SEの再生を止める
 	case '7':
 
-		StopSoundMem(SOUNDEFFECT);
-		CP++;
-
+		//SEの再生を止める
+		SCRIPT_OUTPUT_SESTOP();
 		break;
 
-		//
+		//選択肢の表示
 	case '8':
-		y = SENTAKUSIY;
 
-		if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
-
-			WaitTimer(1200);
-
-			SAVE_CHOICE = 1;
-			SAVESNAP_CHOICE = 1;
-
-			BACKLOG_COUNT++;
-
-			//選択肢
-
-			while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag != 99 && EndFlag != 99999) {
-
-				if (soundnovel_winownovel == 0) {
-
-					DrawGraph(0, 0, BACKGROUND, TRUE);
-
-					DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-				}
-
-				if (soundnovel_winownovel == 1) {
-
-					int	Window_Color = GetColor(0, 0, 0);
-
-					DrawGraph(0, 0, BACKGROUND, TRUE);
-
-					DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-					DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-				}
-
-				if (EndFlag == 1) {
-					//選択肢Aを開く
-					Choice1 = FileRead_open("DATA/STR/CHOICE/A.txt");
-					FileRead_gets(ChoiceA, RETU, Choice1);
-
-					//選択肢Bを開く
-					Choice2 = FileRead_open("DATA/STR/CHOICE/B.txt");
-					FileRead_gets(ChoiceB, RETU, Choice2);
-				}
-
-				if (EndFlag == 2) {
-					//選択肢Cを開く
-					Choice1 = FileRead_open("DATA/STR/CHOICE/C.txt");
-					FileRead_gets(ChoiceA, RETU, Choice1);
-
-					//選択肢Dを開く
-					Choice2 = FileRead_open("DATA/STR/CHOICE/D.txt");
-					FileRead_gets(ChoiceB, RETU, Choice2);
-				}
-
-				if (EndFlag == 3) {
-					//選択肢Eを開く
-					Choice1 = FileRead_open("DATA/STR/CHOICE/E.txt");
-					FileRead_gets(ChoiceA, RETU, Choice1);
-
-					//選択肢Fを開く
-					Choice2 = FileRead_open("DATA/STR/CHOICE/F.txt");
-					FileRead_gets(ChoiceB, RETU, Choice2);
-				}
-
-				if (EndFlag == 4) {
-					//選択肢Gを開く
-					Choice1 = FileRead_open("DATA/STR/CHOICE/G.txt");
-					FileRead_gets(ChoiceA, RETU, Choice1);
-
-					//選択肢Hを開く
-					Choice2 = FileRead_open("DATA/STR/CHOICE/H.txt");
-					FileRead_gets(ChoiceB, RETU, Choice2);
-				}
-
-				if (EndFlag == 5) {
-					//選択肢Iを開く
-					Choice1 = FileRead_open("DATA/STR/CHOICE/I.txt");
-					FileRead_gets(ChoiceA, RETU, Choice1);
-
-					//選択肢Jを開く
-					Choice2 = FileRead_open("DATA/STR/CHOICE/J.txt");
-					FileRead_gets(ChoiceB, RETU, Choice2);
-				}
-
-				if (EndFlag == 6) {
-					//選択肢Kを開く
-					Choice1 = FileRead_open("DATA/STR/CHOICE/K.txt");
-					FileRead_gets(ChoiceA, RETU, Choice1);
-
-					//選択肢Lを開く
-					Choice2 = FileRead_open("DATA/STR/CHOICE/L.txt");
-					FileRead_gets(ChoiceB, RETU, Choice2);
-				}
-
-				if (EndFlag == 7) {
-					//選択肢Mを開く
-					Choice1 = FileRead_open("DATA/STR/CHOICE/M.txt");
-					FileRead_gets(ChoiceA, RETU, Choice1);
-
-					//選択肢Nを開く
-					Choice2 = FileRead_open("DATA/STR/CHOICE/N.txt");
-					FileRead_gets(ChoiceB, RETU, Choice2);
-				}
-
-				sentakusi(Cr, y);
-
-				//ゲームメニュー
-				GAMEMENU();
-
-				//ゲーム終了
-				GAME_FINISH();
-
-				if (SAVESNAP_CHOICE == 1) {
-
-					SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP_CHOICE.png", 0);
-
-					SAVESNAP_CHOICE = LoadGraph("DATA/SAVE/SAVESNAP_CHOICE.png", 0);
-
-				}
-
-				//キー操作関連
-				SetDrawScreen(DX_SCREEN_BACK);
-
-				ClearDrawScreen();
-
-				Mouse_Move();
-
-				if (Key[KEY_INPUT_DOWN] == 1) {
-					ClearDrawScreen();
-					y += CURSOR;
-					if (y == (SENTAKUSI2 + CURSOR))                         // y座標が260なら(選択が一番下なら)
-						y = SENTAKUSI1;                        // 選択座標を一番上に
-				}
-				if (Key[KEY_INPUT_UP] == 1) {
-					ClearDrawScreen();
-					y -= CURSOR;
-					if (y == (SENTAKUSI1 - CURSOR))
-						y = SENTAKUSI2;
-				}
-
-				SetDrawScreen(DX_SCREEN_FRONT);
-
-				if (y == SENTAKUSI1 && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == SENTAKUSI1 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-					if (EndFlag == 1) {
-						EndFlag = 2;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 2) {
-						EndFlag = 4;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 3) {
-						EndFlag = 6;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 4) {
-						EndFlag = 8;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 5) {
-						EndFlag = 10;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 6) {
-						EndFlag = 12;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 7) {
-						EndFlag = 14;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-				}
-
-				if (y == SENTAKUSI2 && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == SENTAKUSI2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-					if (EndFlag == 1) {
-						EndFlag = 3;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 2) {
-						EndFlag = 5;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 3) {
-						EndFlag = 7;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 4) {
-						EndFlag = 9;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 5) {
-						EndFlag = 11;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 6) {
-						EndFlag = 13;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					if (EndFlag == 7) {
-						EndFlag = 15;
-						SAVE_CHOICE = 0;
-						SAVESNAP_CHOICE = 0;
-						break;
-					}
-
-					CP++;
-					break;
-				}
-
-			}
-
-
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			if (soundnovel_winownovel == 0) {
-
-				DrawGraph(0, 0, BACKGROUND, TRUE);
-
-				DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
-			}
-
-			if (soundnovel_winownovel == 1) {
-
-				int	Window_Color = GetColor(0, 0, 0);
-
-				DrawGraph(0, 0, BACKGROUND, TRUE);
-
-				DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-				DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
-			}
-
-			if (EndFlag == 2 || EndFlag == 3) {
-				//選択肢Aを開く
-				Choice1 = FileRead_open("DATA/STR/CHOICE/A.txt");
-				FileRead_gets(ChoiceA, RETU, Choice1);
-
-				//選択肢Bを開く
-				Choice2 = FileRead_open("DATA/STR/CHOICE/B.txt");
-				FileRead_gets(ChoiceB, RETU, Choice2);
-			}
-
-			if (EndFlag == 4 || EndFlag == 5) {
-				//選択肢Cを開く
-				Choice1 = FileRead_open("DATA/STR/CHOICE/C.txt");
-				FileRead_gets(ChoiceA, RETU, Choice1);
-
-				//選択肢Dを開く
-				Choice2 = FileRead_open("DATA/STR/CHOICE/D.txt");
-				FileRead_gets(ChoiceB, RETU, Choice2);
-			}
-
-			if (EndFlag == 6 || EndFlag == 7) {
-				//選択肢Eを開く
-				Choice1 = FileRead_open("DATA/STR/CHOICE/E.txt");
-				FileRead_gets(ChoiceA, RETU, Choice1);
-
-				//選択肢Fを開く
-				Choice2 = FileRead_open("DATA/STR/CHOICE/F.txt");
-				FileRead_gets(ChoiceB, RETU, Choice2);
-			}
-
-			if (EndFlag == 8 || EndFlag == 9) {
-				//選択肢Gを開く
-				Choice1 = FileRead_open("DATA/STR/CHOICE/G.txt");
-				FileRead_gets(ChoiceA, RETU, Choice1);
-
-				//選択肢Hを開く
-				Choice2 = FileRead_open("DATA/STR/CHOICE/H.txt");
-				FileRead_gets(ChoiceB, RETU, Choice2);
-			}
-
-			if (EndFlag == 10 || EndFlag == 11) {
-				//選択肢Iを開く
-				Choice1 = FileRead_open("DATA/STR/CHOICE/I.txt");
-				FileRead_gets(ChoiceA, RETU, Choice1);
-
-				//選択肢Jを開く
-				Choice2 = FileRead_open("DATA/STR/CHOICE/J.txt");
-				FileRead_gets(ChoiceB, RETU, Choice2);
-			}
-
-			if (EndFlag == 12 || EndFlag == 13) {
-				//選択肢Kを開く
-				Choice1 = FileRead_open("DATA/STR/CHOICE/K.txt");
-				FileRead_gets(ChoiceA, RETU, Choice1);
-
-				//選択肢Lを開く
-				Choice2 = FileRead_open("DATA/STR/CHOICE/L.txt");
-				FileRead_gets(ChoiceB, RETU, Choice2);
-			}
-
-			if (EndFlag == 14 || EndFlag == 15) {
-				//選択肢Mを開く
-				Choice1 = FileRead_open("DATA/STR/CHOICE/M.txt");
-				FileRead_gets(ChoiceA, RETU, Choice1);
-
-				//選択肢Nを開く
-				Choice2 = FileRead_open("DATA/STR/CHOICE/N.txt");
-				FileRead_gets(ChoiceB, RETU, Choice2);
-			}
-
-			sentakusi(Cr, y);
-
-			//バックログ取得
-			BACKLOG_GET();
-
-			SetDrawScreen(DX_SCREEN_FRONT);
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-			SetDrawScreen(DX_SCREEN_FRONT);
-
-			break;
-		}
-
-		if (EndFlag == 8 || EndFlag == 9 || EndFlag == 10 || EndFlag == 11 || EndFlag == 12 || EndFlag == 13 || EndFlag == 14 || EndFlag == 15) {
-			CP++;
-			break;
-		}
+		//選択肢描画処理
+		SCRIPT_OUTPUT_CHOICE();
+		break;
 
 		// 終了文字
 	case '9':
 
-		if (EndFlag == 1)
-			LINKS = 1;
-
-		if (EndFlag == 2)
-			A = 1;
-
-		if (EndFlag == 3)
-			B = 1;
-
-		if (EndFlag == 4)
-			C = 1;
-
-		if (EndFlag == 5)
-			D = 1;
-
-		if (EndFlag == 6)
-			E = 1;
-
-		if (EndFlag == 7)
-			F = 1;
-
-		if (EndFlag == 8)
-			G = 1;
-
-		if (EndFlag == 9)
-			H = 1;
-
-		if (EndFlag == 10)
-			I = 1;
-
-		if (EndFlag == 11)
-			J = 1;
-
-		if (EndFlag == 12)
-			K = 1;
-
-		if (EndFlag == 13)
-			L = 1;
-
-		if (EndFlag == 14)
-			M = 1;
-
-		if (EndFlag == 15)
-			N = 1;
-
-		SKIP_READ_SAVE();
-
-		// 終了フラグを立てるおよび参照文字位置を一つ進める
-		EndFlag = 99999;
-		CP++;
-
+		//スクリプトタグ処理(終了文字)
+		SCRIPT_OUTPUT_END();
 		break;
 
 		//立ち絵消しタグ
 	case '@':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-			CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
-
-			CP++;
-		}
-
+		//立ち絵クリア処理
+		SCRIPT_OUTPUT_CHARACTER_REMOVE();
 		break;
 
 		//ウインドウ風キャラクター名描画タグ
 	case '#':
 
-		//サウンドノベル風時の処理
-		if (soundnovel_winownovel == 0) {
-			SP++;
-			CP++;
-		}
-
-		//ウインドウ風時の処理
-		if (soundnovel_winownovel == 1) {
-
-			//キャラクター名を読み込む
-			CHARACTER_NAME[0] = String[SP][CP + 1];
-			CHARACTER_NAME[1] = String[SP][CP + 2];
-			CHARACTER_NAME[2] = String[SP][CP + 3];
-			CHARACTER_NAME[3] = String[SP][CP + 4];
-			CHARACTER_NAME[4] = String[SP][CP + 5];
-			CHARACTER_NAME[5] = String[SP][CP + 6];
-			CHARACTER_NAME[6] = String[SP][CP + 7];
-			CHARACTER_NAME[7] = String[SP][CP + 8];
-			CHARACTER_NAME[8] = String[SP][CP + 9];
-			CHARACTER_NAME[9] = '\0';
-
-			//キャラクター名の背景
-			int	Window_Color = GetColor(0, 0, 0);
-
-			DrawBox(30, 360, 150, 385, Window_Color, TRUE);
-
-			// １文字描画
-			DrawString(30, 360, CHARACTER_NAME, GetColor(255, 255, 255));
-
-			SP++;
-			CP++;
-		}
-
+		//キャラクター名描画処理
+		SCRIPT_OUTPUT_CHARACTER_NAME();
 		break;
 
 		//キャラ01読込（画面に出力）
@@ -3934,9 +4014,6 @@ int SCRIPT_OUTPUT() {
 		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
-
-		//********************背景画像読込文字(ここから)****************************************//
-
 		//背景01読込（画面に出力）
 	case 'M':
 
@@ -3945,7 +4022,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景02読込（画面に出力）
@@ -3956,7 +4032,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景03読込（画面に出力）
@@ -3967,7 +4042,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景04読込（画面に出力）
@@ -3978,7 +4052,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景05読込（画面に出力）
@@ -3989,7 +4062,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景06読込（画面に出力）
@@ -4000,7 +4072,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景07読込（画面に出力）
@@ -4011,7 +4082,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景08読込（画面に出力）
@@ -4022,7 +4092,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景09読込（画面に出力）
@@ -4033,7 +4102,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景10読込（画面に出力）
@@ -4044,7 +4112,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景11読込（画面に出力）
@@ -4055,7 +4122,6 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
 
 		//背景12読込（画面に出力）
@@ -4066,12 +4132,7 @@ int SCRIPT_OUTPUT() {
 
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
-
 		break;
-
-		//********************背景画像読込文字(ここまで)****************************************//
-
-		//********************BGM再生文字(ここから)****************************************//
 
 		//BGM01再生文字
 	case 'Y':
@@ -4084,7 +4145,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM02再生文字
@@ -4098,7 +4158,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM03再生文字
@@ -4112,7 +4171,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM04再生文字
@@ -4126,7 +4184,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM05再生文字
@@ -4140,7 +4197,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM06再生文字
@@ -4154,7 +4210,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM07再生文字
@@ -4168,7 +4223,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM08再生文字
@@ -4182,7 +4236,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM09再生文字
@@ -4196,7 +4249,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM10再生文字
@@ -4210,7 +4262,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM11再生文字
@@ -4224,7 +4275,6 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
 
 		//BGM12再生文字
@@ -4238,12 +4288,7 @@ int SCRIPT_OUTPUT() {
 
 		//BGM再生
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-
 		break;
-
-		//********************BGM再生文字(ここまで)****************************************//
-
-		//********************SE再生文字(ここから)****************************************//
 
 		//SE01再生文字
 	case 'k':
@@ -4256,7 +4301,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE02再生文字
@@ -4270,7 +4314,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE03再生文字
@@ -4284,7 +4327,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE04再生文字
@@ -4298,7 +4340,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE05再生文字
@@ -4312,7 +4353,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE06再生文字
@@ -4326,7 +4366,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE07再生文字
@@ -4340,7 +4379,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE08再生文字
@@ -4354,7 +4392,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE09再生文字
@@ -4368,7 +4405,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE10再生文字
@@ -4382,7 +4418,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE11再生文字
@@ -4396,7 +4431,6 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
 
 		//SE12再生文字
@@ -4410,12 +4444,7 @@ int SCRIPT_OUTPUT() {
 
 		//SE再生
 		SCRIPT_OUTPUT_SOUNDEFFECT();
-
 		break;
-
-		//********************se再生文字(ここまで)****************************************//
-
-		//********************動画読込文字(ここから)****************************************//
 
 		//動画01再生（画面に動画を再生）
 	case 'w':
@@ -4423,7 +4452,6 @@ int SCRIPT_OUTPUT() {
 		//動画01再生
 		PlayMovie("DATA/MOVIE/MOVIE01.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
-
 		break;
 
 		//動画02再生（画面に動画を再生）
@@ -4432,7 +4460,6 @@ int SCRIPT_OUTPUT() {
 		//動画02再生
 		PlayMovie("DATA/MOVIE/MOVIE02.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
-
 		break;
 
 		//動画01再生（画面に動画を再生）
@@ -4441,7 +4468,6 @@ int SCRIPT_OUTPUT() {
 		//動画01再生
 		PlayMovie("DATA/MOVIE/MOVIE03.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
-
 		break;
 
 		//動画02再生（画面に動画を再生）
@@ -4450,7 +4476,6 @@ int SCRIPT_OUTPUT() {
 		//動画02再生
 		PlayMovie("DATA/MOVIE/MOVIE04.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
-
 		break;
 
 		//********************動画読込文字(ここまで)****************************************//
@@ -4579,7 +4604,6 @@ int SCRIPT_OUTPUT() {
 
 		break;
 	}
-
 
 	return 0;
 }
