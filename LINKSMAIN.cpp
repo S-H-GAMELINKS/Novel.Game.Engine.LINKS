@@ -211,9 +211,26 @@ void TITLE_MENU() {
 	}
 }
 
-//ゲームのループ
-void GAME_LOOP() {
+//各ルートでの処理
+void GAME_ROOT() {
 
+
+	
+}
+
+//参照文字列処理
+void WORD_FORMAT() {
+
+	// 参照文字列の終端まで行っていたら参照文字列を進める
+	if (String[SP][CP] == '\0')
+	{
+		SP++;
+		CP = 0;
+	}
+}
+
+//ゲームのループ(LINKS)
+void GAME_LOOP_LINKS() {
 
 	//メインルート
 	if (EndFlag == 1) {
@@ -225,7 +242,7 @@ void GAME_LOOP() {
 		SCRIPT_READ();
 
 		//メインループ(LINKS)
-		while (ProcessMessage() == 0)
+		while (EndFlag != 99 && ProcessMessage() == 0)
 		{
 			//タグ処理
 			SCRIPT_OUTPUT();
@@ -253,14 +270,14 @@ void GAME_LOOP() {
 			if (EndFlag == 99999)
 				break;
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(A)
+void GAME_LOOP_A() {
 
 	//Aルート
 	if (EndFlag == 2) {
@@ -300,14 +317,14 @@ void GAME_LOOP() {
 			if (EndFlag == 99999)
 				break;
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(B)
+void GAME_LOOP_B() {
 
 	//Bルート
 	if (EndFlag == 3) {
@@ -347,14 +364,14 @@ void GAME_LOOP() {
 			if (EndFlag == 99999)
 				break;
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(C)
+void GAME_LOOP_C() {
 
 	//Cルート
 	if (EndFlag == 4) {
@@ -394,14 +411,14 @@ void GAME_LOOP() {
 			if (EndFlag == 99999)
 				break;
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(D)
+void GAME_LOOP_D() {
 
 	//Dルート
 	if (EndFlag == 5) {
@@ -441,14 +458,14 @@ void GAME_LOOP() {
 			if (EndFlag == 99999)
 				break;
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(E)
+void GAME_LOOP_E() {
 
 	//Eルート
 	if (EndFlag == 6) {
@@ -488,14 +505,14 @@ void GAME_LOOP() {
 			if (EndFlag == 99999)
 				break;
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(F)
+void GAME_LOOP_F() {
 
 	//Fルート
 	if (EndFlag == 7) {
@@ -535,14 +552,14 @@ void GAME_LOOP() {
 			if (EndFlag == 99999)
 				break;
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(G)
+void GAME_LOOP_G() {
 
 	//Gルート
 	if (EndFlag == 8) {
@@ -577,14 +594,14 @@ void GAME_LOOP() {
 				break;
 			}
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(H)
+void GAME_LOOP_H() {
 
 	//Hルート
 	if (EndFlag == 9) {
@@ -619,14 +636,14 @@ void GAME_LOOP() {
 				break;
 			}
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(I)
+void GAME_LOOP_I() {
 
 	//Iルート
 	if (EndFlag == 10) {
@@ -661,14 +678,14 @@ void GAME_LOOP() {
 				break;
 			}
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(J)
+void GAME_LOOP_J() {
 
 	//Jルート
 	if (EndFlag == 11) {
@@ -703,14 +720,14 @@ void GAME_LOOP() {
 				break;
 			}
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(K)
+void GAME_LOOP_K() {
 
 	//Kルート
 	if (EndFlag == 12) {
@@ -745,14 +762,14 @@ void GAME_LOOP() {
 				break;
 			}
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(L)
+void GAME_LOOP_L() {
 
 	//Lルート
 	if (EndFlag == 13) {
@@ -787,14 +804,14 @@ void GAME_LOOP() {
 				break;
 			}
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(M)
+void GAME_LOOP_M() {
 
 	//Mルート
 	if (EndFlag == 14) {
@@ -829,14 +846,14 @@ void GAME_LOOP() {
 				break;
 			}
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ(N)
+void GAME_LOOP_N() {
 
 	//Nルート
 	if (EndFlag == 15) {
@@ -871,14 +888,59 @@ void GAME_LOOP() {
 				break;
 			}
 
-			// 参照文字列の終端まで行っていたら参照文字列を進める
-			if (String[SP][CP] == '\0')
-			{
-				SP++;
-				CP = 0;
-			}
+			//参照文字列処理
+			WORD_FORMAT();
 		}
 	}
+}
+
+//ゲームのループ
+void GAME_LOOP() {
+
+	//ゲームのループ(LINKS)
+	GAME_LOOP_LINKS();
+	
+	//ゲームのループ(A)
+	GAME_LOOP_A();
+
+	//ゲームのループ(B)
+	GAME_LOOP_B();
+
+	//ゲームのループ(C)
+	GAME_LOOP_C();
+
+	//ゲームのループ(D)
+	GAME_LOOP_D();
+
+	//ゲームのループ(E)
+	GAME_LOOP_E();
+
+	//ゲームのループ(F)
+	GAME_LOOP_F();
+
+	//ゲームのループ(G)
+	GAME_LOOP_G();
+
+	//ゲームのループ(H)
+	GAME_LOOP_H();
+
+	//ゲームのループ(I)
+	GAME_LOOP_I();
+
+	//ゲームのループ(J)
+	GAME_LOOP_J();
+
+	//ゲームのループ(K)
+	GAME_LOOP_K();
+
+	//ゲームのループ(L)
+	GAME_LOOP_L();
+
+	//ゲームのループ(M)
+	GAME_LOOP_M();
+
+	//ゲームのループ(N)
+	GAME_LOOP_N();
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
