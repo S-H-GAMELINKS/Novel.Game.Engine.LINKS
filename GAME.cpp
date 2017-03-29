@@ -3443,7 +3443,7 @@ void SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN() {
 //選択肢ループ
 void SCRIPT_OUTPUT_CHOICE_LOOP() {
 
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag != 99 && EndFlag != 99999) {
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag != 99 && EndFlag != 99999 && SAVE_CHOICE != 0) {
 
 		//選択肢ループ用描画処理(サウンドノベル風)
 		SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL();
