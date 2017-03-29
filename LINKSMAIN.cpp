@@ -974,8 +974,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		//タイトルメニュー
 		TITLE_MENU();
 
-		if (EndFlag != 99)
-			GAME_LOOP();
+		//各種ゲームループ
+		GAME_LOOP();
 	}
 
 	//設定の保存
