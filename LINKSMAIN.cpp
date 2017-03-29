@@ -52,7 +52,6 @@ extern char *BACKLOG_DELETE;
 
 //セーブ用変数
 extern int SAVE, SAVE_CHOICE;
-extern int SaveFlag;
 extern char *SAVESNAP_CHOICE_DELETE;
 
 //スキップ・オートモード用変数

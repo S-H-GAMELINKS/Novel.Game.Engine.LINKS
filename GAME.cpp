@@ -67,7 +67,6 @@ char *BACKLOG_DELETE;
 
 //セーブ用変数
 int SAVE, SAVE_CHOICE = 0;
-int SaveFlag = 0;
 int SAVESNAP1, SAVESNAP2, SAVESNAP3, SAVETITLE;
 int SAVESNAP_HANDLE1 = 0, SAVESNAP_HANDLE2 = 0, SAVESNAP_HANDLE3 = 0, SAVESNAP_CHOICE = 0;
 char *SAVE_DATA_DELETE;
@@ -1932,8 +1931,6 @@ void DELETE_SOUNDNOVEL() {
 	SOUNDNOVEL();
 
 	GAMEMENU_COUNT = 1;
-	
-	SaveFlag = 0;
 }
 
 //削除後の処理(ウインドウ風)
@@ -2091,10 +2088,7 @@ void SAVEDATA_DELETE_LOOP() {
 			);
 
 			if (SAVE == IDYES) {
-
-				SaveFlag = 0;
 				ClearDrawScreen();
-
 				break;
 			}
 		}
@@ -2418,7 +2412,6 @@ void GAMEMENU_TITLE_BACK() {
 		EndFlag = 99;
 		y = MENUY;
 		skip_auto = 0;
-		SaveFlag = 0;
 		CHARACTER = 0;
 		BACKGROUND = 0;
 		BACKGROUNDMUSIC = 0;
@@ -2497,8 +2490,6 @@ void GAMEMENU_CHOICE() {
 
 	//セーブ
 	if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		SaveFlag = 1;
 
 		//セーブデータセーブ処理
 		SAVEDATA_SAVE();
