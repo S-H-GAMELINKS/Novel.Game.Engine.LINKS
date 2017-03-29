@@ -865,6 +865,8 @@ int QUICKSAVE_LOAD() {
 	BACKGROUNDMUSIC = Data.BGM;
 	SAVE_CHOICE = Data.SAVE_CHOICE;
 
+	GAMEMENU_COUNT = 1;
+
 	//サウンドノベル風描画時の処理
 	SOUNDNOVEL();
 
@@ -879,8 +881,6 @@ int QUICKSAVE_LOAD() {
 	);
 
 	fclose(fp);
-
-	SP++;
 
 	return 0;
 }
@@ -1377,6 +1377,14 @@ void SAVE_WINDOWNOVEL() {
 	GAMEMENU_COUNT = 1;
 }
 
+//セーブ関連の変数初期化
+void SAVEDATA_VAR_FORMAT() {
+
+	SaveFlag = 0;
+	SAVE_CHOICE = 0;
+	GAMEMENU_COUNT = 1;
+}
+
 //セーブデータ１にセーブ
 int SAVEDATA_1_SAVE() {
 
@@ -1427,6 +1435,9 @@ int SAVEDATA_1_SAVE() {
 
 		//ウインドウ風描画時の処理
 		SAVE_WINDOWNOVEL();
+
+		//セーブ関連の変数初期化
+		SAVEDATA_VAR_FORMAT();
 	}
 
 	return 0;
@@ -1481,6 +1492,9 @@ int SAVEDATA_2_SAVE() {
 
 		//ウインドウ風描画時の処理
 		SAVE_WINDOWNOVEL();
+
+		//セーブ関連の変数初期化
+		SAVEDATA_VAR_FORMAT();
 	}
 
 	return 0;
@@ -1535,6 +1549,9 @@ int SAVEDATA_3_SAVE() {
 
 		//ウインドウ風描画時の処理
 		SAVE_WINDOWNOVEL();
+
+		//セーブ関連の変数初期化
+		SAVEDATA_VAR_FORMAT();
 	}
 
 	return 0;
@@ -1543,8 +1560,9 @@ int SAVEDATA_3_SAVE() {
 //セーブデータ・セーブ画面ループ
 void SAVEDATA_SAVE_LOOP() {
 
+	if (SaveFlag == 1) {
 		//セーブデータ・セーブ画面ループ
-		while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
+		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && SaveFlag == 1) {
 
 			//背景描画
 			DrawGraph(0, 0, SAVETITLE, TRUE);
@@ -1604,10 +1622,14 @@ void SAVEDATA_SAVE_LOOP() {
 				}
 			}
 		}
+	}
 }
 
 //セーブデータセーブ関数
 void SAVEDATA_SAVE() {
+
+	//セーブ前のメッセージ
+	SAVEDATA_SAVE_MESSAGE();
 
 	if (SAVE == IDYES) {
 		ClearDrawScreen();
@@ -2503,8 +2525,7 @@ void GAMEMENU_CHOICE() {
 	//セーブ
 	if (GAME_y == GAMEMENU_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-		//セーブ前のメッセージ
-		SAVEDATA_SAVE_MESSAGE();
+		SaveFlag = 1;
 
 		//セーブデータセーブ処理
 		SAVEDATA_SAVE();
