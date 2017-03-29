@@ -168,6 +168,7 @@ void TITLE_MENU_CHOICE() {
 	}
 
 	if (y == GAMELOAD && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == GAMELOAD && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+		SaveFlag = 2;
 		SAVEDATA_LOAD();
 		WaitTimer(300);
 	}

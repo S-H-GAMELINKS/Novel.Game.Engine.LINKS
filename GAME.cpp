@@ -1809,75 +1809,79 @@ int SAVEDATA_3_LOAD() {
 //セーブデータ・ロード画面ループ
 void SAVEDATA_LOAD_LOOP() {
 
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
+	//セーブデータ・ロード画面
+	if (SaveFlag == 2) {
 
-		//背景描画
-		DrawGraph(0, 0, SAVETITLE, TRUE);
+		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && SaveFlag == 2) {
 
-		//カーソル描画
-		SAVE_LOAD_MENU(Cr, SAVE_y);
+			//背景描画
+			DrawGraph(0, 0, SAVETITLE, TRUE);
 
-		//セーブデータ一覧描画
-		SAVEDATA_DRAW();
+			//カーソル描画
+			SAVE_LOAD_MENU(Cr, SAVE_y);
 
-		//マウス操作
-		Mouse_Move();
+			//セーブデータ一覧描画
+			SAVEDATA_DRAW();
 
-		//画面クリア処理
-		SCREEN_CLEAR();
+			//マウス操作
+			Mouse_Move();
 
-		//セーブデータ１のロード
-		if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			//画面クリア処理
+			SCREEN_CLEAR();
 
-			//セーブデータ１をロード
-			SAVEDATA_1_LOAD();
-			break;
-		}
+			//セーブデータ１のロード
+			if (SAVE_y == SAVE_Y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == SAVE_Y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-		//セーブデータ２のロード
-		if (SAVE_y == (SAVE_Y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 2) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-			//セーブデータ2をロード
-			SAVEDATA_2_LOAD();
-			break;
-		}
-
-		//セーブデータ３のロード
-		if (SAVE_y == (SAVE_Y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 3) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-			//セーブデータ2をロード
-			SAVEDATA_3_LOAD();
-			break;
-		}
-
-		//タイトルに戻る
-		if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-			if (EndFlag == 99) {
-				SAVE = MessageBox(
-					NULL,
-					"タイトルに戻りますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
-
-				if (SAVE == IDYES) {
-					SaveFlag = 0;
-					break;
-				}
+				//セーブデータ１をロード
+				SAVEDATA_1_LOAD();
+				break;
 			}
 
-			if (EndFlag != 99) {
-				SAVE = MessageBox(
-					NULL,
-					"メニューに戻りますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
+			//セーブデータ２のロード
+			if (SAVE_y == (SAVE_Y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 2) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-				if (SAVE == IDYES) {
-					SaveFlag = 0;
-					break;
+				//セーブデータ2をロード
+				SAVEDATA_2_LOAD();
+				break;
+			}
+
+			//セーブデータ３のロード
+			if (SAVE_y == (SAVE_Y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 3) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+				//セーブデータ2をロード
+				SAVEDATA_3_LOAD();
+				break;
+			}
+
+			//タイトルに戻る
+			if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+				if (EndFlag == 99) {
+					SAVE = MessageBox(
+						NULL,
+						"タイトルに戻りますか？",
+						"ノベルゲームエンジン「LINKS」",
+						MB_YESNO
+					);
+
+					if (SAVE == IDYES) {
+						SaveFlag = 0;
+						break;
+					}
+				}
+
+				if (EndFlag != 99) {
+					SAVE = MessageBox(
+						NULL,
+						"メニューに戻りますか？",
+						"ノベルゲームエンジン「LINKS」",
+						MB_YESNO
+					);
+
+					if (SAVE == IDYES) {
+						SaveFlag = 0;
+						break;
+					}
 				}
 			}
 		}
