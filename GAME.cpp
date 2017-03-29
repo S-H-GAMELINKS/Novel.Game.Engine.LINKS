@@ -879,6 +879,9 @@ int QUICKSAVE_LOAD() {
 		MB_OK
 	);
 
+	SP = SP - 1;
+	CP = EOF;
+
 	fclose(fp);
 
 	return 0;
@@ -2058,7 +2061,6 @@ void SAVEDATA_DELETE_LOOP() {
 
 			//セーブデータ1削除処理
 			SAVEDATA_1_DELETE();
-
 			break;
 		}
 
@@ -2066,7 +2068,6 @@ void SAVEDATA_DELETE_LOOP() {
 
 			//セーブデータ2削除処理
 			SAVEDATA_2_DELETE();
-
 			break;
 		}
 
@@ -2074,7 +2075,6 @@ void SAVEDATA_DELETE_LOOP() {
 
 			//セーブデータ3削除処理
 			SAVEDATA_3_DELETE();
-
 			break;
 		}
 
