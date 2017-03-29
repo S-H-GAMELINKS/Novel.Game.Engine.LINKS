@@ -880,6 +880,8 @@ int QUICKSAVE_LOAD() {
 
 	fclose(fp);
 
+	SP++;
+
 	return 0;
 }
 
