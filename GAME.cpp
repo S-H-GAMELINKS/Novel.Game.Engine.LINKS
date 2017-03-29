@@ -1377,14 +1377,6 @@ void SAVE_WINDOWNOVEL() {
 	GAMEMENU_COUNT = 1;
 }
 
-//セーブ関連の変数初期化
-void SAVEDATA_VAR_FORMAT() {
-
-	SaveFlag = 0;
-	SAVE_CHOICE = 0;
-	GAMEMENU_COUNT = 1;
-}
-
 //セーブデータ１にセーブ
 int SAVEDATA_1_SAVE() {
 
@@ -1435,9 +1427,6 @@ int SAVEDATA_1_SAVE() {
 
 		//ウインドウ風描画時の処理
 		SAVE_WINDOWNOVEL();
-
-		//セーブ関連の変数初期化
-		SAVEDATA_VAR_FORMAT();
 	}
 
 	return 0;
@@ -1492,9 +1481,6 @@ int SAVEDATA_2_SAVE() {
 
 		//ウインドウ風描画時の処理
 		SAVE_WINDOWNOVEL();
-
-		//セーブ関連の変数初期化
-		SAVEDATA_VAR_FORMAT();
 	}
 
 	return 0;
@@ -1549,9 +1535,6 @@ int SAVEDATA_3_SAVE() {
 
 		//ウインドウ風描画時の処理
 		SAVE_WINDOWNOVEL();
-
-		//セーブ関連の変数初期化
-		SAVEDATA_VAR_FORMAT();
 	}
 
 	return 0;
@@ -1560,9 +1543,8 @@ int SAVEDATA_3_SAVE() {
 //セーブデータ・セーブ画面ループ
 void SAVEDATA_SAVE_LOOP() {
 
-	if (SaveFlag == 1) {
-		//セーブデータ・セーブ画面ループ
-		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && SaveFlag == 1) {
+	//セーブデータ・セーブ画面ループ
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
 
 			//背景描画
 			DrawGraph(0, 0, SAVETITLE, TRUE);
@@ -1622,7 +1604,6 @@ void SAVEDATA_SAVE_LOOP() {
 				}
 			}
 		}
-	}
 }
 
 //セーブデータセーブ関数
@@ -1831,10 +1812,7 @@ int SAVEDATA_3_LOAD() {
 //セーブデータ・ロード画面ループ
 void SAVEDATA_LOAD_LOOP() {
 
-	//セーブデータ・ロード画面
-	if (SaveFlag == 2) {
-
-		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && SaveFlag == 2) {
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && SaveFlag == 2) {
 
 			//背景描画
 			DrawGraph(0, 0, SAVETITLE, TRUE);
@@ -1886,10 +1864,8 @@ void SAVEDATA_LOAD_LOOP() {
 						MB_YESNO
 					);
 
-					if (SAVE == IDYES) {
-						SaveFlag = 0;
+					if (SAVE == IDYES)
 						break;
-					}
 				}
 
 				if (EndFlag != 99) {
@@ -1900,14 +1876,11 @@ void SAVEDATA_LOAD_LOOP() {
 						MB_YESNO
 					);
 
-					if (SAVE == IDYES) {
-						SaveFlag = 0;
+					if (SAVE == IDYES)
 						break;
-					}
 				}
 			}
 		}
-	}
 }
 
 //セーブデータロード関数
