@@ -1812,7 +1812,7 @@ int SAVEDATA_3_LOAD() {
 //セーブデータ・ロード画面ループ
 void SAVEDATA_LOAD_LOOP() {
 
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && SaveFlag == 2) {
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
 
 			//背景描画
 			DrawGraph(0, 0, SAVETITLE, TRUE);
