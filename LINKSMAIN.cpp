@@ -210,13 +210,6 @@ void TITLE_MENU() {
 	}
 }
 
-//各ルートでの処理
-void GAME_ROOT() {
-
-
-	
-}
-
 //参照文字列処理
 void WORD_FORMAT() {
 

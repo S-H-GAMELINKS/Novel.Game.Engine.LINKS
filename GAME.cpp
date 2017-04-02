@@ -1267,6 +1267,9 @@ void CONFIG() {
 			//マウス操作関連
 			Mouse_Move();
 
+			//コンフィグ(キー操作)
+			CONFIG_KEY_MOVE();
+
 			//画面クリア処理
 			SCREEN_CLEAR();
 		}
@@ -2629,6 +2632,9 @@ int GAMEMENU() {
 
 			//マウス操作
 			Mouse_Move();
+
+			//ゲームメニュー(キー操作)
+			GAMEMENU_KEY_MOVE();
 
 			//画面クリア処理
 			SCREEN_CLEAR();
