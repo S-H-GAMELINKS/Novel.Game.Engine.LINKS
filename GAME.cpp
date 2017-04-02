@@ -95,6 +95,9 @@ int STRING_SPEED_COUNT = 10;
 //サウンドノベル風とウインドウ風の切り替え変数
 int soundnovel_winownovel = 0;
 
+//マウス操作とキー操作の切り替え変数
+int mouse_key_move = 1;
+
 //キー操作
 int Key[256];
 int y = MENUY;
@@ -166,6 +169,7 @@ typedef struct {
 	int STRING_SPEED;			//文字列描画速度
 	int STRING_SPEED_COUNT;		//文字列描画速度メーター情報
 	int soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報
+	int mouse_key_move;			//マウス操作とキー操作の情報
 }ConfigData_t;
 
 //各素材データ読込関数
@@ -249,12 +253,10 @@ int SCRIPT_TO_ARRAY() {
 	}
 
 	return 0;
-
 }
 
 //スクリプト読込関数
 int SCRIPT_READ() {
-
 
 	switch (EndFlag) {
 
@@ -266,7 +268,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//	//Aルート
@@ -277,7 +278,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Bルート
@@ -288,7 +288,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Cルート
@@ -299,7 +298,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Dルート
@@ -310,7 +308,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Eルート
@@ -321,7 +318,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Fルート
@@ -332,7 +328,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Gルート
@@ -343,7 +338,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Hルート
@@ -354,7 +348,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Iルート
@@ -365,7 +358,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Jルート
@@ -376,7 +368,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Kルート
@@ -387,7 +378,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Lルート
@@ -398,7 +388,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Mルート
@@ -409,7 +398,6 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
 
 		//Nルート
@@ -420,13 +408,10 @@ int SCRIPT_READ() {
 
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-
 		break;
-
 	}
 
 	return 0;
-
 }
 
 //各処理後のゲーム画面の描画(サウンドノベル風)
@@ -511,17 +496,21 @@ void WINDOWNOVEL() {
 //矢印キー操作関数
 int MoveKey(int KeyStateBuf[]) {
 
-	//キー入力用変数
-	char GetHitKeyStateAll_Key[256];
-	
-	//キーの情報を変数へ
-	GetHitKeyStateAll(GetHitKeyStateAll_Key);
-	
-	//キー入力の状況
-	for (int i = 0; i<256; i++) {
-	
-		if (GetHitKeyStateAll_Key[i] == 1) KeyStateBuf[i]++;
-		else                            KeyStateBuf[i] = 0;
+	//キー操作が有効な場合
+	if (mouse_key_move == 0) {
+
+		//キー入力用変数
+		char GetHitKeyStateAll_Key[256];
+
+		//キーの情報を変数へ
+		GetHitKeyStateAll(GetHitKeyStateAll_Key);
+
+		//キー入力の状況
+		for (int i = 0; i < 256; i++) {
+
+			if (GetHitKeyStateAll_Key[i] == 1) KeyStateBuf[i]++;
+			else                            KeyStateBuf[i] = 0;
+		}
 	}
 	return 0;
 }
@@ -570,24 +559,24 @@ void GAME_MENU_CURSOR(int Cr, int GAME_y) {
 //マウス操作(タイトルメニュー)
 void Mouse_Move_TITLE(int MouseY) {
 
-	//タイトルメニュー
-	if (EndFlag == 99) {
+		//タイトルメニュー
+		if (EndFlag == 99) {
 
-		if (MouseY <= 359)
-			y = 330;
+			if (MouseY <= 359)
+				y = 330;
 
-		if (MouseY >= 360 && MouseY <= 389)
-			y = 360;
+			if (MouseY >= 360 && MouseY <= 389)
+				y = 360;
 
-		if (MouseY >= 390 && MouseY <= 419)
-			y = 390;
+			if (MouseY >= 390 && MouseY <= 419)
+				y = 390;
 
-		if (MouseY >= 420 && MouseY <= 449)
-			y = 420;
+			if (MouseY >= 420 && MouseY <= 449)
+				y = 420;
 
-		if (MouseY >= 450)
-			y = 450;
-	}
+			if (MouseY >= 450)
+				y = 450;
+		}
 }
 
 //マウス操作(ゲームメニュー)
@@ -695,8 +684,11 @@ void Mouse_Move_CONFIG(int MouseY) {
 		if (MouseY >= 210 && MouseY <= 239)
 			GAME_y = 210;
 
-		if (MouseY >= 240)
+		if (MouseY >= 240 && MouseY <= 269)
 			GAME_y = 240;
+
+		if (MouseY >= 270)
+			GAME_y = 270;
 	}
 }
 
@@ -709,21 +701,23 @@ int Mouse_Move() {
 	//マウスの位置を取得
 	GetMousePoint(&MouseX, &MouseY);
 
-	//タイトルメニュー
-	Mouse_Move_TITLE(MouseY);
+	if (mouse_key_move == 1) {
 
-	//ゲームメニュー
-	Mouse_Move_GAME(MouseY);
+		//タイトルメニュー
+		Mouse_Move_TITLE(MouseY);
 
-	//セーブ画面関連
-	Mouse_Move_SAVE(MouseY);
-	
-	//選択肢画面
-	Mouse_Move_CHOICE(MouseY);
+		//ゲームメニュー
+		Mouse_Move_GAME(MouseY);
 
-	//コンフィグ画面
-	Mouse_Move_CONFIG(MouseY);
+		//セーブ画面関連
+		Mouse_Move_SAVE(MouseY);
 
+		//選択肢画面
+		Mouse_Move_CHOICE(MouseY);
+
+		//コンフィグ画面
+		Mouse_Move_CONFIG(MouseY);
+	}
 	return 0;
 }
 
@@ -788,7 +782,7 @@ int CONFIG_SAVE()
 {
 	//設定データ保存
 	#pragma warning(disable:4996);
-	ConfigData_t Data = { BGM_VOL, BGM_VOL_COUNT, SE_VOL, SE_VOL_COUNT, SKIP_SPEED, SKIP_SPEED_COUNT, AUTO_SPEED, AUTO_SPEED_COUNT, STRING_SPEED, STRING_SPEED_COUNT, soundnovel_winownovel };
+	ConfigData_t Data = { BGM_VOL, BGM_VOL_COUNT, SE_VOL, SE_VOL_COUNT, SKIP_SPEED, SKIP_SPEED_COUNT, AUTO_SPEED, AUTO_SPEED_COUNT, STRING_SPEED, STRING_SPEED_COUNT, soundnovel_winownovel, mouse_key_move };
 	FILE *fp = fopen("DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
 	if (fp == NULL) {//エラーが起きたらNULLを返す
 		return 0;
@@ -797,7 +791,6 @@ int CONFIG_SAVE()
 	fclose(fp);//ファイルを閉じる
 
 	return 0;
-
 }
 
 //CONFIG_LOAD関数
@@ -824,6 +817,7 @@ int CONFIG_LOAD()
 	STRING_SPEED = Data.STRING_SPEED;
 	STRING_SPEED_COUNT = Data.STRING_SPEED_COUNT;
 	soundnovel_winownovel = Data.soundnovel_winownovel;
+	mouse_key_move = Data.mouse_key_move;
 
 	return 0;
 
@@ -894,7 +888,7 @@ void CONFIG_KEY_MOVE() {
 	if (Key[KEY_INPUT_DOWN] == 1) {
 		ClearDrawScreen();
 		GAME_y += GAMEMENU_y;
-		if (GAME_y == (GAMEMENU_y * 9))
+		if (GAME_y == (GAMEMENU_y * 10))
 			GAME_y = GAMEMENU_y;
 	}
 
@@ -902,7 +896,7 @@ void CONFIG_KEY_MOVE() {
 		ClearDrawScreen();
 		GAME_y -= GAMEMENU_y;
 		if (GAME_y == (GAMEMENU_y - GAMEMENU_y))
-			GAME_y = (GAMEMENU_y * 8);
+			GAME_y = (GAMEMENU_y * 9);
 	}
 }
 
@@ -1060,7 +1054,6 @@ void STRING_SPEED_CHANGE() {
 			STRING_SPEED = 0;
 			STRING_SPEED_COUNT = 0;
 		}
-
 	}
 }
 
@@ -1104,6 +1097,26 @@ void WINDOWACTIVE() {
 	}
 }
 
+//コンフィグ(マウス/キー操作)
+void MOUSE_KEY_MOVE() {
+
+	//マウス操作を有効に
+	if (GAME_y == GAMEMENU_y * 8 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+		WaitTimer(300);
+
+		mouse_key_move = 1;
+	}
+
+	//キー操作を有効に
+	if (GAME_y == GAMEMENU_y * 8 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 8 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+		WaitTimer(300);
+		
+		mouse_key_move = 0;
+	}
+}
+
 //各種設定情報描画
 void CONFIG_MENU() {
 
@@ -1115,12 +1128,13 @@ void CONFIG_MENU() {
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 5, "文字描画速度", Cr);
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 6, "描画方法", Cr);
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 7, "非アクティブ時", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "マウス/キー操作", Cr);
 
 	if (EndFlag != 99)
-		DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "メニューに戻る", Cr);
+		DrawString(SAVE_NAME_X, GAMEMENU_y * 9, "メニューに戻る", Cr);
 
 	if (EndFlag == 99)
-		DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "タイトルに戻る", Cr);
+		DrawString(SAVE_NAME_X, GAMEMENU_y * 9, "タイトルに戻る", Cr);
 
 	//BGM音量目盛り描画
 	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, Cr, "%d", BGM_VOL);
@@ -1151,13 +1165,21 @@ void CONFIG_MENU() {
 
 	if (WindowActive == FALSE)
 		DrawString(SAVE_NAME_X + CURSOR * 7, GAMEMENU_y * 7, "未処理", Cr);
+
+	//マウス操作
+	if (mouse_key_move == 1)
+		DrawString(SAVE_NAME_X + CURSOR * 8, GAMEMENU_y * 8, "マウス操作", Cr);
+
+	//キー操作
+	if (mouse_key_move == 0)
+		DrawString(SAVE_NAME_X + CURSOR * 8, GAMEMENU_y * 8, "キー操作", Cr);
 }
 
 //コンフィグ(タイトル/ゲームメニューへ戻る)
 void CONFIG_TITLE_BACK() {
 
 	//タイトルに戻る/ゲームメニューに戻る
-	if (GAME_y == GAMEMENU_y * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+	if (GAME_y == GAMEMENU_y * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y * 9 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 		//タイトルに戻る
 		if (EndFlag == 99) {
@@ -1235,6 +1257,9 @@ void CONFIG() {
 
 			//非アクティブ時の処理設定
 			WINDOWACTIVE();
+
+			//マウス操作とキー操作設定
+			MOUSE_KEY_MOVE();
 
 			//タイトルに戻る
 			CONFIG_TITLE_BACK();
