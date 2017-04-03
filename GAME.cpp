@@ -2123,6 +2123,9 @@ void SAVEDATA_DELETE_LOOP() {
 //セーブデータ削除処理
 void SAVEDATA_DELETE() {
 
+	//削除前のメッセージ
+	SAVEDATA_DELETE_MESSAGE();
+
 	if (SAVE == IDYES) {
 
 		ClearDrawScreen();
@@ -2518,6 +2521,7 @@ void GAMEMENU_CHOICE() {
 
 		//セーブデータセーブ処理
 		SAVEDATA_SAVE();
+		WaitTimer(300);
 	}
 
 	//ロード
@@ -2525,16 +2529,15 @@ void GAMEMENU_CHOICE() {
 
 		//セーブデータロード処理
 		SAVEDATA_LOAD();
+		WaitTimer(300);
 	}
 
 	//セーブデータ削除
 	if (GAME_y == (GAMEMENU_y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (GAMEMENU_y * 3) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-		//削除前のメッセージ
-		SAVEDATA_DELETE_MESSAGE();
-
 		//セーブデータ削除処理
 		SAVEDATA_DELETE();
+		WaitTimer(300);
 	}
 
 	//既読スキップ
@@ -2545,6 +2548,7 @@ void GAMEMENU_CHOICE() {
 
 		//既読済みの部分を判定して、スキップ
 		SKIP_READ_CHECK();
+		WaitTimer(300);
 	}
 
 	//スキップ
@@ -2552,6 +2556,7 @@ void GAMEMENU_CHOICE() {
 
 		//スキップ処理
 		SKIP_START();
+		WaitTimer(300);
 	}
 
 	//オート
@@ -2559,6 +2564,7 @@ void GAMEMENU_CHOICE() {
 
 		//オート処理
 		AUTO_START();
+		WaitTimer(300);
 	}
 
 	//オート/スキップ停止
@@ -2566,6 +2572,7 @@ void GAMEMENU_CHOICE() {
 
 		//オート/スキップ停止処理
 		AUTO_SKIP_STOP();
+		WaitTimer(300);
 	}
 
 	//バックログ参照
@@ -2573,6 +2580,7 @@ void GAMEMENU_CHOICE() {
 
 		//バックログ参照
 		BACKLOG_DRAW();
+		WaitTimer(300);
 	}
 
 	//設定
@@ -2580,6 +2588,7 @@ void GAMEMENU_CHOICE() {
 
 		//設定画面の呼び出し
 		CONFIG();
+		WaitTimer(300);
 	}
 
 	//タイトルに戻る
@@ -2587,6 +2596,7 @@ void GAMEMENU_CHOICE() {
 
 		//タイトルに戻る
 		GAMEMENU_TITLE_BACK();
+		WaitTimer(300);
 	}
 
 	//ゲームに戻る
@@ -2594,6 +2604,7 @@ void GAMEMENU_CHOICE() {
 
 		//ゲームに戻る
 		GAMEMENU_GAME_BACK();
+		WaitTimer(300);
 	}
 
 	//ゲーム終了
@@ -2601,6 +2612,7 @@ void GAMEMENU_CHOICE() {
 
 		//ゲーム終了
 		GAMEMENU_GAME_FINISH();
+		WaitTimer(300);
 	}
 
 	//エスケープでゲーム終了
