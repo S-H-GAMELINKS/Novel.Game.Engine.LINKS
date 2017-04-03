@@ -65,4 +65,6 @@ int Mouse_Move();
 //コンフィグ(タイトル画面)
 void CONFIG();
 
+//画面クリア処理
+void SCREEN_CLEAR();
 

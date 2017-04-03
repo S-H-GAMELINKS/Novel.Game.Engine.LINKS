@@ -128,14 +128,12 @@ void DXLib_POST_PREP() {
 void TITLE_MENU_KEY_MOVE() {
 
 	if (Key[KEY_INPUT_DOWN] == 1) {
-		ClearDrawScreen();
 		y += CURSOR;
 		if (y == (GAMEQUIT + CURSOR))
 			y = GAMESTART;
 	}
 
 	if (Key[KEY_INPUT_UP] == 1) {
-		ClearDrawScreen();
 		y -= CURSOR;
 		if (y == (GAMESTART - CURSOR))
 			y = GAMEQUIT;
@@ -198,11 +196,10 @@ void TITLE_MENU() {
 			Mouse_Move();
 
 			//キー操作関連
-			SetDrawScreen(DX_SCREEN_BACK);
-
 			TITLE_MENU_KEY_MOVE();
 
-			SetDrawScreen(DX_SCREEN_FRONT);
+			//画面クリア処理
+			SCREEN_CLEAR();
 
 			//タイトルメニュー(選択処理)
 			TITLE_MENU_CHOICE();
