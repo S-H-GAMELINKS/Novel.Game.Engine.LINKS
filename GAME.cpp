@@ -886,14 +886,12 @@ void CONFIG_KEY_MOVE() {
 
 	//キー操作関連
 	if (Key[KEY_INPUT_DOWN] == 1) {
-		ClearDrawScreen();
 		GAME_y += GAMEMENU_y;
 		if (GAME_y == (GAMEMENU_y * 10))
 			GAME_y = GAMEMENU_y;
 	}
 
 	if (Key[KEY_INPUT_UP] == 1) {
-		ClearDrawScreen();
 		GAME_y -= GAMEMENU_y;
 		if (GAME_y == (GAMEMENU_y - GAMEMENU_y))
 			GAME_y = (GAMEMENU_y * 9);
@@ -1299,14 +1297,12 @@ void GAMEMENU_DRAW() {
 void GAMEMENU_KEY_MOVE() {
 
 	if (Key[KEY_INPUT_DOWN] == 1) {
-		ClearDrawScreen();
 		GAME_y += GAMEMENU_y;
 		if (GAME_y == (GAMEMENU_y * 13))
 			GAME_y = GAMEMENU_y;
 	}
 
 	if (Key[KEY_INPUT_UP] == 1) {
-		ClearDrawScreen();
 		GAME_y -= GAMEMENU_y;
 		if (GAME_y == (GAMEMENU_y - GAMEMENU_y))
 			GAME_y = (GAMEMENU_y * 12);
@@ -1337,14 +1333,12 @@ void SAVEDATA_DRAW() {
 void SAVEDATA_KEY_MOVE() {
 
 	if (Key[KEY_INPUT_DOWN] == 1) {
-		ClearDrawScreen();
 		SAVE_y += SAVE_MOVE;
 		if (SAVE_y == (SAVE_Y_MAX + SAVE_MOVE + SAVE_MOVE))
 			SAVE_y = SAVE_MOVE;
 	}
 
 	if (Key[KEY_INPUT_UP] == 1) {
-		ClearDrawScreen();
 		SAVE_y -= SAVE_MOVE;
 		if (SAVE_y == (SAVE_Y - SAVE_MOVE))
 			SAVE_y = SAVE_Y_MAX + SAVE_MOVE;
@@ -3359,13 +3353,11 @@ void SCRIPT_OUTPUT_CHOICE_LOOP_SAVESNAP() {
 void SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE() {
 
 	if (Key[KEY_INPUT_DOWN] == 1) {
-		ClearDrawScreen();
 		y += CURSOR;
 		if (y == (SENTAKUSI2 + CURSOR))                         // y座標が260なら(選択が一番下なら)
 			y = SENTAKUSI1;                        // 選択座標を一番上に
 	}
 	if (Key[KEY_INPUT_UP] == 1) {
-		ClearDrawScreen();
 		y -= CURSOR;
 		if (y == (SENTAKUSI1 - CURSOR))
 			y = SENTAKUSI2;
