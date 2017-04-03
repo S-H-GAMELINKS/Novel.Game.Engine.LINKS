@@ -1850,6 +1850,9 @@ void SAVEDATA_LOAD_LOOP() {
 			//マウス操作
 			Mouse_Move();
 
+			//セーブ画面(キー操作)
+			SAVEDATA_KEY_MOVE();
+
 			//画面クリア処理
 			SCREEN_CLEAR();
 
