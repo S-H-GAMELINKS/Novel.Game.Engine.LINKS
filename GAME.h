@@ -65,6 +65,9 @@ int Mouse_Move();
 //コンフィグ(タイトル画面)
 void CONFIG();
 
+//終了ウインドウ
+int GAME_FINISH();
+
 //画面クリア処理
 void SCREEN_CLEAR();
 

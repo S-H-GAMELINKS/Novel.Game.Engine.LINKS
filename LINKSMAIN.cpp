@@ -203,6 +203,9 @@ void TITLE_MENU() {
 
 			//タイトルメニュー(選択処理)
 			TITLE_MENU_CHOICE();
+
+			//終了ウインドウ
+			GAME_FINISH();
 		}
 	}
 }
