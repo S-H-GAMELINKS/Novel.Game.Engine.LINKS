@@ -440,8 +440,8 @@ void SOUNDNOVEL() {
 		DrawPointX = 0;
 
 		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
+			SP = SP; //- 1;
+			//CP = EOF;
 		}
 
 		if (SP == 0) {
@@ -482,8 +482,8 @@ void WINDOWNOVEL() {
 		DrawPointX = 0;
 
 		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
+			SP = SP; //- 1;
+			//CP = EOF;
 		}
 
 		if (SP == 0) {
@@ -839,45 +839,57 @@ int QUICKSAVE_SAVE(){
 	return 0;
 }
 
+//クイックロード時のメッセージ
+void QUICKSAVE_LOAD_MESSAGE() {
+	SAVE = MessageBox(
+		NULL,
+		"クイックロードを実行しますか？",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+}
+
 //クイックロード
 int QUICKSAVE_LOAD() {
 
-	//クイックセーブデータの読み込み
-	QuickSaveData_t Data;
+	//クイックロード時のメッセージ
+	QUICKSAVE_LOAD_MESSAGE();
+
+	if (SAVE == IDYES) {
+
+		//クイックセーブデータの読み込み
+		QuickSaveData_t Data;
 #pragma warning(disable:4996);
-	FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "rb");
-	if (fp == NULL) {
-		return 0;
+		FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "rb");
+		if (fp == NULL) {
+			return 0;
+		}
+		fread(&Data, sizeof(Data), 1, fp);
+		EndFlag = Data.ENDFLAG;
+		SP = Data.SP;
+		CP = Data.CP;
+		CHARACTER = Data.CHAR;
+		BACKGROUND = Data.BG;
+		BACKGROUNDMUSIC = Data.BGM;
+		SAVE_CHOICE = Data.SAVE_CHOICE;
+
+		GAMEMENU_COUNT = 1;
+
+		//サウンドノベル風描画時の処理
+		SOUNDNOVEL();
+
+		//ウインドウ風描画時の処理
+		WINDOWNOVEL();
+
+		MessageBox(
+			NULL,
+			"ロードしました！",
+			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		fclose(fp);
 	}
-	fread(&Data, sizeof(Data), 1, fp);
-	EndFlag = Data.ENDFLAG;
-	SP = Data.SP;
-	CP = Data.CP;
-	CHARACTER = Data.CHAR;
-	BACKGROUND = Data.BG;
-	BACKGROUNDMUSIC = Data.BGM;
-	SAVE_CHOICE = Data.SAVE_CHOICE;
-
-	GAMEMENU_COUNT = 1;
-
-	//サウンドノベル風描画時の処理
-	SOUNDNOVEL();
-
-	//ウインドウ風描画時の処理
-	WINDOWNOVEL();
-
-	MessageBox(
-		NULL,
-		"ロードしました！",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_OK
-	);
-
-	SP = SP - 1;
-	CP = EOF;
-
-	fclose(fp);
-
 	return 0;
 }
 
