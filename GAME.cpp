@@ -839,6 +839,13 @@ int QUICKSAVE_SAVE(){
 	return 0;
 }
 
+//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
+void SAVEDATA_LOAD_STRING_POINT() {
+
+	SP = SP + 1;
+	CP = 0;
+}
+
 //クイックロード時のメッセージ
 void QUICKSAVE_LOAD_MESSAGE() {
 	SAVE = MessageBox(
@@ -881,14 +888,15 @@ int QUICKSAVE_LOAD() {
 		//ウインドウ風描画時の処理
 		WINDOWNOVEL();
 
+		//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
+		SAVEDATA_LOAD_STRING_POINT();
+
 		MessageBox(
 			NULL,
 			"ロードしました！",
 			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
 			MB_OK
 		);
-
-		SP = SP + 1;
 
 		fclose(fp);
 	}
@@ -1745,6 +1753,9 @@ int SAVEDATA_1_LOAD() {
 		//ロード後の処理(ウインドウ風)
 		LOAD_WINDOWNOVEL();
 
+		//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
+		SAVEDATA_LOAD_STRING_POINT();
+
 		fclose(fp);
 	}
 
@@ -1794,6 +1805,9 @@ int SAVEDATA_2_LOAD() {
 		//ロード後の処理(ウインドウ風)
 		LOAD_WINDOWNOVEL();
 
+		//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
+		SAVEDATA_LOAD_STRING_POINT();
+
 		fclose(fp);
 	}
 
@@ -1842,6 +1856,9 @@ int SAVEDATA_3_LOAD() {
 
 		//ロード後の処理(ウインドウ風)
 		LOAD_WINDOWNOVEL();
+
+		//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
+		SAVEDATA_LOAD_STRING_POINT();
 
 		fclose(fp);
 	}
