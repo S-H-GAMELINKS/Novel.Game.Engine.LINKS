@@ -440,8 +440,8 @@ void SOUNDNOVEL() {
 		DrawPointX = 0;
 
 		if (SP != 0) {
-			SP = SP; //- 1;
-			//CP = EOF;
+			SP = SP - 1;
+			CP = EOF;
 		}
 
 		if (SP == 0) {
@@ -482,8 +482,8 @@ void WINDOWNOVEL() {
 		DrawPointX = 0;
 
 		if (SP != 0) {
-			SP = SP; //- 1;
-			//CP = EOF;
+			SP = SP - 1;
+			CP = EOF;
 		}
 
 		if (SP == 0) {
@@ -887,6 +887,8 @@ int QUICKSAVE_LOAD() {
 			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
 			MB_OK
 		);
+
+		SP = SP + 1;
 
 		fclose(fp);
 	}
