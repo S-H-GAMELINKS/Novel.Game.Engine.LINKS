@@ -1699,6 +1699,9 @@ void LOAD_SOUNDNOVEL() {
 	SOUNDNOVEL();
 
 	GAMEMENU_COUNT = 1;
+
+	//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
+	SAVEDATA_LOAD_STRING_POINT();
 }
 
 //ロード後の処理(ウインドウ風)
@@ -1708,6 +1711,9 @@ void LOAD_WINDOWNOVEL() {
 	WINDOWNOVEL();
 
 	GAMEMENU_COUNT = 1;
+
+	//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
+	SAVEDATA_LOAD_STRING_POINT();
 }
 
 //セーブデータ1のロード
@@ -1752,9 +1758,6 @@ int SAVEDATA_1_LOAD() {
 
 		//ロード後の処理(ウインドウ風)
 		LOAD_WINDOWNOVEL();
-
-		//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
-		SAVEDATA_LOAD_STRING_POINT();
 
 		fclose(fp);
 	}
@@ -1805,9 +1808,6 @@ int SAVEDATA_2_LOAD() {
 		//ロード後の処理(ウインドウ風)
 		LOAD_WINDOWNOVEL();
 
-		//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
-		SAVEDATA_LOAD_STRING_POINT();
-
 		fclose(fp);
 	}
 
@@ -1856,9 +1856,6 @@ int SAVEDATA_3_LOAD() {
 
 		//ロード後の処理(ウインドウ風)
 		LOAD_WINDOWNOVEL();
-
-		//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
-		SAVEDATA_LOAD_STRING_POINT();
 
 		fclose(fp);
 	}
