@@ -71,3 +71,6 @@ int GAME_FINISH();
 //画面クリア処理
 void SCREEN_CLEAR();
 
+//各種F1～F11キー
+void SHOTCUT_KEY();
+

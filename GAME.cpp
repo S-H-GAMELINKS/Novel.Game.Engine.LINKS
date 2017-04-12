@@ -3895,8 +3895,7 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
 void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
 
 	//ウインドウ風時の改ページ処理
-	if (soundnovel_winownovel == 1 && DrawPointY > 479) {
-
+	if (soundnovel_winownovel == 1 && DrawPointY > 480) {
 
 		SetDrawScreen(DX_SCREEN_BACK);
 
@@ -4907,4 +4906,48 @@ int SCREENSHOT() {
 	}
 
 	return 0;		
+}
+
+//各種F1～F11キー
+void SHOTCUT_KEY() {
+
+	//セーブ
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F1) == 1)
+		SAVEDATA_SAVE();
+
+	//ロード
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F2) == 1)
+		SAVEDATA_LOAD();
+
+	//セーブデータ削除
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F3) == 1)
+		SAVEDATA_DELETE();
+
+	//既読スキップ
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F4) == 1)
+		SKIP_READ_LOAD();
+
+	//スキップ
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F5) == 1)
+		SKIP_START();
+
+	//オート
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F6) == 1)
+		AUTO_START();
+
+	//スキップ&オート停止
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F7) == 1)
+		AUTO_SKIP_STOP();
+
+	//バックログ
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F8) == 1)
+		BACKLOG_DRAW();
+
+	//設定
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F9) == 1)
+		CONFIG();
+
+	//タイトルへ戻る
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F10) == 1)
+		GAMEMENU_TITLE_BACK();
 }

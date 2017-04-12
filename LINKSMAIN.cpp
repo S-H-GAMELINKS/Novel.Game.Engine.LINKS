@@ -245,6 +245,9 @@ void GAME_LOOP_LINKS() {
 			//スクリーンショット取得
 			SCREENSHOT();
 
+			//ショートカットキー
+			SHOTCUT_KEY();
+
 			//終了
 			GAME_FINISH();
 
@@ -291,6 +294,9 @@ void GAME_LOOP_A() {
 
 			//スクリーンショット取得
 			SCREENSHOT();
+
+			//ショートカットキー
+			SHOTCUT_KEY();
 
 			//終了
 			GAME_FINISH();
