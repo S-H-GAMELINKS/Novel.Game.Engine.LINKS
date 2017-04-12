@@ -4908,8 +4908,18 @@ int SCREENSHOT() {
 	return 0;		
 }
 
+//各種F1～F11キー選択時の処理
+void SHORTCUT_KEY_DRAW() {
+
+	//サウンドノベル風時の処理
+	SOUNDNOVEL();
+
+	//ウインドウ風時の処理
+	WINDOWNOVEL();
+}
+
 //各種F1～F11キー
-void SHOTCUT_KEY() {
+void SHORTCUT_KEY() {
 
 	//セーブ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F1) == 1)
@@ -4930,7 +4940,7 @@ void SHOTCUT_KEY() {
 	//スキップ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F5) == 1)
 		SKIP_START();
-
+	
 	//オート
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F6) == 1)
 		AUTO_START();

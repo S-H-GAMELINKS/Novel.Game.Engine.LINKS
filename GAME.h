@@ -72,5 +72,4 @@ int GAME_FINISH();
 void SCREEN_CLEAR();
 
 //КeОнF1Б`F11ГLБ[
-void SHOTCUT_KEY();
-
+void SHORTCUT_KEY();
