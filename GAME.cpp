@@ -114,6 +114,9 @@ int Config = 0;
 //スクリーンショット用変数
 int SCREENSHOT_COUNT = 0;
 
+//ショートカットキー用変数
+short SHORTCUT_KEY_FLAG = 0;
+
 //セーブ・ロード関連
 //通常セーブデータ
 typedef struct {
@@ -2463,6 +2466,9 @@ void GAMEMENU_TITLE_BACK() {
 	if (SAVE == IDYES) {
 
 		ClearDrawScreen();
+
+		if (SHORTCUT_KEY_FLAG == 1)
+			StopSoundMem(BACKGROUNDMUSIC);
 
 		GAMEMENU_COUNT = 1;
 		EndFlag = 99;
@@ -4908,56 +4914,66 @@ int SCREENSHOT() {
 	return 0;		
 }
 
-//各種F1～F11キー選択時の処理
-void SHORTCUT_KEY_DRAW() {
-
-	//サウンドノベル風時の処理
-	SOUNDNOVEL();
-
-	//ウインドウ風時の処理
-	WINDOWNOVEL();
-}
-
 //各種F1～F11キー
 void SHORTCUT_KEY() {
 
 	//セーブ
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F1) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F1) == 1) {
 		SAVEDATA_SAVE();
+		SHORTCUT_KEY_FLAG = 1;
+	}
 
 	//ロード
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F2) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F2) == 1) {
 		SAVEDATA_LOAD();
+		SHORTCUT_KEY_FLAG = 1;
+	}
 
 	//セーブデータ削除
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F3) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F3) == 1) {
 		SAVEDATA_DELETE();
+		SHORTCUT_KEY_FLAG = 1;
+	}
 
 	//既読スキップ
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F4) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F4) == 1) {
 		SKIP_READ_LOAD();
+		SHORTCUT_KEY_FLAG = 1;
+	}
 
 	//スキップ
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F5) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F5) == 1) {
 		SKIP_START();
-	
+		SHORTCUT_KEY_FLAG = 1;
+	}
+
 	//オート
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F6) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F6) == 1) {
 		AUTO_START();
+		SHORTCUT_KEY_FLAG = 1;
+	}
 
 	//スキップ&オート停止
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F7) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F7) == 1) {
 		AUTO_SKIP_STOP();
+		SHORTCUT_KEY_FLAG = 1;
+	}
 
 	//バックログ
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F8) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F8) == 1) {
 		BACKLOG_DRAW();
+		SHORTCUT_KEY_FLAG = 1;
+	}
 
 	//設定
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F9) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F9) == 1) {
 		CONFIG();
+		SHORTCUT_KEY_FLAG = 1;
+	}
 
 	//タイトルへ戻る
-	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F10) == 1)
+	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F10) == 1) {
 		GAMEMENU_TITLE_BACK();
+		SHORTCUT_KEY_FLAG = 1;
+	}
 }
