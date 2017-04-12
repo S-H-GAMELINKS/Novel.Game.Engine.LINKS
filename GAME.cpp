@@ -1654,6 +1654,8 @@ void SAVEDATA_SAVE_LOOP() {
 
 						//ウインドウ風時の処理
 						WINDOWNOVEL();
+
+						SHORTCUT_KEY_FLAG = 0;
 					}
 
 					break;
@@ -1939,6 +1941,8 @@ void SAVEDATA_LOAD_LOOP() {
 
 							//ウインドウ風時の処理
 							WINDOWNOVEL();
+
+							SHORTCUT_KEY_FLAG = 0;
 						}
 
 						break;
@@ -2160,6 +2164,8 @@ void SAVEDATA_DELETE_LOOP() {
 
 					//ウインドウ風時の処理
 					WINDOWNOVEL();
+
+					SHORTCUT_KEY_FLAG = 0;
 				}
 
 				break;
@@ -4936,61 +4942,71 @@ void SHORTCUT_KEY() {
 
 	//セーブ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F1) == 1) {
-		SAVEDATA_SAVE();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		SAVEDATA_SAVE();
 	}
 
 	//ロード
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F2) == 1) {
-		SAVEDATA_LOAD();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		SAVEDATA_LOAD();
 	}
 
 	//セーブデータ削除
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F3) == 1) {
-		SAVEDATA_DELETE();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		SAVEDATA_DELETE();
 	}
 
 	//既読スキップ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F4) == 1) {
-		SKIP_READ_CHECK();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		SKIP_READ_CHECK();
 	}
 
 	//スキップ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F5) == 1) {
-		SKIP_START();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		SKIP_START();
 	}
 
 	//オート
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F6) == 1) {
-		AUTO_START();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		AUTO_START();
 	}
 
 	//スキップ&オート停止
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F7) == 1) {
-		AUTO_SKIP_STOP();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		AUTO_SKIP_STOP();
 	}
 
 	//バックログ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F8) == 1) {
-		BACKLOG_DRAW();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		BACKLOG_DRAW();
 	}
 
 	//設定
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F9) == 1) {
-		CONFIG();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		CONFIG();
 	}
 
 	//タイトルへ戻る
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F10) == 1) {
-		GAMEMENU_TITLE_BACK();
 		SHORTCUT_KEY_FLAG = 1;
+		GAMEMENU_COUNT = 0;
+		GAMEMENU_TITLE_BACK();
 	}
 }
