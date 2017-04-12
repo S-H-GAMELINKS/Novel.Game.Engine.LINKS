@@ -1347,11 +1347,7 @@ void SAVEDATA_DRAW() {
 	DrawString(SAVE_NAME_X, SAVE_Y * 2, "セーブデータ2", Cr);
 	DrawString(SAVE_NAME_X, SAVE_Y * 3, "セーブデータ3", Cr);
 
-	if (EndFlag == 99)
-		DrawString(SAVE_NAME_X - CURSOR, SAVE_Y * 4, "タイトルに戻る", Cr);
-
-	if (EndFlag != 99)
-		DrawString(SAVE_NAME_X - CURSOR, SAVE_Y * 4, "メニューに戻る", Cr);
+	DrawString(SAVE_NAME_X - CURSOR, SAVE_Y * 4, "戻る", Cr);
 }
 
 //セーブ画面(キー操作)
@@ -1637,7 +1633,7 @@ void SAVEDATA_SAVE_LOOP() {
 				break;
 			}
 
-			//メニュー画面に戻る
+			//画面に戻る
 			if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
 				SAVE = MessageBox(
@@ -1922,32 +1918,31 @@ void SAVEDATA_LOAD_LOOP() {
 				break;
 			}
 
-			//タイトルに戻る
+			//戻る
 			if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-				if (EndFlag == 99) {
 					SAVE = MessageBox(
 						NULL,
-						"タイトルに戻りますか？",
+						"戻りますか？",
 						"ノベルゲームエンジン「LINKS」",
 						MB_YESNO
 					);
 
-					if (SAVE == IDYES)
-						break;
-				}
+					if (SAVE == IDYES) {
 
-				if (EndFlag != 99) {
-					SAVE = MessageBox(
-						NULL,
-						"メニューに戻りますか？",
-						"ノベルゲームエンジン「LINKS」",
-						MB_YESNO
-					);
+						ClearDrawScreen();
 
-					if (SAVE == IDYES)
+						if (SHORTCUT_KEY_FLAG == 1) {
+
+							//サウンドノベル風時の処理
+							SOUNDNOVEL();
+
+							//ウインドウ風時の処理
+							WINDOWNOVEL();
+						}
+
 						break;
-				}
+					}
 			}
 		}
 }
@@ -2149,13 +2144,24 @@ void SAVEDATA_DELETE_LOOP() {
 
 			SAVE = MessageBox(
 				NULL,
-				"メニューに戻りますか？",
+				"戻りますか？",
 				"ノベルゲームエンジン「LINKS」",
 				MB_YESNO
 			);
 
 			if (SAVE == IDYES) {
+
 				ClearDrawScreen();
+
+				if (SHORTCUT_KEY_FLAG == 1) {
+
+					//サウンドノベル風時の処理
+					SOUNDNOVEL();
+
+					//ウインドウ風時の処理
+					WINDOWNOVEL();
+				}
+
 				break;
 			}
 		}
