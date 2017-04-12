@@ -1639,9 +1639,10 @@ void SAVEDATA_SAVE_LOOP() {
 
 			//メニュー画面に戻る
 			if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+
 				SAVE = MessageBox(
 					NULL,
-					"メニューに戻りますか？",
+					"戻りますか？",
 					"ノベルゲームエンジン「LINKS」",
 					MB_YESNO
 				);
@@ -1649,6 +1650,16 @@ void SAVEDATA_SAVE_LOOP() {
 				if (SAVE == IDYES) {
 
 					ClearDrawScreen();
+
+					if (SHORTCUT_KEY_FLAG == 1) {
+
+						//サウンドノベル風時の処理
+						SOUNDNOVEL();
+
+						//ウインドウ風時の処理
+						WINDOWNOVEL();
+					}
+
 					break;
 				}
 			}
