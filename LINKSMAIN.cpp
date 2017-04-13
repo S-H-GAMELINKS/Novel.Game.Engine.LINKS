@@ -295,6 +295,9 @@ void GAME_LOOP_A() {
 			//スクリーンショット取得
 			SCREENSHOT();
 
+			//ショートカットキー
+			SHORTCUT_KEY();
+
 			//終了
 			GAME_FINISH();
 
@@ -341,6 +344,9 @@ void GAME_LOOP_B() {
 
 			//スクリーンショット取得
 			SCREENSHOT();
+
+			//ショートカットキー
+			SHORTCUT_KEY();
 
 			//終了
 			GAME_FINISH();
@@ -389,6 +395,9 @@ void GAME_LOOP_C() {
 			//スクリーンショット取得
 			SCREENSHOT();
 
+			//ショートカットキー
+			SHORTCUT_KEY();
+
 			//終了
 			GAME_FINISH();
 
@@ -435,6 +444,9 @@ void GAME_LOOP_D() {
 
 			//スクリーンショット取得
 			SCREENSHOT();
+
+			//ショートカットキー
+			SHORTCUT_KEY();
 
 			//終了
 			GAME_FINISH();
@@ -483,6 +495,9 @@ void GAME_LOOP_E() {
 			//スクリーンショット取得
 			SCREENSHOT();
 
+			//ショートカットキー
+			SHORTCUT_KEY();
+
 			//終了
 			GAME_FINISH();
 
@@ -529,6 +544,9 @@ void GAME_LOOP_F() {
 
 			//スクリーンショット取得
 			SCREENSHOT();
+
+			//ショートカットキー
+			SHORTCUT_KEY();
 
 			//終了
 			GAME_FINISH();
@@ -577,6 +595,9 @@ void GAME_LOOP_G() {
 			//スクリーンショット取得
 			SCREENSHOT();
 
+			//ショートカットキー
+			SHORTCUT_KEY();
+
 			//終了
 			GAME_FINISH();
 
@@ -618,6 +639,9 @@ void GAME_LOOP_H() {
 
 			//スクリーンショット取得
 			SCREENSHOT();
+
+			//ショートカットキー
+			SHORTCUT_KEY();
 
 			//終了
 			GAME_FINISH();
@@ -661,6 +685,9 @@ void GAME_LOOP_I() {
 			//スクリーンショット取得
 			SCREENSHOT();
 
+			//ショートカットキー
+			SHORTCUT_KEY();
+
 			//終了
 			GAME_FINISH();
 
@@ -702,6 +729,9 @@ void GAME_LOOP_J() {
 
 			//スクリーンショット取得
 			SCREENSHOT();
+
+			//ショートカットキー
+			SHORTCUT_KEY();
 
 			//終了
 			GAME_FINISH();
@@ -745,6 +775,9 @@ void GAME_LOOP_K() {
 			//スクリーンショット取得
 			SCREENSHOT();
 
+			//ショートカットキー
+			SHORTCUT_KEY();
+
 			//終了
 			GAME_FINISH();
 
@@ -786,6 +819,9 @@ void GAME_LOOP_L() {
 
 			//スクリーンショット取得
 			SCREENSHOT();
+
+			//ショートカットキー
+			SHORTCUT_KEY();
 
 			//終了
 			GAME_FINISH();
@@ -829,6 +865,9 @@ void GAME_LOOP_M() {
 			//スクリーンショット取得
 			SCREENSHOT();
 
+			//ショートカットキー
+			SHORTCUT_KEY();
+
 			//終了
 			GAME_FINISH();
 
@@ -870,6 +909,9 @@ void GAME_LOOP_N() {
 
 			//スクリーンショット取得
 			SCREENSHOT();
+
+			//ショートカットキー
+			SHORTCUT_KEY();
 
 			//終了
 			GAME_FINISH();
