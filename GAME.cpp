@@ -1301,10 +1301,10 @@ void CONFIG() {
 
 			//画面クリア処理
 			SCREEN_CLEAR();
-
-			//ショートカットキー時の事後処理
-			SHORTCUT_KEY_DRAW();
 		}
+
+		//ショートカットキー時の事後処理
+		SHORTCUT_KEY_DRAW();
 	}
 }
 
