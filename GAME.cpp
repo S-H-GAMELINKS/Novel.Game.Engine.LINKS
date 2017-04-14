@@ -1168,11 +1168,7 @@ void CONFIG_MENU() {
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 7, "非アクティブ時", Cr);
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 8, "マウス/キー操作", Cr);
 
-	if (EndFlag != 99)
-		DrawString(SAVE_NAME_X, GAMEMENU_y * 9, "メニューに戻る", Cr);
-
-	if (EndFlag == 99)
-		DrawString(SAVE_NAME_X, GAMEMENU_y * 9, "タイトルに戻る", Cr);
+	DrawString(SAVE_NAME_X, GAMEMENU_y * 9, "戻る", Cr);
 
 	//BGM音量目盛り描画
 	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, Cr, "%d", BGM_VOL);
