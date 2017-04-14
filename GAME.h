@@ -1,4 +1,3 @@
-
 //各素材データ読込関数
 void MATERIAL_LOAD();
 

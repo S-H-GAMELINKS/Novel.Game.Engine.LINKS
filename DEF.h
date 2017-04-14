@@ -1,5 +1,3 @@
-
-
 // •¶š‚ÌƒTƒCƒY
 #define MOJI_SIZE 21
 
