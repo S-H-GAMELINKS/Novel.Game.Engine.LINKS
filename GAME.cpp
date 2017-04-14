@@ -518,6 +518,21 @@ int MoveKey(int KeyStateBuf[]) {
 	return 0;
 }
 
+//ショートカットキー処理後の描画
+void SHORTCUT_KEY_DRAW() {
+
+	if (SHORTCUT_KEY_FLAG == 1) {
+
+		//サウンドノベル風時の処理
+		SOUNDNOVEL();
+
+		//ウインドウ風時の処理
+		WINDOWNOVEL();
+
+		SHORTCUT_KEY_FLAG = 0;
+	}
+}
+
 //タイトルメニューカーソル関数
 void title(int Cr, int y) {
 
@@ -1204,28 +1219,16 @@ void CONFIG_TITLE_BACK() {
 	//タイトルに戻る/ゲームメニューに戻る
 	if (GAME_y == GAMEMENU_y * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y * 9 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-		//タイトルに戻る
-		if (EndFlag == 99) {
-			SAVE = MessageBox(
-				NULL,
-				"タイトルに戻りますか？",
-				"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-				MB_YESNO
+		//戻る
+		SAVE = MessageBox(
+			NULL,
+			"戻りますか？",
+			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+			MB_YESNO
 			);
-		}
-
-		//ゲームメニューに戻る
-		if (EndFlag != 99) {
-			SAVE = MessageBox(
-				NULL,
-				"メニューに戻りますか？",
-				"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-				MB_YESNO
-			);
-		}
 
 		if (SAVE == IDYES) {
-			WaitTimer(300);
+
 			ClearDrawScreen();
 			GAME_y = GAMEMENU_y;
 			Config = 0;
@@ -1233,8 +1236,8 @@ void CONFIG_TITLE_BACK() {
 	}
 }
 
-//コンフィグ
-void CONFIG() {
+//コンフィグ(メッセージ)
+void CONFIG_MESSAGE() {
 
 	SAVE = MessageBox(
 		NULL,
@@ -1242,6 +1245,13 @@ void CONFIG() {
 		"ノベルゲームエンジン「LINKS」",
 		MB_YESNO
 	);
+}
+
+//コンフィグ
+void CONFIG() {
+
+	//コンフィグ(メッセージ)
+	CONFIG_MESSAGE();
 
 	if (SAVE == IDYES) {
 
@@ -1295,6 +1305,9 @@ void CONFIG() {
 
 			//画面クリア処理
 			SCREEN_CLEAR();
+
+			//ショートカットキー時の事後処理
+			SHORTCUT_KEY_DRAW();
 		}
 	}
 }
@@ -1646,18 +1659,9 @@ void SAVEDATA_SAVE_LOOP() {
 				if (SAVE == IDYES) {
 
 					ClearDrawScreen();
-
-					if (SHORTCUT_KEY_FLAG == 1) {
-
-						//サウンドノベル風時の処理
-						SOUNDNOVEL();
-
-						//ウインドウ風時の処理
-						WINDOWNOVEL();
-
-						SHORTCUT_KEY_FLAG = 0;
-					}
-
+					
+					//ショートカットキー時の事後処理
+					SHORTCUT_KEY_DRAW();
 					break;
 				}
 			}
@@ -1934,17 +1938,8 @@ void SAVEDATA_LOAD_LOOP() {
 
 						ClearDrawScreen();
 
-						if (SHORTCUT_KEY_FLAG == 1) {
-
-							//サウンドノベル風時の処理
-							SOUNDNOVEL();
-
-							//ウインドウ風時の処理
-							WINDOWNOVEL();
-
-							SHORTCUT_KEY_FLAG = 0;
-						}
-
+						//ショートカットキー時の事後処理
+						SHORTCUT_KEY_DRAW();
 						break;
 					}
 			}
@@ -2157,17 +2152,8 @@ void SAVEDATA_DELETE_LOOP() {
 
 				ClearDrawScreen();
 
-				if (SHORTCUT_KEY_FLAG == 1) {
-
-					//サウンドノベル風時の処理
-					SOUNDNOVEL();
-
-					//ウインドウ風時の処理
-					WINDOWNOVEL();
-
-					SHORTCUT_KEY_FLAG = 0;
-				}
-
+				//ショートカットキー時の事後処理
+				SHORTCUT_KEY_DRAW();
 				break;
 			}
 		}
@@ -2274,14 +2260,8 @@ void SKIP_READ_CHECK() {
 	if (EndFlag == 15 && SAVE == IDYES && N == 1)
 		skip_auto = 2;
 
-	if (SAVE == IDYES) {
-
-		//既読スキップ後の処理(サウンドノベル風)
-		SKIP_READ_SOUNDNOVEL();
-
-		//既読スキップ後の処理(ウインドウ風)
-		SKIP_READ_WINDOWNOVEL();
-	}
+	//ショートカットキー時の事後処理
+	SHORTCUT_KEY_DRAW();
 }
 
 //スキップ処理
@@ -2470,6 +2450,8 @@ void BACKLOG_DRAW() {
 
 				WaitTimer(300);
 
+				//ショートカットキー時の事後処理
+				SHORTCUT_KEY_DRAW();
 				break;
 			}
 		}
