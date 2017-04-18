@@ -2,7 +2,7 @@
 #define MOJI_SIZE 21
 
 //スクリプト読込数
-#define GYOU 5000
+#define GYOU 500000
 #define RETU 1024
 
 //タイトルメニュー位置
