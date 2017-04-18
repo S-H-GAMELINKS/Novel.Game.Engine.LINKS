@@ -3942,7 +3942,7 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
 }
 
 //スクリプトタグ処理(メイン)関数
-int SCRIPT_OUTPUT() {
+/*int SCRIPT_OUTPUT() {
 
 	char  Moji;
 
@@ -4639,7 +4639,157 @@ int SCRIPT_OUTPUT() {
 		break;
 	}
 	return 0;
+}*/
+
+//スクリプトタグ処理(メイン)関数
+int SCRIPT_OUTPUT() {
+
+	char  Moji;
+
+	// 文字の描画
+	Moji = String[SP][CP];
+
+	switch (Moji)
+	{
+
+		//キャラ01読込（画面に出力）
+	case 'C':
+
+		CP++;
+
+		switch (String[SP][CP]) {
+
+		case '0':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '1':
+				
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				break;
+			}
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
+		break;
+
+		case '2':
+			//キャラ02読込
+			CHARACTER = CHARACTER_LOAD[1];
+			break;
+		}
+		//キャラクター描画
+		SCRIPT_OUTPUT_CHARACTER_DRAW();
+		break;
+
+		// 改行文字
+	case 'K':
+
+		// 改行処理および参照文字位置を一つ進める
+		Kaigyou();
+		CP++;
+		break;
+
+		// ボタン押し待ち文字
+	case 'W':
+
+		//クリック待ち処理
+		SCRIPT_UTPUT_KEYWAIT();
+		break;
+
+		// クリア文字
+	case 'X':
+
+		//ゲーム画面のクリア処理
+		SCRIPT_OUTPUT_SCREENCLEAR();
+		break;
+
+		//少し待つ
+	case '3':
+
+		//スクリプトタグ処理(少し待つ)
+		SCRIPT_OUTPUT_WAIT();
+		break;
+
+		//ゲームオーバー
+	case '4':
+
+		//ゲームオーバー画面処理
+		SCRIPT_OUTPUT_GAMEOVER();
+		break;
+
+		//エンディング
+	case '5':
+
+		//エンディング再生
+		SCRIPT_OUTPUT_ENDING();
+		break;
+
+		//BGMの再生を止める
+	case '6':
+
+		//BGMの再生を止める
+		SCRIPT_OUTPUT_BGMSTOP();
+		break;
+
+		//SEの再生を止める
+	case '7':
+
+		//SEの再生を止める
+		SCRIPT_OUTPUT_SESTOP();
+		break;
+
+		//選択肢の表示
+	case '8':
+
+		//選択肢描画処理
+		SCRIPT_OUTPUT_CHOICE();
+		break;
+
+		// 終了文字
+	case '9':
+
+		//スクリプトタグ処理(終了文字)
+		SCRIPT_OUTPUT_END();
+		break;
+
+		//立ち絵消しタグ
+	case '@':
+
+		//立ち絵クリア処理
+		SCRIPT_OUTPUT_CHARACTER_REMOVE();
+		break;
+
+		//ウインドウ風キャラクター名描画タグ
+	case '#':
+
+		//キャラクター名描画処理
+		SCRIPT_OUTPUT_CHARACTER_NAME();
+		break;
+
+	default:	// その他の文字
+
+				//文字列の描画処理
+		SCRIPT_OUTPUT_STRING_DRAW();
+
+		//文字列の描画速度
+		SCRIPT_OUTPUT_STRING_DRAW_SPEED();
+
+		//文字列の描画速度
+		SCRIPT_OUTPUT_STRING_KAIGYO();
+
+		//サウンドノベル風時の改ページ処理
+		SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL();
+
+		//ウインドウ風時の改ページ処理
+		SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL();
+		break;
+	}
+	return 0;
 }
+
 
 //初期化
 int FORMAT() {
