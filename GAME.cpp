@@ -6061,6 +6061,877 @@ void BACKGROUND_DRAW() {
 	}
 }
 
+//BGMçƒê∂èàóù1Å`9
+void BACKGROUNDMUSIC_START_0() {
+
+	switch (String[SP][CP])
+	{
+	case '1':
+
+		//BGM01ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[0];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM02ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[1];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM03ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[2];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM04ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[3];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM05ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[4];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM06ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[5];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM07ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[6];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM08ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[7];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM09ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[8];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù10Å`19
+void BACKGROUNDMUSIC_START_1() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//BGM10ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[9];
+		CP++;
+		break;
+
+	case '1':
+
+		//BGM11ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[10];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM12ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[11];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM13ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[12];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM14ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[13];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM15ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[14];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM16ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[15];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM17ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[16];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM18ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[17];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM19ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[18];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù20Å`29
+void BACKGROUNDMUSIC_START_2() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//BGM20ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[19];
+		CP++;
+		break;
+
+	case '1':
+
+		//BGM21ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[20];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM22ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[21];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM23ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[22];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM24ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[23];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM25ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[24];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM26ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[25];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM27ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[26];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM28ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[27];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM29ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[28];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù30Å`39
+void BACKGROUNDMUSIC_START_3() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//BGM30ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[29];
+		CP++;
+		break;
+
+	case '1':
+
+		//BGM31ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[30];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM32ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[31];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM33ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[32];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM34ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[33];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM35ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[34];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM36ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[35];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM37ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[36];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM38ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[37];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM39ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[38];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù40Å`49
+void BACKGROUNDMUSIC_START_4() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//BGM40ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[39];
+		CP++;
+		break;
+
+	case '1':
+
+		//BGM41ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[40];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM42ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[41];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM43ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[42];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM44ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[43];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM45ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[44];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM46ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[45];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM47ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[46];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM48ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[47];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM49ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[48];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù50Å`59
+void BACKGROUNDMUSIC_START_5() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//BGM50ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[49];
+		CP++;
+		break;
+
+	case '1':
+
+		//BGM51ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[50];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM52ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[51];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM53ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[52];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM54ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[53];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM55ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[54];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM56ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[55];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM57ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[56];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM58ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[57];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM59ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[58];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù60Å`69
+void BACKGROUNDMUSIC_START_6() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//BGM60ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[59];
+		CP++;
+		break;
+
+	case '1':
+
+		//BGM61ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[60];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM62ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[61];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM63ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[62];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM64ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[63];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM65ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[64];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM66ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[65];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM67ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[66];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM68ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[67];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM69ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[68];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù70Å`79
+void BACKGROUNDMUSIC_START_7() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//BGM70ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[70];
+		CP++;
+		break;
+
+	case '1':
+
+		//BGM71ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[70];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM72ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[71];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM73ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[72];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM74ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[73];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM75ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[74];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM76ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[75];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM77ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[76];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM78ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[77];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM79ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[78];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù80Å`89
+void BACKGROUNDMUSIC_START_8() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//BGM80ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[79];
+		CP++;
+		break;
+
+	case '1':
+
+		//BGM81ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[80];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM82ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[81];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM83ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[82];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM84ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[83];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM85ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[84];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM86ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[85];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM87ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[86];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM88ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[87];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM89ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[88];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù90Å`99
+void BACKGROUNDMUSIC_START_9() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//BGM90ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[89];
+		CP++;
+		break;
+
+	case '1':
+
+		//BGM91ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[90];
+		CP++;
+		break;
+
+	case '2':
+
+		//BGM92ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[91];
+		CP++;
+		break;
+
+	case '3':
+
+		//BGM93ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[92];
+		CP++;
+		break;
+
+	case '4':
+
+		//BGM94ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[93];
+		CP++;
+		break;
+
+	case '5':
+
+		//BGM95ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[94];
+		CP++;
+		break;
+
+	case '6':
+
+		//BGM96ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[95];
+		CP++;
+		break;
+
+	case '7':
+
+		//BGM97ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[96];
+		CP++;
+		break;
+
+	case '8':
+
+		//BGM98ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[97];
+		CP++;
+		break;
+
+	case '9':
+
+		//BGM99ì«çû
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[98];
+		CP++;
+		break;
+	}
+}
+
+//BGMçƒê∂èàóù
+void BACKGROUNDMUSIC_START() {
+
+	switch (String[SP][CP]) {
+
+	case '0':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_0();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	case '1':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_1();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	case '2':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_2();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	case '3':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_3();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	case '4':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_4();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	case '5':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_5();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	case '6':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_6();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	case '7':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_7();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	case '8':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_8();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	case '9':
+
+		CP++;
+
+		BACKGROUNDMUSIC_START_9();
+
+		//BGMçƒê∂
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
+		break;
+
+	}
+}
+
 //ÉXÉNÉäÉvÉgÉ^ÉOèàóù(ÉÅÉCÉì)ä÷êî
 int SCRIPT_OUTPUT() {
 
@@ -6093,811 +6964,7 @@ int SCRIPT_OUTPUT() {
 
 		CP++;
 
-		switch (String[SP][CP]) {
-
-		case '0':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '1':
-
-				//BGM01ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[0];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM02ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[1];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM03ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[2];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM04ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[3];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM05ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[4];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM06ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[5];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM07ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[6];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM08ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[7];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM09ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[8];
-				CP++;
-				break;
-			}
-
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		case '1':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//BGM10ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[9];
-				CP++;
-				break;
-
-			case '1':
-
-				//BGM11ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[10];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM12ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[11];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM13ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[12];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM14ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[13];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM15ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[14];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM16ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[15];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM17ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[16];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM18ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[17];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM19ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[18];
-				CP++;
-				break;
-			}
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		case '2':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//BGM20ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[19];
-				CP++;
-				break;
-
-			case '1':
-
-				//BGM21ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[20];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM22ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[21];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM23ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[22];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM24ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[23];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM25ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[24];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM26ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[25];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM27ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[26];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM28ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[27];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM29ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[28];
-				CP++;
-				break;
-			}
-
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		case '3':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//BGM30ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[29];
-				CP++;
-				break;
-
-			case '1':
-
-				//BGM31ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[30];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM32ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[31];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM33ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[32];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM34ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[33];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM35ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[34];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM36ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[35];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM37ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[36];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM38ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[37];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM39ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[38];
-				CP++;
-				break;
-			}
-
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		case '4':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//BGM40ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[39];
-				CP++;
-				break;
-
-			case '1':
-
-				//BGM41ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[40];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM42ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[41];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM43ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[42];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM44ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[43];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM45ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[44];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM46ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[45];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM47ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[46];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM48ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[47];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM49ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[48];
-				CP++;
-				break;
-			}
-
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		case '5':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//BGM50ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[49];
-				CP++;
-				break;
-
-			case '1':
-
-				//BGM51ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[50];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM52ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[51];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM53ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[52];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM54ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[53];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM55ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[54];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM56ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[55];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM57ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[56];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM58ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[57];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM59ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[58];
-				CP++;
-				break;
-			}
-
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		case '6':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//BGM60ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[59];
-				CP++;
-				break;
-
-			case '1':
-
-				//BGM61ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[60];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM62ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[61];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM63ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[62];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM64ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[63];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM65ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[64];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM66ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[65];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM67ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[66];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM68ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[67];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM69ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[68];
-				CP++;
-				break;
-			}
-
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		case '7':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//BGM70ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[70];
-				CP++;
-				break;
-
-			case '1':
-
-				//BGM71ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[70];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM72ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[71];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM73ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[72];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM74ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[73];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM75ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[74];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM76ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[75];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM77ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[76];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM78ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[77];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM79ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[78];
-				CP++;
-				break;
-			}
-
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		case '8':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//BGM80ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[79];
-				CP++;
-				break;
-
-			case '1':
-
-				//BGM81ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[80];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM82ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[81];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM83ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[82];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM84ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[83];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM85ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[84];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM86ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[85];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM87ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[86];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM88ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[87];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM89ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[88];
-				CP++;
-				break;
-			}
-
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		case '9':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//BGM90ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[89];
-				CP++;
-				break;
-
-			case '1':
-
-				//BGM91ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[90];
-				CP++;
-				break;
-
-			case '2':
-
-				//BGM92ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[91];
-				CP++;
-				break;
-
-			case '3':
-
-				//BGM93ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[92];
-				CP++;
-				break;
-
-			case '4':
-
-				//BGM94ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[93];
-				CP++;
-				break;
-
-			case '5':
-
-				//BGM95ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[94];
-				CP++;
-				break;
-
-			case '6':
-
-				//BGM96ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[95];
-				CP++;
-				break;
-
-			case '7':
-
-				//BGM97ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[96];
-				CP++;
-				break;
-
-			case '8':
-
-				//BGM98ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[97];
-				CP++;
-				break;
-
-			case '9':
-
-				//BGM99ì«çû
-				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[98];
-				CP++;
-				break;
-			}
-
-			//BGMçƒê∂
-			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
-			break;
-
-		}
+		BACKGROUNFMUSIC_START();
 		break;
 
 		//SEçƒê∂èàóù
