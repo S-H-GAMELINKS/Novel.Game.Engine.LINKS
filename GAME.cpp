@@ -9,16 +9,24 @@ int DrawPointX = 0, DrawPointY = 0;
 int SP = 0, CP = 0;
 
 //キャラクター画像読込変数
-int CHARACTER_LOAD[100], CHARACTER, CHARACTER_DUMMY;
+long CHARACTER_LOAD[100];
+int CHARACTER, CHARACTER_DUMMY;
 
 //背景画像読込変数
-int BACKGROUND_LOAD[100], BACKGROUND;
+long BACKGROUND_LOAD[100];
+int BACKGROUND;
 
 //背景音楽読込変数
-int BACKGROUNDMUSIC_LOAD[100], BACKGROUNDMUSIC;
+long BACKGROUNDMUSIC_LOAD[100];
+int BACKGROUNDMUSIC;
 
 //効果音変数
-int SOUNDEFFECT_LOAD[100], SOUNDEFFECT;
+long SOUNDEFFECT_LOAD[100];
+int SOUNDEFFECT;
+
+//動画変数
+long MOVIE_LOAD[100];
+int MOVIE;
 
 //スクリプト読込変数
 int ScriptFile;
@@ -280,7 +288,7 @@ void MATERIAL_LOAD_CHARACTER() {
 }
 
 //背景画像読込
-void 	MATERIAL_LOAD_BACKGROUND() {
+void MATERIAL_LOAD_BACKGROUND() {
 
 	BACKGROUND_LOAD[0] = LoadGraph("DATA/BACKGROUND/BG01.png");
 	BACKGROUND_LOAD[1] = LoadGraph("DATA/BACKGROUND/BG02.png");
@@ -5151,69 +5159,69 @@ int SCRIPT_OUTPUT() {
 			{
 			case '1':
 
-				//キャラ01読込
+				//背景01読込
 				BACKGROUND = BACKGROUND_LOAD[0];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ02読込
+				//背景02読込
 				BACKGROUND = BACKGROUND_LOAD[1];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ03読込
+				//背景03読込
 				BACKGROUND = BACKGROUND_LOAD[2];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ04読込
+				//背景04読込
 				BACKGROUND = BACKGROUND_LOAD[3];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ05読込
+				//背景05読込
 				BACKGROUND = BACKGROUND_LOAD[4];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ06読込
+				//背景06読込
 				BACKGROUND = BACKGROUND_LOAD[5];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ07読込
+				//背景07読込
 				BACKGROUND = BACKGROUND_LOAD[6];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ08読込
+				//背景08読込
 				BACKGROUND = BACKGROUND_LOAD[7];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ09読込
+				//背景09読込
 				BACKGROUND = BACKGROUND_LOAD[8];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5225,75 +5233,75 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ10読込
+				//背景10読込
 				BACKGROUND = BACKGROUND_LOAD[9];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ11読込
+				//背景11読込
 				BACKGROUND = BACKGROUND_LOAD[10];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
+				//背景12読込
 				BACKGROUND = BACKGROUND_LOAD[11];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
+				//背景13読込
 				BACKGROUND = BACKGROUND_LOAD[12];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ14読込
+				//背景14読込
 				BACKGROUND = BACKGROUND_LOAD[13];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
+				//背景15読込
 				BACKGROUND = BACKGROUND_LOAD[14];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
+				//背景16読込
 				BACKGROUND = BACKGROUND_LOAD[15];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
+				//背景17読込
 				BACKGROUND = BACKGROUND_LOAD[16];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
+				//背景18読込
 				BACKGROUND = BACKGROUND_LOAD[17];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
+				//背景19読込
 				BACKGROUND = BACKGROUND_LOAD[18];
 				CP++;
 				break;
 			}
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5305,76 +5313,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ20読込
+				//背景20読込
 				BACKGROUND = BACKGROUND_LOAD[19];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ21読込
+				//背景21読込
 				BACKGROUND = BACKGROUND_LOAD[20];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ22読込
+				//背景22読込
 				BACKGROUND = BACKGROUND_LOAD[21];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ23読込
+				//背景23読込
 				BACKGROUND = BACKGROUND_LOAD[22];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ24読込
+				//背景24読込
 				BACKGROUND = BACKGROUND_LOAD[23];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ25読込
+				//背景25読込
 				BACKGROUND = BACKGROUND_LOAD[24];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ26読込
+				//背景26読込
 				BACKGROUND = BACKGROUND_LOAD[25];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ27読込
+				//背景27読込
 				BACKGROUND = BACKGROUND_LOAD[26];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ28読込
+				//背景28読込
 				BACKGROUND = BACKGROUND_LOAD[27];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ29読込
+				//背景29読込
 				BACKGROUND = BACKGROUND_LOAD[28];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5386,76 +5394,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ30読込
+				//背景30読込
 				BACKGROUND = BACKGROUND_LOAD[29];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ31読込
+				//背景31読込
 				BACKGROUND = BACKGROUND_LOAD[30];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ32読込
+				//背景32読込
 				BACKGROUND = BACKGROUND_LOAD[31];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ33読込
+				//背景33読込
 				BACKGROUND = BACKGROUND_LOAD[32];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ34読込
+				//背景34読込
 				BACKGROUND = BACKGROUND_LOAD[33];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ35読込
+				//背景35読込
 				BACKGROUND = BACKGROUND_LOAD[34];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ36読込
+				//背景36読込
 				BACKGROUND = BACKGROUND_LOAD[35];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ37読込
+				//背景37読込
 				BACKGROUND = BACKGROUND_LOAD[36];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ38読込
+				//背景38読込
 				BACKGROUND = BACKGROUND_LOAD[37];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ39読込
+				//背景39読込
 				BACKGROUND = BACKGROUND_LOAD[38];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5467,76 +5475,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ40読込
+				//背景40読込
 				BACKGROUND = BACKGROUND_LOAD[39];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ41読込
+				//背景41読込
 				BACKGROUND = BACKGROUND_LOAD[40];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ42読込
+				//背景42読込
 				BACKGROUND = BACKGROUND_LOAD[41];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ43読込
+				//背景43読込
 				BACKGROUND = BACKGROUND_LOAD[42];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ44読込
+				//背景44読込
 				BACKGROUND = BACKGROUND_LOAD[43];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ45読込
+				//背景45読込
 				BACKGROUND = BACKGROUND_LOAD[44];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ46読込
+				//背景46読込
 				BACKGROUND = BACKGROUND_LOAD[45];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ47読込
+				//背景47読込
 				BACKGROUND = BACKGROUND_LOAD[46];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ48読込
+				//背景48読込
 				BACKGROUND = BACKGROUND_LOAD[47];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ49読込
+				//背景49読込
 				BACKGROUND = BACKGROUND_LOAD[48];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5548,76 +5556,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ50読込
+				//背景50読込
 				BACKGROUND = BACKGROUND_LOAD[49];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ51読込
+				//背景51読込
 				BACKGROUND = BACKGROUND_LOAD[50];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ52読込
+				//背景52読込
 				BACKGROUND = BACKGROUND_LOAD[51];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ53読込
+				//背景53読込
 				BACKGROUND = BACKGROUND_LOAD[52];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ54読込
+				//背景54読込
 				BACKGROUND = BACKGROUND_LOAD[53];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ55読込
+				//背景55読込
 				BACKGROUND = BACKGROUND_LOAD[54];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ56読込
+				//背景56読込
 				BACKGROUND = BACKGROUND_LOAD[55];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ57読込
+				//背景57読込
 				BACKGROUND = BACKGROUND_LOAD[56];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ58読込
+				//背景58読込
 				BACKGROUND = BACKGROUND_LOAD[57];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ59読込
+				//背景59読込
 				BACKGROUND = BACKGROUND_LOAD[58];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5629,76 +5637,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ60読込
+				//背景60読込
 				BACKGROUND = BACKGROUND_LOAD[59];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ61読込
+				//背景61読込
 				BACKGROUND = BACKGROUND_LOAD[60];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ62読込
+				//背景62読込
 				BACKGROUND = BACKGROUND_LOAD[61];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ63読込
+				//背景63読込
 				BACKGROUND = BACKGROUND_LOAD[62];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ64読込
+				//背景64読込
 				BACKGROUND = BACKGROUND_LOAD[63];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ65読込
+				//背景65読込
 				BACKGROUND = BACKGROUND_LOAD[64];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ66読込
+				//背景66読込
 				BACKGROUND = BACKGROUND_LOAD[65];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ67読込
+				//背景67読込
 				BACKGROUND = BACKGROUND_LOAD[66];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ68読込
+				//背景68読込
 				BACKGROUND = BACKGROUND_LOAD[67];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ69読込
+				//背景69読込
 				BACKGROUND = BACKGROUND_LOAD[68];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5710,76 +5718,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ70読込
+				//背景70読込
 				BACKGROUND = BACKGROUND_LOAD[70];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ71読込
+				//背景71読込
 				BACKGROUND = BACKGROUND_LOAD[70];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ72読込
+				//背景72読込
 				BACKGROUND = BACKGROUND_LOAD[71];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ73読込
+				//背景73読込
 				BACKGROUND = BACKGROUND_LOAD[72];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ74読込
+				//背景74読込
 				BACKGROUND = BACKGROUND_LOAD[73];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ75読込
+				//背景75読込
 				BACKGROUND = BACKGROUND_LOAD[74];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ76読込
+				//背景76読込
 				BACKGROUND = BACKGROUND_LOAD[75];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ77読込
+				//背景77読込
 				BACKGROUND = BACKGROUND_LOAD[76];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ78読込
+				//背景78読込
 				BACKGROUND = BACKGROUND_LOAD[77];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ79読込
+				//背景79読込
 				BACKGROUND = BACKGROUND_LOAD[78];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5791,76 +5799,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ80読込
+				//背景80読込
 				BACKGROUND = BACKGROUND_LOAD[79];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ81読込
+				//背景81読込
 				BACKGROUND = BACKGROUND_LOAD[80];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ82読込
+				//背景82読込
 				BACKGROUND = BACKGROUND_LOAD[81];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ83読込
+				//背景83読込
 				BACKGROUND = BACKGROUND_LOAD[82];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ84読込
+				//背景84読込
 				BACKGROUND = BACKGROUND_LOAD[83];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ85読込
+				//背景85読込
 				BACKGROUND = BACKGROUND_LOAD[84];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ86読込
+				//背景86読込
 				BACKGROUND = BACKGROUND_LOAD[85];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ87読込
+				//背景87読込
 				BACKGROUND = BACKGROUND_LOAD[86];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ88読込
+				//背景88読込
 				BACKGROUND = BACKGROUND_LOAD[87];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ89読込
+				//背景89読込
 				BACKGROUND = BACKGROUND_LOAD[88];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5872,76 +5880,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ90読込
+				//背景90読込
 				BACKGROUND = BACKGROUND_LOAD[89];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ91読込
+				//背景91読込
 				BACKGROUND = BACKGROUND_LOAD[90];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ92読込
+				//背景92読込
 				BACKGROUND = BACKGROUND_LOAD[91];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ93読込
+				//背景93読込
 				BACKGROUND = BACKGROUND_LOAD[92];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ94読込
+				//背景94読込
 				BACKGROUND = BACKGROUND_LOAD[93];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ95読込
+				//背景95読込
 				BACKGROUND = BACKGROUND_LOAD[94];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ96読込
+				//背景96読込
 				BACKGROUND = BACKGROUND_LOAD[95];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ97読込
+				//背景97読込
 				BACKGROUND = BACKGROUND_LOAD[96];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ98読込
+				//背景98読込
 				BACKGROUND = BACKGROUND_LOAD[97];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ99読込
+				//背景99読込
 				BACKGROUND = BACKGROUND_LOAD[98];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//背景描画
 			SCRIPT_OUTPUT_BACKGROUND();
 			break;
 
@@ -5963,69 +5971,69 @@ int SCRIPT_OUTPUT() {
 			{
 			case '1':
 
-				//キャラ01読込
+				//BGM01読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[0];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ02読込
+				//BGM02読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[1];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ03読込
+				//BGM03読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[2];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ04読込
+				//BGM04読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[3];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ05読込
+				//BGM05読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[4];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ06読込
+				//BGM06読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[5];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ07読込
+				//BGM07読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[6];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ08読込
+				//BGM08読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[7];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ09読込
+				//BGM09読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[8];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6037,75 +6045,75 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ10読込
+				//BGM10読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[9];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ11読込
+				//BGM11読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[10];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
+				//BGM12読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[11];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
+				//BGM13読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[12];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ14読込
+				//BGM14読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[13];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
+				//BGM15読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[14];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
+				//BGM16読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[15];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
+				//BGM17読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[16];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
+				//BGM18読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[17];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
+				//BGM19読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[18];
 				CP++;
 				break;
 			}
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6117,76 +6125,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ20読込
+				//BGM20読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[19];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ21読込
+				//BGM21読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[20];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ22読込
+				//BGM22読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[21];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ23読込
+				//BGM23読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[22];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ24読込
+				//BGM24読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[23];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ25読込
+				//BGM25読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[24];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ26読込
+				//BGM26読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[25];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ27読込
+				//BGM27読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[26];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ28読込
+				//BGM28読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[27];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ29読込
+				//BGM29読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[28];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6198,76 +6206,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ30読込
+				//BGM30読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[29];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ31読込
+				//BGM31読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[30];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ32読込
+				//BGM32読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[31];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ33読込
+				//BGM33読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[32];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ34読込
+				//BGM34読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[33];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ35読込
+				//BGM35読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[34];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ36読込
+				//BGM36読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[35];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ37読込
+				//BGM37読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[36];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ38読込
+				//BGM38読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[37];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ39読込
+				//BGM39読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[38];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6279,76 +6287,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ40読込
+				//BGM40読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[39];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ41読込
+				//BGM41読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[40];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ42読込
+				//BGM42読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[41];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ43読込
+				//BGM43読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[42];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ44読込
+				//BGM44読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[43];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ45読込
+				//BGM45読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[44];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ46読込
+				//BGM46読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[45];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ47読込
+				//BGM47読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[46];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ48読込
+				//BGM48読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[47];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ49読込
+				//BGM49読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[48];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6360,76 +6368,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ50読込
+				//BGM50読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[49];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ51読込
+				//BGM51読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[50];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ52読込
+				//BGM52読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[51];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ53読込
+				//BGM53読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[52];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ54読込
+				//BGM54読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[53];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ55読込
+				//BGM55読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[54];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ56読込
+				//BGM56読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[55];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ57読込
+				//BGM57読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[56];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ58読込
+				//BGM58読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[57];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ59読込
+				//BGM59読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[58];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6441,76 +6449,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ60読込
+				//BGM60読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[59];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ61読込
+				//BGM61読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[60];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ62読込
+				//BGM62読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[61];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ63読込
+				//BGM63読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[62];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ64読込
+				//BGM64読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[63];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ65読込
+				//BGM65読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[64];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ66読込
+				//BGM66読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[65];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ67読込
+				//BGM67読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[66];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ68読込
+				//BGM68読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[67];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ69読込
+				//BGM69読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[68];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6522,76 +6530,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ70読込
+				//BGM70読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[70];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ71読込
+				//BGM71読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[70];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ72読込
+				//BGM72読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[71];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ73読込
+				//BGM73読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[72];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ74読込
+				//BGM74読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[73];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ75読込
+				//BGM75読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[74];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ76読込
+				//BGM76読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[75];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ77読込
+				//BGM77読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[76];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ78読込
+				//BGM78読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[77];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ79読込
+				//BGM79読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[78];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6603,76 +6611,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ80読込
+				//BGM80読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[79];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ81読込
+				//BGM81読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[80];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ82読込
+				//BGM82読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[81];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ83読込
+				//BGM83読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[82];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ84読込
+				//BGM84読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[83];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ85読込
+				//BGM85読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[84];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ86読込
+				//BGM86読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[85];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ87読込
+				//BGM87読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[86];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ88読込
+				//BGM88読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[87];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ89読込
+				//BGM89読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[88];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6684,76 +6692,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ90読込
+				//BGM90読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[89];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ91読込
+				//BGM91読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[90];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ92読込
+				//BGM92読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[91];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ93読込
+				//BGM93読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[92];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ94読込
+				//BGM94読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[93];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ95読込
+				//BGM95読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[94];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ96読込
+				//BGM96読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[95];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ97読込
+				//BGM97読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[96];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ98読込
+				//BGM98読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[97];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ99読込
+				//BGM99読込
 				BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[98];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//BGM再生
 			SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 			break;
 
@@ -6775,69 +6783,69 @@ int SCRIPT_OUTPUT() {
 			{
 			case '1':
 
-				//キャラ01読込
+				//SE01読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[0];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ02読込
+				//SE02読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[1];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ03読込
+				//SE03読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[2];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ04読込
+				//SE04読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[3];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ05読込
+				//SE05読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[4];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ06読込
+				//SE06読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[5];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ07読込
+				//SE07読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[6];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ08読込
+				//SE08読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[7];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ09読込
+				//SE09読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[8];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -6849,75 +6857,75 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ10読込
+				//SE10読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[9];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ11読込
+				//SE11読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[10];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
+				//SE12読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[11];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
+				//SE13読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[12];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ14読込
+				//SE14読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[13];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
+				//SE15読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[14];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
+				//SE16読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[15];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
+				//SE17読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[16];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
+				//SE18読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[17];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
+				//SE19読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[18];
 				CP++;
 				break;
 			}
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -6929,76 +6937,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ20読込
+				//SE20読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[19];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ21読込
+				//SE21読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[20];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ22読込
+				//SE22読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[21];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ23読込
+				//SE23読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[22];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ24読込
+				//SE24読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[23];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ25読込
+				//SE25読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[24];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ26読込
+				//SE26読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[25];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ27読込
+				//SE27読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[26];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ28読込
+				//SE28読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[27];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ29読込
+				//SE29読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[28];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -7010,76 +7018,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ30読込
+				//SE30読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[29];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ31読込
+				//SE31読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[30];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ32読込
+				//SE32読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[31];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ33読込
+				//SE33読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[32];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ34読込
+				//SE34読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[33];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ35読込
+				//SE35読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[34];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ36読込
+				//SE36読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[35];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ37読込
+				//SE37読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[36];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ38読込
+				//SE38読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[37];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ39読込
+				//SE39読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[38];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -7091,76 +7099,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ40読込
+				//SE40読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[39];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ41読込
+				//SE41読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[40];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ42読込
+				//SE42読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[41];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ43読込
+				//SE43読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[42];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ44読込
+				//SE44読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[43];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ45読込
+				//SE45読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[44];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ46読込
+				//SE46読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[45];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ47読込
+				//SE47読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[46];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ48読込
+				//SE48読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[47];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ49読込
+				//SE49読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[48];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -7172,76 +7180,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ50読込
+				//SE50読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[49];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ51読込
+				//SE51読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[50];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ52読込
+				//SE52読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[51];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ53読込
+				//SE53読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[52];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ54読込
+				//SE54読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[53];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ55読込
+				//SE55読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[54];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ56読込
+				//SE56読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[55];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ57読込
+				//SE57読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[56];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ58読込
+				//SE58読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[57];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ59読込
+				//SE59読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[58];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -7253,76 +7261,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ60読込
+				//SE60読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[59];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ61読込
+				//SE61読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[60];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ62読込
+				//SE62読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[61];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ63読込
+				//SE63読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[62];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ64読込
+				//SE64読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[63];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ65読込
+				//SE65読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[64];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ66読込
+				//SE66読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[65];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ67読込
+				//SE67読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[66];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ68読込
+				//SE68読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[67];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ69読込
+				//SE69読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[68];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -7334,76 +7342,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ70読込
+				//SE70読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[70];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ71読込
+				//SE71読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[70];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ72読込
+				//SE72読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[71];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ73読込
+				//SE73読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[72];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ74読込
+				//SE74読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[73];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ75読込
+				//SE75読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[74];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ76読込
+				//SE76読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[75];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ77読込
+				//SE77読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[76];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ78読込
+				//SE78読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[77];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ79読込
+				//SE79読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[78];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -7415,76 +7423,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ80読込
+				//SE80読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[79];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ81読込
+				//SE81読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[80];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ82読込
+				//SE82読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[81];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ83読込
+				//SE83読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[82];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ84読込
+				//SE84読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[83];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ85読込
+				//SE85読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[84];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ86読込
+				//SE86読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[85];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ87読込
+				//SE87読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[86];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ88読込
+				//SE88読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[87];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ89読込
+				//SE89読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[88];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -7496,76 +7504,76 @@ int SCRIPT_OUTPUT() {
 			{
 			case '0':
 
-				//キャラ90読込
+				//SE90読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[89];
 				CP++;
 				break;
 
 			case '1':
 
-				//キャラ91読込
+				//SE91読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[90];
 				CP++;
 				break;
 
 			case '2':
 
-				//キャラ92読込
+				//SE92読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[91];
 				CP++;
 				break;
 
 			case '3':
 
-				//キャラ93読込
+				//SE93読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[92];
 				CP++;
 				break;
 
 			case '4':
 
-				//キャラ94読込
+				//SE94読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[93];
 				CP++;
 				break;
 
 			case '5':
 
-				//キャラ95読込
+				//SE95読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[94];
 				CP++;
 				break;
 
 			case '6':
 
-				//キャラ96読込
+				//SE96読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[95];
 				CP++;
 				break;
 
 			case '7':
 
-				//キャラ97読込
+				//SE97読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[96];
 				CP++;
 				break;
 
 			case '8':
 
-				//キャラ98読込
+				//SE98読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[97];
 				CP++;
 				break;
 
 			case '9':
 
-				//キャラ99読込
+				//SE99読込
 				SOUNDEFFECT = SOUNDEFFECT_LOAD[98];
 				CP++;
 				break;
 			}
 
-			//キャラクター描画
+			//SE再生
 			SCRIPT_OUTPUT_SOUNDEFFECT();
 			break;
 
@@ -7588,69 +7596,69 @@ int SCRIPT_OUTPUT() {
 			case '1':
 
 				//キャラ01読込
-				CHARACTER = CHARACTER_LOAD[0];
+				MOVIE = MOVIE_LOAD[0];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ02読込
-				CHARACTER = CHARACTER_LOAD[1];
+				MOVIE = MOVIE_LOAD[1];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ03読込
-				CHARACTER = CHARACTER_LOAD[2];
+				MOVIE = MOVIE_LOAD[2];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ04読込
-				CHARACTER = CHARACTER_LOAD[3];
+				MOVIE = MOVIE_LOAD[3];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ05読込
-				CHARACTER = CHARACTER_LOAD[4];
+				MOVIE = MOVIE_LOAD[4];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ06読込
-				CHARACTER = CHARACTER_LOAD[5];
+				MOVIE = MOVIE_LOAD[5];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ07読込
-				CHARACTER = CHARACTER_LOAD[6];
+				MOVIE = MOVIE_LOAD[6];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ08読込
-				CHARACTER = CHARACTER_LOAD[7];
+				MOVIE = MOVIE_LOAD[7];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ09読込
-				CHARACTER = CHARACTER_LOAD[8];
+				MOVIE = MOVIE_LOAD[8];
 				CP++;
 				break;
 			}
 
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE_DRAW();
 			break;
 
 		case '1':
@@ -7662,75 +7670,75 @@ int SCRIPT_OUTPUT() {
 			case '0':
 
 				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
+				MOVIE = MOVIE_LOAD[9];
 				CP++;
 				break;
 
 			case '1':
 
 				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				MOVIE = MOVIE_LOAD[10];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				MOVIE = MOVIE_LOAD[11];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				MOVIE = MOVIE_LOAD[12];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ14読込
-				CHARACTER = CHARACTER_LOAD[13];
+				MOVIE = MOVIE_LOAD[13];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				MOVIE = MOVIE_LOAD[14];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				MOVIE = MOVIE_LOAD[15];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				MOVIE = MOVIE_LOAD[16];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				MOVIE = MOVIE_LOAD[17];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				MOVIE = MOVIE_LOAD[18];
 				CP++;
 				break;
 			}
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE_DRAW();
 			break;
 
 		case '2':
@@ -7742,76 +7750,76 @@ int SCRIPT_OUTPUT() {
 			case '0':
 
 				//キャラ20読込
-				CHARACTER = CHARACTER_LOAD[19];
+				MOVIE = MOVIE_LOAD[19];
 				CP++;
 				break;
 
 			case '1':
 
 				//キャラ21読込
-				CHARACTER = CHARACTER_LOAD[20];
+				MOVIE = MOVIE_LOAD[20];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ22読込
-				CHARACTER = CHARACTER_LOAD[21];
+				MOVIE = MOVIE_LOAD[21];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ23読込
-				CHARACTER = CHARACTER_LOAD[22];
+				MOVIE = MOVIE_LOAD[22];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ24読込
-				CHARACTER = CHARACTER_LOAD[23];
+				MOVIE = MOVIE_LOAD[23];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ25読込
-				CHARACTER = CHARACTER_LOAD[24];
+				MOVIE = MOVIE_LOAD[24];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ26読込
-				CHARACTER = CHARACTER_LOAD[25];
+				MOVIE = MOVIE_LOAD[25];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ27読込
-				CHARACTER = CHARACTER_LOAD[26];
+				MOVIE = MOVIE_LOAD[26];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ28読込
-				CHARACTER = CHARACTER_LOAD[27];
+				MOVIE = MOVIE_LOAD[27];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ29読込
-				CHARACTER = CHARACTER_LOAD[28];
+				MOVIE = MOVIE_LOAD[28];
 				CP++;
 				break;
 			}
 
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE_DRAW();
 			break;
 
 		case '3':
@@ -7823,76 +7831,76 @@ int SCRIPT_OUTPUT() {
 			case '0':
 
 				//キャラ30読込
-				CHARACTER = CHARACTER_LOAD[29];
+				MOVIE = MOVIE_LOAD[29];
 				CP++;
 				break;
 
 			case '1':
 
 				//キャラ31読込
-				CHARACTER = CHARACTER_LOAD[30];
+				MOVIE = MOVIE_LOAD[30];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ32読込
-				CHARACTER = CHARACTER_LOAD[31];
+				MOVIE = MOVIE_LOAD[31];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ33読込
-				CHARACTER = CHARACTER_LOAD[32];
+				MOVIE = MOVIE_LOAD[32];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ34読込
-				CHARACTER = CHARACTER_LOAD[33];
+				MOVIE = MOVIE_LOAD[33];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ35読込
-				CHARACTER = CHARACTER_LOAD[34];
+				MOVIE = MOVIE_LOAD[34];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ36読込
-				CHARACTER = CHARACTER_LOAD[35];
+				MOVIE = MOVIE_LOAD[35];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ37読込
-				CHARACTER = CHARACTER_LOAD[36];
+				MOVIE = MOVIE_LOAD[36];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ38読込
-				CHARACTER = CHARACTER_LOAD[37];
+				MOVIE = MOVIE_LOAD[37];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ39読込
-				CHARACTER = CHARACTER_LOAD[38];
+				MOVIE = MOVIE_LOAD[38];
 				CP++;
 				break;
 			}
 
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE_DRAW();
 			break;
 
 		case '4':
@@ -7904,76 +7912,76 @@ int SCRIPT_OUTPUT() {
 			case '0':
 
 				//キャラ40読込
-				CHARACTER = CHARACTER_LOAD[39];
+				MOVIE = MOVIE_LOAD[39];
 				CP++;
 				break;
 
 			case '1':
 
 				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[40];
+				MOVIE = MOVIE_LOAD[40];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ42読込
-				CHARACTER = CHARACTER_LOAD[41];
+				MOVIE = MOVIE_LOAD[41];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ43読込
-				CHARACTER = CHARACTER_LOAD[42];
+				MOVIE = MOVIE_LOAD[42];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ44読込
-				CHARACTER = CHARACTER_LOAD[43];
+				MOVIE = MOVIE_LOAD[43];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ45読込
-				CHARACTER = CHARACTER_LOAD[44];
+				MOVIE = MOVIE_LOAD[44];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ46読込
-				CHARACTER = CHARACTER_LOAD[45];
+				MOVIE = MOVIE_LOAD[45];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ47読込
-				CHARACTER = CHARACTER_LOAD[46];
+				MOVIE = MOVIE_LOAD[46];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ48読込
-				CHARACTER = CHARACTER_LOAD[47];
+				MOVIE = MOVIE_LOAD[47];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ49読込
-				CHARACTER = CHARACTER_LOAD[48];
+				MOVIE = MOVIE_LOAD[48];
 				CP++;
 				break;
 			}
 
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE_DRAW();
 			break;
 
 		case '5':
@@ -7985,76 +7993,76 @@ int SCRIPT_OUTPUT() {
 			case '0':
 
 				//キャラ50読込
-				CHARACTER = CHARACTER_LOAD[49];
+				MOVIE = MOVIE_LOAD[49];
 				CP++;
 				break;
 
 			case '1':
 
 				//キャラ51読込
-				CHARACTER = CHARACTER_LOAD[50];
+				MOVIE = MOVIE_LOAD[50];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ52読込
-				CHARACTER = CHARACTER_LOAD[51];
+				MOVIE = MOVIE_LOAD[51];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ53読込
-				CHARACTER = CHARACTER_LOAD[52];
+				MOVIE = MOVIE_LOAD[52];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ54読込
-				CHARACTER = CHARACTER_LOAD[53];
+				MOVIE = MOVIE_LOAD[53];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ55読込
-				CHARACTER = CHARACTER_LOAD[54];
+				MOVIE = MOVIE_LOAD[54];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ56読込
-				CHARACTER = CHARACTER_LOAD[55];
+				MOVIE = MOVIE_LOAD[55];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ57読込
-				CHARACTER = CHARACTER_LOAD[56];
+				MOVIE = MOVIE_LOAD[56];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ58読込
-				CHARACTER = CHARACTER_LOAD[57];
+				MOVIE = MOVIE_LOAD[57];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ59読込
-				CHARACTER = CHARACTER_LOAD[58];
+				MOVIE = MOVIE_LOAD[58];
 				CP++;
 				break;
 			}
 
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE_DRAW();
 			break;
 
 		case '6':
@@ -8066,76 +8074,76 @@ int SCRIPT_OUTPUT() {
 			case '0':
 
 				//キャラ60読込
-				CHARACTER = CHARACTER_LOAD[59];
+				MOVIE = MOVIE_LOAD[59];
 				CP++;
 				break;
 
 			case '1':
 
 				//キャラ61読込
-				CHARACTER = CHARACTER_LOAD[60];
+				MOVIE = MOVIE_LOAD[60];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ62読込
-				CHARACTER = CHARACTER_LOAD[61];
+				MOVIE = MOVIE_LOAD[61];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ63読込
-				CHARACTER = CHARACTER_LOAD[62];
+				MOVIE = MOVIE_LOAD[62];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ64読込
-				CHARACTER = CHARACTER_LOAD[63];
+				MOVIE = MOVIE_LOAD[63];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ65読込
-				CHARACTER = CHARACTER_LOAD[64];
+				MOVIE = MOVIE_LOAD[64];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ66読込
-				CHARACTER = CHARACTER_LOAD[65];
+				MOVIE = MOVIE_LOAD[65];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ67読込
-				CHARACTER = CHARACTER_LOAD[66];
+				MOVIE = MOVIE_LOAD[66];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ68読込
-				CHARACTER = CHARACTER_LOAD[67];
+				MOVIE = MOVIE_LOAD[67];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ69読込
-				CHARACTER = CHARACTER_LOAD[68];
+				MOVIE = MOVIE_LOAD[68];
 				CP++;
 				break;
 			}
 
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE_DRAW();
 			break;
 
 		case '7':
@@ -8147,76 +8155,76 @@ int SCRIPT_OUTPUT() {
 			case '0':
 
 				//キャラ70読込
-				CHARACTER = CHARACTER_LOAD[70];
+				MOVIE = MOVIE_LOAD[70];
 				CP++;
 				break;
 
 			case '1':
 
 				//キャラ71読込
-				CHARACTER = CHARACTER_LOAD[70];
+				MOVIE = MOVIE_LOAD[70];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ72読込
-				CHARACTER = CHARACTER_LOAD[71];
+				MOVIE = MOVIE_LOAD[71];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ73読込
-				CHARACTER = CHARACTER_LOAD[72];
+				MOVIE = MOVIE_LOAD[72];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ74読込
-				CHARACTER = CHARACTER_LOAD[73];
+				MOVIE = MOVIE_LOAD[73];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ75読込
-				CHARACTER = CHARACTER_LOAD[74];
+				MOVIE = MOVIE_LOAD[74];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ76読込
-				CHARACTER = CHARACTER_LOAD[75];
+				MOVIE = MOVIE_LOAD[75];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ77読込
-				CHARACTER = CHARACTER_LOAD[76];
+				MOVIE = MOVIE_LOAD[76];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ78読込
-				CHARACTER = CHARACTER_LOAD[77];
+				MOVIE = MOVIE_LOAD[77];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ79読込
-				CHARACTER = CHARACTER_LOAD[78];
+				MOVIE = MOVIE_LOAD[78];
 				CP++;
 				break;
 			}
 
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE_DRAW();
 			break;
 
 		case '8':
@@ -8228,76 +8236,76 @@ int SCRIPT_OUTPUT() {
 			case '0':
 
 				//キャラ80読込
-				CHARACTER = CHARACTER_LOAD[79];
+				MOVIE = MOVIE_LOAD[79];
 				CP++;
 				break;
 
 			case '1':
 
 				//キャラ81読込
-				CHARACTER = CHARACTER_LOAD[80];
+				MOVIE = MOVIE_LOAD[80];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ82読込
-				CHARACTER = CHARACTER_LOAD[81];
+				MOVIE = MOVIE_LOAD[81];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ83読込
-				CHARACTER = CHARACTER_LOAD[82];
+				MOVIE = MOVIE_LOAD[82];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ84読込
-				CHARACTER = CHARACTER_LOAD[83];
+				MOVIE = MOVIE_LOAD[83];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ85読込
-				CHARACTER = CHARACTER_LOAD[84];
+				MOVIE = MOVIE_LOAD[84];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ86読込
-				CHARACTER = CHARACTER_LOAD[85];
+				MOVIE = MOVIE_LOAD[85];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ87読込
-				CHARACTER = CHARACTER_LOAD[86];
+				MOVIE = MOVIE_LOAD[86];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ88読込
-				CHARACTER = CHARACTER_LOAD[87];
+				MOVIE = MOVIE_LOAD[87];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ89読込
-				CHARACTER = CHARACTER_LOAD[88];
+				MOVIE = MOVIE_LOAD[88];
 				CP++;
 				break;
 			}
 
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE_DRAW();
 			break;
 
 		case '9':
@@ -8309,76 +8317,76 @@ int SCRIPT_OUTPUT() {
 			case '0':
 
 				//キャラ90読込
-				CHARACTER = CHARACTER_LOAD[89];
+				MOVIE = MOVIE_LOAD[89];
 				CP++;
 				break;
 
 			case '1':
 
 				//キャラ91読込
-				CHARACTER = CHARACTER_LOAD[90];
+				MOVIE = MOVIE_LOAD[90];
 				CP++;
 				break;
 
 			case '2':
 
 				//キャラ92読込
-				CHARACTER = CHARACTER_LOAD[91];
+				MOVIE = MOVIE_LOAD[91];
 				CP++;
 				break;
 
 			case '3':
 
 				//キャラ93読込
-				CHARACTER = CHARACTER_LOAD[92];
+				MOVIE = MOVIE_LOAD[92];
 				CP++;
 				break;
 
 			case '4':
 
 				//キャラ94読込
-				CHARACTER = CHARACTER_LOAD[93];
+				MOVIE = MOVIE_LOAD[93];
 				CP++;
 				break;
 
 			case '5':
 
 				//キャラ95読込
-				CHARACTER = CHARACTER_LOAD[94];
+				MOVIE = MOVIE_LOAD[94];
 				CP++;
 				break;
 
 			case '6':
 
 				//キャラ96読込
-				CHARACTER = CHARACTER_LOAD[95];
+				MOVIE = MOVIE_LOAD[95];
 				CP++;
 				break;
 
 			case '7':
 
 				//キャラ97読込
-				CHARACTER = CHARACTER_LOAD[96];
+				MOVIE = MOVIE_LOAD[96];
 				CP++;
 				break;
 
 			case '8':
 
 				//キャラ98読込
-				CHARACTER = CHARACTER_LOAD[97];
+				MOVIE = MOVIE_LOAD[97];
 				CP++;
 				break;
 
 			case '9':
 
 				//キャラ99読込
-				CHARACTER = CHARACTER_LOAD[98];
+				MOVIE = MOVIE_LOAD[98];
 				CP++;
 				break;
 			}
 
 			//キャラクター描画
-			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			SCRIPT_OUTPUT_MOVIE();
 			break;
 
 		}
