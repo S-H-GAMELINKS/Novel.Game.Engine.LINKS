@@ -175,11 +175,8 @@ typedef struct {
 	int mouse_key_move;			//マウス操作とキー操作の情報
 }ConfigData_t;
 
-//各素材データ読込関数
-void MATERIAL_LOAD() {
-
-	//サウンドデータの読み込み形式
-	SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
+//立ち絵素材読込
+void MATERIAL_LOAD_CHARACTER() {
 
 	//キャラクター画像読込
 	CHARACTER_LOAD[0] = LoadGraph("DATA/CHARACTER/CHAR01.png");
@@ -193,7 +190,105 @@ void MATERIAL_LOAD() {
 	CHARACTER_LOAD[8] = LoadGraph("DATA/CHARACTER/CHAR09.png");
 	CHARACTER_LOAD[9] = LoadGraph("DATA/CHARACTER/CHAR10.png");
 	CHARACTER_LOAD[10] = LoadGraph("DATA/CHARACTER/CHAR11.png");
-	CHARACTER_LOAD[11] = LoadGraph("DATA/CHARACTER/CHAR12.png");
+	CHARACTER_LOAD[12] = LoadGraph("DATA/CHARACTER/CHAR12.png");
+	CHARACTER_LOAD[13] = LoadGraph("DATA/CHARACTER/CHAR13.png");
+	CHARACTER_LOAD[14] = LoadGraph("DATA/CHARACTER/CHAR14.png");
+	CHARACTER_LOAD[15] = LoadGraph("DATA/CHARACTER/CHAR15.png");
+	CHARACTER_LOAD[16] = LoadGraph("DATA/CHARACTER/CHAR16.png");
+	CHARACTER_LOAD[17] = LoadGraph("DATA/CHARACTER/CHAR17.png");
+	CHARACTER_LOAD[18] = LoadGraph("DATA/CHARACTER/CHAR18.png");
+	CHARACTER_LOAD[19] = LoadGraph("DATA/CHARACTER/CHAR19.png");
+	CHARACTER_LOAD[20] = LoadGraph("DATA/CHARACTER/CHAR20.png");
+	CHARACTER_LOAD[21] = LoadGraph("DATA/CHARACTER/CHAR21.png");
+	CHARACTER_LOAD[22] = LoadGraph("DATA/CHARACTER/CHAR22.png");
+	CHARACTER_LOAD[23] = LoadGraph("DATA/CHARACTER/CHAR23.png");
+	CHARACTER_LOAD[24] = LoadGraph("DATA/CHARACTER/CHAR24.png");
+	CHARACTER_LOAD[25] = LoadGraph("DATA/CHARACTER/CHAR25.png");
+	CHARACTER_LOAD[26] = LoadGraph("DATA/CHARACTER/CHAR26.png");
+	CHARACTER_LOAD[27] = LoadGraph("DATA/CHARACTER/CHAR27.png");
+	CHARACTER_LOAD[28] = LoadGraph("DATA/CHARACTER/CHAR28.png");
+	CHARACTER_LOAD[29] = LoadGraph("DATA/CHARACTER/CHAR29.png");
+	CHARACTER_LOAD[20] = LoadGraph("DATA/CHARACTER/CHAR30.png");
+	CHARACTER_LOAD[31] = LoadGraph("DATA/CHARACTER/CHAR31.png");
+	CHARACTER_LOAD[32] = LoadGraph("DATA/CHARACTER/CHAR32.png");
+	CHARACTER_LOAD[33] = LoadGraph("DATA/CHARACTER/CHAR33.png");
+	CHARACTER_LOAD[34] = LoadGraph("DATA/CHARACTER/CHAR34.png");
+	CHARACTER_LOAD[35] = LoadGraph("DATA/CHARACTER/CHAR35.png");
+	CHARACTER_LOAD[36] = LoadGraph("DATA/CHARACTER/CHAR36.png");
+	CHARACTER_LOAD[37] = LoadGraph("DATA/CHARACTER/CHAR37.png");
+	CHARACTER_LOAD[38] = LoadGraph("DATA/CHARACTER/CHAR38.png");
+	CHARACTER_LOAD[39] = LoadGraph("DATA/CHARACTER/CHAR39.png");
+	CHARACTER_LOAD[40] = LoadGraph("DATA/CHARACTER/CHAR40.png");
+	CHARACTER_LOAD[41] = LoadGraph("DATA/CHARACTER/CHAR41.png");
+	CHARACTER_LOAD[42] = LoadGraph("DATA/CHARACTER/CHAR42.png");
+	CHARACTER_LOAD[43] = LoadGraph("DATA/CHARACTER/CHAR43.png");
+	CHARACTER_LOAD[44] = LoadGraph("DATA/CHARACTER/CHAR44.png");
+	CHARACTER_LOAD[45] = LoadGraph("DATA/CHARACTER/CHAR45.png");
+	CHARACTER_LOAD[46] = LoadGraph("DATA/CHARACTER/CHAR46.png");
+	CHARACTER_LOAD[47] = LoadGraph("DATA/CHARACTER/CHAR47.png");
+	CHARACTER_LOAD[48] = LoadGraph("DATA/CHARACTER/CHAR48.png");
+	CHARACTER_LOAD[49] = LoadGraph("DATA/CHARACTER/CHAR49.png");
+	CHARACTER_LOAD[50] = LoadGraph("DATA/CHARACTER/CHAR50.png");
+	CHARACTER_LOAD[51] = LoadGraph("DATA/CHARACTER/CHAR51.png");
+	CHARACTER_LOAD[52] = LoadGraph("DATA/CHARACTER/CHAR52.png");
+	CHARACTER_LOAD[53] = LoadGraph("DATA/CHARACTER/CHAR53.png");
+	CHARACTER_LOAD[54] = LoadGraph("DATA/CHARACTER/CHAR54.png");
+	CHARACTER_LOAD[55] = LoadGraph("DATA/CHARACTER/CHAR55.png");
+	CHARACTER_LOAD[56] = LoadGraph("DATA/CHARACTER/CHAR56.png");
+	CHARACTER_LOAD[57] = LoadGraph("DATA/CHARACTER/CHAR57.png");
+	CHARACTER_LOAD[58] = LoadGraph("DATA/CHARACTER/CHAR58.png");
+	CHARACTER_LOAD[59] = LoadGraph("DATA/CHARACTER/CHAR59.png");
+	CHARACTER_LOAD[60] = LoadGraph("DATA/CHARACTER/CHAR60.png");
+	CHARACTER_LOAD[61] = LoadGraph("DATA/CHARACTER/CHAR61.png");
+	CHARACTER_LOAD[62] = LoadGraph("DATA/CHARACTER/CHAR62.png");
+	CHARACTER_LOAD[63] = LoadGraph("DATA/CHARACTER/CHAR63.png");
+	CHARACTER_LOAD[64] = LoadGraph("DATA/CHARACTER/CHAR64.png");
+	CHARACTER_LOAD[65] = LoadGraph("DATA/CHARACTER/CHAR65.png");
+	CHARACTER_LOAD[66] = LoadGraph("DATA/CHARACTER/CHAR66.png");
+	CHARACTER_LOAD[67] = LoadGraph("DATA/CHARACTER/CHAR67.png");
+	CHARACTER_LOAD[68] = LoadGraph("DATA/CHARACTER/CHAR68.png");
+	CHARACTER_LOAD[69] = LoadGraph("DATA/CHARACTER/CHAR69.png");
+	CHARACTER_LOAD[70] = LoadGraph("DATA/CHARACTER/CHAR70.png");
+	CHARACTER_LOAD[71] = LoadGraph("DATA/CHARACTER/CHAR71.png");
+	CHARACTER_LOAD[72] = LoadGraph("DATA/CHARACTER/CHAR72.png");
+	CHARACTER_LOAD[73] = LoadGraph("DATA/CHARACTER/CHAR73.png");
+	CHARACTER_LOAD[74] = LoadGraph("DATA/CHARACTER/CHAR74.png");
+	CHARACTER_LOAD[75] = LoadGraph("DATA/CHARACTER/CHAR75.png");
+	CHARACTER_LOAD[76] = LoadGraph("DATA/CHARACTER/CHAR76.png");
+	CHARACTER_LOAD[77] = LoadGraph("DATA/CHARACTER/CHAR77.png");
+	CHARACTER_LOAD[78] = LoadGraph("DATA/CHARACTER/CHAR78.png");
+	CHARACTER_LOAD[79] = LoadGraph("DATA/CHARACTER/CHAR79.png");
+	CHARACTER_LOAD[80] = LoadGraph("DATA/CHARACTER/CHAR80.png");
+	CHARACTER_LOAD[81] = LoadGraph("DATA/CHARACTER/CHAR81.png");
+	CHARACTER_LOAD[82] = LoadGraph("DATA/CHARACTER/CHAR82.png");
+	CHARACTER_LOAD[83] = LoadGraph("DATA/CHARACTER/CHAR83.png");
+	CHARACTER_LOAD[84] = LoadGraph("DATA/CHARACTER/CHAR84.png");
+	CHARACTER_LOAD[85] = LoadGraph("DATA/CHARACTER/CHAR85.png");
+	CHARACTER_LOAD[86] = LoadGraph("DATA/CHARACTER/CHAR86.png");
+	CHARACTER_LOAD[87] = LoadGraph("DATA/CHARACTER/CHAR87.png");
+	CHARACTER_LOAD[88] = LoadGraph("DATA/CHARACTER/CHAR88.png");
+	CHARACTER_LOAD[89] = LoadGraph("DATA/CHARACTER/CHAR89.png");
+	CHARACTER_LOAD[90] = LoadGraph("DATA/CHARACTER/CHAR90.png");
+	CHARACTER_LOAD[91] = LoadGraph("DATA/CHARACTER/CHAR91.png");
+	CHARACTER_LOAD[92] = LoadGraph("DATA/CHARACTER/CHAR92.png");
+	CHARACTER_LOAD[93] = LoadGraph("DATA/CHARACTER/CHAR93.png");
+	CHARACTER_LOAD[94] = LoadGraph("DATA/CHARACTER/CHAR94.png");
+	CHARACTER_LOAD[95] = LoadGraph("DATA/CHARACTER/CHAR95.png");
+	CHARACTER_LOAD[96] = LoadGraph("DATA/CHARACTER/CHAR96.png");
+	CHARACTER_LOAD[97] = LoadGraph("DATA/CHARACTER/CHAR97.png");
+	CHARACTER_LOAD[98] = LoadGraph("DATA/CHARACTER/CHAR98.png");
+	CHARACTER_LOAD[99] = LoadGraph("DATA/CHARACTER/CHAR99.png");
+}
+
+
+//各素材データ読込関数
+void MATERIAL_LOAD() {
+
+	//サウンドデータの読み込み形式
+	SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
+
+	//キャラクター画像読込
+	MATERIAL_LOAD_CHARACTER();
 
 	//背景画像読込
 	BACKGROUND_LOAD[0] = LoadGraph("DATA/BACKGROUND/BG01.png");
@@ -4697,30 +4792,35 @@ int SCRIPT_OUTPUT() {
 
 				//キャラ05読込
 				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
 				//キャラ06読込
 				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
 				//キャラ07読込
 				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
 				//キャラ08読込
 				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
 				//キャラ09読込
 				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
 
@@ -4734,67 +4834,69 @@ int SCRIPT_OUTPUT() {
 
 			switch (String[SP][CP])
 			{
-			case '0':
-
-				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
-				break;
-
 			case '1':
 
-				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
 				break;
 
 			case '4':
 
-				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[13];
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
-
 			//キャラクター描画
 			SCRIPT_OUTPUT_CHARACTER_DRAW();
 			break;
@@ -4805,64 +4907,67 @@ int SCRIPT_OUTPUT() {
 
 			switch (String[SP][CP])
 			{
-			case '0':
-
-				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
-				break;
-
 			case '1':
 
-				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
 				break;
 
 			case '4':
 
-				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[13];
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
 
@@ -4876,64 +4981,67 @@ int SCRIPT_OUTPUT() {
 
 			switch (String[SP][CP])
 			{
-			case '0':
-
-				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
-				break;
-
 			case '1':
 
-				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
 				break;
 
 			case '4':
 
-				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[13];
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
 
@@ -4947,64 +5055,67 @@ int SCRIPT_OUTPUT() {
 
 			switch (String[SP][CP])
 			{
-			case '0':
-
-				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
-				break;
-
 			case '1':
 
-				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
 				break;
 
 			case '4':
 
-				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[13];
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
 
@@ -5018,64 +5129,67 @@ int SCRIPT_OUTPUT() {
 
 			switch (String[SP][CP])
 			{
-			case '0':
-
-				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
-				break;
-
 			case '1':
 
-				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
 				break;
 
 			case '4':
 
-				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[13];
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
 
@@ -5089,64 +5203,67 @@ int SCRIPT_OUTPUT() {
 
 			switch (String[SP][CP])
 			{
-			case '0':
-
-				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
-				break;
-
 			case '1':
 
-				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
 				break;
 
 			case '4':
 
-				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[13];
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
 
@@ -5160,64 +5277,67 @@ int SCRIPT_OUTPUT() {
 
 			switch (String[SP][CP])
 			{
-			case '0':
-
-				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
-				break;
-
 			case '1':
 
-				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
 				break;
 
 			case '4':
 
-				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[13];
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
 
@@ -5231,64 +5351,67 @@ int SCRIPT_OUTPUT() {
 
 			switch (String[SP][CP])
 			{
-			case '0':
-
-				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
-				break;
-
 			case '1':
 
-				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
 				break;
 
 			case '4':
 
-				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[13];
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
 
@@ -5302,64 +5425,67 @@ int SCRIPT_OUTPUT() {
 
 			switch (String[SP][CP])
 			{
-			case '0':
-
-				//キャラ10読込
-				CHARACTER = CHARACTER_LOAD[9];
-				break;
-
 			case '1':
 
-				//キャラ11読込
-				CHARACTER = CHARACTER_LOAD[10];
+				//キャラ01読込
+				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
 				break;
 
 			case '2':
 
-				//キャラ12読込
-				CHARACTER = CHARACTER_LOAD[11];
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
 				break;
 
 			case '3':
 
-				//キャラ13読込
-				CHARACTER = CHARACTER_LOAD[12];
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
 				break;
 
 			case '4':
 
-				//キャラ41読込
-				CHARACTER = CHARACTER_LOAD[13];
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
 				break;
 
 			case '5':
 
-				//キャラ15読込
-				CHARACTER = CHARACTER_LOAD[14];
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				CP++;
 				break;
 
 			case '6':
 
-				//キャラ16読込
-				CHARACTER = CHARACTER_LOAD[15];
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				CP++;
 				break;
 
 			case '7':
 
-				//キャラ17読込
-				CHARACTER = CHARACTER_LOAD[16];
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				CP++;
 				break;
 
 			case '8':
 
-				//キャラ18読込
-				CHARACTER = CHARACTER_LOAD[17];
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				CP++;
 				break;
 
 			case '9':
 
-				//キャラ19読込
-				CHARACTER = CHARACTER_LOAD[18];
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
+				CP++;
 				break;
 			}
 
