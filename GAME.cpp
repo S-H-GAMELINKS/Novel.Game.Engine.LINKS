@@ -9,7 +9,7 @@ int DrawPointX = 0, DrawPointY = 0;
 int SP = 0, CP = 0;
 
 //キャラクター画像読込変数
-int CHARACTER_LOAD[12], CHARACTER, CHARACTER_DUMMY;
+int CHARACTER_LOAD[100], CHARACTER, CHARACTER_DUMMY;
 
 //背景画像読込変数
 int BACKGROUND_LOAD[12], BACKGROUND;
@@ -4669,19 +4669,705 @@ int SCRIPT_OUTPUT() {
 				
 				//キャラ01読込
 				CHARACTER = CHARACTER_LOAD[0];
+				CP++;
+				break;
+
+			case '2':
+
+				//キャラ02読込
+				CHARACTER = CHARACTER_LOAD[1];
+				CP++;
+				break;
+
+			case '3':
+
+				//キャラ03読込
+				CHARACTER = CHARACTER_LOAD[2];
+				CP++;
+				break;
+
+			case '4':
+
+				//キャラ04読込
+				CHARACTER = CHARACTER_LOAD[3];
+				CP++;
+				break;
+
+			case '5':
+
+				//キャラ05読込
+				CHARACTER = CHARACTER_LOAD[4];
+				break;
+
+			case '6':
+
+				//キャラ06読込
+				CHARACTER = CHARACTER_LOAD[5];
+				break;
+
+			case '7':
+
+				//キャラ07読込
+				CHARACTER = CHARACTER_LOAD[6];
+				break;
+
+			case '8':
+
+				//キャラ08読込
+				CHARACTER = CHARACTER_LOAD[7];
+				break;
+
+			case '9':
+
+				//キャラ09読込
+				CHARACTER = CHARACTER_LOAD[8];
 				break;
 			}
+
 			//キャラクター描画
 			SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
-		case '2':
-			//キャラ02読込
-			CHARACTER = CHARACTER_LOAD[1];
+		case '1':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '0':
+
+				//キャラ10読込
+				CHARACTER = CHARACTER_LOAD[9];
+				break;
+
+			case '1':
+
+				//キャラ11読込
+				CHARACTER = CHARACTER_LOAD[10];
+				break;
+
+			case '2':
+
+				//キャラ12読込
+				CHARACTER = CHARACTER_LOAD[11];
+				break;
+
+			case '3':
+
+				//キャラ13読込
+				CHARACTER = CHARACTER_LOAD[12];
+				break;
+
+			case '4':
+
+				//キャラ41読込
+				CHARACTER = CHARACTER_LOAD[13];
+				break;
+
+			case '5':
+
+				//キャラ15読込
+				CHARACTER = CHARACTER_LOAD[14];
+				break;
+
+			case '6':
+
+				//キャラ16読込
+				CHARACTER = CHARACTER_LOAD[15];
+				break;
+
+			case '7':
+
+				//キャラ17読込
+				CHARACTER = CHARACTER_LOAD[16];
+				break;
+
+			case '8':
+
+				//キャラ18読込
+				CHARACTER = CHARACTER_LOAD[17];
+				break;
+
+			case '9':
+
+				//キャラ19読込
+				CHARACTER = CHARACTER_LOAD[18];
+				break;
+			}
+
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
 			break;
+
+		case '2':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '0':
+
+				//キャラ10読込
+				CHARACTER = CHARACTER_LOAD[9];
+				break;
+
+			case '1':
+
+				//キャラ11読込
+				CHARACTER = CHARACTER_LOAD[10];
+				break;
+
+			case '2':
+
+				//キャラ12読込
+				CHARACTER = CHARACTER_LOAD[11];
+				break;
+
+			case '3':
+
+				//キャラ13読込
+				CHARACTER = CHARACTER_LOAD[12];
+				break;
+
+			case '4':
+
+				//キャラ41読込
+				CHARACTER = CHARACTER_LOAD[13];
+				break;
+
+			case '5':
+
+				//キャラ15読込
+				CHARACTER = CHARACTER_LOAD[14];
+				break;
+
+			case '6':
+
+				//キャラ16読込
+				CHARACTER = CHARACTER_LOAD[15];
+				break;
+
+			case '7':
+
+				//キャラ17読込
+				CHARACTER = CHARACTER_LOAD[16];
+				break;
+
+			case '8':
+
+				//キャラ18読込
+				CHARACTER = CHARACTER_LOAD[17];
+				break;
+
+			case '9':
+
+				//キャラ19読込
+				CHARACTER = CHARACTER_LOAD[18];
+				break;
+			}
+
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			break;
+
+		case '3':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '0':
+
+				//キャラ10読込
+				CHARACTER = CHARACTER_LOAD[9];
+				break;
+
+			case '1':
+
+				//キャラ11読込
+				CHARACTER = CHARACTER_LOAD[10];
+				break;
+
+			case '2':
+
+				//キャラ12読込
+				CHARACTER = CHARACTER_LOAD[11];
+				break;
+
+			case '3':
+
+				//キャラ13読込
+				CHARACTER = CHARACTER_LOAD[12];
+				break;
+
+			case '4':
+
+				//キャラ41読込
+				CHARACTER = CHARACTER_LOAD[13];
+				break;
+
+			case '5':
+
+				//キャラ15読込
+				CHARACTER = CHARACTER_LOAD[14];
+				break;
+
+			case '6':
+
+				//キャラ16読込
+				CHARACTER = CHARACTER_LOAD[15];
+				break;
+
+			case '7':
+
+				//キャラ17読込
+				CHARACTER = CHARACTER_LOAD[16];
+				break;
+
+			case '8':
+
+				//キャラ18読込
+				CHARACTER = CHARACTER_LOAD[17];
+				break;
+
+			case '9':
+
+				//キャラ19読込
+				CHARACTER = CHARACTER_LOAD[18];
+				break;
+			}
+
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			break;
+
+		case '4':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '0':
+
+				//キャラ10読込
+				CHARACTER = CHARACTER_LOAD[9];
+				break;
+
+			case '1':
+
+				//キャラ11読込
+				CHARACTER = CHARACTER_LOAD[10];
+				break;
+
+			case '2':
+
+				//キャラ12読込
+				CHARACTER = CHARACTER_LOAD[11];
+				break;
+
+			case '3':
+
+				//キャラ13読込
+				CHARACTER = CHARACTER_LOAD[12];
+				break;
+
+			case '4':
+
+				//キャラ41読込
+				CHARACTER = CHARACTER_LOAD[13];
+				break;
+
+			case '5':
+
+				//キャラ15読込
+				CHARACTER = CHARACTER_LOAD[14];
+				break;
+
+			case '6':
+
+				//キャラ16読込
+				CHARACTER = CHARACTER_LOAD[15];
+				break;
+
+			case '7':
+
+				//キャラ17読込
+				CHARACTER = CHARACTER_LOAD[16];
+				break;
+
+			case '8':
+
+				//キャラ18読込
+				CHARACTER = CHARACTER_LOAD[17];
+				break;
+
+			case '9':
+
+				//キャラ19読込
+				CHARACTER = CHARACTER_LOAD[18];
+				break;
+			}
+
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			break;
+
+		case '5':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '0':
+
+				//キャラ10読込
+				CHARACTER = CHARACTER_LOAD[9];
+				break;
+
+			case '1':
+
+				//キャラ11読込
+				CHARACTER = CHARACTER_LOAD[10];
+				break;
+
+			case '2':
+
+				//キャラ12読込
+				CHARACTER = CHARACTER_LOAD[11];
+				break;
+
+			case '3':
+
+				//キャラ13読込
+				CHARACTER = CHARACTER_LOAD[12];
+				break;
+
+			case '4':
+
+				//キャラ41読込
+				CHARACTER = CHARACTER_LOAD[13];
+				break;
+
+			case '5':
+
+				//キャラ15読込
+				CHARACTER = CHARACTER_LOAD[14];
+				break;
+
+			case '6':
+
+				//キャラ16読込
+				CHARACTER = CHARACTER_LOAD[15];
+				break;
+
+			case '7':
+
+				//キャラ17読込
+				CHARACTER = CHARACTER_LOAD[16];
+				break;
+
+			case '8':
+
+				//キャラ18読込
+				CHARACTER = CHARACTER_LOAD[17];
+				break;
+
+			case '9':
+
+				//キャラ19読込
+				CHARACTER = CHARACTER_LOAD[18];
+				break;
+			}
+
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			break;
+
+		case '6':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '0':
+
+				//キャラ10読込
+				CHARACTER = CHARACTER_LOAD[9];
+				break;
+
+			case '1':
+
+				//キャラ11読込
+				CHARACTER = CHARACTER_LOAD[10];
+				break;
+
+			case '2':
+
+				//キャラ12読込
+				CHARACTER = CHARACTER_LOAD[11];
+				break;
+
+			case '3':
+
+				//キャラ13読込
+				CHARACTER = CHARACTER_LOAD[12];
+				break;
+
+			case '4':
+
+				//キャラ41読込
+				CHARACTER = CHARACTER_LOAD[13];
+				break;
+
+			case '5':
+
+				//キャラ15読込
+				CHARACTER = CHARACTER_LOAD[14];
+				break;
+
+			case '6':
+
+				//キャラ16読込
+				CHARACTER = CHARACTER_LOAD[15];
+				break;
+
+			case '7':
+
+				//キャラ17読込
+				CHARACTER = CHARACTER_LOAD[16];
+				break;
+
+			case '8':
+
+				//キャラ18読込
+				CHARACTER = CHARACTER_LOAD[17];
+				break;
+
+			case '9':
+
+				//キャラ19読込
+				CHARACTER = CHARACTER_LOAD[18];
+				break;
+			}
+
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			break;
+
+		case '7':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '0':
+
+				//キャラ10読込
+				CHARACTER = CHARACTER_LOAD[9];
+				break;
+
+			case '1':
+
+				//キャラ11読込
+				CHARACTER = CHARACTER_LOAD[10];
+				break;
+
+			case '2':
+
+				//キャラ12読込
+				CHARACTER = CHARACTER_LOAD[11];
+				break;
+
+			case '3':
+
+				//キャラ13読込
+				CHARACTER = CHARACTER_LOAD[12];
+				break;
+
+			case '4':
+
+				//キャラ41読込
+				CHARACTER = CHARACTER_LOAD[13];
+				break;
+
+			case '5':
+
+				//キャラ15読込
+				CHARACTER = CHARACTER_LOAD[14];
+				break;
+
+			case '6':
+
+				//キャラ16読込
+				CHARACTER = CHARACTER_LOAD[15];
+				break;
+
+			case '7':
+
+				//キャラ17読込
+				CHARACTER = CHARACTER_LOAD[16];
+				break;
+
+			case '8':
+
+				//キャラ18読込
+				CHARACTER = CHARACTER_LOAD[17];
+				break;
+
+			case '9':
+
+				//キャラ19読込
+				CHARACTER = CHARACTER_LOAD[18];
+				break;
+			}
+
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			break;
+
+		case '8':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '0':
+
+				//キャラ10読込
+				CHARACTER = CHARACTER_LOAD[9];
+				break;
+
+			case '1':
+
+				//キャラ11読込
+				CHARACTER = CHARACTER_LOAD[10];
+				break;
+
+			case '2':
+
+				//キャラ12読込
+				CHARACTER = CHARACTER_LOAD[11];
+				break;
+
+			case '3':
+
+				//キャラ13読込
+				CHARACTER = CHARACTER_LOAD[12];
+				break;
+
+			case '4':
+
+				//キャラ41読込
+				CHARACTER = CHARACTER_LOAD[13];
+				break;
+
+			case '5':
+
+				//キャラ15読込
+				CHARACTER = CHARACTER_LOAD[14];
+				break;
+
+			case '6':
+
+				//キャラ16読込
+				CHARACTER = CHARACTER_LOAD[15];
+				break;
+
+			case '7':
+
+				//キャラ17読込
+				CHARACTER = CHARACTER_LOAD[16];
+				break;
+
+			case '8':
+
+				//キャラ18読込
+				CHARACTER = CHARACTER_LOAD[17];
+				break;
+
+			case '9':
+
+				//キャラ19読込
+				CHARACTER = CHARACTER_LOAD[18];
+				break;
+			}
+
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			break;
+
+		case '9':
+
+			CP++;
+
+			switch (String[SP][CP])
+			{
+			case '0':
+
+				//キャラ10読込
+				CHARACTER = CHARACTER_LOAD[9];
+				break;
+
+			case '1':
+
+				//キャラ11読込
+				CHARACTER = CHARACTER_LOAD[10];
+				break;
+
+			case '2':
+
+				//キャラ12読込
+				CHARACTER = CHARACTER_LOAD[11];
+				break;
+
+			case '3':
+
+				//キャラ13読込
+				CHARACTER = CHARACTER_LOAD[12];
+				break;
+
+			case '4':
+
+				//キャラ41読込
+				CHARACTER = CHARACTER_LOAD[13];
+				break;
+
+			case '5':
+
+				//キャラ15読込
+				CHARACTER = CHARACTER_LOAD[14];
+				break;
+
+			case '6':
+
+				//キャラ16読込
+				CHARACTER = CHARACTER_LOAD[15];
+				break;
+
+			case '7':
+
+				//キャラ17読込
+				CHARACTER = CHARACTER_LOAD[16];
+				break;
+
+			case '8':
+
+				//キャラ18読込
+				CHARACTER = CHARACTER_LOAD[17];
+				break;
+
+			case '9':
+
+				//キャラ19読込
+				CHARACTER = CHARACTER_LOAD[18];
+				break;
+			}
+
+			//キャラクター描画
+			SCRIPT_OUTPUT_CHARACTER_DRAW();
+			break;
+
 		}
-		//キャラクター描画
-		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		// 改行文字
@@ -4700,56 +5386,56 @@ int SCRIPT_OUTPUT() {
 		break;
 
 		// クリア文字
-	case 'X':
+	case 'R':
 
 		//ゲーム画面のクリア処理
 		SCRIPT_OUTPUT_SCREENCLEAR();
 		break;
 
 		//少し待つ
-	case '3':
+	case 'D':
 
 		//スクリプトタグ処理(少し待つ)
 		SCRIPT_OUTPUT_WAIT();
 		break;
 
 		//ゲームオーバー
-	case '4':
+	case 'G':
 
 		//ゲームオーバー画面処理
 		SCRIPT_OUTPUT_GAMEOVER();
 		break;
 
 		//エンディング
-	case '5':
+	case 'F':
 
 		//エンディング再生
 		SCRIPT_OUTPUT_ENDING();
 		break;
 
 		//BGMの再生を止める
-	case '6':
+	case 'L':
 
 		//BGMの再生を止める
 		SCRIPT_OUTPUT_BGMSTOP();
 		break;
 
 		//SEの再生を止める
-	case '7':
+	case 'J':
 
 		//SEの再生を止める
 		SCRIPT_OUTPUT_SESTOP();
 		break;
 
 		//選択肢の表示
-	case '8':
+	case 'Q':
 
 		//選択肢描画処理
 		SCRIPT_OUTPUT_CHOICE();
 		break;
 
 		// 終了文字
-	case '9':
+	case 'E':
 
 		//スクリプトタグ処理(終了文字)
 		SCRIPT_OUTPUT_END();
