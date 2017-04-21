@@ -25,8 +25,8 @@ long SOUNDEFFECT_LOAD[100];
 int SOUNDEFFECT;
 
 //動画変数
-char MOVIE_LOAD[100];
-char MOVIE;
+char *MOVIE_LOAD[100];
+char *MOVIE;
 
 //スクリプト読込変数
 int ScriptFile;
@@ -602,105 +602,105 @@ void MATERIAL_LOAD_SOUNDEFFECT(){
 //動画読込
 void MATERIAL_LOAD_MOVIE() {
 
-	MOVIE_LOAD[0] = "DATA/MOVIE/SE01.ogg";
-	MOVIE_LOAD[1] = "DATA/MOVIE/SE02.ogg";
-	MOVIE_LOAD[2] = "DATA/MOVIE/SE03.ogg";
-	MOVIE_LOAD[3] = "DATA/MOVIE/SE04.ogg";
-	MOVIE_LOAD[4] = "DATA/MOVIE/SE05.ogg";
-	MOVIE_LOAD[5] = "DATA/MOVIE/SE06.ogg";
-	MOVIE_LOAD[6] = "DATA/MOVIE/SE07.ogg";
-	MOVIE_LOAD[7] = "DATA/MOVIE/SE08.ogg";
-	MOVIE_LOAD[8] = "DATA/MOVIE/SE09.ogg";
-	MOVIE_LOAD[9] = "DATA/MOVIE/SE10.ogg";
-	MOVIE_LOAD[10] = "DATA/MOVIE/SE11.ogg";
-	MOVIE_LOAD[12] = "DATA/MOVIE/SE12.ogg";
-	MOVIE_LOAD[13] = "DATA/MOVIE/SE13.ogg";
-	MOVIE_LOAD[14] = "DATA/MOVIE/SE14.ogg";
-	MOVIE_LOAD[15] = "DATA/MOVIE/SE15.ogg";
-	MOVIE_LOAD[16] = "DATA/MOVIE/SE16.ogg";
-	MOVIE_LOAD[17] = "DATA/MOVIE/SE17.ogg";
-	MOVIE_LOAD[18] = "DATA/MOVIE/SE18.ogg";
-	MOVIE_LOAD[19] = "DATA/MOVIE/SE19.ogg";
-	MOVIE_LOAD[20] = "DATA/MOVIE/SE20.ogg";
-	MOVIE_LOAD[21] = "DATA/MOVIE/SE21.ogg";
-	MOVIE_LOAD[22] = "DATA/MOVIE/SE22.ogg";
-	MOVIE_LOAD[23] = "DATA/MOVIE/SE23.ogg";
-	MOVIE_LOAD[24] = "DATA/MOVIE/SE24.ogg";
-	MOVIE_LOAD[25] = "DATA/MOVIE/SE25.ogg";
-	MOVIE_LOAD[26] = "DATA/MOVIE/SE26.ogg";
-	MOVIE_LOAD[27] = "DATA/MOVIE/SE27.ogg";
-	MOVIE_LOAD[28] = "DATA/MOVIE/SE28.ogg";
-	MOVIE_LOAD[29] = "DATA/MOVIE/SE29.ogg";
-	MOVIE_LOAD[20] = "DATA/MOVIE/SE30.ogg";
-	MOVIE_LOAD[31] = "DATA/MOVIE/SE31.ogg";
-	MOVIE_LOAD[32] = "DATA/MOVIE/SE32.ogg";
-	MOVIE_LOAD[33] = "DATA/MOVIE/SE33.ogg";
-	MOVIE_LOAD[34] = "DATA/MOVIE/SE34.ogg";
-	MOVIE_LOAD[35] = "DATA/MOVIE/SE35.ogg";
-	MOVIE_LOAD[36] = "DATA/MOVIE/SE36.ogg";
-	MOVIE_LOAD[37] = "DATA/MOVIE/SE37.ogg";
-	MOVIE_LOAD[38] = "DATA/MOVIE/SE38.ogg";
-	MOVIE_LOAD[39] = "DATA/MOVIE/SE39.ogg";
-	MOVIE_LOAD[40] = "DATA/MOVIE/SE40.ogg";
-	MOVIE_LOAD[41] = "DATA/MOVIE/SE41.ogg";
-	MOVIE_LOAD[42] = "DATA/MOVIE/SE42.ogg";
-	MOVIE_LOAD[43] = "DATA/MOVIE/SE43.ogg";
-	MOVIE_LOAD[44] = "DATA/MOVIE/SE44.ogg";
-	MOVIE_LOAD[45] = "DATA/MOVIE/SE45.ogg";
-	MOVIE_LOAD[46] = "DATA/MOVIE/SE46.ogg";
-	MOVIE_LOAD[47] = "DATA/MOVIE/SE47.ogg";
-	MOVIE_LOAD[48] = "DATA/MOVIE/SE48.ogg";
-	MOVIE_LOAD[49] = "DATA/MOVIE/SE49.ogg";
-	MOVIE_LOAD[50] = "DATA/MOVIE/SE50.ogg";
-	MOVIE_LOAD[51] = "DATA/MOVIE/SE51.ogg";
-	MOVIE_LOAD[52] = "DATA/MOVIE/SE52.ogg";
-	MOVIE_LOAD[53] = "DATA/MOVIE/SE53.ogg";
-	MOVIE_LOAD[54] = "DATA/MOVIE/SE54.ogg";
-	MOVIE_LOAD[55] = "DATA/MOVIE/SE55.ogg";
-	MOVIE_LOAD[56] = "DATA/MOVIE/SE56.ogg";
-	MOVIE_LOAD[57] = "DATA/MOVIE/SE57.ogg";
-	MOVIE_LOAD[58] = "DATA/MOVIE/SE58.ogg";
-	MOVIE_LOAD[59] = "DATA/MOVIE/SE59.ogg";
-	MOVIE_LOAD[60] = "DATA/MOVIE/SE60.ogg";
-	MOVIE_LOAD[61] = "DATA/MOVIE/SE61.ogg";
-	MOVIE_LOAD[62] = "DATA/MOVIE/SE62.ogg";
-	MOVIE_LOAD[63] = "DATA/MOVIE/SE63.ogg";
-	MOVIE_LOAD[64] = "DATA/MOVIE/SE64.ogg";
-	MOVIE_LOAD[65] = "DATA/MOVIE/SE65.ogg";
-	MOVIE_LOAD[66] = "DATA/MOVIE/SE66.ogg";
-	MOVIE_LOAD[67] = "DATA/MOVIE/SE67.ogg";
-	MOVIE_LOAD[68] = "DATA/MOVIE/SE68.ogg";
-	MOVIE_LOAD[69] = "DATA/MOVIE/SE69.ogg";
-	MOVIE_LOAD[70] = "DATA/MOVIE/SE70.ogg";
-	MOVIE_LOAD[71] = "DATA/MOVIE/SE71.ogg";
-	MOVIE_LOAD[72] = "DATA/MOVIE/SE72.ogg";
-	MOVIE_LOAD[73] = "DATA/MOVIE/SE73.ogg";
-	MOVIE_LOAD[74] = "DATA/MOVIE/SE74.ogg";
-	MOVIE_LOAD[75] = "DATA/MOVIE/SE75.ogg";
-	MOVIE_LOAD[76] = "DATA/MOVIE/SE76.ogg";
-	MOVIE_LOAD[77] = "DATA/MOVIE/SE77.ogg";
-	MOVIE_LOAD[78] = "DATA/MOVIE/SE78.ogg";
-	MOVIE_LOAD[79] = "DATA/MOVIE/SE79.ogg";
-	MOVIE_LOAD[80] = "DATA/MOVIE/SE80.ogg";
-	MOVIE_LOAD[81] = "DATA/MOVIE/SE81.ogg";
-	MOVIE_LOAD[82] = "DATA/MOVIE/SE82.ogg";
-	MOVIE_LOAD[83] = "DATA/MOVIE/SE83.ogg";
-	MOVIE_LOAD[84] = "DATA/MOVIE/SE84.ogg";
-	MOVIE_LOAD[85] = "DATA/MOVIE/SE85.ogg";
-	MOVIE_LOAD[86] = "DATA/MOVIE/SE86.ogg";
-	MOVIE_LOAD[87] = "DATA/MOVIE/SE87.ogg";
-	MOVIE_LOAD[88] = "DATA/MOVIE/SE88.ogg";
-	MOVIE_LOAD[89] = "DATA/MOVIE/SE89.ogg";
-	MOVIE_LOAD[90] = "DATA/MOVIE/SE90.ogg";
-	MOVIE_LOAD[91] = "DATA/MOVIE/SE91.ogg";
-	MOVIE_LOAD[92] = "DATA/MOVIE/SE92.ogg";
-	MOVIE_LOAD[93] = "DATA/MOVIE/SE93.ogg";
-	MOVIE_LOAD[94] = "DATA/MOVIE/SE94.ogg";
-	MOVIE_LOAD[95] = "DATA/MOVIE/SE95.ogg";
-	MOVIE_LOAD[96] = "DATA/MOVIE/SE96.ogg";
-	MOVIE_LOAD[97] = "DATA/MOVIE/SE97.ogg";
-	MOVIE_LOAD[98] = "DATA/MOVIE/SE98.ogg";
-	MOVIE_LOAD[99] = "DATA/MOVIE/SE99.ogg";
+	MOVIE_LOAD[0] = "DATA/MOVIE/MOVIE01.wmv";
+	MOVIE_LOAD[1] = "DATA/MOVIE/MOVIE02.wmv";
+	MOVIE_LOAD[2] = "DATA/MOVIE/MOVIE03.wmv";
+	MOVIE_LOAD[3] = "DATA/MOVIE/MOVIE04.wmv";
+	MOVIE_LOAD[4] = "DATA/MOVIE/MOVIE05.wmv";
+	MOVIE_LOAD[5] = "DATA/MOVIE/MOVIE06.wmv";
+	MOVIE_LOAD[6] = "DATA/MOVIE/MOVIE07.wmv";
+	MOVIE_LOAD[7] = "DATA/MOVIE/MOVIE08.wmv";
+	MOVIE_LOAD[8] = "DATA/MOVIE/MOVIE09.wmv";
+	MOVIE_LOAD[9] = "DATA/MOVIE/MOVIE10.wmv";
+	MOVIE_LOAD[10] = "DATA/MOVIE/MOVIE11.wmv";
+	MOVIE_LOAD[12] = "DATA/MOVIE/MOVIE12.wmv";
+	MOVIE_LOAD[13] = "DATA/MOVIE/MOVIE13.wmv";
+	MOVIE_LOAD[14] = "DATA/MOVIE/MOVIE14.wmv";
+	MOVIE_LOAD[15] = "DATA/MOVIE/MOVIE15.wmv";
+	MOVIE_LOAD[16] = "DATA/MOVIE/MOVIE16.wmv";
+	MOVIE_LOAD[17] = "DATA/MOVIE/MOVIE17.wmv";
+	MOVIE_LOAD[18] = "DATA/MOVIE/MOVIE18.wmv";
+	MOVIE_LOAD[19] = "DATA/MOVIE/MOVIE19.wmv";
+	MOVIE_LOAD[20] = "DATA/MOVIE/MOVIE20.wmv";
+	MOVIE_LOAD[21] = "DATA/MOVIE/MOVIE21.wmv";
+	MOVIE_LOAD[22] = "DATA/MOVIE/MOVIE22.wmv";
+	MOVIE_LOAD[23] = "DATA/MOVIE/MOVIE23.wmv";
+	MOVIE_LOAD[24] = "DATA/MOVIE/MOVIE24.wmv";
+	MOVIE_LOAD[25] = "DATA/MOVIE/MOVIE25.wmv";
+	MOVIE_LOAD[26] = "DATA/MOVIE/MOVIE26.wmv";
+	MOVIE_LOAD[27] = "DATA/MOVIE/MOVIE27.wmv";
+	MOVIE_LOAD[28] = "DATA/MOVIE/MOVIE28.wmv";
+	MOVIE_LOAD[29] = "DATA/MOVIE/MOVIE29.wmv";
+	MOVIE_LOAD[20] = "DATA/MOVIE/MOVIE30.wmv";
+	MOVIE_LOAD[31] = "DATA/MOVIE/MOVIE31.wmv";
+	MOVIE_LOAD[32] = "DATA/MOVIE/MOVIE32.wmv";
+	MOVIE_LOAD[33] = "DATA/MOVIE/MOVIE33.wmv";
+	MOVIE_LOAD[34] = "DATA/MOVIE/MOVIE34.wmv";
+	MOVIE_LOAD[35] = "DATA/MOVIE/MOVIE35.wmv";
+	MOVIE_LOAD[36] = "DATA/MOVIE/MOVIE36.wmv";
+	MOVIE_LOAD[37] = "DATA/MOVIE/MOVIE37.wmv";
+	MOVIE_LOAD[38] = "DATA/MOVIE/MOVIE38.wmv";
+	MOVIE_LOAD[39] = "DATA/MOVIE/MOVIE39.wmv";
+	MOVIE_LOAD[40] = "DATA/MOVIE/MOVIE40.wmv";
+	MOVIE_LOAD[41] = "DATA/MOVIE/MOVIE41.wmv";
+	MOVIE_LOAD[42] = "DATA/MOVIE/MOVIE42.wmv";
+	MOVIE_LOAD[43] = "DATA/MOVIE/MOVIE43.wmv";
+	MOVIE_LOAD[44] = "DATA/MOVIE/MOVIE44.wmv";
+	MOVIE_LOAD[45] = "DATA/MOVIE/MOVIE45.wmv";
+	MOVIE_LOAD[46] = "DATA/MOVIE/MOVIE46.wmv";
+	MOVIE_LOAD[47] = "DATA/MOVIE/MOVIE47.wmv";
+	MOVIE_LOAD[48] = "DATA/MOVIE/MOVIE48.wmv";
+	MOVIE_LOAD[49] = "DATA/MOVIE/MOVIE49.wmv";
+	MOVIE_LOAD[50] = "DATA/MOVIE/MOVIE50.wmv";
+	MOVIE_LOAD[51] = "DATA/MOVIE/MOVIE51.wmv";
+	MOVIE_LOAD[52] = "DATA/MOVIE/MOVIE52.wmv";
+	MOVIE_LOAD[53] = "DATA/MOVIE/MOVIE53.wmv";
+	MOVIE_LOAD[54] = "DATA/MOVIE/MOVIE54.wmv";
+	MOVIE_LOAD[55] = "DATA/MOVIE/MOVIE55.wmv";
+	MOVIE_LOAD[56] = "DATA/MOVIE/MOVIE56.wmv";
+	MOVIE_LOAD[57] = "DATA/MOVIE/MOVIE57.wmv";
+	MOVIE_LOAD[58] = "DATA/MOVIE/MOVIE58.wmv";
+	MOVIE_LOAD[59] = "DATA/MOVIE/MOVIE59.wmv";
+	MOVIE_LOAD[60] = "DATA/MOVIE/MOVIE60.wmv";
+	MOVIE_LOAD[61] = "DATA/MOVIE/MOVIE61.wmv";
+	MOVIE_LOAD[62] = "DATA/MOVIE/MOVIE62.wmv";
+	MOVIE_LOAD[63] = "DATA/MOVIE/MOVIE63.wmv";
+	MOVIE_LOAD[64] = "DATA/MOVIE/MOVIE64.wmv";
+	MOVIE_LOAD[65] = "DATA/MOVIE/MOVIE65.wmv";
+	MOVIE_LOAD[66] = "DATA/MOVIE/MOVIE66.wmv";
+	MOVIE_LOAD[67] = "DATA/MOVIE/MOVIE67.wmv";
+	MOVIE_LOAD[68] = "DATA/MOVIE/MOVIE68.wmv";
+	MOVIE_LOAD[69] = "DATA/MOVIE/MOVIE69.wmv";
+	MOVIE_LOAD[70] = "DATA/MOVIE/MOVIE70.wmv";
+	MOVIE_LOAD[71] = "DATA/MOVIE/MOVIE71.wmv";
+	MOVIE_LOAD[72] = "DATA/MOVIE/MOVIE72.wmv";
+	MOVIE_LOAD[73] = "DATA/MOVIE/MOVIE73.wmv";
+	MOVIE_LOAD[74] = "DATA/MOVIE/MOVIE74.wmv";
+	MOVIE_LOAD[75] = "DATA/MOVIE/MOVIE75.wmv";
+	MOVIE_LOAD[76] = "DATA/MOVIE/MOVIE76.wmv";
+	MOVIE_LOAD[77] = "DATA/MOVIE/MOVIE77.wmv";
+	MOVIE_LOAD[78] = "DATA/MOVIE/MOVIE78.wmv";
+	MOVIE_LOAD[79] = "DATA/MOVIE/MOVIE79.wmv";
+	MOVIE_LOAD[80] = "DATA/MOVIE/MOVIE80.wmv";
+	MOVIE_LOAD[81] = "DATA/MOVIE/MOVIE81.wmv";
+	MOVIE_LOAD[82] = "DATA/MOVIE/MOVIE82.wmv";
+	MOVIE_LOAD[83] = "DATA/MOVIE/MOVIE83.wmv";
+	MOVIE_LOAD[84] = "DATA/MOVIE/MOVIE84.wmv";
+	MOVIE_LOAD[85] = "DATA/MOVIE/MOVIE85.wmv";
+	MOVIE_LOAD[86] = "DATA/MOVIE/MOVIE86.wmv";
+	MOVIE_LOAD[87] = "DATA/MOVIE/MOVIE87.wmv";
+	MOVIE_LOAD[88] = "DATA/MOVIE/MOVIE88.wmv";
+	MOVIE_LOAD[89] = "DATA/MOVIE/MOVIE89.wmv";
+	MOVIE_LOAD[90] = "DATA/MOVIE/MOVIE90.wmv";
+	MOVIE_LOAD[91] = "DATA/MOVIE/MOVIE91.wmv";
+	MOVIE_LOAD[92] = "DATA/MOVIE/MOVIE92.wmv";
+	MOVIE_LOAD[93] = "DATA/MOVIE/MOVIE93.wmv";
+	MOVIE_LOAD[94] = "DATA/MOVIE/MOVIE94.wmv";
+	MOVIE_LOAD[95] = "DATA/MOVIE/MOVIE95.wmv";
+	MOVIE_LOAD[96] = "DATA/MOVIE/MOVIE96.wmv";
+	MOVIE_LOAD[97] = "DATA/MOVIE/MOVIE97.wmv";
+	MOVIE_LOAD[98] = "DATA/MOVIE/MOVIE98.wmv";
+	MOVIE_LOAD[99] = "DATA/MOVIE/MOVIE99.wmv";
 }
 
 //各素材データ読込関数
@@ -7918,6 +7918,769 @@ void SOUNDEFFECT_START() {
 	}
 }
 
+//動画再生1～9
+void MOVIE_START_0() {
+
+	switch (String[SP][CP])
+	{
+	case '1':
+
+		//動画01読込
+		MOVIE = MOVIE_LOAD[0];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画02読込
+		MOVIE = MOVIE_LOAD[1];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画03読込
+		MOVIE = MOVIE_LOAD[2];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画04読込
+		MOVIE = MOVIE_LOAD[3];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画05読込
+		MOVIE = MOVIE_LOAD[4];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画06読込
+		MOVIE = MOVIE_LOAD[5];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画07読込
+		MOVIE = MOVIE_LOAD[6];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画08読込
+		MOVIE = MOVIE_LOAD[7];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画09読込
+		MOVIE = MOVIE_LOAD[8];
+		CP++;
+		break;
+	}
+}
+
+//動画再生10～19
+void MOVIE_START_1() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//動画10読込
+		MOVIE = MOVIE_LOAD[9];
+		CP++;
+		break;
+
+	case '1':
+
+		//動画11読込
+		MOVIE = MOVIE_LOAD[10];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画12読込
+		MOVIE = MOVIE_LOAD[11];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画13読込
+		MOVIE = MOVIE_LOAD[12];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画14読込
+		MOVIE = MOVIE_LOAD[13];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画15読込
+		MOVIE = MOVIE_LOAD[14];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画16読込
+		MOVIE = MOVIE_LOAD[15];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画17読込
+		MOVIE = MOVIE_LOAD[16];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画18読込
+		MOVIE = MOVIE_LOAD[17];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画19読込
+		MOVIE = MOVIE_LOAD[18];
+		CP++;
+		break;
+	}
+}
+
+//動画再生20～29
+void MOVIE_START_2() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//動画20読込
+		MOVIE = MOVIE_LOAD[19];
+		CP++;
+		break;
+
+	case '1':
+
+		//動画21読込
+		MOVIE = MOVIE_LOAD[20];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画22読込
+		MOVIE = MOVIE_LOAD[21];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画23読込
+		MOVIE = MOVIE_LOAD[22];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画24読込
+		MOVIE = MOVIE_LOAD[23];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画25読込
+		MOVIE = MOVIE_LOAD[24];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画26読込
+		MOVIE = MOVIE_LOAD[25];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画27読込
+		MOVIE = MOVIE_LOAD[26];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画28読込
+		MOVIE = MOVIE_LOAD[27];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画29読込
+		MOVIE = MOVIE_LOAD[28];
+		CP++;
+		break;
+	}
+}
+
+//動画再生30～39
+void MOVIE_START_3() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//動画30読込
+		MOVIE = MOVIE_LOAD[29];
+		CP++;
+		break;
+
+	case '1':
+
+		//動画31読込
+		MOVIE = MOVIE_LOAD[30];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画32読込
+		MOVIE = MOVIE_LOAD[31];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画33読込
+		MOVIE = MOVIE_LOAD[32];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画34読込
+		MOVIE = MOVIE_LOAD[33];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画35読込
+		MOVIE = MOVIE_LOAD[34];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画36読込
+		MOVIE = MOVIE_LOAD[35];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画37読込
+		MOVIE = MOVIE_LOAD[36];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画38読込
+		MOVIE = MOVIE_LOAD[37];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画39読込
+		MOVIE = MOVIE_LOAD[38];
+		CP++;
+		break;
+	}
+}
+
+//動画再生40～49
+void MOVIE_START_4() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//動画40読込
+		MOVIE = MOVIE_LOAD[39];
+		CP++;
+		break;
+
+	case '1':
+
+		//動画41読込
+		MOVIE = MOVIE_LOAD[40];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画42読込
+		MOVIE = MOVIE_LOAD[41];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画43読込
+		MOVIE = MOVIE_LOAD[42];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画44読込
+		MOVIE = MOVIE_LOAD[43];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画45読込
+		MOVIE = MOVIE_LOAD[44];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画46読込
+		MOVIE = MOVIE_LOAD[45];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画47読込
+		MOVIE = MOVIE_LOAD[46];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画48読込
+		MOVIE = MOVIE_LOAD[47];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画49読込
+		MOVIE = MOVIE_LOAD[48];
+		CP++;
+		break;
+	}
+}
+
+//動画再生50～59
+void MOVIE_START_5() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//動画50読込
+		MOVIE = MOVIE_LOAD[49];
+		CP++;
+		break;
+
+	case '1':
+
+		//動画51読込
+		MOVIE = MOVIE_LOAD[50];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画52読込
+		MOVIE = MOVIE_LOAD[51];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画53読込
+		MOVIE = MOVIE_LOAD[52];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画54読込
+		MOVIE = MOVIE_LOAD[53];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画55読込
+		MOVIE = MOVIE_LOAD[54];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画56読込
+		MOVIE = MOVIE_LOAD[55];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画57読込
+		MOVIE = MOVIE_LOAD[56];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画58読込
+		MOVIE = MOVIE_LOAD[57];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画59読込
+		MOVIE = MOVIE_LOAD[58];
+		CP++;
+		break;
+	}
+}
+
+//動画再生60～69
+void MOVIE_START_6() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//動画60読込
+		MOVIE = MOVIE_LOAD[59];
+		CP++;
+		break;
+
+	case '1':
+
+		//動画61読込
+		MOVIE = MOVIE_LOAD[60];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画62読込
+		MOVIE = MOVIE_LOAD[61];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画63読込
+		MOVIE = MOVIE_LOAD[62];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画64読込
+		MOVIE = MOVIE_LOAD[63];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画65読込
+		MOVIE = MOVIE_LOAD[64];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画66読込
+		MOVIE = MOVIE_LOAD[65];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画67読込
+		MOVIE = MOVIE_LOAD[66];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画68読込
+		MOVIE = MOVIE_LOAD[67];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画69読込
+		MOVIE = MOVIE_LOAD[68];
+		CP++;
+		break;
+	}
+}
+
+//動画再生70～79
+void MOVIE_START_7() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//動画70読込
+		MOVIE = MOVIE_LOAD[70];
+		CP++;
+		break;
+
+	case '1':
+
+		//動画71読込
+		MOVIE = MOVIE_LOAD[70];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画72読込
+		MOVIE = MOVIE_LOAD[71];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画73読込
+		MOVIE = MOVIE_LOAD[72];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画74読込
+		MOVIE = MOVIE_LOAD[73];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画75読込
+		MOVIE = MOVIE_LOAD[74];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画76読込
+		MOVIE = MOVIE_LOAD[75];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画77読込
+		MOVIE = MOVIE_LOAD[76];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画78読込
+		MOVIE = MOVIE_LOAD[77];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画79読込
+		MOVIE = MOVIE_LOAD[78];
+		CP++;
+		break;
+	}
+}
+
+//動画再生80～89
+void MOVIE_START_8() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//動画80読込
+		MOVIE = MOVIE_LOAD[79];
+		CP++;
+		break;
+
+	case '1':
+
+		//動画81読込
+		MOVIE = MOVIE_LOAD[80];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画82読込
+		MOVIE = MOVIE_LOAD[81];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画83読込
+		MOVIE = MOVIE_LOAD[82];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画84読込
+		MOVIE = MOVIE_LOAD[83];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画85読込
+		MOVIE = MOVIE_LOAD[84];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画86読込
+		MOVIE = MOVIE_LOAD[85];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画87読込
+		MOVIE = MOVIE_LOAD[86];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画88読込
+		MOVIE = MOVIE_LOAD[87];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画89読込
+		MOVIE = MOVIE_LOAD[88];
+		CP++;
+		break;
+	}
+}
+
+//動画再生90～99
+void MOVIE_START_9() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//動画90読込
+		MOVIE = MOVIE_LOAD[89];
+		CP++;
+		break;
+
+	case '1':
+
+		//動画91読込
+		MOVIE = MOVIE_LOAD[90];
+		CP++;
+		break;
+
+	case '2':
+
+		//動画92読込
+		MOVIE = MOVIE_LOAD[91];
+		CP++;
+		break;
+
+	case '3':
+
+		//動画93読込
+		MOVIE = MOVIE_LOAD[92];
+		CP++;
+		break;
+
+	case '4':
+
+		//動画94読込
+		MOVIE = MOVIE_LOAD[93];
+		CP++;
+		break;
+
+	case '5':
+
+		//動画95読込
+		MOVIE = MOVIE_LOAD[94];
+		CP++;
+		break;
+
+	case '6':
+
+		//動画96読込
+		MOVIE = MOVIE_LOAD[95];
+		CP++;
+		break;
+
+	case '7':
+
+		//動画97読込
+		MOVIE = MOVIE_LOAD[96];
+		CP++;
+		break;
+
+	case '8':
+
+		//動画98読込
+		MOVIE = MOVIE_LOAD[97];
+		CP++;
+		break;
+
+	case '9':
+
+		//動画99読込
+		MOVIE = MOVIE_LOAD[98];
+		CP++;
+		break;
+	}
+}
+
 //動画再生処理
 void MOVIE_START() {
 
@@ -7927,73 +8690,9 @@ void MOVIE_START() {
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '1':
+		MOVIE_START_0();
 
-			//キャラ01読込
-			MOVIE = MOVIE_LOAD[0];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ02読込
-			MOVIE = MOVIE_LOAD[1];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ03読込
-			MOVIE = MOVIE_LOAD[2];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ04読込
-			MOVIE = MOVIE_LOAD[3];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ05読込
-			MOVIE = MOVIE_LOAD[4];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ06読込
-			MOVIE = MOVIE_LOAD[5];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ07読込
-			MOVIE = MOVIE_LOAD[6];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ08読込
-			MOVIE = MOVIE_LOAD[7];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ09読込
-			MOVIE = MOVIE_LOAD[8];
-			CP++;
-			break;
-		}
-
-		//キャラクター描画
+		//動画描画
 		SCRIPT_OUTPUT_MOVIE();
 		break;
 
@@ -8001,727 +8700,89 @@ void MOVIE_START() {
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '0':
+		MOVIE_START_1();
 
-			//キャラ10読込
-			MOVIE = MOVIE_LOAD[9];
-			CP++;
-			break;
-
-		case '1':
-
-			//キャラ11読込
-			MOVIE = MOVIE_LOAD[10];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ12読込
-			MOVIE = MOVIE_LOAD[11];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ13読込
-			MOVIE = MOVIE_LOAD[12];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ14読込
-			MOVIE = MOVIE_LOAD[13];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ15読込
-			MOVIE = MOVIE_LOAD[14];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ16読込
-			MOVIE = MOVIE_LOAD[15];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ17読込
-			MOVIE = MOVIE_LOAD[16];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ18読込
-			MOVIE = MOVIE_LOAD[17];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ19読込
-			MOVIE = MOVIE_LOAD[18];
-			CP++;
-			break;
-		}
-		//キャラクター描画
-		SCRIPT_OUTPUT_MOVIE_DRAW();
+		//動画描画
+		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '2':
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '0':
+		MOVIE_START_2();
 
-			//キャラ20読込
-			MOVIE = MOVIE_LOAD[19];
-			CP++;
-			break;
-
-		case '1':
-
-			//キャラ21読込
-			MOVIE = MOVIE_LOAD[20];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ22読込
-			MOVIE = MOVIE_LOAD[21];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ23読込
-			MOVIE = MOVIE_LOAD[22];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ24読込
-			MOVIE = MOVIE_LOAD[23];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ25読込
-			MOVIE = MOVIE_LOAD[24];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ26読込
-			MOVIE = MOVIE_LOAD[25];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ27読込
-			MOVIE = MOVIE_LOAD[26];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ28読込
-			MOVIE = MOVIE_LOAD[27];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ29読込
-			MOVIE = MOVIE_LOAD[28];
-			CP++;
-			break;
-		}
-
-		//キャラクター描画
-		SCRIPT_OUTPUT_MOVIE_DRAW();
+		//動画描画
+		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '3':
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '0':
+		MOVIE_START_3();
 
-			//キャラ30読込
-			MOVIE = MOVIE_LOAD[29];
-			CP++;
-			break;
-
-		case '1':
-
-			//キャラ31読込
-			MOVIE = MOVIE_LOAD[30];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ32読込
-			MOVIE = MOVIE_LOAD[31];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ33読込
-			MOVIE = MOVIE_LOAD[32];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ34読込
-			MOVIE = MOVIE_LOAD[33];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ35読込
-			MOVIE = MOVIE_LOAD[34];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ36読込
-			MOVIE = MOVIE_LOAD[35];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ37読込
-			MOVIE = MOVIE_LOAD[36];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ38読込
-			MOVIE = MOVIE_LOAD[37];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ39読込
-			MOVIE = MOVIE_LOAD[38];
-			CP++;
-			break;
-		}
-
-		//キャラクター描画
-		SCRIPT_OUTPUT_MOVIE_DRAW();
+		//動画描画
+		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '4':
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '0':
+		MOVIE_START_4();
 
-			//キャラ40読込
-			MOVIE = MOVIE_LOAD[39];
-			CP++;
-			break;
-
-		case '1':
-
-			//キャラ41読込
-			MOVIE = MOVIE_LOAD[40];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ42読込
-			MOVIE = MOVIE_LOAD[41];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ43読込
-			MOVIE = MOVIE_LOAD[42];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ44読込
-			MOVIE = MOVIE_LOAD[43];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ45読込
-			MOVIE = MOVIE_LOAD[44];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ46読込
-			MOVIE = MOVIE_LOAD[45];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ47読込
-			MOVIE = MOVIE_LOAD[46];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ48読込
-			MOVIE = MOVIE_LOAD[47];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ49読込
-			MOVIE = MOVIE_LOAD[48];
-			CP++;
-			break;
-		}
-
-		//キャラクター描画
-		SCRIPT_OUTPUT_MOVIE_DRAW();
+		//動画描画
+		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '5':
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '0':
+		MOVIE_START_5();
 
-			//キャラ50読込
-			MOVIE = MOVIE_LOAD[49];
-			CP++;
-			break;
-
-		case '1':
-
-			//キャラ51読込
-			MOVIE = MOVIE_LOAD[50];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ52読込
-			MOVIE = MOVIE_LOAD[51];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ53読込
-			MOVIE = MOVIE_LOAD[52];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ54読込
-			MOVIE = MOVIE_LOAD[53];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ55読込
-			MOVIE = MOVIE_LOAD[54];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ56読込
-			MOVIE = MOVIE_LOAD[55];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ57読込
-			MOVIE = MOVIE_LOAD[56];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ58読込
-			MOVIE = MOVIE_LOAD[57];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ59読込
-			MOVIE = MOVIE_LOAD[58];
-			CP++;
-			break;
-		}
-
-		//キャラクター描画
-		SCRIPT_OUTPUT_MOVIE_DRAW();
+		//動画描画
+		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '6':
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '0':
+		MOVIE_START_6();
 
-			//キャラ60読込
-			MOVIE = MOVIE_LOAD[59];
-			CP++;
-			break;
-
-		case '1':
-
-			//キャラ61読込
-			MOVIE = MOVIE_LOAD[60];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ62読込
-			MOVIE = MOVIE_LOAD[61];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ63読込
-			MOVIE = MOVIE_LOAD[62];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ64読込
-			MOVIE = MOVIE_LOAD[63];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ65読込
-			MOVIE = MOVIE_LOAD[64];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ66読込
-			MOVIE = MOVIE_LOAD[65];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ67読込
-			MOVIE = MOVIE_LOAD[66];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ68読込
-			MOVIE = MOVIE_LOAD[67];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ69読込
-			MOVIE = MOVIE_LOAD[68];
-			CP++;
-			break;
-		}
-
-		//キャラクター描画
-		SCRIPT_OUTPUT_MOVIE_DRAW();
+		//動画描画
+		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '7':
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '0':
+		MOVIE_START_7();
 
-			//キャラ70読込
-			MOVIE = MOVIE_LOAD[70];
-			CP++;
-			break;
-
-		case '1':
-
-			//キャラ71読込
-			MOVIE = MOVIE_LOAD[70];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ72読込
-			MOVIE = MOVIE_LOAD[71];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ73読込
-			MOVIE = MOVIE_LOAD[72];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ74読込
-			MOVIE = MOVIE_LOAD[73];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ75読込
-			MOVIE = MOVIE_LOAD[74];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ76読込
-			MOVIE = MOVIE_LOAD[75];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ77読込
-			MOVIE = MOVIE_LOAD[76];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ78読込
-			MOVIE = MOVIE_LOAD[77];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ79読込
-			MOVIE = MOVIE_LOAD[78];
-			CP++;
-			break;
-		}
-
-		//キャラクター描画
-		SCRIPT_OUTPUT_MOVIE_DRAW();
+		//動画描画
+		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '8':
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '0':
+		MOVIE_START_8();
 
-			//キャラ80読込
-			MOVIE = MOVIE_LOAD[79];
-			CP++;
-			break;
-
-		case '1':
-
-			//キャラ81読込
-			MOVIE = MOVIE_LOAD[80];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ82読込
-			MOVIE = MOVIE_LOAD[81];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ83読込
-			MOVIE = MOVIE_LOAD[82];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ84読込
-			MOVIE = MOVIE_LOAD[83];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ85読込
-			MOVIE = MOVIE_LOAD[84];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ86読込
-			MOVIE = MOVIE_LOAD[85];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ87読込
-			MOVIE = MOVIE_LOAD[86];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ88読込
-			MOVIE = MOVIE_LOAD[87];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ89読込
-			MOVIE = MOVIE_LOAD[88];
-			CP++;
-			break;
-		}
-
-		//キャラクター描画
-		SCRIPT_OUTPUT_MOVIE_DRAW();
+		//動画描画
+		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '9':
 
 		CP++;
 
-		switch (String[SP][CP])
-		{
-		case '0':
+		MOVIE_START_9();
 
-			//キャラ90読込
-			MOVIE = MOVIE_LOAD[89];
-			CP++;
-			break;
-
-		case '1':
-
-			//キャラ91読込
-			MOVIE = MOVIE_LOAD[90];
-			CP++;
-			break;
-
-		case '2':
-
-			//キャラ92読込
-			MOVIE = MOVIE_LOAD[91];
-			CP++;
-			break;
-
-		case '3':
-
-			//キャラ93読込
-			MOVIE = MOVIE_LOAD[92];
-			CP++;
-			break;
-
-		case '4':
-
-			//キャラ94読込
-			MOVIE = MOVIE_LOAD[93];
-			CP++;
-			break;
-
-		case '5':
-
-			//キャラ95読込
-			MOVIE = MOVIE_LOAD[94];
-			CP++;
-			break;
-
-		case '6':
-
-			//キャラ96読込
-			MOVIE = MOVIE_LOAD[95];
-			CP++;
-			break;
-
-		case '7':
-
-			//キャラ97読込
-			MOVIE = MOVIE_LOAD[96];
-			CP++;
-			break;
-
-		case '8':
-
-			//キャラ98読込
-			MOVIE = MOVIE_LOAD[97];
-			CP++;
-			break;
-
-		case '9':
-
-			//キャラ99読込
-			MOVIE = MOVIE_LOAD[98];
-			CP++;
-			break;
-		}
-
-		//キャラクター描画
+		//動画描画
 		SCRIPT_OUTPUT_MOVIE();
 		break;
 
