@@ -3180,8 +3180,6 @@ void SCRIPT_OUTPUT_BACKGROUND() {
 //スクリプトタグ処理(BGM再生)
 void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
 
-	StopSoundMem(BACKGROUNDMUSIC);
-
 	// 音量の設定
 	ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
 
@@ -6774,9 +6772,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_0();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	case '1':
@@ -6784,9 +6779,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_1();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	case '2':
@@ -6794,9 +6786,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_2();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	case '3':
@@ -6804,9 +6793,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_3();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	case '4':
@@ -6814,9 +6800,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_4();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	case '5':
@@ -6824,9 +6807,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_5();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	case '6':
@@ -6834,9 +6814,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_6();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	case '7':
@@ -6844,9 +6821,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_7();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	case '8':
@@ -6854,9 +6828,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_8();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	case '9':
@@ -6864,9 +6835,6 @@ void BACKGROUNDMUSIC_START() {
 		CP++;
 
 		BACKGROUNDMUSIC_START_9();
-
-		//BGM再生
-		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 	}
@@ -7645,9 +7613,6 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_0();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 	case '1':
@@ -7655,9 +7620,6 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_1();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 	case '2':
@@ -7665,9 +7627,6 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_2();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 	case '3':
@@ -7675,9 +7634,6 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_3();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 	case '4':
@@ -7685,9 +7641,6 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_4();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 	case '5':
@@ -7695,9 +7648,6 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_5();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 	case '6':
@@ -7705,9 +7655,6 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_6();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 	case '7':
@@ -7715,9 +7662,6 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_7();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 	case '8':
@@ -7725,9 +7669,6 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_8();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 	case '9':
@@ -7735,11 +7676,7 @@ void SOUNDEFFECT_START() {
 		CP++;
 
 		SOUNDEFFECT_START_9();
-
-		//SE再生
-		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
-
 	}
 }
 
@@ -8622,7 +8559,12 @@ int SCRIPT_OUTPUT() {
 
 		CP++;
 
+		StopSoundMem(BACKGROUNDMUSIC);
+
 		BACKGROUNDMUSIC_START();
+
+		//BGM再生処理
+		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 		//SE再生処理
@@ -8630,7 +8572,12 @@ int SCRIPT_OUTPUT() {
 
 		CP++;
 
+		StopSoundMem(SOUNDEFFECT);
+
 		SOUNDEFFECT_START();
+
+		//SE再生処理
+		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
 
 		//ムービー再生処理
