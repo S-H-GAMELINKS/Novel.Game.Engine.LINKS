@@ -24,10 +24,6 @@ int BACKGROUNDMUSIC;
 long SOUNDEFFECT_LOAD[100];
 int SOUNDEFFECT;
 
-//動画変数
-char *MOVIE_LOAD[100];
-char *MOVIE;
-
 //スクリプト読込変数
 int ScriptFile;
 
@@ -599,110 +595,6 @@ void MATERIAL_LOAD_SOUNDEFFECT(){
 	SOUNDEFFECT_LOAD[99] = LoadGraph("DATA/SOUNDEFFECT/SE99.ogg");
 }
 
-//動画読込
-void MATERIAL_LOAD_MOVIE() {
-
-	MOVIE_LOAD[0] = "DATA/MOVIE/MOVIE01.wmv";
-	MOVIE_LOAD[1] = "DATA/MOVIE/MOVIE02.wmv";
-	MOVIE_LOAD[2] = "DATA/MOVIE/MOVIE03.wmv";
-	MOVIE_LOAD[3] = "DATA/MOVIE/MOVIE04.wmv";
-	MOVIE_LOAD[4] = "DATA/MOVIE/MOVIE05.wmv";
-	MOVIE_LOAD[5] = "DATA/MOVIE/MOVIE06.wmv";
-	MOVIE_LOAD[6] = "DATA/MOVIE/MOVIE07.wmv";
-	MOVIE_LOAD[7] = "DATA/MOVIE/MOVIE08.wmv";
-	MOVIE_LOAD[8] = "DATA/MOVIE/MOVIE09.wmv";
-	MOVIE_LOAD[9] = "DATA/MOVIE/MOVIE10.wmv";
-	MOVIE_LOAD[10] = "DATA/MOVIE/MOVIE11.wmv";
-	MOVIE_LOAD[12] = "DATA/MOVIE/MOVIE12.wmv";
-	MOVIE_LOAD[13] = "DATA/MOVIE/MOVIE13.wmv";
-	MOVIE_LOAD[14] = "DATA/MOVIE/MOVIE14.wmv";
-	MOVIE_LOAD[15] = "DATA/MOVIE/MOVIE15.wmv";
-	MOVIE_LOAD[16] = "DATA/MOVIE/MOVIE16.wmv";
-	MOVIE_LOAD[17] = "DATA/MOVIE/MOVIE17.wmv";
-	MOVIE_LOAD[18] = "DATA/MOVIE/MOVIE18.wmv";
-	MOVIE_LOAD[19] = "DATA/MOVIE/MOVIE19.wmv";
-	MOVIE_LOAD[20] = "DATA/MOVIE/MOVIE20.wmv";
-	MOVIE_LOAD[21] = "DATA/MOVIE/MOVIE21.wmv";
-	MOVIE_LOAD[22] = "DATA/MOVIE/MOVIE22.wmv";
-	MOVIE_LOAD[23] = "DATA/MOVIE/MOVIE23.wmv";
-	MOVIE_LOAD[24] = "DATA/MOVIE/MOVIE24.wmv";
-	MOVIE_LOAD[25] = "DATA/MOVIE/MOVIE25.wmv";
-	MOVIE_LOAD[26] = "DATA/MOVIE/MOVIE26.wmv";
-	MOVIE_LOAD[27] = "DATA/MOVIE/MOVIE27.wmv";
-	MOVIE_LOAD[28] = "DATA/MOVIE/MOVIE28.wmv";
-	MOVIE_LOAD[29] = "DATA/MOVIE/MOVIE29.wmv";
-	MOVIE_LOAD[20] = "DATA/MOVIE/MOVIE30.wmv";
-	MOVIE_LOAD[31] = "DATA/MOVIE/MOVIE31.wmv";
-	MOVIE_LOAD[32] = "DATA/MOVIE/MOVIE32.wmv";
-	MOVIE_LOAD[33] = "DATA/MOVIE/MOVIE33.wmv";
-	MOVIE_LOAD[34] = "DATA/MOVIE/MOVIE34.wmv";
-	MOVIE_LOAD[35] = "DATA/MOVIE/MOVIE35.wmv";
-	MOVIE_LOAD[36] = "DATA/MOVIE/MOVIE36.wmv";
-	MOVIE_LOAD[37] = "DATA/MOVIE/MOVIE37.wmv";
-	MOVIE_LOAD[38] = "DATA/MOVIE/MOVIE38.wmv";
-	MOVIE_LOAD[39] = "DATA/MOVIE/MOVIE39.wmv";
-	MOVIE_LOAD[40] = "DATA/MOVIE/MOVIE40.wmv";
-	MOVIE_LOAD[41] = "DATA/MOVIE/MOVIE41.wmv";
-	MOVIE_LOAD[42] = "DATA/MOVIE/MOVIE42.wmv";
-	MOVIE_LOAD[43] = "DATA/MOVIE/MOVIE43.wmv";
-	MOVIE_LOAD[44] = "DATA/MOVIE/MOVIE44.wmv";
-	MOVIE_LOAD[45] = "DATA/MOVIE/MOVIE45.wmv";
-	MOVIE_LOAD[46] = "DATA/MOVIE/MOVIE46.wmv";
-	MOVIE_LOAD[47] = "DATA/MOVIE/MOVIE47.wmv";
-	MOVIE_LOAD[48] = "DATA/MOVIE/MOVIE48.wmv";
-	MOVIE_LOAD[49] = "DATA/MOVIE/MOVIE49.wmv";
-	MOVIE_LOAD[50] = "DATA/MOVIE/MOVIE50.wmv";
-	MOVIE_LOAD[51] = "DATA/MOVIE/MOVIE51.wmv";
-	MOVIE_LOAD[52] = "DATA/MOVIE/MOVIE52.wmv";
-	MOVIE_LOAD[53] = "DATA/MOVIE/MOVIE53.wmv";
-	MOVIE_LOAD[54] = "DATA/MOVIE/MOVIE54.wmv";
-	MOVIE_LOAD[55] = "DATA/MOVIE/MOVIE55.wmv";
-	MOVIE_LOAD[56] = "DATA/MOVIE/MOVIE56.wmv";
-	MOVIE_LOAD[57] = "DATA/MOVIE/MOVIE57.wmv";
-	MOVIE_LOAD[58] = "DATA/MOVIE/MOVIE58.wmv";
-	MOVIE_LOAD[59] = "DATA/MOVIE/MOVIE59.wmv";
-	MOVIE_LOAD[60] = "DATA/MOVIE/MOVIE60.wmv";
-	MOVIE_LOAD[61] = "DATA/MOVIE/MOVIE61.wmv";
-	MOVIE_LOAD[62] = "DATA/MOVIE/MOVIE62.wmv";
-	MOVIE_LOAD[63] = "DATA/MOVIE/MOVIE63.wmv";
-	MOVIE_LOAD[64] = "DATA/MOVIE/MOVIE64.wmv";
-	MOVIE_LOAD[65] = "DATA/MOVIE/MOVIE65.wmv";
-	MOVIE_LOAD[66] = "DATA/MOVIE/MOVIE66.wmv";
-	MOVIE_LOAD[67] = "DATA/MOVIE/MOVIE67.wmv";
-	MOVIE_LOAD[68] = "DATA/MOVIE/MOVIE68.wmv";
-	MOVIE_LOAD[69] = "DATA/MOVIE/MOVIE69.wmv";
-	MOVIE_LOAD[70] = "DATA/MOVIE/MOVIE70.wmv";
-	MOVIE_LOAD[71] = "DATA/MOVIE/MOVIE71.wmv";
-	MOVIE_LOAD[72] = "DATA/MOVIE/MOVIE72.wmv";
-	MOVIE_LOAD[73] = "DATA/MOVIE/MOVIE73.wmv";
-	MOVIE_LOAD[74] = "DATA/MOVIE/MOVIE74.wmv";
-	MOVIE_LOAD[75] = "DATA/MOVIE/MOVIE75.wmv";
-	MOVIE_LOAD[76] = "DATA/MOVIE/MOVIE76.wmv";
-	MOVIE_LOAD[77] = "DATA/MOVIE/MOVIE77.wmv";
-	MOVIE_LOAD[78] = "DATA/MOVIE/MOVIE78.wmv";
-	MOVIE_LOAD[79] = "DATA/MOVIE/MOVIE79.wmv";
-	MOVIE_LOAD[80] = "DATA/MOVIE/MOVIE80.wmv";
-	MOVIE_LOAD[81] = "DATA/MOVIE/MOVIE81.wmv";
-	MOVIE_LOAD[82] = "DATA/MOVIE/MOVIE82.wmv";
-	MOVIE_LOAD[83] = "DATA/MOVIE/MOVIE83.wmv";
-	MOVIE_LOAD[84] = "DATA/MOVIE/MOVIE84.wmv";
-	MOVIE_LOAD[85] = "DATA/MOVIE/MOVIE85.wmv";
-	MOVIE_LOAD[86] = "DATA/MOVIE/MOVIE86.wmv";
-	MOVIE_LOAD[87] = "DATA/MOVIE/MOVIE87.wmv";
-	MOVIE_LOAD[88] = "DATA/MOVIE/MOVIE88.wmv";
-	MOVIE_LOAD[89] = "DATA/MOVIE/MOVIE89.wmv";
-	MOVIE_LOAD[90] = "DATA/MOVIE/MOVIE90.wmv";
-	MOVIE_LOAD[91] = "DATA/MOVIE/MOVIE91.wmv";
-	MOVIE_LOAD[92] = "DATA/MOVIE/MOVIE92.wmv";
-	MOVIE_LOAD[93] = "DATA/MOVIE/MOVIE93.wmv";
-	MOVIE_LOAD[94] = "DATA/MOVIE/MOVIE94.wmv";
-	MOVIE_LOAD[95] = "DATA/MOVIE/MOVIE95.wmv";
-	MOVIE_LOAD[96] = "DATA/MOVIE/MOVIE96.wmv";
-	MOVIE_LOAD[97] = "DATA/MOVIE/MOVIE97.wmv";
-	MOVIE_LOAD[98] = "DATA/MOVIE/MOVIE98.wmv";
-	MOVIE_LOAD[99] = "DATA/MOVIE/MOVIE99.wmv";
-}
-
 //各素材データ読込関数
 void MATERIAL_LOAD() {
 
@@ -720,9 +612,6 @@ void MATERIAL_LOAD() {
 
 	//ＳＥ読込
 	MATERIAL_LOAD_SOUNDEFFECT();
-
-	//動画読込
-	MATERIAL_LOAD_MOVIE();
 
 	//ゲームオーバー画面
 	GAMEOVER = LoadGraph("DATA/BACKGROUND/GAMEOVER.png");
@@ -3314,14 +3203,6 @@ void SCRIPT_OUTPUT_SOUNDEFFECT() {
 	//文字を進める
 	CP++;
 
-}
-
-//スクリプトタグ処理(動画再生)
-void SCRIPT_OUTPUT_MOVIE() {
-
-	//動画再生
-	PlayMovie(MOVIE, 1, DX_MOVIEPLAYTYPE_BCANCEL);
-	CP++;
 }
 
 //セーブデータ用スクリーンショット保存
@@ -7926,63 +7807,63 @@ void MOVIE_START_0() {
 	case '1':
 
 		//動画01読込
-		MOVIE = MOVIE_LOAD[0];
+		PlayMovie("DATA/MOVIE/MOVIE01.wmv");
 		CP++;
 		break;
 
 	case '2':
 
 		//動画02読込
-		MOVIE = MOVIE_LOAD[1];
+		PlayMovie("DATA/MOVIE/MOVIE02.wmv");
 		CP++;
 		break;
 
 	case '3':
 
 		//動画03読込
-		MOVIE = MOVIE_LOAD[2];
+		PlayMovie("DATA/MOVIE/MOVIE03.wmv");
 		CP++;
 		break;
 
 	case '4':
 
 		//動画04読込
-		MOVIE = MOVIE_LOAD[3];
+		PlayMovie("DATA/MOVIE/MOVIE04.wmv");
 		CP++;
 		break;
 
 	case '5':
 
 		//動画05読込
-		MOVIE = MOVIE_LOAD[4];
+		PlayMovie("DATA/MOVIE/MOVIE05.wmv");
 		CP++;
 		break;
 
 	case '6':
 
 		//動画06読込
-		MOVIE = MOVIE_LOAD[5];
+		PlayMovie("DATA/MOVIE/MOVIE06.wmv");
 		CP++;
 		break;
 
 	case '7':
 
 		//動画07読込
-		MOVIE = MOVIE_LOAD[6];
+		PlayMovie("DATA/MOVIE/MOVIE07.wmv");
 		CP++;
 		break;
 
 	case '8':
 
 		//動画08読込
-		MOVIE = MOVIE_LOAD[7];
+		PlayMovie("DATA/MOVIE/MOVIE08.wmv");
 		CP++;
 		break;
 
 	case '9':
 
 		//動画09読込
-		MOVIE = MOVIE_LOAD[8];
+		PlayMovie("DATA/MOVIE/MOVIE09.wmv");
 		CP++;
 		break;
 	}
@@ -7996,70 +7877,70 @@ void MOVIE_START_1() {
 	case '0':
 
 		//動画10読込
-		MOVIE = MOVIE_LOAD[9];
+		PlayMovie("DATA/MOVIE/MOVIE10.wmv");
 		CP++;
 		break;
 
 	case '1':
 
 		//動画11読込
-		MOVIE = MOVIE_LOAD[10];
+		PlayMovie("DATA/MOVIE/MOVIE11.wmv");
 		CP++;
 		break;
 
 	case '2':
 
 		//動画12読込
-		MOVIE = MOVIE_LOAD[11];
+		PlayMovie("DATA/MOVIE/MOVIE12.wmv");
 		CP++;
 		break;
 
 	case '3':
 
 		//動画13読込
-		MOVIE = MOVIE_LOAD[12];
+		PlayMovie("DATA/MOVIE/MOVIE13.wmv");
 		CP++;
 		break;
 
 	case '4':
 
 		//動画14読込
-		MOVIE = MOVIE_LOAD[13];
+		PlayMovie("DATA/MOVIE/MOVIE14.wmv");
 		CP++;
 		break;
 
 	case '5':
 
 		//動画15読込
-		MOVIE = MOVIE_LOAD[14];
+		PlayMovie("DATA/MOVIE/MOVIE15.wmv");
 		CP++;
 		break;
 
 	case '6':
 
 		//動画16読込
-		MOVIE = MOVIE_LOAD[15];
+		PlayMovie("DATA/MOVIE/MOVIE16.wmv");
 		CP++;
 		break;
 
 	case '7':
 
 		//動画17読込
-		MOVIE = MOVIE_LOAD[16];
+		PlayMovie("DATA/MOVIE/MOVIE17.wmv");
 		CP++;
 		break;
 
 	case '8':
 
 		//動画18読込
-		MOVIE = MOVIE_LOAD[17];
+		PlayMovie("DATA/MOVIE/MOVIE18.wmv");
 		CP++;
 		break;
 
 	case '9':
 
 		//動画19読込
-		MOVIE = MOVIE_LOAD[18];
+		PlayMovie("DATA/MOVIE/MOVIE19.wmv");
 		CP++;
 		break;
 	}
@@ -8073,21 +7954,22 @@ void MOVIE_START_2() {
 	case '0':
 
 		//動画20読込
-		MOVIE = MOVIE_LOAD[19];
+		PlayMovie("DATA/MOVIE/MOVIE20.wmv");
 		CP++;
 		break;
 
 	case '1':
 
 		//動画21読込
-		MOVIE = MOVIE_LOAD[20];
+		PlayMovie("DATA/MOVIE/MOVIE21.wmv");
 		CP++;
 		break;
 
 	case '2':
 
 		//動画22読込
-		MOVIE = MOVIE_LOAD[21];
+		PlayMovie("DATA/MOVIE/MOVIE21.wmv");
+
 		CP++;
 		break;
 
@@ -8691,9 +8573,6 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_0();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '1':
@@ -8701,9 +8580,6 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_1();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '2':
@@ -8711,9 +8587,6 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_2();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '3':
@@ -8721,9 +8594,6 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_3();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '4':
@@ -8731,9 +8601,6 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_4();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '5':
@@ -8741,9 +8608,6 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_5();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '6':
@@ -8751,9 +8615,6 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_6();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '7':
@@ -8761,9 +8622,6 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_7();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '8':
@@ -8771,9 +8629,6 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_8();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '9':
@@ -8781,13 +8636,8 @@ void MOVIE_START() {
 		CP++;
 
 		MOVIE_START_9();
-
-		//動画描画
-		SCRIPT_OUTPUT_MOVIE();
 		break;
-
 	}
-
 }
 
 //スクリプトタグ処理(メイン)関数
