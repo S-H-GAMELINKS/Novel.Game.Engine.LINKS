@@ -7807,63 +7807,63 @@ void MOVIE_START_0() {
 	case '1':
 
 		//ìÆâÊ01ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE01.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE01.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ02ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE02.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE02.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '3':
 
 		//ìÆâÊ03ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE03.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE03.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ04ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE04.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE04.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ05ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE05.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE05.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ06ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE06.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE06.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ07ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE07.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE07.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ08ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE08.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE08.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ09ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE09.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE09.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
@@ -7877,70 +7877,70 @@ void MOVIE_START_1() {
 	case '0':
 
 		//ìÆâÊ10ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE10.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE10.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '1':
 
 		//ìÆâÊ11ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE11.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE11.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ12ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE12.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE12.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '3':
 
 		//ìÆâÊ13ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE13.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE13.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ14ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE14.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE14.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ15ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE15.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE15.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ16ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE16.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE16.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ17ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE17.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE17.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ18ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE18.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE18.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ19ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE19.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE19.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
@@ -7954,21 +7954,21 @@ void MOVIE_START_2() {
 	case '0':
 
 		//ìÆâÊ20ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE20.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE20.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '1':
 
 		//ìÆâÊ21ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE21.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE21.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ22ì«çû
-		PlayMovie("DATA/MOVIE/MOVIE21.wmv");
+		PlayMovie("DATA/MOVIE/MOVIE22.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 
 		CP++;
 		break;
@@ -7976,49 +7976,49 @@ void MOVIE_START_2() {
 	case '3':
 
 		//ìÆâÊ23ì«çû
-		MOVIE = MOVIE_LOAD[22];
+		PlayMovie("DATA/MOVIE/MOVIE23.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ24ì«çû
-		MOVIE = MOVIE_LOAD[23];
+		PlayMovie("DATA/MOVIE/MOVIE24.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ25ì«çû
-		MOVIE = MOVIE_LOAD[24];
+		PlayMovie("DATA/MOVIE/MOVIE25.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ26ì«çû
-		MOVIE = MOVIE_LOAD[25];
+		PlayMovie("DATA/MOVIE/MOVIE26.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ27ì«çû
-		MOVIE = MOVIE_LOAD[26];
+		PlayMovie("DATA/MOVIE/MOVIE27.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ28ì«çû
-		MOVIE = MOVIE_LOAD[27];
+		PlayMovie("DATA/MOVIE/MOVIE28.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ29ì«çû
-		MOVIE = MOVIE_LOAD[28];
+		PlayMovie("DATA/MOVIE/MOVIE29.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
@@ -8032,70 +8032,70 @@ void MOVIE_START_3() {
 	case '0':
 
 		//ìÆâÊ30ì«çû
-		MOVIE = MOVIE_LOAD[29];
+		PlayMovie("DATA/MOVIE/MOVIE30.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '1':
 
 		//ìÆâÊ31ì«çû
-		MOVIE = MOVIE_LOAD[30];
+		PlayMovie("DATA/MOVIE/MOVIE31.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ32ì«çû
-		MOVIE = MOVIE_LOAD[31];
+		PlayMovie("DATA/MOVIE/MOVIE32.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '3':
 
 		//ìÆâÊ33ì«çû
-		MOVIE = MOVIE_LOAD[32];
+		PlayMovie("DATA/MOVIE/MOVIE33.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ34ì«çû
-		MOVIE = MOVIE_LOAD[33];
+		PlayMovie("DATA/MOVIE/MOVIE34.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ35ì«çû
-		MOVIE = MOVIE_LOAD[34];
+		PlayMovie("DATA/MOVIE/MOVIE35.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ36ì«çû
-		MOVIE = MOVIE_LOAD[35];
+		PlayMovie("DATA/MOVIE/MOVIE36.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ37ì«çû
-		MOVIE = MOVIE_LOAD[36];
+		PlayMovie("DATA/MOVIE/MOVIE37.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ38ì«çû
-		MOVIE = MOVIE_LOAD[37];
+		PlayMovie("DATA/MOVIE/MOVIE38.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ39ì«çû
-		MOVIE = MOVIE_LOAD[38];
+		PlayMovie("DATA/MOVIE/MOVIE39.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
@@ -8109,70 +8109,70 @@ void MOVIE_START_4() {
 	case '0':
 
 		//ìÆâÊ40ì«çû
-		MOVIE = MOVIE_LOAD[39];
+		PlayMovie("DATA/MOVIE/MOVIE40.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '1':
 
 		//ìÆâÊ41ì«çû
-		MOVIE = MOVIE_LOAD[40];
+		PlayMovie("DATA/MOVIE/MOVIE41.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ42ì«çû
-		MOVIE = MOVIE_LOAD[41];
+		PlayMovie("DATA/MOVIE/MOVIE42.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '3':
 
 		//ìÆâÊ43ì«çû
-		MOVIE = MOVIE_LOAD[42];
+		PlayMovie("DATA/MOVIE/MOVIE43.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ44ì«çû
-		MOVIE = MOVIE_LOAD[43];
+		PlayMovie("DATA/MOVIE/MOVIE44.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ45ì«çû
-		MOVIE = MOVIE_LOAD[44];
+		PlayMovie("DATA/MOVIE/MOVIE45.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ46ì«çû
-		MOVIE = MOVIE_LOAD[45];
+		PlayMovie("DATA/MOVIE/MOVIE46.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ47ì«çû
-		MOVIE = MOVIE_LOAD[46];
+		PlayMovie("DATA/MOVIE/MOVIE47.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ48ì«çû
-		MOVIE = MOVIE_LOAD[47];
+		PlayMovie("DATA/MOVIE/MOVIE48.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ49ì«çû
-		MOVIE = MOVIE_LOAD[48];
+		PlayMovie("DATA/MOVIE/MOVIE49.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
@@ -8186,70 +8186,70 @@ void MOVIE_START_5() {
 	case '0':
 
 		//ìÆâÊ50ì«çû
-		MOVIE = MOVIE_LOAD[49];
+		PlayMovie("DATA/MOVIE/MOVIE50.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '1':
 
 		//ìÆâÊ51ì«çû
-		MOVIE = MOVIE_LOAD[50];
+		PlayMovie("DATA/MOVIE/MOVIE51.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ52ì«çû
-		MOVIE = MOVIE_LOAD[51];
+		PlayMovie("DATA/MOVIE/MOVIE52.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '3':
 
 		//ìÆâÊ53ì«çû
-		MOVIE = MOVIE_LOAD[52];
+		PlayMovie("DATA/MOVIE/MOVIE53.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ54ì«çû
-		MOVIE = MOVIE_LOAD[53];
+		PlayMovie("DATA/MOVIE/MOVIE54.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ55ì«çû
-		MOVIE = MOVIE_LOAD[54];
+		PlayMovie("DATA/MOVIE/MOVIE55.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ56ì«çû
-		MOVIE = MOVIE_LOAD[55];
+		PlayMovie("DATA/MOVIE/MOVIE56.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ57ì«çû
-		MOVIE = MOVIE_LOAD[56];
+		PlayMovie("DATA/MOVIE/MOVIE57.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ58ì«çû
-		MOVIE = MOVIE_LOAD[57];
+		PlayMovie("DATA/MOVIE/MOVIE58.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ59ì«çû
-		MOVIE = MOVIE_LOAD[58];
+		PlayMovie("DATA/MOVIE/MOVIE59.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
@@ -8263,70 +8263,70 @@ void MOVIE_START_6() {
 	case '0':
 
 		//ìÆâÊ60ì«çû
-		MOVIE = MOVIE_LOAD[59];
+		PlayMovie("DATA/MOVIE/MOVIE60.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '1':
 
 		//ìÆâÊ61ì«çû
-		MOVIE = MOVIE_LOAD[60];
+		PlayMovie("DATA/MOVIE/MOVIE61.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ62ì«çû
-		MOVIE = MOVIE_LOAD[61];
+		PlayMovie("DATA/MOVIE/MOVIE62.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '3':
 
 		//ìÆâÊ63ì«çû
-		MOVIE = MOVIE_LOAD[62];
+		PlayMovie("DATA/MOVIE/MOVIE63.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ64ì«çû
-		MOVIE = MOVIE_LOAD[63];
+		PlayMovie("DATA/MOVIE/MOVIE64.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ65ì«çû
-		MOVIE = MOVIE_LOAD[64];
+		PlayMovie("DATA/MOVIE/MOVIE65.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ66ì«çû
-		MOVIE = MOVIE_LOAD[65];
+		PlayMovie("DATA/MOVIE/MOVIE66.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ67ì«çû
-		MOVIE = MOVIE_LOAD[66];
+		PlayMovie("DATA/MOVIE/MOVIE67.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ68ì«çû
-		MOVIE = MOVIE_LOAD[67];
+		PlayMovie("DATA/MOVIE/MOVIE68.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ69ì«çû
-		MOVIE = MOVIE_LOAD[68];
+		PlayMovie("DATA/MOVIE/MOVIE69.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
@@ -8340,70 +8340,70 @@ void MOVIE_START_7() {
 	case '0':
 
 		//ìÆâÊ70ì«çû
-		MOVIE = MOVIE_LOAD[70];
+		PlayMovie("DATA/MOVIE/MOVIE70.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '1':
 
 		//ìÆâÊ71ì«çû
-		MOVIE = MOVIE_LOAD[70];
+		PlayMovie("DATA/MOVIE/MOVIE71.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ72ì«çû
-		MOVIE = MOVIE_LOAD[71];
+		PlayMovie("DATA/MOVIE/MOVIE72.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '3':
 
 		//ìÆâÊ73ì«çû
-		MOVIE = MOVIE_LOAD[72];
+		PlayMovie("DATA/MOVIE/MOVIE73.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ74ì«çû
-		MOVIE = MOVIE_LOAD[73];
+		PlayMovie("DATA/MOVIE/MOVIE74.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ75ì«çû
-		MOVIE = MOVIE_LOAD[74];
+		PlayMovie("DATA/MOVIE/MOVIE75.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ76ì«çû
-		MOVIE = MOVIE_LOAD[75];
+		PlayMovie("DATA/MOVIE/MOVIE76.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ77ì«çû
-		MOVIE = MOVIE_LOAD[76];
+		PlayMovie("DATA/MOVIE/MOVIE77.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ78ì«çû
-		MOVIE = MOVIE_LOAD[77];
+		PlayMovie("DATA/MOVIE/MOVIE78.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ79ì«çû
-		MOVIE = MOVIE_LOAD[78];
+		PlayMovie("DATA/MOVIE/MOVIE79.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
@@ -8417,70 +8417,70 @@ void MOVIE_START_8() {
 	case '0':
 
 		//ìÆâÊ80ì«çû
-		MOVIE = MOVIE_LOAD[79];
+		PlayMovie("DATA/MOVIE/MOVIE80.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '1':
 
 		//ìÆâÊ81ì«çû
-		MOVIE = MOVIE_LOAD[80];
+		PlayMovie("DATA/MOVIE/MOVIE81.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ82ì«çû
-		MOVIE = MOVIE_LOAD[81];
+		PlayMovie("DATA/MOVIE/MOVIE82.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '3':
 
 		//ìÆâÊ83ì«çû
-		MOVIE = MOVIE_LOAD[82];
+		PlayMovie("DATA/MOVIE/MOVIE83.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ84ì«çû
-		MOVIE = MOVIE_LOAD[83];
+		PlayMovie("DATA/MOVIE/MOVIE84.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ85ì«çû
-		MOVIE = MOVIE_LOAD[84];
+		PlayMovie("DATA/MOVIE/MOVIE85.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ86ì«çû
-		MOVIE = MOVIE_LOAD[85];
+		PlayMovie("DATA/MOVIE/MOVIE86.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ87ì«çû
-		MOVIE = MOVIE_LOAD[86];
+		PlayMovie("DATA/MOVIE/MOVIE87.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ88ì«çû
-		MOVIE = MOVIE_LOAD[87];
+		PlayMovie("DATA/MOVIE/MOVIE88.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ89ì«çû
-		MOVIE = MOVIE_LOAD[88];
+		PlayMovie("DATA/MOVIE/MOVIE89.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
@@ -8494,70 +8494,70 @@ void MOVIE_START_9() {
 	case '0':
 
 		//ìÆâÊ90ì«çû
-		MOVIE = MOVIE_LOAD[89];
+		PlayMovie("DATA/MOVIE/MOVIE90.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '1':
 
 		//ìÆâÊ91ì«çû
-		MOVIE = MOVIE_LOAD[90];
+		PlayMovie("DATA/MOVIE/MOVIE91.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '2':
 
 		//ìÆâÊ92ì«çû
-		MOVIE = MOVIE_LOAD[91];
+		PlayMovie("DATA/MOVIE/MOVIE92.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '3':
 
 		//ìÆâÊ93ì«çû
-		MOVIE = MOVIE_LOAD[92];
+		PlayMovie("DATA/MOVIE/MOVIE93.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '4':
 
 		//ìÆâÊ94ì«çû
-		MOVIE = MOVIE_LOAD[93];
+		PlayMovie("DATA/MOVIE/MOVIE94.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '5':
 
 		//ìÆâÊ95ì«çû
-		MOVIE = MOVIE_LOAD[94];
+		PlayMovie("DATA/MOVIE/MOVIE95.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '6':
 
 		//ìÆâÊ96ì«çû
-		MOVIE = MOVIE_LOAD[95];
+		PlayMovie("DATA/MOVIE/MOVIE96.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '7':
 
 		//ìÆâÊ97ì«çû
-		MOVIE = MOVIE_LOAD[96];
+		PlayMovie("DATA/MOVIE/MOVIE97.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '8':
 
 		//ìÆâÊ98ì«çû
-		MOVIE = MOVIE_LOAD[97];
+		PlayMovie("DATA/MOVIE/MOVIE98.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 
 	case '9':
 
 		//ìÆâÊ99ì«çû
-		MOVIE = MOVIE_LOAD[98];
+		PlayMovie("DATA/MOVIE/MOVIE99.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP++;
 		break;
 	}
