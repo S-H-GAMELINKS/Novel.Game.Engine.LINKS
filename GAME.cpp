@@ -3209,6 +3209,11 @@ void SCRIPT_OUTPUT_SOUNDEFFECT() {
 
 }
 
+//スクリプトタグ処理(動画再生)
+void SCRIPT_OUTPUT_MOVIE() {
+
+}
+
 //セーブデータ用スクリーンショット保存
 void SAVESNAP() {
 
@@ -7879,7 +7884,7 @@ void MOVIE_START() {
 		}
 
 		//キャラクター描画
-		SCRIPT_OUTPUT_MOVIE_DRAW();
+		SCRIPT_OUTPUT_MOVIE();
 		break;
 
 	case '1':
