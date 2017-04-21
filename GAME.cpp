@@ -6932,6 +6932,1688 @@ void BACKGROUNDMUSIC_START() {
 	}
 }
 
+//SE再生処理1～9
+void SOUNDEFFECT_START_0() {
+
+	switch (String[SP][CP])
+	{
+	case '1':
+
+		//SE01読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[0];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE02読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[1];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE03読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[2];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE04読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[3];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE05読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[4];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE06読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[5];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE07読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[6];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE08読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[7];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE09読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[8];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理10～19
+void SOUNDEFFECT_START_1() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//SE10読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[9];
+		CP++;
+		break;
+
+	case '1':
+
+		//SE11読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[10];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE12読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[11];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE13読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[12];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE14読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[13];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE15読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[14];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE16読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[15];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE17読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[16];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE18読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[17];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE19読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[18];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理20～29
+void SOUNDEFFECT_START_2() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//SE20読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[19];
+		CP++;
+		break;
+
+	case '1':
+
+		//SE21読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[20];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE22読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[21];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE23読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[22];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE24読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[23];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE25読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[24];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE26読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[25];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE27読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[26];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE28読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[27];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE29読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[28];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理30～39
+void SOUNDEFFECT_START_3() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//SE30読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[29];
+		CP++;
+		break;
+
+	case '1':
+
+		//SE31読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[30];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE32読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[31];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE33読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[32];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE34読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[33];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE35読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[34];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE36読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[35];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE37読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[36];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE38読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[37];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE39読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[38];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理4～49
+void SOUNDEFFECT_START_4() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//SE40読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[39];
+		CP++;
+		break;
+
+	case '1':
+
+		//SE41読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[40];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE42読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[41];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE43読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[42];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE44読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[43];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE45読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[44];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE46読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[45];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE47読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[46];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE48読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[47];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE49読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[48];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理50～59
+void SOUNDEFFECT_START_5() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//SE50読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[49];
+		CP++;
+		break;
+
+	case '1':
+
+		//SE51読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[50];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE52読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[51];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE53読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[52];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE54読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[53];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE55読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[54];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE56読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[55];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE57読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[56];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE58読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[57];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE59読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[58];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理60～69
+void SOUNDEFFECT_START_6() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//SE60読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[59];
+		CP++;
+		break;
+
+	case '1':
+
+		//SE61読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[60];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE62読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[61];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE63読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[62];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE64読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[63];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE65読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[64];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE66読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[65];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE67読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[66];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE68読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[67];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE69読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[68];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理70～79
+void SOUNDEFFECT_START_7() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//SE70読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[70];
+		CP++;
+		break;
+
+	case '1':
+
+		//SE71読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[70];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE72読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[71];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE73読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[72];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE74読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[73];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE75読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[74];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE76読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[75];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE77読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[76];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE78読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[77];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE79読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[78];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理80～89
+void SOUNDEFFECT_START_8() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//SE80読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[79];
+		CP++;
+		break;
+
+	case '1':
+
+		//SE81読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[80];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE82読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[81];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE83読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[82];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE84読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[83];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE85読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[84];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE86読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[85];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE87読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[86];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE88読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[87];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE89読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[88];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理90～99
+void SOUNDEFFECT_START_9() {
+
+	switch (String[SP][CP])
+	{
+	case '0':
+
+		//SE90読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[89];
+		CP++;
+		break;
+
+	case '1':
+
+		//SE91読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[90];
+		CP++;
+		break;
+
+	case '2':
+
+		//SE92読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[91];
+		CP++;
+		break;
+
+	case '3':
+
+		//SE93読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[92];
+		CP++;
+		break;
+
+	case '4':
+
+		//SE94読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[93];
+		CP++;
+		break;
+
+	case '5':
+
+		//SE95読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[94];
+		CP++;
+		break;
+
+	case '6':
+
+		//SE96読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[95];
+		CP++;
+		break;
+
+	case '7':
+
+		//SE97読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[96];
+		CP++;
+		break;
+
+	case '8':
+
+		//SE98読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[97];
+		CP++;
+		break;
+
+	case '9':
+
+		//SE99読込
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[98];
+		CP++;
+		break;
+	}
+}
+
+//SE再生処理
+void SOUNDEFFECT_START() {
+
+	switch (String[SP][CP]) {
+
+	case '0':
+
+		CP++;
+
+		SOUNDEFFECT_START_0();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	case '1':
+
+		CP++;
+
+		SOUNDEFFECT_START_1();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	case '2':
+
+		CP++;
+
+		SOUNDEFFECT_START_2();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	case '3':
+
+		CP++;
+
+		SOUNDEFFECT_START_3();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	case '4':
+
+		CP++;
+
+		SOUNDEFFECT_START_4();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	case '5':
+
+		CP++;
+
+		SOUNDEFFECT_START_5();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	case '6':
+
+		CP++;
+
+		SOUNDEFFECT_START_6();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	case '7':
+
+		CP++;
+
+		SOUNDEFFECT_START_7();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	case '8':
+
+		CP++;
+
+		SOUNDEFFECT_START_8();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	case '9':
+
+		CP++;
+
+		SOUNDEFFECT_START_9();
+
+		//SE再生
+		SCRIPT_OUTPUT_SOUNDEFFECT();
+		break;
+
+	}
+}
+
+//動画再生処理
+void MOVIE_START() {
+
+	switch (String[SP][CP]) {
+
+	case '0':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '1':
+
+			//キャラ01読込
+			MOVIE = MOVIE_LOAD[0];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ02読込
+			MOVIE = MOVIE_LOAD[1];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ03読込
+			MOVIE = MOVIE_LOAD[2];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ04読込
+			MOVIE = MOVIE_LOAD[3];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ05読込
+			MOVIE = MOVIE_LOAD[4];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ06読込
+			MOVIE = MOVIE_LOAD[5];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ07読込
+			MOVIE = MOVIE_LOAD[6];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ08読込
+			MOVIE = MOVIE_LOAD[7];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ09読込
+			MOVIE = MOVIE_LOAD[8];
+			CP++;
+			break;
+		}
+
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE_DRAW();
+		break;
+
+	case '1':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '0':
+
+			//キャラ10読込
+			MOVIE = MOVIE_LOAD[9];
+			CP++;
+			break;
+
+		case '1':
+
+			//キャラ11読込
+			MOVIE = MOVIE_LOAD[10];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ12読込
+			MOVIE = MOVIE_LOAD[11];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ13読込
+			MOVIE = MOVIE_LOAD[12];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ14読込
+			MOVIE = MOVIE_LOAD[13];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ15読込
+			MOVIE = MOVIE_LOAD[14];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ16読込
+			MOVIE = MOVIE_LOAD[15];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ17読込
+			MOVIE = MOVIE_LOAD[16];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ18読込
+			MOVIE = MOVIE_LOAD[17];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ19読込
+			MOVIE = MOVIE_LOAD[18];
+			CP++;
+			break;
+		}
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE_DRAW();
+		break;
+
+	case '2':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '0':
+
+			//キャラ20読込
+			MOVIE = MOVIE_LOAD[19];
+			CP++;
+			break;
+
+		case '1':
+
+			//キャラ21読込
+			MOVIE = MOVIE_LOAD[20];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ22読込
+			MOVIE = MOVIE_LOAD[21];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ23読込
+			MOVIE = MOVIE_LOAD[22];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ24読込
+			MOVIE = MOVIE_LOAD[23];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ25読込
+			MOVIE = MOVIE_LOAD[24];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ26読込
+			MOVIE = MOVIE_LOAD[25];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ27読込
+			MOVIE = MOVIE_LOAD[26];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ28読込
+			MOVIE = MOVIE_LOAD[27];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ29読込
+			MOVIE = MOVIE_LOAD[28];
+			CP++;
+			break;
+		}
+
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE_DRAW();
+		break;
+
+	case '3':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '0':
+
+			//キャラ30読込
+			MOVIE = MOVIE_LOAD[29];
+			CP++;
+			break;
+
+		case '1':
+
+			//キャラ31読込
+			MOVIE = MOVIE_LOAD[30];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ32読込
+			MOVIE = MOVIE_LOAD[31];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ33読込
+			MOVIE = MOVIE_LOAD[32];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ34読込
+			MOVIE = MOVIE_LOAD[33];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ35読込
+			MOVIE = MOVIE_LOAD[34];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ36読込
+			MOVIE = MOVIE_LOAD[35];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ37読込
+			MOVIE = MOVIE_LOAD[36];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ38読込
+			MOVIE = MOVIE_LOAD[37];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ39読込
+			MOVIE = MOVIE_LOAD[38];
+			CP++;
+			break;
+		}
+
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE_DRAW();
+		break;
+
+	case '4':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '0':
+
+			//キャラ40読込
+			MOVIE = MOVIE_LOAD[39];
+			CP++;
+			break;
+
+		case '1':
+
+			//キャラ41読込
+			MOVIE = MOVIE_LOAD[40];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ42読込
+			MOVIE = MOVIE_LOAD[41];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ43読込
+			MOVIE = MOVIE_LOAD[42];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ44読込
+			MOVIE = MOVIE_LOAD[43];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ45読込
+			MOVIE = MOVIE_LOAD[44];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ46読込
+			MOVIE = MOVIE_LOAD[45];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ47読込
+			MOVIE = MOVIE_LOAD[46];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ48読込
+			MOVIE = MOVIE_LOAD[47];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ49読込
+			MOVIE = MOVIE_LOAD[48];
+			CP++;
+			break;
+		}
+
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE_DRAW();
+		break;
+
+	case '5':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '0':
+
+			//キャラ50読込
+			MOVIE = MOVIE_LOAD[49];
+			CP++;
+			break;
+
+		case '1':
+
+			//キャラ51読込
+			MOVIE = MOVIE_LOAD[50];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ52読込
+			MOVIE = MOVIE_LOAD[51];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ53読込
+			MOVIE = MOVIE_LOAD[52];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ54読込
+			MOVIE = MOVIE_LOAD[53];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ55読込
+			MOVIE = MOVIE_LOAD[54];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ56読込
+			MOVIE = MOVIE_LOAD[55];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ57読込
+			MOVIE = MOVIE_LOAD[56];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ58読込
+			MOVIE = MOVIE_LOAD[57];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ59読込
+			MOVIE = MOVIE_LOAD[58];
+			CP++;
+			break;
+		}
+
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE_DRAW();
+		break;
+
+	case '6':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '0':
+
+			//キャラ60読込
+			MOVIE = MOVIE_LOAD[59];
+			CP++;
+			break;
+
+		case '1':
+
+			//キャラ61読込
+			MOVIE = MOVIE_LOAD[60];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ62読込
+			MOVIE = MOVIE_LOAD[61];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ63読込
+			MOVIE = MOVIE_LOAD[62];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ64読込
+			MOVIE = MOVIE_LOAD[63];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ65読込
+			MOVIE = MOVIE_LOAD[64];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ66読込
+			MOVIE = MOVIE_LOAD[65];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ67読込
+			MOVIE = MOVIE_LOAD[66];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ68読込
+			MOVIE = MOVIE_LOAD[67];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ69読込
+			MOVIE = MOVIE_LOAD[68];
+			CP++;
+			break;
+		}
+
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE_DRAW();
+		break;
+
+	case '7':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '0':
+
+			//キャラ70読込
+			MOVIE = MOVIE_LOAD[70];
+			CP++;
+			break;
+
+		case '1':
+
+			//キャラ71読込
+			MOVIE = MOVIE_LOAD[70];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ72読込
+			MOVIE = MOVIE_LOAD[71];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ73読込
+			MOVIE = MOVIE_LOAD[72];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ74読込
+			MOVIE = MOVIE_LOAD[73];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ75読込
+			MOVIE = MOVIE_LOAD[74];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ76読込
+			MOVIE = MOVIE_LOAD[75];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ77読込
+			MOVIE = MOVIE_LOAD[76];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ78読込
+			MOVIE = MOVIE_LOAD[77];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ79読込
+			MOVIE = MOVIE_LOAD[78];
+			CP++;
+			break;
+		}
+
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE_DRAW();
+		break;
+
+	case '8':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '0':
+
+			//キャラ80読込
+			MOVIE = MOVIE_LOAD[79];
+			CP++;
+			break;
+
+		case '1':
+
+			//キャラ81読込
+			MOVIE = MOVIE_LOAD[80];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ82読込
+			MOVIE = MOVIE_LOAD[81];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ83読込
+			MOVIE = MOVIE_LOAD[82];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ84読込
+			MOVIE = MOVIE_LOAD[83];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ85読込
+			MOVIE = MOVIE_LOAD[84];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ86読込
+			MOVIE = MOVIE_LOAD[85];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ87読込
+			MOVIE = MOVIE_LOAD[86];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ88読込
+			MOVIE = MOVIE_LOAD[87];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ89読込
+			MOVIE = MOVIE_LOAD[88];
+			CP++;
+			break;
+		}
+
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE_DRAW();
+		break;
+
+	case '9':
+
+		CP++;
+
+		switch (String[SP][CP])
+		{
+		case '0':
+
+			//キャラ90読込
+			MOVIE = MOVIE_LOAD[89];
+			CP++;
+			break;
+
+		case '1':
+
+			//キャラ91読込
+			MOVIE = MOVIE_LOAD[90];
+			CP++;
+			break;
+
+		case '2':
+
+			//キャラ92読込
+			MOVIE = MOVIE_LOAD[91];
+			CP++;
+			break;
+
+		case '3':
+
+			//キャラ93読込
+			MOVIE = MOVIE_LOAD[92];
+			CP++;
+			break;
+
+		case '4':
+
+			//キャラ94読込
+			MOVIE = MOVIE_LOAD[93];
+			CP++;
+			break;
+
+		case '5':
+
+			//キャラ95読込
+			MOVIE = MOVIE_LOAD[94];
+			CP++;
+			break;
+
+		case '6':
+
+			//キャラ96読込
+			MOVIE = MOVIE_LOAD[95];
+			CP++;
+			break;
+
+		case '7':
+
+			//キャラ97読込
+			MOVIE = MOVIE_LOAD[96];
+			CP++;
+			break;
+
+		case '8':
+
+			//キャラ98読込
+			MOVIE = MOVIE_LOAD[97];
+			CP++;
+			break;
+
+		case '9':
+
+			//キャラ99読込
+			MOVIE = MOVIE_LOAD[98];
+			CP++;
+			break;
+		}
+
+		//キャラクター描画
+		SCRIPT_OUTPUT_MOVIE();
+		break;
+
+	}
+
+}
+
 //スクリプトタグ処理(メイン)関数
 int SCRIPT_OUTPUT() {
 
@@ -6964,7 +8646,7 @@ int SCRIPT_OUTPUT() {
 
 		CP++;
 
-		BACKGROUNFMUSIC_START();
+		BACKGROUNDMUSIC_START();
 		break;
 
 		//SE再生処理
@@ -6972,811 +8654,7 @@ int SCRIPT_OUTPUT() {
 
 		CP++;
 
-		switch (String[SP][CP]) {
-
-		case '0':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '1':
-
-				//SE01読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[0];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE02読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[1];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE03読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[2];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE04読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[3];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE05読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[4];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE06読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[5];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE07読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[6];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE08読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[7];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE09読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[8];
-				CP++;
-				break;
-			}
-
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		case '1':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//SE10読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[9];
-				CP++;
-				break;
-
-			case '1':
-
-				//SE11読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[10];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE12読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[11];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE13読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[12];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE14読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[13];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE15読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[14];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE16読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[15];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE17読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[16];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE18読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[17];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE19読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[18];
-				CP++;
-				break;
-			}
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		case '2':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//SE20読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[19];
-				CP++;
-				break;
-
-			case '1':
-
-				//SE21読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[20];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE22読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[21];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE23読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[22];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE24読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[23];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE25読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[24];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE26読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[25];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE27読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[26];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE28読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[27];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE29読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[28];
-				CP++;
-				break;
-			}
-
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		case '3':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//SE30読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[29];
-				CP++;
-				break;
-
-			case '1':
-
-				//SE31読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[30];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE32読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[31];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE33読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[32];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE34読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[33];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE35読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[34];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE36読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[35];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE37読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[36];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE38読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[37];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE39読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[38];
-				CP++;
-				break;
-			}
-
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		case '4':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//SE40読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[39];
-				CP++;
-				break;
-
-			case '1':
-
-				//SE41読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[40];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE42読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[41];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE43読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[42];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE44読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[43];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE45読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[44];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE46読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[45];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE47読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[46];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE48読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[47];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE49読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[48];
-				CP++;
-				break;
-			}
-
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		case '5':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//SE50読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[49];
-				CP++;
-				break;
-
-			case '1':
-
-				//SE51読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[50];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE52読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[51];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE53読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[52];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE54読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[53];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE55読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[54];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE56読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[55];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE57読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[56];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE58読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[57];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE59読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[58];
-				CP++;
-				break;
-			}
-
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		case '6':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//SE60読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[59];
-				CP++;
-				break;
-
-			case '1':
-
-				//SE61読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[60];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE62読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[61];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE63読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[62];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE64読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[63];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE65読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[64];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE66読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[65];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE67読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[66];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE68読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[67];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE69読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[68];
-				CP++;
-				break;
-			}
-
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		case '7':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//SE70読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[70];
-				CP++;
-				break;
-
-			case '1':
-
-				//SE71読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[70];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE72読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[71];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE73読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[72];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE74読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[73];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE75読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[74];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE76読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[75];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE77読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[76];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE78読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[77];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE79読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[78];
-				CP++;
-				break;
-			}
-
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		case '8':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//SE80読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[79];
-				CP++;
-				break;
-
-			case '1':
-
-				//SE81読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[80];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE82読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[81];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE83読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[82];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE84読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[83];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE85読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[84];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE86読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[85];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE87読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[86];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE88読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[87];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE89読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[88];
-				CP++;
-				break;
-			}
-
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		case '9':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//SE90読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[89];
-				CP++;
-				break;
-
-			case '1':
-
-				//SE91読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[90];
-				CP++;
-				break;
-
-			case '2':
-
-				//SE92読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[91];
-				CP++;
-				break;
-
-			case '3':
-
-				//SE93読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[92];
-				CP++;
-				break;
-
-			case '4':
-
-				//SE94読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[93];
-				CP++;
-				break;
-
-			case '5':
-
-				//SE95読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[94];
-				CP++;
-				break;
-
-			case '6':
-
-				//SE96読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[95];
-				CP++;
-				break;
-
-			case '7':
-
-				//SE97読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[96];
-				CP++;
-				break;
-
-			case '8':
-
-				//SE98読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[97];
-				CP++;
-				break;
-
-			case '9':
-
-				//SE99読込
-				SOUNDEFFECT = SOUNDEFFECT_LOAD[98];
-				CP++;
-				break;
-			}
-
-			//SE再生
-			SCRIPT_OUTPUT_SOUNDEFFECT();
-			break;
-
-		}
+		SOUNDEFFECT_START();
 		break;
 
 		//ムービー再生処理
@@ -7784,811 +8662,7 @@ int SCRIPT_OUTPUT() {
 
 		CP++;
 
-		switch (String[SP][CP]) {
-
-		case '0':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '1':
-
-				//キャラ01読込
-				MOVIE = MOVIE_LOAD[0];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ02読込
-				MOVIE = MOVIE_LOAD[1];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ03読込
-				MOVIE = MOVIE_LOAD[2];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ04読込
-				MOVIE = MOVIE_LOAD[3];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ05読込
-				MOVIE = MOVIE_LOAD[4];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ06読込
-				MOVIE = MOVIE_LOAD[5];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ07読込
-				MOVIE = MOVIE_LOAD[6];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ08読込
-				MOVIE = MOVIE_LOAD[7];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ09読込
-				MOVIE = MOVIE_LOAD[8];
-				CP++;
-				break;
-			}
-
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE_DRAW();
-			break;
-
-		case '1':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//キャラ10読込
-				MOVIE = MOVIE_LOAD[9];
-				CP++;
-				break;
-
-			case '1':
-
-				//キャラ11読込
-				MOVIE = MOVIE_LOAD[10];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ12読込
-				MOVIE = MOVIE_LOAD[11];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ13読込
-				MOVIE = MOVIE_LOAD[12];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ14読込
-				MOVIE = MOVIE_LOAD[13];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ15読込
-				MOVIE = MOVIE_LOAD[14];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ16読込
-				MOVIE = MOVIE_LOAD[15];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ17読込
-				MOVIE = MOVIE_LOAD[16];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ18読込
-				MOVIE = MOVIE_LOAD[17];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ19読込
-				MOVIE = MOVIE_LOAD[18];
-				CP++;
-				break;
-			}
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE_DRAW();
-			break;
-
-		case '2':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//キャラ20読込
-				MOVIE = MOVIE_LOAD[19];
-				CP++;
-				break;
-
-			case '1':
-
-				//キャラ21読込
-				MOVIE = MOVIE_LOAD[20];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ22読込
-				MOVIE = MOVIE_LOAD[21];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ23読込
-				MOVIE = MOVIE_LOAD[22];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ24読込
-				MOVIE = MOVIE_LOAD[23];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ25読込
-				MOVIE = MOVIE_LOAD[24];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ26読込
-				MOVIE = MOVIE_LOAD[25];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ27読込
-				MOVIE = MOVIE_LOAD[26];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ28読込
-				MOVIE = MOVIE_LOAD[27];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ29読込
-				MOVIE = MOVIE_LOAD[28];
-				CP++;
-				break;
-			}
-
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE_DRAW();
-			break;
-
-		case '3':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//キャラ30読込
-				MOVIE = MOVIE_LOAD[29];
-				CP++;
-				break;
-
-			case '1':
-
-				//キャラ31読込
-				MOVIE = MOVIE_LOAD[30];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ32読込
-				MOVIE = MOVIE_LOAD[31];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ33読込
-				MOVIE = MOVIE_LOAD[32];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ34読込
-				MOVIE = MOVIE_LOAD[33];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ35読込
-				MOVIE = MOVIE_LOAD[34];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ36読込
-				MOVIE = MOVIE_LOAD[35];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ37読込
-				MOVIE = MOVIE_LOAD[36];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ38読込
-				MOVIE = MOVIE_LOAD[37];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ39読込
-				MOVIE = MOVIE_LOAD[38];
-				CP++;
-				break;
-			}
-
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE_DRAW();
-			break;
-
-		case '4':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//キャラ40読込
-				MOVIE = MOVIE_LOAD[39];
-				CP++;
-				break;
-
-			case '1':
-
-				//キャラ41読込
-				MOVIE = MOVIE_LOAD[40];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ42読込
-				MOVIE = MOVIE_LOAD[41];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ43読込
-				MOVIE = MOVIE_LOAD[42];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ44読込
-				MOVIE = MOVIE_LOAD[43];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ45読込
-				MOVIE = MOVIE_LOAD[44];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ46読込
-				MOVIE = MOVIE_LOAD[45];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ47読込
-				MOVIE = MOVIE_LOAD[46];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ48読込
-				MOVIE = MOVIE_LOAD[47];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ49読込
-				MOVIE = MOVIE_LOAD[48];
-				CP++;
-				break;
-			}
-
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE_DRAW();
-			break;
-
-		case '5':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//キャラ50読込
-				MOVIE = MOVIE_LOAD[49];
-				CP++;
-				break;
-
-			case '1':
-
-				//キャラ51読込
-				MOVIE = MOVIE_LOAD[50];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ52読込
-				MOVIE = MOVIE_LOAD[51];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ53読込
-				MOVIE = MOVIE_LOAD[52];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ54読込
-				MOVIE = MOVIE_LOAD[53];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ55読込
-				MOVIE = MOVIE_LOAD[54];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ56読込
-				MOVIE = MOVIE_LOAD[55];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ57読込
-				MOVIE = MOVIE_LOAD[56];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ58読込
-				MOVIE = MOVIE_LOAD[57];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ59読込
-				MOVIE = MOVIE_LOAD[58];
-				CP++;
-				break;
-			}
-
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE_DRAW();
-			break;
-
-		case '6':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//キャラ60読込
-				MOVIE = MOVIE_LOAD[59];
-				CP++;
-				break;
-
-			case '1':
-
-				//キャラ61読込
-				MOVIE = MOVIE_LOAD[60];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ62読込
-				MOVIE = MOVIE_LOAD[61];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ63読込
-				MOVIE = MOVIE_LOAD[62];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ64読込
-				MOVIE = MOVIE_LOAD[63];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ65読込
-				MOVIE = MOVIE_LOAD[64];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ66読込
-				MOVIE = MOVIE_LOAD[65];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ67読込
-				MOVIE = MOVIE_LOAD[66];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ68読込
-				MOVIE = MOVIE_LOAD[67];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ69読込
-				MOVIE = MOVIE_LOAD[68];
-				CP++;
-				break;
-			}
-
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE_DRAW();
-			break;
-
-		case '7':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//キャラ70読込
-				MOVIE = MOVIE_LOAD[70];
-				CP++;
-				break;
-
-			case '1':
-
-				//キャラ71読込
-				MOVIE = MOVIE_LOAD[70];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ72読込
-				MOVIE = MOVIE_LOAD[71];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ73読込
-				MOVIE = MOVIE_LOAD[72];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ74読込
-				MOVIE = MOVIE_LOAD[73];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ75読込
-				MOVIE = MOVIE_LOAD[74];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ76読込
-				MOVIE = MOVIE_LOAD[75];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ77読込
-				MOVIE = MOVIE_LOAD[76];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ78読込
-				MOVIE = MOVIE_LOAD[77];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ79読込
-				MOVIE = MOVIE_LOAD[78];
-				CP++;
-				break;
-			}
-
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE_DRAW();
-			break;
-
-		case '8':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//キャラ80読込
-				MOVIE = MOVIE_LOAD[79];
-				CP++;
-				break;
-
-			case '1':
-
-				//キャラ81読込
-				MOVIE = MOVIE_LOAD[80];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ82読込
-				MOVIE = MOVIE_LOAD[81];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ83読込
-				MOVIE = MOVIE_LOAD[82];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ84読込
-				MOVIE = MOVIE_LOAD[83];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ85読込
-				MOVIE = MOVIE_LOAD[84];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ86読込
-				MOVIE = MOVIE_LOAD[85];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ87読込
-				MOVIE = MOVIE_LOAD[86];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ88読込
-				MOVIE = MOVIE_LOAD[87];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ89読込
-				MOVIE = MOVIE_LOAD[88];
-				CP++;
-				break;
-			}
-
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE_DRAW();
-			break;
-
-		case '9':
-
-			CP++;
-
-			switch (String[SP][CP])
-			{
-			case '0':
-
-				//キャラ90読込
-				MOVIE = MOVIE_LOAD[89];
-				CP++;
-				break;
-
-			case '1':
-
-				//キャラ91読込
-				MOVIE = MOVIE_LOAD[90];
-				CP++;
-				break;
-
-			case '2':
-
-				//キャラ92読込
-				MOVIE = MOVIE_LOAD[91];
-				CP++;
-				break;
-
-			case '3':
-
-				//キャラ93読込
-				MOVIE = MOVIE_LOAD[92];
-				CP++;
-				break;
-
-			case '4':
-
-				//キャラ94読込
-				MOVIE = MOVIE_LOAD[93];
-				CP++;
-				break;
-
-			case '5':
-
-				//キャラ95読込
-				MOVIE = MOVIE_LOAD[94];
-				CP++;
-				break;
-
-			case '6':
-
-				//キャラ96読込
-				MOVIE = MOVIE_LOAD[95];
-				CP++;
-				break;
-
-			case '7':
-
-				//キャラ97読込
-				MOVIE = MOVIE_LOAD[96];
-				CP++;
-				break;
-
-			case '8':
-
-				//キャラ98読込
-				MOVIE = MOVIE_LOAD[97];
-				CP++;
-				break;
-
-			case '9':
-
-				//キャラ99読込
-				MOVIE = MOVIE_LOAD[98];
-				CP++;
-				break;
-			}
-
-			//キャラクター描画
-			SCRIPT_OUTPUT_MOVIE();
-			break;
-
-		}
+		MOVIE_START();
 		break;
 
 		// 改行文字
