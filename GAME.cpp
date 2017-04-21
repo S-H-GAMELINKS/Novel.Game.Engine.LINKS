@@ -5933,100 +5933,70 @@ void BACKGROUND_DRAW() {
 
 		CP++;
 
-		CHARACTER_DRAW_0();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_0();
 		break;
 
 	case '1':
 
 		CP++;
 
-		CHARACTER_DRAW_1();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_1();
 		break;
 
 	case '2':
 
 		CP++;
 
-		CHARACTER_DRAW_2();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_2();
 		break;
 
 	case '3':
 
 		CP++;
 
-		CHARACTER_DRAW_3();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_3();
 		break;
 
 	case '4':
 
 		CP++;
 
-		CHARACTER_DRAW_4();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_4();
 		break;
 
 	case '5':
 
 		CP++;
 
-		CHARACTER_DRAW_5();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_5();
 		break;
 
 	case '6':
 
 		CP++;
 
-		CHARACTER_DRAW_6();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_6();
 		break;
 
 	case '7':
 
 		CP++;
 
-		CHARACTER_DRAW_7();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_7();
 		break;
 
 	case '8':
 
 		CP++;
 
-		CHARACTER_DRAW_8();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_8();
 		break;
 
 	case '9':
 
 		CP++;
 
-		CHARACTER_DRAW_9();
-
-		//îwåiï`âÊ
-		SCRIPT_OUTPUT_BACKGROUND();
+		BACKGROUND_DRAW_9();
 		break;
 	}
 }
@@ -8642,6 +8612,9 @@ int SCRIPT_OUTPUT() {
 		CP++;
 
 		BACKGROUND_DRAW();
+
+		//îwåiï`âÊ
+		SCRIPT_OUTPUT_BACKGROUND();
 		break;
 
 		//BGMçƒê∂èàóù
