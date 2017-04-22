@@ -1,4 +1,4 @@
-//ゲームリンクス開発 簡易ノベルゲームエンジン「ＬＩＮＫＳ」ver2.80
+//ゲームリンクス開発 簡易ノベルゲームエンジン「ＬＩＮＫＳ」ver3.00
 #include "DxLib.h"
 #include "stdio.h"
 #include "GAME.h"
