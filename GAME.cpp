@@ -4328,63 +4328,54 @@ void CHARACTER_DRAW_0() {
 
 		//ÉLÉÉÉâ01ì«çû
 		CHARACTER = CHARACTER_LOAD[0];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ02ì«çû
 		CHARACTER = CHARACTER_LOAD[1];
-		CP++;
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ03ì«çû
 		CHARACTER = CHARACTER_LOAD[2];
-		CP++;
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ04ì«çû
 		CHARACTER = CHARACTER_LOAD[3];
-		CP++;
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ05ì«çû
 		CHARACTER = CHARACTER_LOAD[4];
-		CP++;
 		break;
 
 	case '6':
 
 		//ÉLÉÉÉâ06ì«çû
 		CHARACTER = CHARACTER_LOAD[5];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ07ì«çû
 		CHARACTER = CHARACTER_LOAD[6];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ08ì«çû
 		CHARACTER = CHARACTER_LOAD[7];
-		CP++;
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ09ì«çû
-		CHARACTER = CHARACTER_LOAD[8];
-		CP++;
+		CHARACTER = CHARACTER_LOAD[8];		
 		break;
 	}
 }
@@ -4397,71 +4388,61 @@ void CHARACTER_DRAW_1() {
 	case '0':
 
 		//ÉLÉÉÉâ10ì«çû
-		CHARACTER = CHARACTER_LOAD[9];
-		CP++;
+		CHARACTER = CHARACTER_LOAD[9];		
 		break;
 
 	case '1':
 
 		//ÉLÉÉÉâ11ì«çû
 		CHARACTER = CHARACTER_LOAD[10];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ12ì«çû
-		CHARACTER = CHARACTER_LOAD[11];
-		CP++;
+		CHARACTER = CHARACTER_LOAD[11];		
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ13ì«çû
-		CHARACTER = CHARACTER_LOAD[12];
-		CP++;
+		CHARACTER = CHARACTER_LOAD[12];		
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ14ì«çû
-		CHARACTER = CHARACTER_LOAD[13];
-		CP++;
+		CHARACTER = CHARACTER_LOAD[13];	
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ15ì«çû
-		CHARACTER = CHARACTER_LOAD[14];
-		CP++;
+		CHARACTER = CHARACTER_LOAD[14];		
 		break;
 
 	case '6':
 
 		//ÉLÉÉÉâ16ì«çû
 		CHARACTER = CHARACTER_LOAD[15];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ17ì«çû
 		CHARACTER = CHARACTER_LOAD[16];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ18ì«çû
 		CHARACTER = CHARACTER_LOAD[17];
-		CP++;
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ19ì«çû
 		CHARACTER = CHARACTER_LOAD[18];
-		CP++;
 		break;
 	}
 }
@@ -4474,71 +4455,61 @@ void CHARACTER_DRAW_2() {
 	case '0':
 
 		//ÉLÉÉÉâ20ì«çû
-		CHARACTER = CHARACTER_LOAD[19];
-		CP++;
+		CHARACTER = CHARACTER_LOAD[19];	
 		break;
 
 	case '1':
 
 		//ÉLÉÉÉâ21ì«çû
 		CHARACTER = CHARACTER_LOAD[20];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ22ì«çû
 		CHARACTER = CHARACTER_LOAD[21];
-		CP++;
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ23ì«çû
 		CHARACTER = CHARACTER_LOAD[22];
-		CP++;
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ24ì«çû
-		CHARACTER = CHARACTER_LOAD[23];
-		CP++;
+		CHARACTER = CHARACTER_LOAD[23];	
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ25ì«çû
 		CHARACTER = CHARACTER_LOAD[24];
-		CP++;
 		break;
 
 	case '6':
 
 		//ÉLÉÉÉâ26ì«çû
 		CHARACTER = CHARACTER_LOAD[25];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ27ì«çû
 		CHARACTER = CHARACTER_LOAD[26];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ28ì«çû
-		CHARACTER = CHARACTER_LOAD[27];
-		CP++;
+		CHARACTER = CHARACTER_LOAD[27];	
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ29ì«çû
 		CHARACTER = CHARACTER_LOAD[28];
-		CP++;
 		break;
 	}
 }
@@ -4552,70 +4523,60 @@ void CHARACTER_DRAW_3() {
 
 		//ÉLÉÉÉâ30ì«çû
 		CHARACTER = CHARACTER_LOAD[29];
-		CP++;
 		break;
 
 	case '1':
 
 		//ÉLÉÉÉâ31ì«çû
 		CHARACTER = CHARACTER_LOAD[30];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ32ì«çû
 		CHARACTER = CHARACTER_LOAD[31];
-		CP++;
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ33ì«çû
 		CHARACTER = CHARACTER_LOAD[32];
-		CP++;
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ34ì«çû
 		CHARACTER = CHARACTER_LOAD[33];
-		CP++;
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ35ì«çû
 		CHARACTER = CHARACTER_LOAD[34];
-		CP++;
 		break;
 
 	case '6':
 
 		//ÉLÉÉÉâ36ì«çû
 		CHARACTER = CHARACTER_LOAD[35];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ37ì«çû
 		CHARACTER = CHARACTER_LOAD[36];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ38ì«çû
 		CHARACTER = CHARACTER_LOAD[37];
-		CP++;
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ39ì«çû
 		CHARACTER = CHARACTER_LOAD[38];
-		CP++;
 		break;
 	}
 }
@@ -4629,70 +4590,60 @@ void CHARACTER_DRAW_4() {
 
 		//ÉLÉÉÉâ40ì«çû
 		CHARACTER = CHARACTER_LOAD[39];
-		CP++;
 		break;
 
 	case '1':
 
 		//ÉLÉÉÉâ41ì«çû
 		CHARACTER = CHARACTER_LOAD[40];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ42ì«çû
 		CHARACTER = CHARACTER_LOAD[41];
-		CP++;
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ43ì«çû
 		CHARACTER = CHARACTER_LOAD[42];
-		CP++;
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ44ì«çû
 		CHARACTER = CHARACTER_LOAD[43];
-		CP++;
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ45ì«çû
 		CHARACTER = CHARACTER_LOAD[44];
-		CP++;
 		break;
 
 	case '6':
 
 		//ÉLÉÉÉâ46ì«çû
 		CHARACTER = CHARACTER_LOAD[45];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ47ì«çû
 		CHARACTER = CHARACTER_LOAD[46];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ48ì«çû
 		CHARACTER = CHARACTER_LOAD[47];
-		CP++;
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ49ì«çû
 		CHARACTER = CHARACTER_LOAD[48];
-		CP++;
 		break;
 	}
 }
@@ -4706,70 +4657,60 @@ void CHARACTER_DRAW_5() {
 
 		//ÉLÉÉÉâ50ì«çû
 		CHARACTER = CHARACTER_LOAD[49];
-		CP++;
 		break;
 
 	case '1':
 
 		//ÉLÉÉÉâ51ì«çû
 		CHARACTER = CHARACTER_LOAD[50];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ52ì«çû
 		CHARACTER = CHARACTER_LOAD[51];
-		CP++;
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ53ì«çû
 		CHARACTER = CHARACTER_LOAD[52];
-		CP++;
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ54ì«çû
 		CHARACTER = CHARACTER_LOAD[53];
-		CP++;
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ55ì«çû
 		CHARACTER = CHARACTER_LOAD[54];
-		CP++;
 		break;
 
 	case '6':
 
 		//ÉLÉÉÉâ56ì«çû
 		CHARACTER = CHARACTER_LOAD[55];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ57ì«çû
 		CHARACTER = CHARACTER_LOAD[56];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ58ì«çû
 		CHARACTER = CHARACTER_LOAD[57];
-		CP++;
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ59ì«çû
 		CHARACTER = CHARACTER_LOAD[58];
-		CP++;
 		break;
 	}
 }
@@ -4783,70 +4724,60 @@ void CHARACTER_DRAW_6() {
 
 		//ÉLÉÉÉâ60ì«çû
 		CHARACTER = CHARACTER_LOAD[59];
-		CP++;
 		break;
 
 	case '1':
 
 		//ÉLÉÉÉâ61ì«çû
 		CHARACTER = CHARACTER_LOAD[60];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ62ì«çû
 		CHARACTER = CHARACTER_LOAD[61];
-		CP++;
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ63ì«çû
 		CHARACTER = CHARACTER_LOAD[62];
-		CP++;
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ64ì«çû
 		CHARACTER = CHARACTER_LOAD[63];
-		CP++;
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ65ì«çû
 		CHARACTER = CHARACTER_LOAD[64];
-		CP++;
 		break;
 
 	case '6':
 
 		//ÉLÉÉÉâ66ì«çû
 		CHARACTER = CHARACTER_LOAD[65];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ67ì«çû
 		CHARACTER = CHARACTER_LOAD[66];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ68ì«çû
 		CHARACTER = CHARACTER_LOAD[67];
-		CP++;
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ69ì«çû
 		CHARACTER = CHARACTER_LOAD[68];
-		CP++;
 		break;
 	}
 }
@@ -4860,70 +4791,60 @@ void CHARACTER_DRAW_7() {
 
 		//ÉLÉÉÉâ70ì«çû
 		CHARACTER = CHARACTER_LOAD[70];
-		CP++;
 		break;
 
 	case '1':
 
 		//ÉLÉÉÉâ71ì«çû
 		CHARACTER = CHARACTER_LOAD[70];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ72ì«çû
 		CHARACTER = CHARACTER_LOAD[71];
-		CP++;
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ73ì«çû
 		CHARACTER = CHARACTER_LOAD[72];
-		CP++;
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ74ì«çû
 		CHARACTER = CHARACTER_LOAD[73];
-		CP++;
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ75ì«çû
 		CHARACTER = CHARACTER_LOAD[74];
-		CP++;
 		break;
 
 	case '6':
 
 		//ÉLÉÉÉâ76ì«çû
 		CHARACTER = CHARACTER_LOAD[75];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ77ì«çû
 		CHARACTER = CHARACTER_LOAD[76];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ78ì«çû
 		CHARACTER = CHARACTER_LOAD[77];
-		CP++;
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ79ì«çû
 		CHARACTER = CHARACTER_LOAD[78];
-		CP++;
 		break;
 	}
 }
@@ -4937,70 +4858,59 @@ void CHARACTER_DRAW_8() {
 
 		//ÉLÉÉÉâ80ì«çû
 		CHARACTER = CHARACTER_LOAD[79];
-		CP++;
 		break;
 
 	case '1':
 
 		//ÉLÉÉÉâ81ì«çû
 		CHARACTER = CHARACTER_LOAD[80];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ82ì«çû
 		CHARACTER = CHARACTER_LOAD[81];
-		CP++;
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ83ì«çû
 		CHARACTER = CHARACTER_LOAD[82];
-		CP++;
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ84ì«çû
 		CHARACTER = CHARACTER_LOAD[83];
-		CP++;
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ85ì«çû
 		CHARACTER = CHARACTER_LOAD[84];
-		CP++;
 		break;
 
 	case '6':
-
 		//ÉLÉÉÉâ86ì«çû
 		CHARACTER = CHARACTER_LOAD[85];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ87ì«çû
 		CHARACTER = CHARACTER_LOAD[86];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ88ì«çû
 		CHARACTER = CHARACTER_LOAD[87];
-		CP++;
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ89ì«çû
 		CHARACTER = CHARACTER_LOAD[88];
-		CP++;
 		break;
 	}
 }
@@ -5014,70 +4924,60 @@ void CHARACTER_DRAW_9() {
 
 		//ÉLÉÉÉâ90ì«çû
 		CHARACTER = CHARACTER_LOAD[89];
-		CP++;
 		break;
 
 	case '1':
 
 		//ÉLÉÉÉâ91ì«çû
 		CHARACTER = CHARACTER_LOAD[90];
-		CP++;
 		break;
 
 	case '2':
 
 		//ÉLÉÉÉâ92ì«çû
 		CHARACTER = CHARACTER_LOAD[91];
-		CP++;
 		break;
 
 	case '3':
 
 		//ÉLÉÉÉâ93ì«çû
 		CHARACTER = CHARACTER_LOAD[92];
-		CP++;
 		break;
 
 	case '4':
 
 		//ÉLÉÉÉâ94ì«çû
 		CHARACTER = CHARACTER_LOAD[93];
-		CP++;
 		break;
 
 	case '5':
 
 		//ÉLÉÉÉâ95ì«çû
 		CHARACTER = CHARACTER_LOAD[94];
-		CP++;
 		break;
 
 	case '6':
 
 		//ÉLÉÉÉâ96ì«çû
 		CHARACTER = CHARACTER_LOAD[95];
-		CP++;
 		break;
 
 	case '7':
 
 		//ÉLÉÉÉâ97ì«çû
 		CHARACTER = CHARACTER_LOAD[96];
-		CP++;
 		break;
 
 	case '8':
 
 		//ÉLÉÉÉâ98ì«çû
 		CHARACTER = CHARACTER_LOAD[97];
-		CP++;
 		break;
 
 	case '9':
 
 		//ÉLÉÉÉâ99ì«çû
 		CHARACTER = CHARACTER_LOAD[98];
-		CP++;
 		break;
 	}
 }
@@ -5168,63 +5068,55 @@ void BACKGROUND_DRAW_0() {
 
 		//îwåi01ì«çû
 		BACKGROUND = BACKGROUND_LOAD[0];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi02ì«çû
 		BACKGROUND = BACKGROUND_LOAD[1];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi03ì«çû
 		BACKGROUND = BACKGROUND_LOAD[2];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi04ì«çû
 		BACKGROUND = BACKGROUND_LOAD[3];
-		CP++;
 		break;
 
 	case '5':
 
 		//îwåi05ì«çû
 		BACKGROUND = BACKGROUND_LOAD[4];
-		CP++;
+		
 		break;
 
 	case '6':
 
 		//îwåi06ì«çû
 		BACKGROUND = BACKGROUND_LOAD[5];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi07ì«çû
 		BACKGROUND = BACKGROUND_LOAD[6];
-		CP++;
 		break;
 
 	case '8':
 
 		//îwåi08ì«çû
 		BACKGROUND = BACKGROUND_LOAD[7];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi09ì«çû
 		BACKGROUND = BACKGROUND_LOAD[8];
-		CP++;
 		break;
 	}
 }
@@ -5238,70 +5130,60 @@ void BACKGROUND_DRAW_1() {
 
 		//îwåi10ì«çû
 		BACKGROUND = BACKGROUND_LOAD[9];
-		CP++;
 		break;
 
 	case '1':
 
 		//îwåi11ì«çû
 		BACKGROUND = BACKGROUND_LOAD[10];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi12ì«çû
 		BACKGROUND = BACKGROUND_LOAD[11];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi13ì«çû
 		BACKGROUND = BACKGROUND_LOAD[12];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi14ì«çû
 		BACKGROUND = BACKGROUND_LOAD[13];
-		CP++;
 		break;
 
 	case '5':
 
 		//îwåi15ì«çû
 		BACKGROUND = BACKGROUND_LOAD[14];
-		CP++;
 		break;
 
 	case '6':
 
 		//îwåi16ì«çû
 		BACKGROUND = BACKGROUND_LOAD[15];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi17ì«çû
 		BACKGROUND = BACKGROUND_LOAD[16];
-		CP++;
 		break;
 
 	case '8':
 
 		//îwåi18ì«çû
 		BACKGROUND = BACKGROUND_LOAD[17];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi19ì«çû
 		BACKGROUND = BACKGROUND_LOAD[18];
-		CP++;
 		break;
 	}
 }
@@ -5315,70 +5197,60 @@ void BACKGROUND_DRAW_2() {
 
 		//îwåi20ì«çû
 		BACKGROUND = BACKGROUND_LOAD[19];
-		CP++;
 		break;
 
 	case '1':
 
 		//îwåi21ì«çû
 		BACKGROUND = BACKGROUND_LOAD[20];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi22ì«çû
 		BACKGROUND = BACKGROUND_LOAD[21];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi23ì«çû
 		BACKGROUND = BACKGROUND_LOAD[22];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi24ì«çû
 		BACKGROUND = BACKGROUND_LOAD[23];
-		CP++;
 		break;
 
 	case '5':
 
 		//îwåi25ì«çû
 		BACKGROUND = BACKGROUND_LOAD[24];
-		CP++;
 		break;
 
 	case '6':
 
 		//îwåi26ì«çû
 		BACKGROUND = BACKGROUND_LOAD[25];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi27ì«çû
 		BACKGROUND = BACKGROUND_LOAD[26];
-		CP++;
 		break;
 
 	case '8':
 
 		//îwåi28ì«çû
 		BACKGROUND = BACKGROUND_LOAD[27];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi29ì«çû
 		BACKGROUND = BACKGROUND_LOAD[28];
-		CP++;
 		break;
 	}
 }
@@ -5392,70 +5264,60 @@ void BACKGROUND_DRAW_3() {
 
 		//îwåi30ì«çû
 		BACKGROUND = BACKGROUND_LOAD[29];
-		CP++;
 		break;
 
 	case '1':
 
 		//îwåi31ì«çû
 		BACKGROUND = BACKGROUND_LOAD[30];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi32ì«çû
 		BACKGROUND = BACKGROUND_LOAD[31];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi33ì«çû
 		BACKGROUND = BACKGROUND_LOAD[32];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi34ì«çû
 		BACKGROUND = BACKGROUND_LOAD[33];
-		CP++;
 		break;
 
 	case '5':
 
 		//îwåi35ì«çû
 		BACKGROUND = BACKGROUND_LOAD[34];
-		CP++;
 		break;
 
 	case '6':
 
 		//îwåi36ì«çû
 		BACKGROUND = BACKGROUND_LOAD[35];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi37ì«çû
 		BACKGROUND = BACKGROUND_LOAD[36];
-		CP++;
 		break;
 
 	case '8':
 
 		//îwåi38ì«çû
 		BACKGROUND = BACKGROUND_LOAD[37];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi39ì«çû
 		BACKGROUND = BACKGROUND_LOAD[38];
-		CP++;
 		break;
 	}
 }
@@ -5469,70 +5331,60 @@ void BACKGROUND_DRAW_4() {
 
 		//îwåi40ì«çû
 		BACKGROUND = BACKGROUND_LOAD[39];
-		CP++;
 		break;
 
 	case '1':
 
 		//îwåi41ì«çû
 		BACKGROUND = BACKGROUND_LOAD[40];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi42ì«çû
 		BACKGROUND = BACKGROUND_LOAD[41];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi43ì«çû
 		BACKGROUND = BACKGROUND_LOAD[42];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi44ì«çû
 		BACKGROUND = BACKGROUND_LOAD[43];
-		CP++;
 		break;
 
 	case '5':
 
 		//îwåi45ì«çû
 		BACKGROUND = BACKGROUND_LOAD[44];
-		CP++;
 		break;
 
 	case '6':
 
 		//îwåi46ì«çû
 		BACKGROUND = BACKGROUND_LOAD[45];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi47ì«çû
 		BACKGROUND = BACKGROUND_LOAD[46];
-		CP++;
 		break;
 
 	case '8':
 
 		//îwåi48ì«çû
 		BACKGROUND = BACKGROUND_LOAD[47];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi49ì«çû
 		BACKGROUND = BACKGROUND_LOAD[48];
-		CP++;
 		break;
 	}
 }
@@ -5546,70 +5398,60 @@ void BACKGROUND_DRAW_5() {
 
 		//îwåi50ì«çû
 		BACKGROUND = BACKGROUND_LOAD[49];
-		CP++;
 		break;
 
 	case '1':
 
 		//îwåi51ì«çû
 		BACKGROUND = BACKGROUND_LOAD[50];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi52ì«çû
 		BACKGROUND = BACKGROUND_LOAD[51];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi53ì«çû
 		BACKGROUND = BACKGROUND_LOAD[52];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi54ì«çû
 		BACKGROUND = BACKGROUND_LOAD[53];
-		CP++;
 		break;
 
 	case '5':
 
 		//îwåi55ì«çû
 		BACKGROUND = BACKGROUND_LOAD[54];
-		CP++;
 		break;
 
 	case '6':
 
 		//îwåi56ì«çû
 		BACKGROUND = BACKGROUND_LOAD[55];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi57ì«çû
 		BACKGROUND = BACKGROUND_LOAD[56];
-		CP++;
 		break;
 
 	case '8':
 
 		//îwåi58ì«çû
 		BACKGROUND = BACKGROUND_LOAD[57];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi59ì«çû
 		BACKGROUND = BACKGROUND_LOAD[58];
-		CP++;
 		break;
 	}
 }
@@ -5623,70 +5465,60 @@ void BACKGROUND_DRAW_6() {
 
 		//îwåi60ì«çû
 		BACKGROUND = BACKGROUND_LOAD[59];
-		CP++;
 		break;
 
 	case '1':
 
 		//îwåi61ì«çû
 		BACKGROUND = BACKGROUND_LOAD[60];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi62ì«çû
 		BACKGROUND = BACKGROUND_LOAD[61];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi63ì«çû
 		BACKGROUND = BACKGROUND_LOAD[62];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi64ì«çû
 		BACKGROUND = BACKGROUND_LOAD[63];
-		CP++;
 		break;
 
 	case '5':
 
 		//îwåi65ì«çû
 		BACKGROUND = BACKGROUND_LOAD[64];
-		CP++;
 		break;
 
 	case '6':
 
 		//îwåi66ì«çû
 		BACKGROUND = BACKGROUND_LOAD[65];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi67ì«çû
 		BACKGROUND = BACKGROUND_LOAD[66];
-		CP++;
 		break;
 
 	case '8':
 
 		//îwåi68ì«çû
 		BACKGROUND = BACKGROUND_LOAD[67];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi69ì«çû
 		BACKGROUND = BACKGROUND_LOAD[68];
-		CP++;
 		break;
 	}
 }
@@ -5700,70 +5532,61 @@ void BACKGROUND_DRAW_7() {
 
 		//îwåi70ì«çû
 		BACKGROUND = BACKGROUND_LOAD[70];
-		CP++;
 		break;
 
 	case '1':
 
 		//îwåi71ì«çû
 		BACKGROUND = BACKGROUND_LOAD[70];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi72ì«çû
 		BACKGROUND = BACKGROUND_LOAD[71];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi73ì«çû
 		BACKGROUND = BACKGROUND_LOAD[72];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi74ì«çû
 		BACKGROUND = BACKGROUND_LOAD[73];
-		CP++;
 		break;
 
 	case '5':
 
 		//îwåi75ì«çû
 		BACKGROUND = BACKGROUND_LOAD[74];
-		CP++;
 		break;
 
 	case '6':
 
 		//îwåi76ì«çû
 		BACKGROUND = BACKGROUND_LOAD[75];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi77ì«çû
 		BACKGROUND = BACKGROUND_LOAD[76];
-		CP++;
+		
 		break;
 
 	case '8':
 
 		//îwåi78ì«çû
 		BACKGROUND = BACKGROUND_LOAD[77];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi79ì«çû
 		BACKGROUND = BACKGROUND_LOAD[78];
-		CP++;
 		break;
 	}
 }
@@ -5777,70 +5600,61 @@ void BACKGROUND_DRAW_8() {
 
 		//îwåi80ì«çû
 		BACKGROUND = BACKGROUND_LOAD[79];
-		CP++;
 		break;
 
 	case '1':
 
 		//îwåi81ì«çû
 		BACKGROUND = BACKGROUND_LOAD[80];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi82ì«çû
 		BACKGROUND = BACKGROUND_LOAD[81];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi83ì«çû
 		BACKGROUND = BACKGROUND_LOAD[82];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi84ì«çû
 		BACKGROUND = BACKGROUND_LOAD[83];
-		CP++;
+		
 		break;
 
 	case '5':
 
 		//îwåi85ì«çû
 		BACKGROUND = BACKGROUND_LOAD[84];
-		CP++;
 		break;
 
 	case '6':
 
 		//îwåi86ì«çû
 		BACKGROUND = BACKGROUND_LOAD[85];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi87ì«çû
 		BACKGROUND = BACKGROUND_LOAD[86];
-		CP++;
 		break;
 
 	case '8':
 
 		//îwåi88ì«çû
 		BACKGROUND = BACKGROUND_LOAD[87];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi89ì«çû
 		BACKGROUND = BACKGROUND_LOAD[88];
-		CP++;
 		break;
 	}
 }
@@ -5854,70 +5668,60 @@ void BACKGROUND_DRAW_9() {
 
 		//îwåi90ì«çû
 		BACKGROUND = BACKGROUND_LOAD[89];
-		CP++;
 		break;
 
 	case '1':
 
 		//îwåi91ì«çû
 		BACKGROUND = BACKGROUND_LOAD[90];
-		CP++;
 		break;
 
 	case '2':
 
 		//îwåi92ì«çû
 		BACKGROUND = BACKGROUND_LOAD[91];
-		CP++;
 		break;
 
 	case '3':
 
 		//îwåi93ì«çû
 		BACKGROUND = BACKGROUND_LOAD[92];
-		CP++;
 		break;
 
 	case '4':
 
 		//îwåi94ì«çû
 		BACKGROUND = BACKGROUND_LOAD[93];
-		CP++;
 		break;
 
 	case '5':
 
 		//îwåi95ì«çû
 		BACKGROUND = BACKGROUND_LOAD[94];
-		CP++;
 		break;
 
 	case '6':
 
 		//îwåi96ì«çû
 		BACKGROUND = BACKGROUND_LOAD[95];
-		CP++;
 		break;
 
 	case '7':
 
 		//îwåi97ì«çû
 		BACKGROUND = BACKGROUND_LOAD[96];
-		CP++;
 		break;
 
 	case '8':
 
 		//îwåi98ì«çû
 		BACKGROUND = BACKGROUND_LOAD[97];
-		CP++;
 		break;
 
 	case '9':
 
 		//îwåi99ì«çû
 		BACKGROUND = BACKGROUND_LOAD[98];
-		CP++;
 		break;
 	}
 }
@@ -6007,64 +5811,55 @@ void BACKGROUNDMUSIC_START_0() {
 	case '1':
 
 		//BGM01ì«çû
-		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[0];
-		CP++;
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[0];		
 		break;
 
 	case '2':
 
 		//BGM02ì«çû
-		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[1];
-		CP++;
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[1];		
 		break;
 
 	case '3':
 
 		//BGM03ì«çû
-		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[2];
-		CP++;
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[2];		
 		break;
 
 	case '4':
 
 		//BGM04ì«çû
-		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[3];
-		CP++;
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[3];	
 		break;
 
 	case '5':
 
 		//BGM05ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[4];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM06ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[5];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM07ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[6];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM08ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[7];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM09ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[8];
-		CP++;
 		break;
 	}
 }
@@ -6078,70 +5873,60 @@ void BACKGROUNDMUSIC_START_1() {
 
 		//BGM10ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[9];
-		CP++;
 		break;
 
 	case '1':
 
 		//BGM11ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[10];
-		CP++;
 		break;
 
 	case '2':
 
 		//BGM12ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[11];
-		CP++;
 		break;
 
 	case '3':
 
 		//BGM13ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[12];
-		CP++;
 		break;
 
 	case '4':
 
 		//BGM14ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[13];
-		CP++;
 		break;
 
 	case '5':
 
 		//BGM15ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[14];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM16ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[15];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM17ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[16];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM18ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[17];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM19ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[18];
-		CP++;
 		break;
 	}
 }
@@ -6155,70 +5940,60 @@ void BACKGROUNDMUSIC_START_2() {
 
 		//BGM20ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[19];
-		CP++;
 		break;
 
 	case '1':
 
 		//BGM21ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[20];
-		CP++;
 		break;
 
 	case '2':
 
 		//BGM22ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[21];
-		CP++;
 		break;
 
 	case '3':
 
 		//BGM23ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[22];
-		CP++;
 		break;
 
 	case '4':
 
 		//BGM24ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[23];
-		CP++;
 		break;
 
 	case '5':
 
 		//BGM25ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[24];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM26ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[25];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM27ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[26];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM28ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[27];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM29ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[28];
-		CP++;
 		break;
 	}
 }
@@ -6232,70 +6007,60 @@ void BACKGROUNDMUSIC_START_3() {
 
 		//BGM30ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[29];
-		CP++;
 		break;
 
 	case '1':
 
 		//BGM31ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[30];
-		CP++;
 		break;
 
 	case '2':
 
 		//BGM32ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[31];
-		CP++;
 		break;
 
 	case '3':
 
 		//BGM33ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[32];
-		CP++;
 		break;
 
 	case '4':
 
 		//BGM34ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[33];
-		CP++;
 		break;
 
 	case '5':
 
 		//BGM35ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[34];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM36ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[35];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM37ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[36];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM38ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[37];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM39ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[38];
-		CP++;
 		break;
 	}
 }
@@ -6309,70 +6074,60 @@ void BACKGROUNDMUSIC_START_4() {
 
 		//BGM40ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[39];
-		CP++;
 		break;
 
 	case '1':
 
 		//BGM41ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[40];
-		CP++;
 		break;
 
 	case '2':
 
 		//BGM42ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[41];
-		CP++;
 		break;
 
 	case '3':
 
 		//BGM43ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[42];
-		CP++;
 		break;
 
 	case '4':
 
 		//BGM44ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[43];
-		CP++;
 		break;
 
 	case '5':
 
 		//BGM45ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[44];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM46ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[45];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM47ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[46];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM48ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[47];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM49ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[48];
-		CP++;
 		break;
 	}
 }
@@ -6386,70 +6141,60 @@ void BACKGROUNDMUSIC_START_5() {
 
 		//BGM50ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[49];
-		CP++;
 		break;
 
 	case '1':
 
 		//BGM51ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[50];
-		CP++;
 		break;
 
 	case '2':
 
 		//BGM52ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[51];
-		CP++;
 		break;
 
 	case '3':
 
 		//BGM53ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[52];
-		CP++;
 		break;
 
 	case '4':
 
 		//BGM54ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[53];
-		CP++;
 		break;
 
 	case '5':
 
 		//BGM55ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[54];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM56ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[55];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM57ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[56];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM58ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[57];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM59ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[58];
-		CP++;
 		break;
 	}
 }
@@ -6463,70 +6208,60 @@ void BACKGROUNDMUSIC_START_6() {
 
 		//BGM60ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[59];
-		CP++;
 		break;
 
 	case '1':
 
 		//BGM61ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[60];
-		CP++;
 		break;
 
 	case '2':
 
 		//BGM62ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[61];
-		CP++;
 		break;
 
 	case '3':
 
 		//BGM63ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[62];
-		CP++;
 		break;
 
 	case '4':
 
 		//BGM64ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[63];
-		CP++;
 		break;
 
 	case '5':
 
 		//BGM65ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[64];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM66ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[65];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM67ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[66];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM68ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[67];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM69ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[68];
-		CP++;
 		break;
 	}
 }
@@ -6540,70 +6275,60 @@ void BACKGROUNDMUSIC_START_7() {
 
 		//BGM70ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[70];
-		CP++;
 		break;
 
 	case '1':
 
 		//BGM71ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[70];
-		CP++;
 		break;
 
 	case '2':
 
 		//BGM72ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[71];
-		CP++;
 		break;
 
 	case '3':
 
 		//BGM73ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[72];
-		CP++;
 		break;
 
 	case '4':
 
 		//BGM74ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[73];
-		CP++;
 		break;
 
 	case '5':
 
 		//BGM75ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[74];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM76ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[75];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM77ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[76];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM78ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[77];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM79ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[78];
-		CP++;
 		break;
 	}
 }
@@ -6617,70 +6342,62 @@ void BACKGROUNDMUSIC_START_8() {
 
 		//BGM80ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[79];
-		CP++;
+		
 		break;
 
 	case '1':
 
 		//BGM81ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[80];
-		CP++;
 		break;
 
 	case '2':
 
 		//BGM82ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[81];
-		CP++;
 		break;
 
 	case '3':
 
 		//BGM83ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[82];
-		CP++;
 		break;
 
 	case '4':
 
 		//BGM84ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[83];
-		CP++;
+		
 		break;
 
 	case '5':
 
 		//BGM85ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[84];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM86ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[85];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM87ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[86];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM88ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[87];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM89ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[88];
-		CP++;
 		break;
 	}
 }
@@ -6694,70 +6411,60 @@ void BACKGROUNDMUSIC_START_9() {
 
 		//BGM90ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[89];
-		CP++;
 		break;
 
 	case '1':
 
 		//BGM91ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[90];
-		CP++;
 		break;
 
 	case '2':
 
 		//BGM92ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[91];
-		CP++;
 		break;
 
 	case '3':
 
 		//BGM93ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[92];
-		CP++;
 		break;
 
 	case '4':
 
 		//BGM94ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[93];
-		CP++;
 		break;
 
 	case '5':
 
 		//BGM95ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[94];
-		CP++;
 		break;
 
 	case '6':
 
 		//BGM96ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[95];
-		CP++;
 		break;
 
 	case '7':
 
 		//BGM97ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[96];
-		CP++;
 		break;
 
 	case '8':
 
 		//BGM98ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[97];
-		CP++;
 		break;
 
 	case '9':
 
 		//BGM99ì«çû
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[98];
-		CP++;
 		break;
 	}
 }
@@ -6849,63 +6556,55 @@ void SOUNDEFFECT_START_0() {
 
 		//SE01ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[0];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE02ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[1];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE03ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[2];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE04ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[3];
-		CP++;
+		
 		break;
 
 	case '5':
 
 		//SE05ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[4];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE06ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[5];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE07ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[6];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE08ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[7];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE09ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[8];
-		CP++;
 		break;
 	}
 }
@@ -6919,70 +6618,60 @@ void SOUNDEFFECT_START_1() {
 
 		//SE10ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[9];
-		CP++;
 		break;
 
 	case '1':
 
 		//SE11ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[10];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE12ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[11];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE13ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[12];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE14ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[13];
-		CP++;
 		break;
 
 	case '5':
 
 		//SE15ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[14];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE16ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[15];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE17ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[16];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE18ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[17];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE19ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[18];
-		CP++;
 		break;
 	}
 }
@@ -6996,70 +6685,60 @@ void SOUNDEFFECT_START_2() {
 
 		//SE20ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[19];
-		CP++;
 		break;
 
 	case '1':
 
 		//SE21ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[20];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE22ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[21];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE23ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[22];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE24ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[23];
-		CP++;
 		break;
 
 	case '5':
 
 		//SE25ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[24];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE26ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[25];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE27ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[26];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE28ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[27];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE29ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[28];
-		CP++;
 		break;
 	}
 }
@@ -7073,70 +6752,60 @@ void SOUNDEFFECT_START_3() {
 
 		//SE30ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[29];
-		CP++;
 		break;
 
 	case '1':
 
 		//SE31ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[30];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE32ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[31];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE33ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[32];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE34ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[33];
-		CP++;
 		break;
 
 	case '5':
 
 		//SE35ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[34];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE36ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[35];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE37ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[36];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE38ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[37];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE39ì«çû
-		SOUNDEFFECT = SOUNDEFFECT_LOAD[38];
-		CP++;
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[38];		
 		break;
 	}
 }
@@ -7150,70 +6819,60 @@ void SOUNDEFFECT_START_4() {
 
 		//SE40ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[39];
-		CP++;
 		break;
 
 	case '1':
 
 		//SE41ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[40];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE42ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[41];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE43ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[42];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE44ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[43];
-		CP++;
 		break;
 
 	case '5':
 
 		//SE45ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[44];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE46ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[45];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE47ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[46];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE48ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[47];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE49ì«çû
-		SOUNDEFFECT = SOUNDEFFECT_LOAD[48];
-		CP++;
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[48];		
 		break;
 	}
 }
@@ -7227,70 +6886,61 @@ void SOUNDEFFECT_START_5() {
 
 		//SE50ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[49];
-		CP++;
 		break;
 
 	case '1':
 
 		//SE51ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[50];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE52ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[51];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE53ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[52];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE54ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[53];
-		CP++;
+		
 		break;
 
 	case '5':
 
 		//SE55ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[54];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE56ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[55];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE57ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[56];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE58ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[57];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE59ì«çû
-		SOUNDEFFECT = SOUNDEFFECT_LOAD[58];
-		CP++;
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[58];		
 		break;
 	}
 }
@@ -7304,70 +6954,60 @@ void SOUNDEFFECT_START_6() {
 
 		//SE60ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[59];
-		CP++;
 		break;
 
 	case '1':
 
 		//SE61ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[60];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE62ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[61];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE63ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[62];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE64ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[63];
-		CP++;
 		break;
 
 	case '5':
 
 		//SE65ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[64];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE66ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[65];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE67ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[66];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE68ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[67];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE69ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[68];
-		CP++;
 		break;
 	}
 }
@@ -7381,70 +7021,60 @@ void SOUNDEFFECT_START_7() {
 
 		//SE70ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[70];
-		CP++;
 		break;
 
 	case '1':
 
 		//SE71ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[70];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE72ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[71];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE73ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[72];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE74ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[73];
-		CP++;
 		break;
 
 	case '5':
 
 		//SE75ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[74];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE76ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[75];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE77ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[76];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE78ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[77];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE79ì«çû
-		SOUNDEFFECT = SOUNDEFFECT_LOAD[78];
-		CP++;
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[78];	
 		break;
 	}
 }
@@ -7458,70 +7088,60 @@ void SOUNDEFFECT_START_8() {
 
 		//SE80ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[79];
-		CP++;
 		break;
 
 	case '1':
 
 		//SE81ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[80];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE82ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[81];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE83ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[82];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE84ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[83];
-		CP++;
 		break;
 
 	case '5':
 
 		//SE85ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[84];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE86ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[85];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE87ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[86];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE88ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[87];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE89ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[88];
-		CP++;
 		break;
 	}
 }
@@ -7535,70 +7155,60 @@ void SOUNDEFFECT_START_9() {
 
 		//SE90ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[89];
-		CP++;
 		break;
 
 	case '1':
 
 		//SE91ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[90];
-		CP++;
 		break;
 
 	case '2':
 
 		//SE92ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[91];
-		CP++;
 		break;
 
 	case '3':
 
 		//SE93ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[92];
-		CP++;
 		break;
 
 	case '4':
 
 		//SE94ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[93];
-		CP++;
 		break;
 
 	case '5':
 
 		//SE95ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[94];
-		CP++;
 		break;
 
 	case '6':
 
 		//SE96ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[95];
-		CP++;
 		break;
 
 	case '7':
 
 		//SE97ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[96];
-		CP++;
 		break;
 
 	case '8':
 
 		//SE98ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[97];
-		CP++;
 		break;
 
 	case '9':
 
 		//SE99ì«çû
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[98];
-		CP++;
 		break;
 	}
 }
@@ -7850,7 +7460,6 @@ void MOVIE_START_2() {
 
 		//ìÆâÊ22ì«çû
 		PlayMovie("DATA/MOVIE/MOVIE22.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
-
 		CP++;
 		break;
 
@@ -7872,7 +7481,7 @@ void MOVIE_START_2() {
 
 		//ìÆâÊ25ì«çû
 		PlayMovie("DATA/MOVIE/MOVIE25.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
-		CP++;
+		
 		break;
 
 	case '6':
@@ -8005,7 +7614,7 @@ void MOVIE_START_4() {
 
 		//ìÆâÊ42ì«çû
 		PlayMovie("DATA/MOVIE/MOVIE42.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
-		CP++;
+		
 		break;
 
 	case '3':
@@ -8327,7 +7936,7 @@ void MOVIE_START_8() {
 
 		//ìÆâÊ84ì«çû
 		PlayMovie("DATA/MOVIE/MOVIE84.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
-		CP++;
+		
 		break;
 
 	case '5':
@@ -8671,6 +8280,10 @@ int SCRIPT_OUTPUT() {
 
 		//ÉLÉÉÉâÉNÉ^Å[ñºï`âÊèàóù
 		SCRIPT_OUTPUT_CHARACTER_NAME();
+		break;
+
+	case ' ':
+		CP++;
 		break;
 
 	default:	// ÇªÇÃëºÇÃï∂éö
