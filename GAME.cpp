@@ -1977,7 +1977,7 @@ int SAVEDATA_3_SAVE() {
 void SAVEDATA_SAVE_LOOP() {
 
 	//セーブデータ・セーブ画面ループ
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && SAVESNAP_HANDLE1 == 0 && SAVESNAP_HANDLE2 == 0 && SAVESNAP_HANDLE3 == 0) {
 
 			//背景描画
 			DrawGraph(0, 0, SAVETITLE, TRUE);
@@ -2002,7 +2002,6 @@ void SAVEDATA_SAVE_LOOP() {
 
 				//セーブデータ１にセーブ
 				SAVEDATA_1_SAVE();
-				break;
 			}
 
 			//セーブデータ２にセーブ
@@ -2010,7 +2009,6 @@ void SAVEDATA_SAVE_LOOP() {
 
 				//セーブデータ２にセーブ
 				SAVEDATA_2_SAVE();
-				break;
 			}
 
 			//セーブデータ３にセーブ
@@ -2018,7 +2016,6 @@ void SAVEDATA_SAVE_LOOP() {
 
 				//セーブデータ３にセーブ
 				SAVEDATA_3_SAVE();
-				break;
 			}
 
 			//画面に戻る
