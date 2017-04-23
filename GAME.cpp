@@ -827,6 +827,12 @@ void SOUNDNOVEL() {
 			SP = 0;
 			CP = 0;
 		}
+
+		//選択肢ループの場合
+		if (SAVE_CHOICE == 1) {
+			SP = SP + 1;
+			CP = 0;
+		}
 	}
 }
 
@@ -867,6 +873,12 @@ void WINDOWNOVEL() {
 
 		if (SP == 0) {
 			SP = 0;
+			CP = 0;
+		}
+
+		//選択肢ループの場合
+		if (SAVE_CHOICE == 1) {
+			SP = SP + 1;
 			CP = 0;
 		}
 	}
@@ -1274,9 +1286,6 @@ int QUICKSAVE_LOAD() {
 
 		//ウインドウ風描画時の処理
 		WINDOWNOVEL();
-
-		//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
-		//SAVEDATA_LOAD_STRING_POINT();
 
 		MessageBox(
 			NULL,
