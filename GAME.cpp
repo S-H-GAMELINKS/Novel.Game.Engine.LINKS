@@ -1233,13 +1233,6 @@ int QUICKSAVE_SAVE(){
 	return 0;
 }
 
-//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
-void SAVEDATA_LOAD_STRING_POINT() {
-
-	SP = SP + 1;
-	CP = 0;
-}
-
 //クイックロード時のメッセージ
 void QUICKSAVE_LOAD_MESSAGE() {
 	SAVE = MessageBox(
@@ -1283,7 +1276,7 @@ int QUICKSAVE_LOAD() {
 		WINDOWNOVEL();
 
 		//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
-		SAVEDATA_LOAD_STRING_POINT();
+		//SAVEDATA_LOAD_STRING_POINT();
 
 		MessageBox(
 			NULL,
@@ -2087,9 +2080,6 @@ void LOAD_SOUNDNOVEL() {
 	SOUNDNOVEL();
 
 	GAMEMENU_COUNT = 1;
-
-	//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
-	SAVEDATA_LOAD_STRING_POINT();
 }
 
 //ロード後の処理(ウインドウ風)
@@ -2099,9 +2089,6 @@ void LOAD_WINDOWNOVEL() {
 	WINDOWNOVEL();
 
 	GAMEMENU_COUNT = 1;
-
-	//クイックセーブデータ又はセーブデータ読み込み時の文字位置処理
-	SAVEDATA_LOAD_STRING_POINT();
 }
 
 //セーブデータ1のロード
