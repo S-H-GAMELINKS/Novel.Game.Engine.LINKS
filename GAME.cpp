@@ -3809,49 +3809,42 @@ void SCRIPT_OUTPUT_CHOICE_BRANCH_UP() {
 			EndFlag = 2;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 2:
 			EndFlag = 4;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 3:
 			EndFlag = 6;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 4:
 			EndFlag = 8;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 5:
 			EndFlag = 10;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 6:
 			EndFlag = 12;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 7:
 			EndFlag = 14;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 	}
 }
@@ -3865,101 +3858,43 @@ void SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN() {
 			EndFlag = 3;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 2:
 			EndFlag = 5;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 3:
 			EndFlag = 7;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 4:
 			EndFlag = 9;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 5:
 			EndFlag = 11;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 6:
 			EndFlag = 13;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
 
 	case 7:
 			EndFlag = 15;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
-			BACKLOG_CHOICE = 1;
 			break;
-	}
-}
-
-//選択肢ループ
-void SCRIPT_OUTPUT_CHOICE_LOOP() {
-
-	//選択肢ファイルの読み込み(描画用
-	SCRIPT_OUTPUT_CHOICE_READ();
-
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag != 99 && EndFlag != 99999 && SAVE_CHOICE != 0) {
-
-		//選択肢ループ用描画処理
-		SCRIPT_OUTPUT_CHOICE_LOOP_DRAW();
-	
-		//選択肢の描画
-		sentakusi(Cr, y);
-
-		//ゲームメニュー
-		GAMEMENU();
-
-		//ゲーム終了
-		GAME_FINISH();
-
-		//セーブデータ用スクリーンショット取得
-		SCRIPT_OUTPUT_CHOICE_LOOP_SAVESNAP();
-
-		//マウス操作
-		Mouse_Move();
-
-		//キー操作関連
-		SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE();
-
-		//画面クリア処理
-		SCREEN_CLEAR();
-
-		if (y == SENTAKUSI1 && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == SENTAKUSI1 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-			//選択後の分岐処理(選択肢↑)
-			SCRIPT_OUTPUT_CHOICE_BRANCH_UP();
-			CP++;
-			break;
-		}
-
-		if (y == SENTAKUSI2 && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == SENTAKUSI2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-			//選択後の分岐処理(選択肢↑)
-			SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN();
-			CP++;
-			break;
-		}
-
 	}
 }
 
@@ -4056,12 +3991,77 @@ void SCRIPT_OUTPUT_CHOICE_BACKLOG() {
 
 	//バックログ取得
 	BACKLOG_GET();
-	
+
+	ClearDrawScreen();
+	DrawPointY = 0;
+	DrawPointX = 0;
+	BACKGROUND = 0;
+	CHARACTER = 0;
+
 	SetDrawScreen(DX_SCREEN_FRONT);
+}
+
+//選択肢ループ
+void SCRIPT_OUTPUT_CHOICE_LOOP() {
+
+	//選択肢ファイルの読み込み(描画用
+	SCRIPT_OUTPUT_CHOICE_READ();
+
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag != 99 && EndFlag != 99999 && SAVE_CHOICE != 0) {
+
+		//選択肢ループ用描画処理
+		SCRIPT_OUTPUT_CHOICE_LOOP_DRAW();
+	
+		//選択肢の描画
+		sentakusi(Cr, y);
+
+		//ゲームメニュー
+		GAMEMENU();
+
+		//ゲーム終了
+		GAME_FINISH();
+
+		//セーブデータ用スクリーンショット取得
+		SCRIPT_OUTPUT_CHOICE_LOOP_SAVESNAP();
+
+		//マウス操作
+		Mouse_Move();
+
+		//キー操作関連
+		SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE();
+
+		//画面クリア処理
+		SCREEN_CLEAR();
+
+		if (y == SENTAKUSI1 && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == SENTAKUSI1 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+			BACKLOG_COUNT++;
+
+			//選択肢時のバックログ取得
+			SCRIPT_OUTPUT_CHOICE_BACKLOG();
+
+			//選択後の分岐処理(選択肢↑)
+			SCRIPT_OUTPUT_CHOICE_BRANCH_UP();
+			CP++;
+			break;
+		}
+
+		if (y == SENTAKUSI2 && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == SENTAKUSI2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+			//選択後の分岐処理(選択肢↑)
+			SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN();
+			CP++;
+			break;
+		}
+
+	}
 }
 
 //スクリプトタグ処理(選択肢処理)
 void SCRIPT_OUTPUT_CHOICE() {
+
+	int temp_CHARACTER = CHARACTER;
+	int temp_BACKGROUND = BACKGROUND;
 
 	y = SENTAKUSIY;
 
@@ -4072,14 +4072,6 @@ void SCRIPT_OUTPUT_CHOICE() {
 
 		//選択肢ループ
 		SCRIPT_OUTPUT_CHOICE_LOOP();
-
-		if (BACKLOG_CHOICE == 1) {
-
-			BACKLOG_COUNT++;
-
-			//選択肢時のバックログ取得
-			SCRIPT_OUTPUT_CHOICE_BACKLOG();
-		}
 	}
 
 	if (EndFlag == 8 || EndFlag == 9 || EndFlag == 10 || EndFlag == 11 || EndFlag == 12 || EndFlag == 13 || EndFlag == 14 || EndFlag == 15)
