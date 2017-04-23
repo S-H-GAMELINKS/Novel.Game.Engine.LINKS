@@ -1977,7 +1977,7 @@ int SAVEDATA_3_SAVE() {
 void SAVEDATA_SAVE_LOOP() {
 
 	//セーブデータ・セーブ画面ループ
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && SAVESNAP_HANDLE1 == 0 && SAVESNAP_HANDLE2 == 0 && SAVESNAP_HANDLE3 == 0) {
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && GAMEMENU_COUNT == 0) {
 
 			//背景描画
 			DrawGraph(0, 0, SAVETITLE, TRUE);
@@ -2246,7 +2246,7 @@ int SAVEDATA_3_LOAD() {
 //セーブデータ・ロード画面ループ
 void SAVEDATA_LOAD_LOOP() {
 
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && GAMEMENU_COUNT == 0) {
 
 			//背景描画
 			DrawGraph(0, 0, SAVETITLE, TRUE);
@@ -2271,7 +2271,6 @@ void SAVEDATA_LOAD_LOOP() {
 
 				//セーブデータ１をロード
 				SAVEDATA_1_LOAD();
-				break;
 			}
 
 			//セーブデータ２のロード
@@ -2279,7 +2278,6 @@ void SAVEDATA_LOAD_LOOP() {
 
 				//セーブデータ2をロード
 				SAVEDATA_2_LOAD();
-				break;
 			}
 
 			//セーブデータ３のロード
@@ -2287,7 +2285,6 @@ void SAVEDATA_LOAD_LOOP() {
 
 				//セーブデータ2をロード
 				SAVEDATA_3_LOAD();
-				break;
 			}
 
 			//戻る
@@ -2464,7 +2461,7 @@ void SAVEDATA_3_DELETE() {
 //セーブデータ削除画面ループ
 void SAVEDATA_DELETE_LOOP() {
 
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0) {
+	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && GAMEMENU_COUNT == 0) {
 
 		//背景描画
 		DrawGraph(0, 0, SAVETITLE, TRUE);
@@ -2488,21 +2485,18 @@ void SAVEDATA_DELETE_LOOP() {
 
 			//セーブデータ1削除処理
 			SAVEDATA_1_DELETE();
-			break;
 		}
 
 		if (SAVE_y == (SAVE_Y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
 			//セーブデータ2削除処理
 			SAVEDATA_2_DELETE();
-			break;
 		}
 
 		if (SAVE_y == (SAVE_Y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
 			//セーブデータ3削除処理
 			SAVEDATA_3_DELETE();
-			break;
 		}
 
 		if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
