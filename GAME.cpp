@@ -65,6 +65,7 @@ int M = 0;
 int N = 0;
 
 //バックログ変数
+int BACKLOG_CHOICE = 0;
 int BACKLOG_HANDLE, BACKLOG[11], BACKLOG_BACKGROUND;
 int LOG = 1, BACKLOG_COUNT = 1;
 char *BACKLOG_DELETE;
@@ -793,12 +794,23 @@ int SCRIPT_READ() {
 	return 0;
 }
 
+//画面クリア処理関数
+void SCREEN_CLEAR() {
+
+	//画面処理
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	ClearDrawScreen();
+
+	SetDrawScreen(DX_SCREEN_FRONT);
+}
+
 //各処理後のゲーム画面の描画(サウンドノベル風)
 void SOUNDNOVEL() {
 
 	if (soundnovel_winownovel == 0) {
 
-		ClearDrawScreen();
+		SCREEN_CLEAR();
 
 		//背景の表示
 		if (BACKGROUND != 0) {
@@ -842,7 +854,7 @@ void WINDOWNOVEL() {
 	//ウインドウ風描画時の処理
 	if (soundnovel_winownovel == 1) {
 
-		ClearDrawScreen();
+		SCREEN_CLEAR();
 
 		//背景の表示
 		if (BACKGROUND != 0) {
@@ -1125,17 +1137,6 @@ int Mouse_Move() {
 		Mouse_Move_CONFIG(MouseY);
 	}
 	return 0;
-}
-
-//画面クリア処理関数
-void SCREEN_CLEAR() {
-
-	//画面処理
-	SetDrawScreen(DX_SCREEN_BACK);
-
-	ClearDrawScreen();
-
-	SetDrawScreen(DX_SCREEN_FRONT);
 }
 
 //SKIP_READ LOAD関数
@@ -3665,7 +3666,7 @@ void SCRIPT_OUTPUT_SESTOP() {
 //選択肢ループ用描画処理(サウンドノベル風)
 void SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL() {
 
-	if (soundnovel_winownovel == 0) {
+	if (soundnovel_winownovel == 0 && SAVE_CHOICE == 1) {
 
 		DrawGraph(0, 0, BACKGROUND, TRUE);
 
@@ -3673,10 +3674,10 @@ void SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL() {
 	}
 }
 
-//選択肢ループ湯描画処理(ウインドウ風)
+//選択肢ループ用描画処理(ウインドウ風)
 void SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL() {
 
-	if (soundnovel_winownovel == 1) {
+	if (soundnovel_winownovel == 1 && SAVE_CHOICE == 1) {
 
 		int	Window_Color = GetColor(0, 0, 0);
 
@@ -3686,6 +3687,16 @@ void SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL() {
 
 		DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
 	}
+}
+
+//選択肢ループ用描画処理
+void SCRIPT_OUTPUT_CHOICE_LOOP_DRAW() {
+
+	//選択肢ループ用描画処理(サウンドノベル風)
+	SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL();
+
+	//選択肢ループ用描画処理(ウインドウノベル風)
+	SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL();
 }
 
 //選択肢ファイルの読み込み(描画用)
@@ -3798,42 +3809,49 @@ void SCRIPT_OUTPUT_CHOICE_BRANCH_UP() {
 			EndFlag = 2;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 2:
 			EndFlag = 4;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 3:
 			EndFlag = 6;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 4:
 			EndFlag = 8;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 5:
 			EndFlag = 10;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 6:
 			EndFlag = 12;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 7:
 			EndFlag = 14;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 	}
 }
@@ -3847,42 +3865,49 @@ void SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN() {
 			EndFlag = 3;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 2:
 			EndFlag = 5;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 3:
 			EndFlag = 7;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 4:
 			EndFlag = 9;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 5:
 			EndFlag = 11;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 6:
 			EndFlag = 13;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 
 	case 7:
 			EndFlag = 15;
 			SAVE_CHOICE = 0;
 			SAVESNAP_CHOICE = 0;
+			BACKLOG_CHOICE = 1;
 			break;
 	}
 }
@@ -3890,17 +3915,15 @@ void SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN() {
 //選択肢ループ
 void SCRIPT_OUTPUT_CHOICE_LOOP() {
 
+	//選択肢ファイルの読み込み(描画用
+	SCRIPT_OUTPUT_CHOICE_READ();
+
 	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag != 99 && EndFlag != 99999 && SAVE_CHOICE != 0) {
 
-		//選択肢ループ用描画処理(サウンドノベル風)
-		SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL();
-
-		//選択肢ループ用描画処理(ウインドウノベル風)
-		SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL();
-		
-		//選択肢ファイルの読み込み(描画用
-		SCRIPT_OUTPUT_CHOICE_READ();
-
+		//選択肢ループ用描画処理
+		SCRIPT_OUTPUT_CHOICE_LOOP_DRAW();
+	
+		//選択肢の描画
 		sentakusi(Cr, y);
 
 		//ゲームメニュー
@@ -4033,15 +4056,7 @@ void SCRIPT_OUTPUT_CHOICE_BACKLOG() {
 
 	//バックログ取得
 	BACKLOG_GET();
-
-	// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-	ClearDrawScreen();
-	DrawPointY = 0;
-	DrawPointX = 0;
-	CHARACTER = 0;
-	BACKGROUND = 0;
-	CP++;
-
+	
 	SetDrawScreen(DX_SCREEN_FRONT);
 }
 
@@ -4055,13 +4070,16 @@ void SCRIPT_OUTPUT_CHOICE() {
 		SAVE_CHOICE = 1;
 		SAVESNAP_CHOICE = 1;
 
-		BACKLOG_COUNT++;
-
 		//選択肢ループ
 		SCRIPT_OUTPUT_CHOICE_LOOP();
 
-		//選択肢時のバックログ取得
-		SCRIPT_OUTPUT_CHOICE_BACKLOG();
+		if (BACKLOG_CHOICE == 1) {
+
+			BACKLOG_COUNT++;
+
+			//選択肢時のバックログ取得
+			SCRIPT_OUTPUT_CHOICE_BACKLOG();
+		}
 	}
 
 	if (EndFlag == 8 || EndFlag == 9 || EndFlag == 10 || EndFlag == 11 || EndFlag == 12 || EndFlag == 13 || EndFlag == 14 || EndFlag == 15)
