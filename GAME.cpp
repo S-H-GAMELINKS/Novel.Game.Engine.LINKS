@@ -8127,6 +8127,19 @@ void MOVIE_START() {
 	}
 }
 
+//コメント処理
+void COMMENT() {
+
+	switch (String[SP][CP]) {
+
+		case '/':
+
+			SP++;
+			CP = 0;
+			break;
+	}
+}
+
 //スクリプトタグ処理(メイン)関数
 int SCRIPT_OUTPUT() {
 
@@ -8277,6 +8290,15 @@ int SCRIPT_OUTPUT() {
 
 		//キャラクター名描画処理
 		SCRIPT_OUTPUT_CHARACTER_NAME();
+		break;
+
+		//コメントタグ
+	case '/' :
+
+		CP++;
+
+		//コメントタグ処理
+		COMMENT();
 		break;
 
 	case ' ':
