@@ -31,11 +31,11 @@ int CONFIG_SAVE();
 //CONFIG_LOAD関数
 int CONFIG_LOAD();
 
-//クイックセーブ
-int QUICKSAVE_SAVE();
-
 //クイックロード
 int QUICKSAVE_LOAD();
+
+//コンティニュー用ロード
+int CONTINUE_LOAD();
 
 //セーブ・ロード・スキップ・オート他 ゲームメニュー
 int GAMEMENU();

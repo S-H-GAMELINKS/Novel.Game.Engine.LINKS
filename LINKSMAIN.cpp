@@ -171,6 +171,9 @@ void TITLE_MENU_CHOICE() {
 	if (y == QUICKLOAD && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == QUICKLOAD && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
 		QUICKSAVE_LOAD();
 
+	if (y == CONTINUE && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == CONTINUE && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+		CONTINUE_LOAD();
+
 	if (y == GAMEQUIT && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == GAMEQUIT && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
 		TITLE_MENU_END();
 }

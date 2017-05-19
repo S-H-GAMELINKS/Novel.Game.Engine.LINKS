@@ -6,10 +6,11 @@
 #define RETU 1024
 
 //タイトルメニュー位置
-#define GAMESTART 330
-#define GAMELOAD 360
-#define GAMECONFIG 390
-#define QUICKLOAD 420
+#define GAMESTART 300
+#define GAMELOAD 330
+#define GAMECONFIG 360
+#define QUICKLOAD 390
+#define CONTINUE 420
 #define GAMEQUIT 450
 #define MENUY 330
 #define MENUX 400

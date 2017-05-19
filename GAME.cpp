@@ -145,6 +145,17 @@ typedef struct {
 	int SAVE_CHOICE;//選択肢画面でのセーブ情報
 }QuickSaveData_t;
 
+//コンティニューセーブデータ
+typedef struct {
+	int ENDFLAG;    //ENDFLAG
+	int SP;			//行数
+	int CP;			//文字位置
+	int CHAR;		//立ち絵情報
+	int BG;			//背景画像情報
+	int BGM;		//BGM情報
+	int SAVE_CHOICE;//選択肢画面でのセーブ情報
+}ContinueSaveData_t;
+
 //既読スキップ
 typedef struct {
 	int LINKS;		//メインルートの既読情報
@@ -944,6 +955,7 @@ void title(int Cr, int y) {
 	DrawString(MENUX + CURSOR, GAMELOAD, "LOAD", Cr);
 	DrawString(MENUX + CURSOR, GAMECONFIG, "CONFIG", Cr);
 	DrawString(MENUX + CURSOR, QUICKLOAD, "QUICKLOAD", Cr);
+	DrawString(MENUX + CURSOR, CONTINUE, "CONTINUE", Cr);
 	DrawString(MENUX + CURSOR, GAMEQUIT, "QUIT", Cr);
 }
 
@@ -980,7 +992,10 @@ void Mouse_Move_TITLE(int MouseY) {
 		//タイトルメニュー
 		if (EndFlag == 99) {
 
-			if (MouseY <= 359)
+			if (MouseY <= 329)
+				y = 300;
+
+			if (MouseY >= 330 && MouseY <= 359)
 				y = 330;
 
 			if (MouseY >= 360 && MouseY <= 389)
@@ -1230,20 +1245,37 @@ int CONFIG_LOAD()
 
 }
 
+//クイックセーブ時のメッセージ
+void QUICKSAVE_SAVE_MESSAGE() {
+	SAVE = MessageBox(
+		NULL,
+		"クイックセーブを実行しますか？",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+}
+
 //クイックセーブ
 int QUICKSAVE_SAVE(){
+	
+	//クイックセーブじのメッセージ
+	QUICKSAVE_SAVE_MESSAGE();
 
-	//クイックセーブデータの作成 
+	if (SAVE == IDYES) {
+
+		//クイックセーブデータの作成 
 #pragma warning(disable:4996);
-	QuickSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-	FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "wb");//バイナリファイルを開く
-	if (fp == NULL) {//エラーが起きたらNULLを返す
-		return 0;
+		QuickSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
+		FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "wb");//バイナリファイルを開く
+		if (fp == NULL) {//エラーが起きたらNULLを返す
+			return 0;
+		}
+		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
+		fclose(fp);//ファイルを閉じる
 	}
-	fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
-	fclose(fp);//ファイルを閉じる
 
 	return 0;
+
 }
 
 //クイックロード時のメッセージ
@@ -1268,6 +1300,76 @@ int QUICKSAVE_LOAD() {
 		QuickSaveData_t Data;
 #pragma warning(disable:4996);
 		FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "rb");
+		if (fp == NULL) {
+			return 0;
+		}
+		fread(&Data, sizeof(Data), 1, fp);
+		EndFlag = Data.ENDFLAG;
+		SP = Data.SP;
+		CP = Data.CP;
+		CHARACTER = Data.CHAR;
+		BACKGROUND = Data.BG;
+		BACKGROUNDMUSIC = Data.BGM;
+		SAVE_CHOICE = Data.SAVE_CHOICE;
+
+		GAMEMENU_COUNT = 1;
+
+		//サウンドノベル風描画時の処理
+		SOUNDNOVEL();
+
+		//ウインドウ風描画時の処理
+		WINDOWNOVEL();
+
+		MessageBox(
+			NULL,
+			"ロードしました！",
+			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+			MB_OK
+		);
+
+		fclose(fp);
+	}
+	return 0;
+}
+
+//コンティニュー用セーブ
+int CONTINUE_SAVE() {
+
+	//クイックセーブデータの作成 
+#pragma warning(disable:4996);
+	ContinueSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
+	FILE *fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "wb");//バイナリファイルを開く
+	if (fp == NULL) {//エラーが起きたらNULLを返す
+		return 0;
+	}
+	fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
+	fclose(fp);//ファイルを閉じる
+
+	return 0;
+}
+
+//コンティニュー用ロード時のメッセージ
+void CONTINUE_LOAD_MESSAGE() {
+	SAVE = MessageBox(
+		NULL,
+		"前回遊んだところから再開しますか？",
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+}
+
+//コンティニュー用ロード
+int CONTINUE_LOAD() {
+
+	//コンティニュー用ロード時のメッセージ
+	CONTINUE_LOAD_MESSAGE();
+
+	if (SAVE == IDYES) {
+
+		//コンティニューセーブデータの読み込み
+		ContinueSaveData_t Data;
+#pragma warning(disable:4996);
+		FILE *fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "rb");
 		if (fp == NULL) {
 			return 0;
 		}
@@ -2879,8 +2981,8 @@ void GAMEMENU_GAME_FINISH() {
 
 	if (SAVE == IDYES) {
 
-		//クイックセーブ
-		QUICKSAVE_SAVE();
+		//コンティニュー用セーブ
+		CONTINUE_SAVE();
 
 		EndFlag = 99999;
 
@@ -2901,7 +3003,10 @@ int GAME_FINISH() {
 		);
 
 		if (SAVE == IDYES) {
-			QUICKSAVE_SAVE();
+
+			//コンティニュー用セーブ
+			CONTINUE_SAVE();
+			
 			EndFlag = 99999;
 
 			if (GAMEMENU_COUNT == 0)
@@ -8666,10 +8771,10 @@ void SHORTCUT_KEY() {
 		CONFIG();
 	}
 
-	//タイトルへ戻る
+	//クイックセーブ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F10) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
 		GAMEMENU_COUNT = 0;
-		GAMEMENU_TITLE_BACK();
+		QUICKSAVE_SAVE();
 	}
 }
