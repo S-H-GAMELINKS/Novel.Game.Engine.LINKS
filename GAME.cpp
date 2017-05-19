@@ -1258,7 +1258,7 @@ void QUICKSAVE_SAVE_MESSAGE() {
 //クイックセーブ
 int QUICKSAVE_SAVE(){
 	
-	//クイックセーブじのメッセージ
+	//クイックセーブ時のメッセージ
 	QUICKSAVE_SAVE_MESSAGE();
 
 	if (SAVE == IDYES) {
