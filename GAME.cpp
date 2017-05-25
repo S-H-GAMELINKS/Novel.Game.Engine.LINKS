@@ -4346,35 +4346,38 @@ void SCRIPT_OUTPUT_STRING_KAIGYO() {
 void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
 
 	//サウンドノベル風時の改ページ処理
-	if (soundnovel_winownovel == 0 && DrawPointY * MOJI_SIZE + MOJI_SIZE > CHARACTERY + MOJI_SIZE) {
+	if (soundnovel_winownovel == 0) {
 
-		SetDrawScreen(DX_SCREEN_BACK);
+		if (DrawPointY * MOJI_SIZE + MOJI_SIZE > CHARACTERY + MOJI_SIZE) {
 
-		BACKLOG_COUNT++;
+			SetDrawScreen(DX_SCREEN_BACK);
 
-		//バックログ取得
-		BACKLOG_GET();
+			BACKLOG_COUNT++;
 
-		// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-		ClearDrawScreen();
-		DrawPointY = 0;
-		DrawPointX = 0;
-		CHARACTER = 0;
-		BACKGROUND = 0;
-		CP++;
+			//バックログ取得
+			BACKLOG_GET();
 
-		SetDrawScreen(DX_SCREEN_FRONT);
+			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+			ClearDrawScreen();
+			DrawPointY = 0;
+			DrawPointX = 0;
+			CHARACTER = 0;
+			BACKGROUND = 0;
+			CP++;
 
-		WaitTimer(300);
-		ClearDrawScreen();
-		DrawPointY = 0;
-		DrawPointX = 0;
+			SetDrawScreen(DX_SCREEN_FRONT);
 
-		if (BACKGROUND != 0)
-			DrawGraph(0, 0, BACKGROUND, TRUE);
+			WaitTimer(300);
+			ClearDrawScreen();
+			DrawPointY = 0;
+			DrawPointX = 0;
 
-		if (CHARACTER != 0)
-			DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
+			if (BACKGROUND != 0)
+				DrawGraph(0, 0, BACKGROUND, TRUE);
+
+			if (CHARACTER != 0)
+				DrawGraph(CHARACTERX, CHARACTERY, CHARACTER, TRUE);
+		}
 	}
 }
 
@@ -4382,42 +4385,45 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
 void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
 
 	//ウインドウ風時の改ページ処理
-	if (soundnovel_winownovel == 1 && DrawPointY > 480) {
+	if (soundnovel_winownovel == 1) {
 
-		SetDrawScreen(DX_SCREEN_BACK);
+		if (DrawPointY > 480) {
 
-		BACKLOG_COUNT++;
+			SetDrawScreen(DX_SCREEN_BACK);
 
-		//バックログ取得
-		BACKLOG_GET();
+			BACKLOG_COUNT++;
 
-		// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-		ClearDrawScreen();
-		DrawPointY = 0;
-		DrawPointX = 0;
-		CHARACTER = 0;
-		BACKGROUND = 0;
-		CP++;
+			//バックログ取得
+			BACKLOG_GET();
 
-		SetDrawScreen(DX_SCREEN_FRONT);
+			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+			ClearDrawScreen();
+			DrawPointY = 0;
+			DrawPointX = 0;
+			CHARACTER = 0;
+			BACKGROUND = 0;
+			CP++;
 
-		WaitTimer(300);
-		ClearDrawScreen();
-		DrawPointY = 400;
-		DrawPointX = 0;
+			SetDrawScreen(DX_SCREEN_FRONT);
 
-		if (BACKGROUND != 0)
-			DrawGraph(0, 0, BACKGROUND, TRUE);
+			WaitTimer(300);
+			ClearDrawScreen();
+			DrawPointY = 400;
+			DrawPointX = 0;
 
-		if (soundnovel_winownovel == 1) {
+			if (BACKGROUND != 0)
+				DrawGraph(0, 0, BACKGROUND, TRUE);
 
-			int	Window_Color = GetColor(0, 0, 0);
+			if (soundnovel_winownovel == 1) {
 
-			DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+				int	Window_Color = GetColor(0, 0, 0);
+
+				DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+			}
+
+			if (CHARACTER != 0)
+				DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
 		}
-
-		if (CHARACTER != 0)
-			DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER, TRUE);
 	}
 }
 
