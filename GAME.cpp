@@ -2,6 +2,9 @@
 #include "DxLib.h"
 #include "DEF.h"
 
+#if defined(__STDC_LIB_EXT1__) || (defined(_MSC_VER) && 1400 <= _MSC_VER)
+#	define LINKS_HAS_FOPEN_S 1
+#endif
 // 文字列描画の位置
 int DrawPointX = 0, DrawPointY = 0;
 
@@ -1159,10 +1162,18 @@ int SKIP_READ_LOAD()
 {
 	//既読データを読み込んで、各変数に代入
 	SkipData_t Data;
-	FILE *fp = fopen("DATA/SAVE/SKIP_READ.dat", "rb");
+	FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+	const errno_t er = fopen_s(&fp, "DATA/SAVE/SKIP_READ.dat", "rb");
+	if (0 != er) {
+		return 0;
+	}
+#else
+	fp = fopen("DATA/SAVE/SKIP_READ.dat", "rb");
 	if (fp == NULL) {
 		return 0;
 	}
+#endif
 	fread(&Data, sizeof(Data), 1, fp);
 	LINKS = Data.LINKS;
 	A = Data.A;
@@ -1186,10 +1197,18 @@ int SKIP_READ_SAVE()
 {
 		//既読スキップデータ保存
 		SkipData_t Data = { LINKS, A, B, C, D, E, F, G, H, I, J, K, L, M, N };
-		FILE *fp = fopen("DATA/SAVE/SKIP_READ.dat", "wb");//バイナリファイルを開く
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/SKIP_READ.dat", "wb");
+		if (0 != er) {
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/SKIP_READ.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
 			return 0;
 		}
+#endif
 		fwrite(&Data, sizeof(Data), 1, fp); // SkipData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 
@@ -1202,10 +1221,18 @@ int CONFIG_SAVE()
 {
 	//設定データ保存
 	ConfigData_t Data = { BGM_VOL, BGM_VOL_COUNT, SE_VOL, SE_VOL_COUNT, SKIP_SPEED, SKIP_SPEED_COUNT, AUTO_SPEED, AUTO_SPEED_COUNT, STRING_SPEED, STRING_SPEED_COUNT, soundnovel_winownovel, mouse_key_move };
-	FILE *fp = fopen("DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
+	FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+	const errno_t er = fopen_s(&fp, "DATA/SAVE/Config.dat", "wb");
+	if (0 != er) {
+		return 0;
+	}
+#else
+	fp = fopen("DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
 	if (fp == NULL) {//エラーが起きたらNULLを返す
 		return 0;
 	}
+#endif
 	fwrite(&Data, sizeof(Data), 1, fp); // ConfigData_t構造体の中身を出力
 	fclose(fp);//ファイルを閉じる
 
@@ -1217,10 +1244,18 @@ int CONFIG_LOAD()
 {
 	//設定データの読み込み
 	ConfigData_t Data;
-	FILE *fp = fopen("DATA/SAVE/Config.dat", "rb");
+	FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+	const errno_t er = fopen_s(&fp, "DATA/SAVE/Config.dat", "rb");
+	if (0 != er) {
+		return 0;
+	}
+#else
+	fp = fopen("DATA/SAVE/Config.dat", "rb");
 	if (fp == NULL) {
 		return 0;
 	}
+#endif
 	fread(&Data, sizeof(Data), 1, fp);
 
 	//各種変数に代入
@@ -1261,10 +1296,18 @@ int QUICKSAVE_SAVE(){
 
 		//クイックセーブデータの作成
 		QuickSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-		FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "wb");//バイナリファイルを開く
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/QUICKSAVEDATA.dat", "wb");
+		if (0 != er) {
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
 			return 0;
 		}
+#endif
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 	}
@@ -1293,10 +1336,18 @@ int QUICKSAVE_LOAD() {
 
 		//クイックセーブデータの読み込み
 		QuickSaveData_t Data;
-		FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "rb");
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/QUICKSAVEDATA.dat", "rb");
+		if (0 != er) {
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "rb");
 		if (fp == NULL) {
 			return 0;
 		}
+#endif
 		fread(&Data, sizeof(Data), 1, fp);
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
@@ -1331,10 +1382,18 @@ int CONTINUE_SAVE() {
 
 	//クイックセーブデータの作成
 	ContinueSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-	FILE *fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "wb");//バイナリファイルを開く
+	FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+	const errno_t er = fopen_s(&fp, "DATA/SAVE/CONTINUESAVEDATA.dat", "wb");
+	if (0 != er) {
+		return 0;
+	}
+#else
+	fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "wb");//バイナリファイルを開く
 	if (fp == NULL) {//エラーが起きたらNULLを返す
 		return 0;
 	}
+#endif
 	fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 	fclose(fp);//ファイルを閉じる
 
@@ -1361,10 +1420,18 @@ int CONTINUE_LOAD() {
 
 		//コンティニューセーブデータの読み込み
 		ContinueSaveData_t Data;
-		FILE *fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "rb");
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/CONTINUESAVEDATA.dat", "rb");
+		if (0 != er) {
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "rb");
 		if (fp == NULL) {
 			return 0;
 		}
+#endif
 		fread(&Data, sizeof(Data), 1, fp);
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
@@ -1938,10 +2005,18 @@ int SAVEDATA_1_SAVE() {
 
 		//セーブデータの作成
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-		FILE *fp = fopen("DATA/SAVE/SAVEDATA1.dat", "wb");//バイナリファイルを開く
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA1.dat", "wb");
+		if (0 != er) {
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/SAVEDATA1.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
 			return 0;
 		}
+#endif
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 
@@ -1991,10 +2066,18 @@ int SAVEDATA_2_SAVE() {
 
 		//セーブデータの作成
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-		FILE *fp = fopen("DATA/SAVE/SAVEDATA2.dat", "wb");//バイナリファイルを開く
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA2.dat", "wb");
+		if (0 != er) {
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/SAVEDATA2.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
 			return 0;
 		}
+#endif
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 
@@ -2044,10 +2127,18 @@ int SAVEDATA_3_SAVE() {
 
 		//セーブデータの作成
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-		FILE *fp = fopen("DATA/SAVE/SAVEDATA3.dat", "wb");//バイナリファイルを開く
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA3.dat", "wb");
+		if (0 != er) {
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/SAVEDATA3.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
 			return 0;
 		}
+#endif
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 
@@ -2201,7 +2292,20 @@ int SAVEDATA_1_LOAD() {
 
 	if (SAVE == IDYES) {
 		SaveData_t Data;
-		FILE *fp = fopen("DATA/SAVE/SAVEDATA1.dat", "rb");
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA1.dat", "rb");
+		if (0 != er) {
+			MessageBox(
+				NULL,
+				"セーブデータ1がありません！",
+				"ノベルゲームエンジン「LINKS」",
+				MB_OK
+			);
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/SAVEDATA1.dat", "rb");
 		if (fp == NULL) {
 
 			MessageBox(
@@ -2213,6 +2317,7 @@ int SAVEDATA_1_LOAD() {
 
 			return 0;
 		}
+#endif
 		fread(&Data, sizeof(Data), 1, fp);
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
@@ -2249,7 +2354,20 @@ int SAVEDATA_2_LOAD() {
 
 	if (SAVE == IDYES) {
 		SaveData_t Data;
-		FILE *fp = fopen("DATA/SAVE/SAVEDATA2.dat", "rb");
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA2.dat", "rb");
+		if (0 != er) {
+			MessageBox(
+				NULL,
+				"セーブデータ2がありません！",
+				"ノベルゲームエンジン「LINKS」",
+				MB_OK
+			);
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/SAVEDATA2.dat", "rb");
 		if (fp == NULL) {
 
 			MessageBox(
@@ -2261,6 +2379,7 @@ int SAVEDATA_2_LOAD() {
 
 			return 0;
 		}
+#endif
 		fread(&Data, sizeof(Data), 1, fp);
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
@@ -2297,7 +2416,20 @@ int SAVEDATA_3_LOAD() {
 
 	if (SAVE == IDYES) {
 		SaveData_t Data;
-		FILE *fp = fopen("DATA/SAVE/SAVEDATA3.dat", "rb");
+		FILE *fp;
+#ifdef LINKS_HAS_FOPEN_S
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA3.dat", "wb");
+		if (0 != er) {
+			MessageBox(
+				NULL,
+				"セーブデータ3がありません！",
+				"ノベルゲームエンジン「LINKS」",
+				MB_OK
+			);
+			return 0;
+		}
+#else
+		fp = fopen("DATA/SAVE/SAVEDATA3.dat", "rb");
 		if (fp == NULL) {
 
 			MessageBox(
@@ -2309,6 +2441,7 @@ int SAVEDATA_3_LOAD() {
 
 			return 0;
 		}
+#endif
 		fread(&Data, sizeof(Data), 1, fp);
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
