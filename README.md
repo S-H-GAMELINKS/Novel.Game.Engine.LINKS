@@ -1,4 +1,4 @@
-# Novel.Game.Engine.LINKS
+﻿# Novel.Game.Engine.LINKS
 元々は、サークル内で使用する予定だったものをexe形式で配布していました。
 
 ver2.60より、オープンソースソフトウェアとしてリリース開始。
