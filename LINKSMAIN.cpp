@@ -939,7 +939,7 @@ void GAME_LOOP() {
 
 	//ゲームのループ(LINKS)
 	GAME_LOOP_LINKS();
-	
+
 	//ゲームのループ(A)
 	GAME_LOOP_A();
 
@@ -990,7 +990,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	DXLib_PREP();
 
 	// ＤＸライブラリ初期化処理
-	if (DxLib_Init() == -1)	
+	if (DxLib_Init() == -1)
 	{
 		// エラーが起きたら直ちに終了
 		return -1;

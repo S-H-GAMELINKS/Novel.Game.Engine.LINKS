@@ -1014,7 +1014,7 @@ void Mouse_Move_TITLE(int MouseY) {
 
 //マウス操作(ゲームメニュー)
 void Mouse_Move_GAME(int MouseY) {
-	
+
 	//ゲームメニュー
 	if (EndFlag == 99 || EndFlag != 99 && GAMEMENU_COUNT == 0 && Config == 0) {
 
@@ -1253,13 +1253,13 @@ void QUICKSAVE_SAVE_MESSAGE() {
 
 //クイックセーブ
 int QUICKSAVE_SAVE(){
-	
+
 	//クイックセーブ時のメッセージ
 	QUICKSAVE_SAVE_MESSAGE();
 
 	if (SAVE == IDYES) {
 
-		//クイックセーブデータの作成 
+		//クイックセーブデータの作成
 		QuickSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 		FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -1329,7 +1329,7 @@ int QUICKSAVE_LOAD() {
 //コンティニュー用セーブ
 int CONTINUE_SAVE() {
 
-	//クイックセーブデータの作成 
+	//クイックセーブデータの作成
 	ContinueSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 	FILE *fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "wb");//バイナリファイルを開く
 	if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -1507,7 +1507,7 @@ void AUTO_SPEED_CHANGE() {
 
 //コンフィグ(スキップ速度調整)
 void SKIP_SPEED_CHANGE() {
-	
+
 	//スキップ速度調整
 	if (GAME_y == GAMEMENU_y * 4 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 4 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
@@ -1623,7 +1623,7 @@ void MOUSE_KEY_MOVE() {
 	if (GAME_y == GAMEMENU_y * 8 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 8 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
 
 		WaitTimer(300);
-		
+
 		mouse_key_move = 0;
 	}
 }
@@ -1936,7 +1936,7 @@ int SAVEDATA_1_SAVE() {
 
 		}
 
-		//セーブデータの作成 
+		//セーブデータの作成
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 		FILE *fp = fopen("DATA/SAVE/SAVEDATA1.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -1989,7 +1989,7 @@ int SAVEDATA_2_SAVE() {
 
 		}
 
-		//セーブデータの作成 
+		//セーブデータの作成
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 		FILE *fp = fopen("DATA/SAVE/SAVEDATA2.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -2042,7 +2042,7 @@ int SAVEDATA_3_SAVE() {
 
 		}
 
-		//セーブデータの作成 
+		//セーブデータの作成
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 		FILE *fp = fopen("DATA/SAVE/SAVEDATA3.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -2122,7 +2122,7 @@ void SAVEDATA_SAVE_LOOP() {
 				if (SAVE == IDYES) {
 
 					ClearDrawScreen();
-					
+
 					//ショートカットキー時の事後処理
 					SHORTCUT_KEY_DRAW();
 					break;
@@ -2992,7 +2992,7 @@ int GAME_FINISH() {
 
 			//コンティニュー用セーブ
 			CONTINUE_SAVE();
-			
+
 			EndFlag = 99999;
 
 			if (GAMEMENU_COUNT == 0)
@@ -3114,7 +3114,7 @@ int GAMEMENU() {
 
 	//ゲームメニューを開く
 	if (CheckHitKey(KEY_INPUT_BACK) == 1 || (GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
-		
+
 		GAMEMENU_COUNT = 0;
 		ClearDrawScreen();
 		StopSoundMem(BACKGROUNDMUSIC);
@@ -3151,7 +3151,7 @@ void sentakusi(int Cr, int y) {
 
 	//カーソルの描画
 	DrawString(SENTAKUSIX, y, "■", Cr);
-	
+
 	//選択肢の描画
 	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI1, ChoiceA, Cr);
 	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI2, ChoiceB, Cr);
@@ -4093,7 +4093,7 @@ void SCRIPT_OUTPUT_CHOICE_LOOP() {
 
 		//選択肢ループ用描画処理
 		SCRIPT_OUTPUT_CHOICE_LOOP_DRAW();
-	
+
 		//選択肢の描画
 		sentakusi(Cr, y);
 
@@ -4469,7 +4469,7 @@ void CHARACTER_DRAW_0() {
 	case '9':
 
 		//キャラ09読込
-		CHARACTER = CHARACTER_LOAD[8];		
+		CHARACTER = CHARACTER_LOAD[8];
 		break;
 	}
 }
@@ -4482,7 +4482,7 @@ void CHARACTER_DRAW_1() {
 	case '0':
 
 		//キャラ10読込
-		CHARACTER = CHARACTER_LOAD[9];		
+		CHARACTER = CHARACTER_LOAD[9];
 		break;
 
 	case '1':
@@ -4494,25 +4494,25 @@ void CHARACTER_DRAW_1() {
 	case '2':
 
 		//キャラ12読込
-		CHARACTER = CHARACTER_LOAD[11];		
+		CHARACTER = CHARACTER_LOAD[11];
 		break;
 
 	case '3':
 
 		//キャラ13読込
-		CHARACTER = CHARACTER_LOAD[12];		
+		CHARACTER = CHARACTER_LOAD[12];
 		break;
 
 	case '4':
 
 		//キャラ14読込
-		CHARACTER = CHARACTER_LOAD[13];	
+		CHARACTER = CHARACTER_LOAD[13];
 		break;
 
 	case '5':
 
 		//キャラ15読込
-		CHARACTER = CHARACTER_LOAD[14];		
+		CHARACTER = CHARACTER_LOAD[14];
 		break;
 
 	case '6':
@@ -4549,7 +4549,7 @@ void CHARACTER_DRAW_2() {
 	case '0':
 
 		//キャラ20読込
-		CHARACTER = CHARACTER_LOAD[19];	
+		CHARACTER = CHARACTER_LOAD[19];
 		break;
 
 	case '1':
@@ -4573,7 +4573,7 @@ void CHARACTER_DRAW_2() {
 	case '4':
 
 		//キャラ24読込
-		CHARACTER = CHARACTER_LOAD[23];	
+		CHARACTER = CHARACTER_LOAD[23];
 		break;
 
 	case '5':
@@ -4597,7 +4597,7 @@ void CHARACTER_DRAW_2() {
 	case '8':
 
 		//キャラ28読込
-		CHARACTER = CHARACTER_LOAD[27];	
+		CHARACTER = CHARACTER_LOAD[27];
 		break;
 
 	case '9':
@@ -5186,7 +5186,7 @@ void BACKGROUND_DRAW_0() {
 
 		//背景05読込
 		BACKGROUND = BACKGROUND_LOAD[4];
-		
+
 		break;
 
 	case '6':
@@ -5668,7 +5668,7 @@ void BACKGROUND_DRAW_7() {
 
 		//背景77読込
 		BACKGROUND = BACKGROUND_LOAD[76];
-		
+
 		break;
 
 	case '8':
@@ -5718,7 +5718,7 @@ void BACKGROUND_DRAW_8() {
 
 		//背景84読込
 		BACKGROUND = BACKGROUND_LOAD[83];
-		
+
 		break;
 
 	case '5':
@@ -5905,25 +5905,25 @@ void BACKGROUNDMUSIC_START_0() {
 	case '1':
 
 		//BGM01読込
-		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[0];		
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[0];
 		break;
 
 	case '2':
 
 		//BGM02読込
-		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[1];		
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[1];
 		break;
 
 	case '3':
 
 		//BGM03読込
-		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[2];		
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[2];
 		break;
 
 	case '4':
 
 		//BGM04読込
-		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[3];	
+		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[3];
 		break;
 
 	case '5':
@@ -6436,7 +6436,7 @@ void BACKGROUNDMUSIC_START_8() {
 
 		//BGM80読込
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[79];
-		
+
 		break;
 
 	case '1':
@@ -6461,7 +6461,7 @@ void BACKGROUNDMUSIC_START_8() {
 
 		//BGM84読込
 		BACKGROUNDMUSIC = BACKGROUNDMUSIC_LOAD[83];
-		
+
 		break;
 
 	case '5':
@@ -6668,7 +6668,7 @@ void SOUNDEFFECT_START_0() {
 
 		//SE04読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[3];
-		
+
 		break;
 
 	case '5':
@@ -6899,7 +6899,7 @@ void SOUNDEFFECT_START_3() {
 	case '9':
 
 		//SE39読込
-		SOUNDEFFECT = SOUNDEFFECT_LOAD[38];		
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[38];
 		break;
 	}
 }
@@ -6966,7 +6966,7 @@ void SOUNDEFFECT_START_4() {
 	case '9':
 
 		//SE49読込
-		SOUNDEFFECT = SOUNDEFFECT_LOAD[48];		
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[48];
 		break;
 	}
 }
@@ -7004,7 +7004,7 @@ void SOUNDEFFECT_START_5() {
 
 		//SE54読込
 		SOUNDEFFECT = SOUNDEFFECT_LOAD[53];
-		
+
 		break;
 
 	case '5':
@@ -7034,7 +7034,7 @@ void SOUNDEFFECT_START_5() {
 	case '9':
 
 		//SE59読込
-		SOUNDEFFECT = SOUNDEFFECT_LOAD[58];		
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[58];
 		break;
 	}
 }
@@ -7168,7 +7168,7 @@ void SOUNDEFFECT_START_7() {
 	case '9':
 
 		//SE79読込
-		SOUNDEFFECT = SOUNDEFFECT_LOAD[78];	
+		SOUNDEFFECT = SOUNDEFFECT_LOAD[78];
 		break;
 	}
 }
@@ -7575,7 +7575,7 @@ void MOVIE_START_2() {
 
 		//動画25読込
 		PlayMovie("DATA/MOVIE/MOVIE25.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
-		
+
 		break;
 
 	case '6':
@@ -7708,7 +7708,7 @@ void MOVIE_START_4() {
 
 		//動画42読込
 		PlayMovie("DATA/MOVIE/MOVIE42.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
-		
+
 		break;
 
 	case '3':
@@ -8030,7 +8030,7 @@ void MOVIE_START_8() {
 
 		//動画84読込
 		PlayMovie("DATA/MOVIE/MOVIE84.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
-		
+
 		break;
 
 	case '5':
@@ -8683,7 +8683,7 @@ int SCREENSHOT() {
 
 	//スクリーンショット取得限界メッセージ
 	if (SCREENSHOT_COUNT >= 10 && CheckHitKey(KEY_INPUT_F12) == 1) {
-			
+
 		MessageBox(
 			NULL,
 			"これ以上スクリーンショットを取得できません",
@@ -8694,7 +8694,7 @@ int SCREENSHOT() {
 		WaitTimer(300);
 	}
 
-	return 0;		
+	return 0;
 }
 
 //各種F1～F11キー
