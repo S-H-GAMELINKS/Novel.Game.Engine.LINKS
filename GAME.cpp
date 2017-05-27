@@ -1952,46 +1952,15 @@ void BACKLOG_KEY_MOVE() {
 
 //バックログの描画関数
 void BACKLOG_SCREENSHOT_DRAW() {
-
-	if (LOG == 1) {
-		DrawGraph(0, 0, BACKLOG[0], TRUE);
-		DrawString(0, 450, "バックログ1", Cr);
-	}
-	if (LOG == 2) {
-		DrawGraph(0, 0, BACKLOG[1], TRUE);
-		DrawString(0, 450, "バックログ2", Cr);
-	}
-	if (LOG == 3) {
-		DrawGraph(0, 0, BACKLOG[2], TRUE);
-		DrawString(0, 450, "バックログ3", Cr);
-	}
-	if (LOG == 4) {
-		DrawGraph(0, 0, BACKLOG[3], TRUE);
-		DrawString(0, 450, "バックログ4", Cr);
-	}
-	if (LOG == 5) {
-		DrawGraph(0, 0, BACKLOG[4], TRUE);
-		DrawString(0, 450, "バックログ5", Cr);
-	}
-	if (LOG == 6) {
-		DrawGraph(0, 0, BACKLOG[5], TRUE);
-		DrawString(0, 450, "バックログ6", Cr);
-	}
-	if (LOG == 7) {
-		DrawGraph(0, 0, BACKLOG[6], TRUE);
-		DrawString(0, 450, "バックログ7", Cr);
-	}
-	if (LOG == 8) {
-		DrawGraph(0, 0, BACKLOG[7], TRUE);
-		DrawString(0, 450, "バックログ8", Cr);
-	}
-	if (LOG == 9) {
-		DrawGraph(0, 0, BACKLOG[8], TRUE);
-		DrawString(0, 450, "バックログ9", Cr);
-	}
-	if (LOG == 10) {
-		DrawGraph(0, 0, BACKLOG[9], TRUE);
-		DrawString(0, 450, "バックログ10", Cr);
+	if (0 < LOG && LOG <= 10) {
+		DrawGraph(0, 0, BACKLOG[LOG - 1], TRUE);
+		char Message[15] = {};
+#ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
+		sprintf_s(Message, countof(Message), "バックログ%d", LOG);
+#else
+		snprintf(FilePathString, format, i);
+#endif
+		DrawString(0, 450, Message, Cr);
 	}
 }
 
