@@ -88,7 +88,6 @@ char *BACKLOG_DELETE;
 int SAVE, SAVE_CHOICE = 0;
 int SAVESNAP1, SAVESNAP2, SAVESNAP3, SAVETITLE;
 int SAVESNAP_HANDLE1 = 0, SAVESNAP_HANDLE2 = 0, SAVESNAP_HANDLE3 = 0, SAVESNAP_CHOICE = 0;
-char *SAVE_DATA_DELETE;
 char *SAVESNAP_CHOICE_DELETE;
 
 //スキップ・オートモード用変数
@@ -1718,78 +1717,33 @@ void DELETE_WINDOWNOVEL() {
 	GAMEMENU_COUNT = 1;
 }
 
-//セーブデータ1削除
-void SAVEDATA_1_DELETE(){
-
-	SAVE = LINKS_MessageBox_YESNO("セーブデータ1を削除しますか？");
+static void DeleteSaveData(const char* Message, const char* ImagePath, const char* SaveDataPath) {
+	SAVE = LINKS_MessageBox_YESNO(Message);
 
 	if (SAVE == IDYES) {
-
-		SAVE_DATA_DELETE = "DATA/SAVE/SAVEDATA1.dat";
-		remove(SAVE_DATA_DELETE);
-
-		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP1.png";
-		remove(SAVE_DATA_DELETE);
-
+		remove(SaveDataPath);
+		remove(ImagePath);
 		//削除後のメッセージ
 		DELETE_MESSAGE();
-
 		//削除後の処理(サウンドノベル風)
 		DELETE_SOUNDNOVEL();
-
 		//削除後の処理(ウインドウ風)
 		DELETE_WINDOWNOVEL();
 	}
+}
+//セーブデータ1削除
+void SAVEDATA_1_DELETE(){
+	DeleteSaveData("セーブデータ1を削除しますか？", "DATA/SAVE/SAVESNAP1.png", "DATA/SAVE/SAVEDATA1.dat");
 }
 
 //セーブデータ2削除
 void SAVEDATA_2_DELETE() {
-
-	SAVE = LINKS_MessageBox_YESNO("セーブデータ2を削除しますか？");
-
-	if (SAVE == IDYES) {
-
-		SAVE_DATA_DELETE = "DATA/SAVE/SAVEDATA2.dat";
-		remove(SAVE_DATA_DELETE);
-
-		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP2.png";
-		remove(SAVE_DATA_DELETE);
-
-		//削除後のメッセージ
-		DELETE_MESSAGE();
-
-		//削除後の処理(サウンドノベル風)
-		DELETE_SOUNDNOVEL();
-
-		//削除後の処理(ウインドウ風)
-		DELETE_WINDOWNOVEL();
-	}
-
+	DeleteSaveData("セーブデータ2を削除しますか？", "DATA/SAVE/SAVESNAP2.png", "DATA/SAVE/SAVEDATA2.dat");
 }
 
 //セーブデータ3削除
 void SAVEDATA_3_DELETE() {
-
-	SAVE = LINKS_MessageBox_YESNO("セーブデータ3を削除しますか？");
-
-	if (SAVE == IDYES) {
-
-		SAVE_DATA_DELETE = "DATA/SAVE/SAVEDATA3.dat";
-		remove(SAVE_DATA_DELETE);
-
-		SAVE_DATA_DELETE = "DATA/SAVE/SAVESNAP3.png";
-		remove(SAVE_DATA_DELETE);
-
-		//削除後のメッセージ
-		DELETE_MESSAGE();
-
-		//削除後の処理(サウンドノベル風)
-		DELETE_SOUNDNOVEL();
-
-		//削除後の処理(ウインドウ風)
-		DELETE_WINDOWNOVEL();
-	}
-
+	DeleteSaveData("セーブデータ3を削除しますか？", "DATA/SAVE/SAVESNAP3.png", "DATA/SAVE/SAVEDATA3.dat");
 }
 
 //セーブデータ削除画面ループ
