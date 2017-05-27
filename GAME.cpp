@@ -520,18 +520,10 @@ void Mouse_Move_GAME(int MouseY) {
 void Mouse_Move_SAVE(int MouseY) {
 
 	if (GAMEMENU_COUNT == 0 && EndFlag != 99 || EndFlag == 99) {
-
-		if (MouseY <= 199)
-			SAVE_y = 100;
-
-		if (MouseY >= 200 && MouseY <= 299)
-			SAVE_y = 200;
-
-		if (MouseY >= 300 && MouseY <= 399)
-			SAVE_y = 300;
-
-		if (MouseY >= 400)
-			SAVE_y = 400;
+		SAVE_y = (MouseY <= 199) ? 100
+			: (MouseY <= 299) ? 200
+			: (MouseY <= 399) ? 300
+			: 400;
 	}
 }
 
