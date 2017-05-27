@@ -143,12 +143,7 @@ void TITLE_MENU_KEY_MOVE() {
 //タイトルメニュー終了処理
 void TITLE_MENU_END() {
 
-	SAVE = MessageBox(
-		NULL,
-		"終了しますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("終了しますか？");
 
 	if (SAVE == IDYES)
 		EndFlag = 99999;

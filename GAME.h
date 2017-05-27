@@ -1,4 +1,7 @@
-﻿//各素材データ読込関数
+﻿//Yes/Noのメッセージボックス
+int LINKS_MessageBox_YESNO(LPCTSTR lpText);
+
+//各素材データ読込関数
 void MATERIAL_LOAD();
 
 //スクリプト読込関数

@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "DEF.h"
 #include <cassert>
+#include "GAME.h"
 
 #if defined(_MSC_VER) && 1400 <= _MSC_VER
 #	define LINKS_HAS_CRT_SECURE_FUNCTIONS 1
@@ -203,6 +204,26 @@ typedef struct {
 	int soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報
 	int mouse_key_move;			//マウス操作とキー操作の情報
 }ConfigData_t;
+
+int LINKS_MessageBox_YESNO(LPCTSTR lpText)
+{
+	return MessageBox(
+		GetMainWindowHandle(),
+		lpText,
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_YESNO
+	);
+}
+static int LINKS_MessageBox_OK(LPCTSTR lpText)
+{
+	return MessageBox(
+		GetMainWindowHandle(),
+		lpText,
+		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
+		MB_OK
+	);
+}
+
 
 static bool SerialNumberFileLoader(long* dest_arr, size_t dest_arr_num, const char* format) {
 	assert(dest_arr_num <= 40);
@@ -703,12 +724,7 @@ int CONFIG_LOAD()
 
 //クイックセーブ時のメッセージ
 void QUICKSAVE_SAVE_MESSAGE() {
-	SAVE = MessageBox(
-		NULL,
-		"クイックセーブを実行しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("クイックセーブを実行しますか？");
 }
 
 //クイックセーブ
@@ -743,12 +759,7 @@ int QUICKSAVE_SAVE(){
 
 //クイックロード時のメッセージ
 void QUICKSAVE_LOAD_MESSAGE() {
-	SAVE = MessageBox(
-		NULL,
-		"クイックロードを実行しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("クイックロードを実行しますか？");
 }
 
 //クイックロード
@@ -790,12 +801,7 @@ int QUICKSAVE_LOAD() {
 		//ウインドウ風描画時の処理
 		WINDOWNOVEL();
 
-		MessageBox(
-			NULL,
-			"ロードしました！",
-			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("ロードしました！");
 
 		fclose(fp);
 	}
@@ -827,12 +833,7 @@ int CONTINUE_SAVE() {
 
 //コンティニュー用ロード時のメッセージ
 void CONTINUE_LOAD_MESSAGE() {
-	SAVE = MessageBox(
-		NULL,
-		"前回遊んだところから再開しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("前回遊んだところから再開しますか？");
 }
 
 //コンティニュー用ロード
@@ -874,12 +875,7 @@ int CONTINUE_LOAD() {
 		//ウインドウ風描画時の処理
 		WINDOWNOVEL();
 
-		MessageBox(
-			NULL,
-			"ロードしました！",
-			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("ロードしました！");
 
 		fclose(fp);
 	}
@@ -1181,12 +1177,7 @@ void CONFIG_TITLE_BACK() {
 	if (GAME_y == GAMEMENU_y * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == GAMEMENU_y * 9 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 		//戻る
-		SAVE = MessageBox(
-			NULL,
-			"戻りますか？",
-			"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-			MB_YESNO
-			);
+		SAVE = LINKS_MessageBox_YESNO("戻りますか？");
 
 		if (SAVE == IDYES) {
 
@@ -1200,12 +1191,7 @@ void CONFIG_TITLE_BACK() {
 //コンフィグ(メッセージ)
 void CONFIG_MESSAGE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"設定を変更しますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("設定を変更しますか？");
 }
 
 //コンフィグ
@@ -1355,23 +1341,13 @@ void SAVEDATA_SCREENSHOT_READ() {
 //セーブ前のメッセージ
 void SAVEDATA_SAVE_MESSAGE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"セーブ画面に移行しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("セーブ画面に移行しますか？");
 }
 
 //セーブ後のメッセージ
 void SAVE_MESSAGE() {
 
-	MessageBox(
-		NULL,
-		"セーブしました！",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_OK
-	);
+	LINKS_MessageBox_OK("セーブしました！");
 }
 
 //セーブ後の処理(サウンドノベル風)
@@ -1397,12 +1373,7 @@ void SAVE_WINDOWNOVEL() {
 }
 
 static int CreateSaveData(int* SaveSnapHandle, const char* Message, const char* ImagePath, const char* SaveDataPath) {
-	SAVE = MessageBox(
-		NULL,
-		Message,
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO(Message);
 	if (SAVE == IDYES) {
 		//セーブデータ１用のスクリーンショット取得変数
 		*SaveSnapHandle = 1;
@@ -1522,12 +1493,7 @@ void SAVEDATA_SAVE_LOOP() {
 			//画面に戻る
 			if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
-				SAVE = MessageBox(
-					NULL,
-					"戻りますか？",
-					"ノベルゲームエンジン「LINKS」",
-					MB_YESNO
-				);
+				SAVE = LINKS_MessageBox_YESNO("戻りますか？");
 
 				if (SAVE == IDYES) {
 
@@ -1562,23 +1528,13 @@ void SAVEDATA_SAVE() {
 //ロード前のメッセージ
 void SAVEDATA_LOAD_MESSAGE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"ロード画面に移行しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("ロード画面に移行しますか？");
 }
 
 //ロード後のメッセージ
 void LOAD_MESSAGE() {
 
-	MessageBox(
-		NULL,
-		"ロードしました！",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_OK
-	);
+	LINKS_MessageBox_OK("ロードしました！");
 }
 
 //ロード後の処理(サウンドノベル風)
@@ -1602,12 +1558,7 @@ void LOAD_WINDOWNOVEL() {
 //セーブデータ1のロード
 int SAVEDATA_1_LOAD() {
 
-	SAVE = MessageBox(
-		NULL,
-		"セーブデータ1をロードしますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("セーブデータ1をロードしますか？");
 
 	if (SAVE == IDYES) {
 		SaveData_t Data;
@@ -1615,24 +1566,14 @@ int SAVEDATA_1_LOAD() {
 #ifdef LINKS_HAS_FOPEN_S
 		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA1.dat", "rb");
 		if (0 != er) {
-			MessageBox(
-				NULL,
-				"セーブデータ1がありません！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
+			LINKS_MessageBox_OK("セーブデータ1がありません！");
 			return 0;
 		}
 #else
 		fp = fopen("DATA/SAVE/SAVEDATA1.dat", "rb");
 		if (fp == NULL) {
 
-			MessageBox(
-				NULL,
-				"セーブデータ1がありません！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
+			LINKS_MessageBox_OK("セーブデータ1がありません！");
 
 			return 0;
 		}
@@ -1664,12 +1605,7 @@ int SAVEDATA_1_LOAD() {
 //セーブデータ2のロード
 int SAVEDATA_2_LOAD() {
 
-	SAVE = MessageBox(
-		NULL,
-		"セーブデータ2をロードしますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("セーブデータ2をロードしますか？");
 
 	if (SAVE == IDYES) {
 		SaveData_t Data;
@@ -1677,24 +1613,14 @@ int SAVEDATA_2_LOAD() {
 #ifdef LINKS_HAS_FOPEN_S
 		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA2.dat", "rb");
 		if (0 != er) {
-			MessageBox(
-				NULL,
-				"セーブデータ2がありません！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
+			LINKS_MessageBox_OK("セーブデータ2がありません！");
 			return 0;
 		}
 #else
 		fp = fopen("DATA/SAVE/SAVEDATA2.dat", "rb");
 		if (fp == NULL) {
 
-			MessageBox(
-				NULL,
-				"セーブデータ2がありません！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
+			LINKS_MessageBox_OK("セーブデータ2がありません！");
 
 			return 0;
 		}
@@ -1726,12 +1652,7 @@ int SAVEDATA_2_LOAD() {
 //セーブデータ3をロード
 int SAVEDATA_3_LOAD() {
 
-	SAVE = MessageBox(
-		NULL,
-		"セーブデータ3をロードしますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("セーブデータ3をロードしますか？");
 
 	if (SAVE == IDYES) {
 		SaveData_t Data;
@@ -1739,24 +1660,14 @@ int SAVEDATA_3_LOAD() {
 #ifdef LINKS_HAS_FOPEN_S
 		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA3.dat", "wb");
 		if (0 != er) {
-			MessageBox(
-				NULL,
-				"セーブデータ3がありません！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
+			LINKS_MessageBox_OK("セーブデータ3がありません！");
 			return 0;
 		}
 #else
 		fp = fopen("DATA/SAVE/SAVEDATA3.dat", "rb");
 		if (fp == NULL) {
 
-			MessageBox(
-				NULL,
-				"セーブデータ3がありません！",
-				"ノベルゲームエンジン「LINKS」",
-				MB_OK
-			);
+			LINKS_MessageBox_OK("セーブデータ3がありません！");
 
 			return 0;
 		}
@@ -1831,12 +1742,7 @@ void SAVEDATA_LOAD_LOOP() {
 			//戻る
 			if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-					SAVE = MessageBox(
-						NULL,
-						"戻りますか？",
-						"ノベルゲームエンジン「LINKS」",
-						MB_YESNO
-					);
+					SAVE = LINKS_MessageBox_YESNO("戻りますか？");
 
 					if (SAVE == IDYES) {
 
@@ -1873,23 +1779,13 @@ int SAVEDATA_LOAD() {
 //削除前のメッセージ
 void SAVEDATA_DELETE_MESSAGE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"セーブデータ削除画面に移行しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("セーブデータ削除画面に移行しますか？");
 }
 
 //削除後のメッセージ
 void DELETE_MESSAGE() {
 
-	MessageBox(
-		NULL,
-		"削除しました！",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_OK
-	);
+	LINKS_MessageBox_OK("削除しました！");
 }
 
 //削除後の処理(サウンドノベル風)
@@ -1913,12 +1809,7 @@ void DELETE_WINDOWNOVEL() {
 //セーブデータ1削除
 void SAVEDATA_1_DELETE(){
 
-	SAVE = MessageBox(
-		NULL,
-		"セーブデータ1を削除しますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("セーブデータ1を削除しますか？");
 
 	if (SAVE == IDYES) {
 
@@ -1942,12 +1833,7 @@ void SAVEDATA_1_DELETE(){
 //セーブデータ2削除
 void SAVEDATA_2_DELETE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"セーブデータ2を削除しますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("セーブデータ2を削除しますか？");
 
 	if (SAVE == IDYES) {
 
@@ -1972,12 +1858,7 @@ void SAVEDATA_2_DELETE() {
 //セーブデータ3削除
 void SAVEDATA_3_DELETE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"セーブデータ3を削除しますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("セーブデータ3を削除しますか？");
 
 	if (SAVE == IDYES) {
 
@@ -2042,12 +1923,7 @@ void SAVEDATA_DELETE_LOOP() {
 
 		if (SAVE_y == (SAVE_Y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (SAVE_Y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
-			SAVE = MessageBox(
-				NULL,
-				"戻りますか？",
-				"ノベルゲームエンジン「LINKS」",
-				MB_YESNO
-			);
+			SAVE = LINKS_MessageBox_YESNO("戻りますか？");
 
 			if (SAVE == IDYES) {
 
@@ -2083,12 +1959,7 @@ void SAVEDATA_DELETE() {
 //既読スキップメッセージ
 void SKIP_READ_MESSAGE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"既読スキップを実行しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("既読スキップを実行しますか？");
 }
 
 //既読スキップ後の処理(サウンドノベル風)
@@ -2168,12 +2039,7 @@ void SKIP_READ_CHECK() {
 //スキップ処理
 void SKIP_START() {
 
-	SAVE = MessageBox(
-		NULL,
-		"スキップを実行しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("スキップを実行しますか？");
 
 	if (SAVE == IDYES) {
 
@@ -2191,12 +2057,7 @@ void SKIP_START() {
 //オート処理メッセージ
 void AUTO_MESSAGE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"オートモードを実行しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("オートモードを実行しますか？");
 }
 
 //オート処理
@@ -2221,12 +2082,7 @@ void AUTO_START() {
 //オート/スキップ停止処理メッセージ
 void AUTO_SKIP_MESSAGE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"スキップ又はオートモードを終了しますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("スキップ又はオートモードを終了しますか？");
 }
 
 //オート/スキップ停止処理
@@ -2251,12 +2107,7 @@ void AUTO_SKIP_STOP() {
 //バックログ参照メッセージ
 void BACKLOG_MESSAGE() {
 
-	SAVE = MessageBox(
-		NULL,
-		"バックログ画面に移行しますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("バックログ画面に移行しますか？");
 }
 
 //バックログ(キー操作関連)
@@ -2362,12 +2213,7 @@ void BACKLOG_DRAW() {
 //タイトルに戻る
 void GAMEMENU_TITLE_BACK() {
 
-	SAVE = MessageBox(
-		NULL,
-		"タイトル画面に戻りますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("タイトル画面に戻りますか？");
 
 	if (SAVE == IDYES) {
 
@@ -2389,12 +2235,7 @@ void GAMEMENU_TITLE_BACK() {
 //ゲームに戻る
 void GAMEMENU_GAME_BACK() {
 
-	SAVE = MessageBox(
-		NULL,
-		"ゲームに戻りますか？",
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("ゲームに戻りますか？");
 
 	if (SAVE == IDYES) {
 
@@ -2411,12 +2252,7 @@ void GAMEMENU_GAME_BACK() {
 //ゲーム終了
 void GAMEMENU_GAME_FINISH() {
 
-	SAVE = MessageBox(
-		NULL,
-		"終了しますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("終了しますか？");
 
 	if (SAVE == IDYES) {
 
@@ -2434,12 +2270,7 @@ int GAME_FINISH() {
 
 	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {
 
-		SAVE = MessageBox(
-			NULL,
-			"終了しますか？",
-			"ノベルゲームエンジン「LINKS」",
-			MB_YESNO
-		);
+		SAVE = LINKS_MessageBox_YESNO("終了しますか？");
 
 		if (SAVE == IDYES) {
 
@@ -7909,12 +7740,7 @@ void SCREENSHOT_01() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT01.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット０１を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット０１を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -7929,12 +7755,7 @@ void SCREENSHOT_02() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT02.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット０２を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット０２を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -7949,12 +7770,7 @@ void SCREENSHOT_03() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT03.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット０３を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット０３を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -7969,12 +7785,7 @@ void SCREENSHOT_04() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT04.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット０４を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット０４を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -7989,12 +7800,7 @@ void SCREENSHOT_05() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT05.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット０５を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット０５を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -8009,12 +7815,7 @@ void SCREENSHOT_06() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT06.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット０６を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット０６を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -8029,12 +7830,7 @@ void SCREENSHOT_07() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT07.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット０７を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット０７を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -8049,12 +7845,7 @@ void SCREENSHOT_08() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT08.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット０８を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット０８を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -8069,12 +7860,7 @@ void SCREENSHOT_09() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT09.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット０９を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット０９を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -8089,12 +7875,7 @@ void SCREENSHOT_10() {
 
 		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT10.png", 0);
 
-		MessageBox(
-			NULL,
-			"スクリーンショット１０を取得しました！",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("スクリーンショット１０を取得しました！");
 
 		//スクリーンショット取得後の処理
 		SCREEN_SHOT_COUNT();
@@ -8137,12 +7918,7 @@ int SCREENSHOT() {
 	//スクリーンショット取得限界メッセージ
 	if (SCREENSHOT_COUNT >= 10 && CheckHitKey(KEY_INPUT_F12) == 1) {
 
-		MessageBox(
-			NULL,
-			"これ以上スクリーンショットを取得できません",
-			"ノベルゲームエンジン「LINKS」",
-			MB_OK
-		);
+		LINKS_MessageBox_OK("これ以上スクリーンショットを取得できません");
 
 		WaitTimer(300);
 	}
