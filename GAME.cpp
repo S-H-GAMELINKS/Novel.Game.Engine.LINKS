@@ -279,160 +279,29 @@ int SCRIPT_TO_ARRAY() {
 
 //スクリプト読込関数
 int SCRIPT_READ() {
-
-	switch (EndFlag) {
-
-		//メインルート
-	case 1:
-
-		// メインスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/LINKS.txt");
-
+	const char* ScriptFileNames[] = {
+		"DATA/STR/LINKS.txt",
+		"DATA/STR/A.txt",
+		"DATA/STR/B.txt",
+		"DATA/STR/C.txt",
+		"DATA/STR/D.txt",
+		"DATA/STR/E.txt",
+		"DATA/STR/F.txt",
+		"DATA/STR/G.txt",
+		"DATA/STR/H.txt",
+		"DATA/STR/I.txt",
+		"DATA/STR/J.txt",
+		"DATA/STR/K.txt",
+		"DATA/STR/L.txt",
+		"DATA/STR/M.txt",
+		"DATA/STR/N.txt"
+	};
+	if (0 < EndFlag && EndFlag <= countof(ScriptFileNames)) {
+		// スクリプトファイルを開く
+		ScriptFile = FileRead_open(ScriptFileNames[EndFlag]);
 		//スクリプトファイルを配列に流しこみ
 		SCRIPT_TO_ARRAY();
-		break;
-
-		//	//Aルート
-	case 2:
-
-		//Aルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/A.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Bルート
-	case 3:
-
-		//Ｂルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/B.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Cルート
-	case 4:
-
-		//Cルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/C.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Dルート
-	case 5:
-
-		//Dルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/D.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Eルート
-	case 6:
-
-		//Eルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/E.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Fルート
-	case 7:
-
-		//Fルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/F.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Gルート
-	case 8:
-
-		//Gルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/G.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Hルート
-	case 9:
-
-		//Hルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/H.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Iルート
-	case 10:
-
-		//Iルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/I.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Jルート
-	case 11:
-
-		//Jルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/J.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Kルート
-	case 12:
-
-		//Kルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/K.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Lルート
-	case 13:
-
-		//Lルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/L.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Mルート
-	case 14:
-
-		//Mルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/M.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
-
-		//Nルート
-	case 15:
-
-		//Nルートのスクリプトファイルを開く
-		ScriptFile = FileRead_open("DATA/STR/N.txt");
-
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
-		break;
 	}
-
 	return 0;
 }
 
