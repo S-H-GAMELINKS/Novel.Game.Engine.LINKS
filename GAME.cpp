@@ -1555,26 +1555,21 @@ void LOAD_WINDOWNOVEL() {
 	GAMEMENU_COUNT = 1;
 }
 
-//セーブデータ1のロード
-int SAVEDATA_1_LOAD() {
-
-	SAVE = LINKS_MessageBox_YESNO("セーブデータ1をロードしますか？");
-
+static int LoadSaveData(const char* Message, const char* ErrorMessage, const char* SaveDataPath) {
+	SAVE = LINKS_MessageBox_YESNO(Message);
 	if (SAVE == IDYES) {
 		SaveData_t Data;
 		FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA1.dat", "rb");
+		const errno_t er = fopen_s(&fp, SaveDataPath, "rb");
 		if (0 != er) {
-			LINKS_MessageBox_OK("セーブデータ1がありません！");
+			LINKS_MessageBox_OK(ErrorMessage);
 			return 0;
 		}
 #else
-		fp = fopen("DATA/SAVE/SAVEDATA1.dat", "rb");
+		fp = fopen(SaveDataPath, "rb");
 		if (fp == NULL) {
-
-			LINKS_MessageBox_OK("セーブデータ1がありません！");
-
+			LINKS_MessageBox_OK(ErrorMessage);
 			return 0;
 		}
 #endif
@@ -1589,110 +1584,27 @@ int SAVEDATA_1_LOAD() {
 
 		//ロード後のメッセージ
 		LOAD_MESSAGE();
-
 		//ロード後の処理(サウンドノベル風)
 		LOAD_SOUNDNOVEL();
-
 		//ロード後の処理(ウインドウ風)
 		LOAD_WINDOWNOVEL();
-
 		fclose(fp);
 	}
-
 	return 0;
+}
+//セーブデータ1のロード
+int SAVEDATA_1_LOAD() {
+	return LoadSaveData("セーブデータ1をロードしますか？", "セーブデータ1がありません！", "DATA/SAVE/SAVEDATA1.dat");
 }
 
 //セーブデータ2のロード
 int SAVEDATA_2_LOAD() {
-
-	SAVE = LINKS_MessageBox_YESNO("セーブデータ2をロードしますか？");
-
-	if (SAVE == IDYES) {
-		SaveData_t Data;
-		FILE *fp;
-#ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA2.dat", "rb");
-		if (0 != er) {
-			LINKS_MessageBox_OK("セーブデータ2がありません！");
-			return 0;
-		}
-#else
-		fp = fopen("DATA/SAVE/SAVEDATA2.dat", "rb");
-		if (fp == NULL) {
-
-			LINKS_MessageBox_OK("セーブデータ2がありません！");
-
-			return 0;
-		}
-#endif
-		fread(&Data, sizeof(Data), 1, fp);
-		EndFlag = Data.ENDFLAG;
-		SP = Data.SP;
-		CP = Data.CP;
-		CHARACTER = Data.CHAR;
-		BACKGROUND = Data.BG;
-		BACKGROUNDMUSIC = Data.BGM;
-		SAVE_CHOICE = Data.SAVE_CHOICE;
-
-		//ロード後のメッセージ
-		LOAD_MESSAGE();
-
-		//ロード後の処理(サウンドノベル風)
-		LOAD_SOUNDNOVEL();
-
-		//ロード後の処理(ウインドウ風)
-		LOAD_WINDOWNOVEL();
-
-		fclose(fp);
-	}
-
-	return 0;
+	return LoadSaveData("セーブデータ2をロードしますか？", "セーブデータ2がありません！", "DATA/SAVE/SAVEDATA2.dat");
 }
 
 //セーブデータ3をロード
 int SAVEDATA_3_LOAD() {
-
-	SAVE = LINKS_MessageBox_YESNO("セーブデータ3をロードしますか？");
-
-	if (SAVE == IDYES) {
-		SaveData_t Data;
-		FILE *fp;
-#ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA3.dat", "wb");
-		if (0 != er) {
-			LINKS_MessageBox_OK("セーブデータ3がありません！");
-			return 0;
-		}
-#else
-		fp = fopen("DATA/SAVE/SAVEDATA3.dat", "rb");
-		if (fp == NULL) {
-
-			LINKS_MessageBox_OK("セーブデータ3がありません！");
-
-			return 0;
-		}
-#endif
-		fread(&Data, sizeof(Data), 1, fp);
-		EndFlag = Data.ENDFLAG;
-		SP = Data.SP;
-		CP = Data.CP;
-		CHARACTER = Data.CHAR;
-		BACKGROUND = Data.BG;
-		BACKGROUNDMUSIC = Data.BGM;
-		SAVE_CHOICE = Data.SAVE_CHOICE;
-
-		//ロード後のメッセージ
-		LOAD_MESSAGE();
-
-		//ロード後の処理(サウンドノベル風)
-		LOAD_SOUNDNOVEL();
-
-		//ロード後の処理(ウインドウ風)
-		LOAD_WINDOWNOVEL();
-
-		fclose(fp);
-	}
-	return 0;
+	return LoadSaveData("セーブデータ3をロードしますか？", "セーブデータ3がありません！", "DATA/SAVE/SAVEDATA3.dat");
 }
 
 //セーブデータ・ロード画面ループ
