@@ -1852,52 +1852,11 @@ void SKIP_READ_CHECK() {
 	//既読スキップメッセージ
 	SKIP_READ_MESSAGE();
 
-	//以下、既読データ読み込み時の判定
-	if (EndFlag == 1 && SAVE == IDYES && LINKS == 1)
+	const int TextIgnoredflags[] = { LINKS, A, B, C, D, E, F, G, H, I, J, K, L, M, N };
+	//既読データ読み込み時の判定
+	if (IDYES == SAVE && 0 < EndFlag && EndFlag <= countof(TextIgnoredflags) && 1 == TextIgnoredflags[EndFlag - 1]) {
 		skip_auto = 2;
-
-	if (EndFlag == 2 && SAVE == IDYES && A == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 3 && SAVE == IDYES && B == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 4 && SAVE == IDYES && C == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 5 && SAVE == IDYES && D == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 6 && SAVE == IDYES && E == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 7 && SAVE == IDYES && F == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 8 && SAVE == IDYES && G == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 9 && SAVE == IDYES && H == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 10 && SAVE == IDYES && I == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 11 && SAVE == IDYES && J == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 12 && SAVE == IDYES && K == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 13 && SAVE == IDYES && L == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 14 && SAVE == IDYES && M == 1)
-		skip_auto = 2;
-
-	if (EndFlag == 15 && SAVE == IDYES && N == 1)
-		skip_auto = 2;
-
+	}
 	//ショートカットキー時の事後処理
 	SHORTCUT_KEY_DRAW();
 }
