@@ -1159,7 +1159,6 @@ int SKIP_READ_LOAD()
 {
 	//既読データを読み込んで、各変数に代入
 	SkipData_t Data;
-#pragma warning(disable:4996);
 	FILE *fp = fopen("DATA/SAVE/SKIP_READ.dat", "rb");
 	if (fp == NULL) {
 		return 0;
@@ -1186,7 +1185,6 @@ int SKIP_READ_LOAD()
 int SKIP_READ_SAVE()
 {
 		//既読スキップデータ保存
-#pragma warning(disable:4996);
 		SkipData_t Data = { LINKS, A, B, C, D, E, F, G, H, I, J, K, L, M, N };
 		FILE *fp = fopen("DATA/SAVE/SKIP_READ.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -1203,7 +1201,6 @@ int SKIP_READ_SAVE()
 int CONFIG_SAVE()
 {
 	//設定データ保存
-	#pragma warning(disable:4996);
 	ConfigData_t Data = { BGM_VOL, BGM_VOL_COUNT, SE_VOL, SE_VOL_COUNT, SKIP_SPEED, SKIP_SPEED_COUNT, AUTO_SPEED, AUTO_SPEED_COUNT, STRING_SPEED, STRING_SPEED_COUNT, soundnovel_winownovel, mouse_key_move };
 	FILE *fp = fopen("DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
 	if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -1220,7 +1217,6 @@ int CONFIG_LOAD()
 {
 	//設定データの読み込み
 	ConfigData_t Data;
-	#pragma warning(disable:4996);
 	FILE *fp = fopen("DATA/SAVE/Config.dat", "rb");
 	if (fp == NULL) {
 		return 0;
@@ -1264,7 +1260,6 @@ int QUICKSAVE_SAVE(){
 	if (SAVE == IDYES) {
 
 		//クイックセーブデータの作成 
-#pragma warning(disable:4996);
 		QuickSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 		FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -1298,7 +1293,6 @@ int QUICKSAVE_LOAD() {
 
 		//クイックセーブデータの読み込み
 		QuickSaveData_t Data;
-#pragma warning(disable:4996);
 		FILE *fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "rb");
 		if (fp == NULL) {
 			return 0;
@@ -1336,7 +1330,6 @@ int QUICKSAVE_LOAD() {
 int CONTINUE_SAVE() {
 
 	//クイックセーブデータの作成 
-#pragma warning(disable:4996);
 	ContinueSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 	FILE *fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "wb");//バイナリファイルを開く
 	if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -1368,7 +1361,6 @@ int CONTINUE_LOAD() {
 
 		//コンティニューセーブデータの読み込み
 		ContinueSaveData_t Data;
-#pragma warning(disable:4996);
 		FILE *fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "rb");
 		if (fp == NULL) {
 			return 0;
@@ -1945,7 +1937,6 @@ int SAVEDATA_1_SAVE() {
 		}
 
 		//セーブデータの作成 
-#pragma warning(disable:4996);
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 		FILE *fp = fopen("DATA/SAVE/SAVEDATA1.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -1999,7 +1990,6 @@ int SAVEDATA_2_SAVE() {
 		}
 
 		//セーブデータの作成 
-#pragma warning(disable:4996);
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 		FILE *fp = fopen("DATA/SAVE/SAVEDATA2.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -2053,7 +2043,6 @@ int SAVEDATA_3_SAVE() {
 		}
 
 		//セーブデータの作成 
-#pragma warning(disable:4996);
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 		FILE *fp = fopen("DATA/SAVE/SAVEDATA3.dat", "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
@@ -2212,7 +2201,6 @@ int SAVEDATA_1_LOAD() {
 
 	if (SAVE == IDYES) {
 		SaveData_t Data;
-#pragma warning(disable:4996);
 		FILE *fp = fopen("DATA/SAVE/SAVEDATA1.dat", "rb");
 		if (fp == NULL) {
 
@@ -2261,7 +2249,6 @@ int SAVEDATA_2_LOAD() {
 
 	if (SAVE == IDYES) {
 		SaveData_t Data;
-#pragma warning(disable:4996);
 		FILE *fp = fopen("DATA/SAVE/SAVEDATA2.dat", "rb");
 		if (fp == NULL) {
 
@@ -2310,7 +2297,6 @@ int SAVEDATA_3_LOAD() {
 
 	if (SAVE == IDYES) {
 		SaveData_t Data;
-#pragma warning(disable:4996);
 		FILE *fp = fopen("DATA/SAVE/SAVEDATA3.dat", "rb");
 		if (fp == NULL) {
 
