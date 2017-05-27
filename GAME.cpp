@@ -529,17 +529,10 @@ void Mouse_Move_SAVE(int MouseY) {
 
 //マウス操作(選択肢画面)
 void Mouse_Move_CHOICE(int MouseY) {
-
 	//選択肢画面
 	if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
-
-		if (MouseY <= 229)
-			y = 200;
-
-		if (MouseY >= 230)
-			y = 230;
+		y = (MouseY <= 229) ? 200 : 230;
 	}
-
 }
 
 //マウス操作(コンフィグ)
