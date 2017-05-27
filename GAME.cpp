@@ -1396,34 +1396,24 @@ void SAVE_WINDOWNOVEL() {
 	GAMEMENU_COUNT = 1;
 }
 
-//セーブデータ１にセーブ
-int SAVEDATA_1_SAVE() {
-
+static int CreateSaveData(int* SaveSnapHandle, const char* Message, const char* ImagePath, const char* SaveDataPath) {
 	SAVE = MessageBox(
 		NULL,
-		"セーブデータ1にセーブしますか？",
+		Message,
 		"ノベルゲームエンジン「LINKS」",
 		MB_YESNO
 	);
-
 	if (SAVE == IDYES) {
-
 		//セーブデータ１用のスクリーンショット取得変数
-		SAVESNAP_HANDLE1 = 1;
+		*SaveSnapHandle = 1;
 
 		//選択肢画面でのセーブ処理
 		if (SAVESNAP_CHOICE != 0) {
-
 			SetDrawScreen(DX_SCREEN_BACK);
-
 			DrawGraph(0, 0, SAVESNAP_CHOICE, TRUE);
-
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP1.png", 0);
-
+			SaveDrawScreenToPNG(0, 0, 640, 480, ImagePath, 0);
 			SAVESNAP_CHOICE = 0;
-
-			SAVESNAP_HANDLE1 = 0;
-
+			*SaveSnapHandle = 0;
 			SetDrawScreen(DX_SCREEN_FRONT);
 
 		}
@@ -1432,152 +1422,56 @@ int SAVEDATA_1_SAVE() {
 		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
 		FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA1.dat", "wb");
+		const errno_t er = fopen_s(&fp, SaveDataPath, "wb");
 		if (0 != er) {
 			return 0;
 		}
 #else
-		fp = fopen("DATA/SAVE/SAVEDATA1.dat", "wb");//バイナリファイルを開く
+		fp = fopen(SaveDataPath, "wb");//バイナリファイルを開く
 		if (fp == NULL) {//エラーが起きたらNULLを返す
 			return 0;
 		}
 #endif
 		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
-		fclose(fp);//ファイルを閉じる
-
+		fclose(fp);
 		//セーブ後のメッセージ
 		SAVE_MESSAGE();
-
 		//サウンドノベル風描画時の処理
 		SAVE_SOUNDNOVEL();
-
 		//ウインドウ風描画時の処理
 		SAVE_WINDOWNOVEL();
 	}
 
 	return 0;
+}
+//セーブデータ１にセーブ
+int SAVEDATA_1_SAVE() {
+	return CreateSaveData(
+		&SAVESNAP_HANDLE1, 
+		"セーブデータ1にセーブしますか？", 
+		"DATA/SAVE/SAVESNAP1.png", 
+		"DATA/SAVE/SAVEDATA1.dat"
+	);
 }
 
 //セーブデータ2にセーブ
 int SAVEDATA_2_SAVE() {
-
-	SAVE = MessageBox(
-		NULL,
+	return CreateSaveData(
+		&SAVESNAP_HANDLE2,
 		"セーブデータ2にセーブしますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
+		"DATA/SAVE/SAVESNAP2.png",
+		"DATA/SAVE/SAVEDATA2.dat"
 	);
-
-	if (SAVE == IDYES) {
-
-		SAVESNAP_HANDLE2 = 1;
-
-		//選択肢画面でのセーブ処理
-		if (SAVESNAP_CHOICE != 0) {
-
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			DrawGraph(0, 0, SAVESNAP_CHOICE, TRUE);
-
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP2.png", 0);
-
-			SAVESNAP_CHOICE = 0;
-
-			SAVESNAP_HANDLE3 = 0;
-
-			SetDrawScreen(DX_SCREEN_FRONT);
-
-		}
-
-		//セーブデータの作成
-		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-		FILE *fp;
-#ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA2.dat", "wb");
-		if (0 != er) {
-			return 0;
-		}
-#else
-		fp = fopen("DATA/SAVE/SAVEDATA2.dat", "wb");//バイナリファイルを開く
-		if (fp == NULL) {//エラーが起きたらNULLを返す
-			return 0;
-		}
-#endif
-		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
-		fclose(fp);//ファイルを閉じる
-
-	   //セーブ後のメッセージ
-		SAVE_MESSAGE();
-
-		//サウンドノベル風描画時の処理
-		SAVE_SOUNDNOVEL();
-
-		//ウインドウ風描画時の処理
-		SAVE_WINDOWNOVEL();
-	}
-
-	return 0;
 }
 
 //セーブデータ3にセーブ
 int SAVEDATA_3_SAVE() {
-
-	SAVE = MessageBox(
-		NULL,
+	return CreateSaveData(
+		&SAVESNAP_HANDLE3,
 		"セーブデータ3にセーブしますか？",
-		"ノベルゲームエンジン「LINKS」",
-		MB_YESNO
+		"DATA/SAVE/SAVESNAP3.png",
+		"DATA/SAVE/SAVEDATA3.dat"
 	);
-
-	if (SAVE == IDYES) {
-
-		SAVESNAP_HANDLE3 = 1;
-
-		//選択肢画面でのセーブ処理
-		if (SAVESNAP_CHOICE != 0) {
-
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			DrawGraph(0, 0, SAVESNAP_CHOICE, TRUE);
-
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP3.png", 0);
-
-			SAVESNAP_CHOICE = 0;
-
-			SAVESNAP_HANDLE3 = 0;
-
-			SetDrawScreen(DX_SCREEN_FRONT);
-
-		}
-
-		//セーブデータの作成
-		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-		FILE *fp;
-#ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, "DATA/SAVE/SAVEDATA3.dat", "wb");
-		if (0 != er) {
-			return 0;
-		}
-#else
-		fp = fopen("DATA/SAVE/SAVEDATA3.dat", "wb");//バイナリファイルを開く
-		if (fp == NULL) {//エラーが起きたらNULLを返す
-			return 0;
-		}
-#endif
-		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
-		fclose(fp);//ファイルを閉じる
-
-	   //セーブ後のメッセージ
-		SAVE_MESSAGE();
-
-		//サウンドノベル風描画時の処理
-		SAVE_SOUNDNOVEL();
-
-		//ウインドウ風描画時の処理
-		SAVE_WINDOWNOVEL();
-	}
-
-	return 0;
 }
 
 //セーブデータ・セーブ画面ループ
