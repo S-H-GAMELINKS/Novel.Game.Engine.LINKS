@@ -215,6 +215,7 @@ static bool SerialNumberFileLoader(long* dest_arr, size_t dest_arr_num, const ch
 #endif
 		dest_arr[i] = LoadGraph(FilePathString);
 	}
+	return true;
 }
 
 //立ち絵素材読込
