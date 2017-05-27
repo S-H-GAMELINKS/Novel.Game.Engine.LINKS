@@ -499,45 +499,20 @@ void Mouse_Move_TITLE(int MouseY) {
 
 //マウス操作(ゲームメニュー)
 void Mouse_Move_GAME(int MouseY) {
-
 	//ゲームメニュー
 	if (EndFlag == 99 || EndFlag != 99 && GAMEMENU_COUNT == 0 && Config == 0) {
-
-		if (MouseY <= 59)
-			GAME_y = 30;
-
-		if (MouseY >= 60 && MouseY <= 89)
-			GAME_y = 60;
-
-		if (MouseY >= 90 && MouseY <= 119)
-			GAME_y = 90;
-
-		if (MouseY >= 120 && MouseY <= 149)
-			GAME_y = 120;
-
-		if (MouseY >= 150 && MouseY <= 179)
-			GAME_y = 150;
-
-		if (MouseY >= 180 && MouseY <= 209)
-			GAME_y = 180;
-
-		if (MouseY >= 210 && MouseY <= 239)
-			GAME_y = 210;
-
-		if (MouseY >= 240 && MouseY <= 269)
-			GAME_y = 240;
-
-		if (MouseY >= 270 && MouseY <= 299)
-			GAME_y = 270;
-
-		if (MouseY >= 300 && MouseY <= 329)
-			GAME_y = 300;
-
-		if (MouseY >= 330 && MouseY <= 359)
-			GAME_y = 330;
-
-		if (MouseY >= 360)
-			GAME_y = 360;
+		GAME_y = (MouseY <= 59) ? 30
+			: (MouseY <= 89) ? 60
+			: (MouseY <= 119) ? 90
+			: (MouseY <= 149) ? 120
+			: (MouseY <= 179) ? 150
+			: (MouseY <= 209) ? 180
+			: (MouseY <= 239) ? 210
+			: (MouseY <= 269) ? 240
+			: (MouseY <= 299) ? 270
+			: (MouseY <= 329) ? 300
+			: (MouseY <= 359) ? 330
+			: 360;
 	}
 }
 
