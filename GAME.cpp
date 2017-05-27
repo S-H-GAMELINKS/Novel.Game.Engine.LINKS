@@ -421,9 +421,7 @@ int MoveKey(int KeyStateBuf[]) {
 
 		//キー入力の状況
 		for (int i = 0; i < 256; i++) {
-
-			if (GetHitKeyStateAll_Key[i] == 1) KeyStateBuf[i]++;
-			else                            KeyStateBuf[i] = 0;
+			KeyStateBuf[i] = (GetHitKeyStateAll_Key[i] == 1) ? KeyStateBuf[i] + 1 : 0;
 		}
 	}
 	return 0;
