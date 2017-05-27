@@ -1190,6 +1190,7 @@ int SKIP_READ_LOAD()
 	L = Data.L;
 	M = Data.M;
 	N = Data.N;
+	return 0;
 }
 
 //SKIP_READ SAVE関数
@@ -2462,6 +2463,7 @@ int SAVEDATA_3_LOAD() {
 
 		fclose(fp);
 	}
+	return 0;
 }
 
 //セーブデータ・ロード画面ループ
