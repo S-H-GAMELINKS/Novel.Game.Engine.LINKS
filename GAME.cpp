@@ -486,28 +486,15 @@ void GAME_MENU_CURSOR(int Cr, int GAME_y) {
 
 //マウス操作(タイトルメニュー)
 void Mouse_Move_TITLE(int MouseY) {
-
-		//タイトルメニュー
-		if (EndFlag == 99) {
-
-			if (MouseY <= 329)
-				y = 300;
-
-			if (MouseY >= 330 && MouseY <= 359)
-				y = 330;
-
-			if (MouseY >= 360 && MouseY <= 389)
-				y = 360;
-
-			if (MouseY >= 390 && MouseY <= 419)
-				y = 390;
-
-			if (MouseY >= 420 && MouseY <= 449)
-				y = 420;
-
-			if (MouseY >= 450)
-				y = 450;
-		}
+	//タイトルメニュー
+	if (EndFlag == 99) {
+		y = (MouseY <= 329) ? 300
+			: (MouseY <= 359) ? 330
+			: (MouseY <= 389) ? 360
+			: (MouseY <= 419) ? 390
+			: (MouseY <= 449) ? 420
+			: 450;
+	}
 }
 
 //マウス操作(ゲームメニュー)
