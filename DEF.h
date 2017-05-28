@@ -1,4 +1,7 @@
-﻿// 文字のサイズ
+﻿#ifndef LINKS_DEF_H_
+#define LINKS_DEF_H_
+
+// 文字のサイズ
 #define MOJI_SIZE 21
 
 //スクリプト読込数
@@ -43,3 +46,4 @@
 //ゲームメニュー位置関係
 #define GAMEMENU_y 30
 
+#endif //LINKS_DEF_H_

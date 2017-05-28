@@ -1,4 +1,7 @@
-﻿#include <Windows.h>
+﻿#ifndef LINKS_GAME_H_
+#define LINKS_GAME_H_
+
+#include <Windows.h>
 //Yes/Noのメッセージボックス
 int LINKS_MessageBox_YESNO(LPCTSTR lpText);
 
@@ -76,3 +79,5 @@ void SCREEN_CLEAR();
 
 //各種F1～F11キー
 void SHORTCUT_KEY();
+
+#endif //LINKS_GAME_H_
