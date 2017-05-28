@@ -263,10 +263,9 @@ void MATERIAL_LOAD() {
 int SCRIPT_TO_ARRAY(int ScriptFile) {
 
 	//スクリプトファイルを配列へ流し込む
-	for (int i = 0; i < GYOU; i++) {
-		FileRead_scanf(ScriptFile, "%s", String[i]);
+	for (auto&& s : String) {
+		FileRead_scanf(ScriptFile, "%s", s);
 	}
-
 	return 0;
 }
 
