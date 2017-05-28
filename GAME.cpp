@@ -2596,100 +2596,19 @@ void SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE() {
 
 //選択後の分岐処理(選択肢↑)
 void SCRIPT_OUTPUT_CHOICE_BRANCH_UP() {
-
-	switch (EndFlag) {
-
-	case 1:
-
-			EndFlag = 2;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 2:
-			EndFlag = 4;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 3:
-			EndFlag = 6;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 4:
-			EndFlag = 8;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 5:
-			EndFlag = 10;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 6:
-			EndFlag = 12;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 7:
-			EndFlag = 14;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
+	if (1 <= EndFlag && EndFlag <= 7) {
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+		EndFlag *= 2;
 	}
 }
 
 //選択後の分岐処理(選択肢↓)
 void SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN() {
-
-	switch (EndFlag) {
-
-	case 1:
-			EndFlag = 3;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 2:
-			EndFlag = 5;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 3:
-			EndFlag = 7;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 4:
-			EndFlag = 9;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 5:
-			EndFlag = 11;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 6:
-			EndFlag = 13;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
-
-	case 7:
-			EndFlag = 15;
-			SAVE_CHOICE = 0;
-			SAVESNAP_CHOICE = 0;
-			break;
+	if (1 <= EndFlag && EndFlag <= 7) {
+		SAVE_CHOICE = 0;
+		SAVESNAP_CHOICE = 0;
+		EndFlag = EndFlag * 2 + 1;
 	}
 }
 
