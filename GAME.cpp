@@ -2801,7 +2801,7 @@ void SCRIPT_OUTPUT_CHARACTER_NAME() {
 
 //文字列の描画
 void SCRIPT_OUTPUT_STRING_DRAW() {
-
+	//TODO: https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS/issues/3
 	// １文字分抜き出す
 	OneMojiBuf[0] = String[SP][CP];
 	OneMojiBuf[1] = String[SP][CP + 1];
