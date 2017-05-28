@@ -5,65 +5,6 @@
 #include "DEF.h"
 #include "resource.h"
 
-// 文字列描画の位置
-extern int DrawPointX, DrawPointY;
-
-// 参照する文字列番号と文字列中の文字ポインタ
-extern int SP, CP;
-
-//スクリプト用読込配列
-extern char String[GYOU][RETU];
-
-//タイトル関連
-extern int TITLE;
-extern unsigned int Cr;
-
-//エンドフラグ
-extern int EndFlag;
-
-//既読スキップ変数
-extern int LINKS;
-extern int A;
-extern int B;
-extern int C;
-extern int D;
-extern int E;
-extern int F;
-extern int G;
-extern int H;
-extern int I;
-extern int J;
-extern int K;
-extern int L;
-extern int M;
-extern int N;
-
-//設定用変数
-extern int BGM_VOL;
-extern int SE_VOL;
-extern int BGM_VOL_COUNT;
-extern int SE_VOL_COUNT;
-
-//バックログ変数
-extern char *BACKLOG_DELETE;
-
-//セーブ用変数
-extern int SAVE, SAVE_CHOICE;
-extern char *SAVESNAP_CHOICE_DELETE;
-
-//スキップ・オートモード用変数
-extern int skip_auto;
-extern int SKIP_SPEED;
-extern int SKIP_SPEED_COUNT;
-extern int AUTO_SPEED;
-extern int AUTO_SPEED_COUNT;
-
-//キー操作
-extern int Key[256];
-extern int y;
-extern int SAVE_y;
-extern int GAME_y;
-
 //DXライブラリ初期化前処理
 void DXLib_PREP() {
 
