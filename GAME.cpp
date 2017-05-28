@@ -128,42 +128,43 @@ static short SHORTCUT_KEY_FLAG = 0;
 
 //セーブ・ロード関連
 //通常セーブデータ
-typedef struct {
-	int ENDFLAG;    //ENDFLAG
-	int SP;			//行数
-	int CP;			//文字位置
-	int CHAR;		//立ち絵情報
-	int BG;			//背景画像情報
-	int BGM;		//BGM情報
-	int SAVE_CHOICE;//選択肢画面でのセーブ情報
-}SaveData_t;
+struct alignas(4) SaveData_t {
+	std::int32_t ENDFLAG;    //ENDFLAG
+	std::int32_t SP;			//行数
+	std::int32_t CP;			//文字位置
+	std::int32_t CHAR;		//立ち絵情報
+	std::int32_t BG;			//背景画像情報
+	std::int32_t BGM;		//BGM情報
+	std::int32_t SAVE_CHOICE;//選択肢画面でのセーブ情報
+};
 
 //クイックセーブデータ
-typedef struct {
-	int ENDFLAG;    //ENDFLAG
-	int SP;			//行数
-	int CP;			//文字位置
-	int CHAR;		//立ち絵情報
-	int BG;			//背景画像情報
-	int BGM;		//BGM情報
-	int SAVE_CHOICE;//選択肢画面でのセーブ情報
-}QuickSaveData_t;
+struct alignas(4) QuickSaveData_t {
+	std::int32_t ENDFLAG;    //ENDFLAG
+	std::int32_t SP;			//行数
+	std::int32_t CP;			//文字位置
+	std::int32_t CHAR;		//立ち絵情報
+	std::int32_t BG;			//背景画像情報
+	std::int32_t BGM;		//BGM情報
+	std::int32_t SAVE_CHOICE;//選択肢画面でのセーブ情報
+};
 
 //コンティニューセーブデータ
-typedef struct {
-	int ENDFLAG;    //ENDFLAG
-	int SP;			//行数
-	int CP;			//文字位置
-	int CHAR;		//立ち絵情報
-	int BG;			//背景画像情報
-	int BGM;		//BGM情報
-	int SAVE_CHOICE;//選択肢画面でのセーブ情報
-}ContinueSaveData_t;
+struct alignas(4) ContinueSaveData_t {
+	std::int32_t ENDFLAG;    //ENDFLAG
+	std::int32_t SP;			//行数
+	std::int32_t CP;			//文字位置
+	std::int32_t CHAR;		//立ち絵情報
+	std::int32_t BG;			//背景画像情報
+	std::int32_t BGM;		//BGM情報
+	std::int32_t SAVE_CHOICE;//選択肢画面でのセーブ情報
+};
 
 union SkipDataConv {
 	alignas(4) SkipData_t flag;
 	alignas(4) std::int32_t arr[15];
 };
+static_assert(alignof(std::int32_t) == 4, "err");
 static_assert(alignof(SkipData_t) == alignof(std::int32_t[15]), "err");
 static_assert(sizeof(SkipData_t) == sizeof(std::int32_t[15]), "err");
 
