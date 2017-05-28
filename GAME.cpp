@@ -2965,28 +2965,28 @@ static bool SelectLoadedResource(int& out, const int* LoadedArray, size_t Loaded
 //キャラクター描画処理
 void CHARACTER_DRAW() {
 	if (SelectLoadedResource(CHARACTER, CHARACTER_LOAD, countof(CHARACTER_LOAD), String[SP][CP], String[SP][CP + 1])) {
-		++CP;
+		CP += 2;
 	}
 }
 
 //背景描画処理
 void BACKGROUND_DRAW() {
 	if (SelectLoadedResource(BACKGROUND, BACKGROUND_LOAD, countof(BACKGROUND_LOAD), String[SP][CP], String[SP][CP + 1])) {
-		++CP;
+		CP += 2;
 	}
 }
 
 //BGM再生処理
 void BACKGROUNDMUSIC_START() {
 	if (SelectLoadedResource(BACKGROUNDMUSIC, BACKGROUNDMUSIC_LOAD, countof(BACKGROUNDMUSIC_LOAD), String[SP][CP], String[SP][CP + 1])) {
-		++CP;
+		CP += 2;
 	}
 }
 
 //SE再生処理
 void SOUNDEFFECT_START() {
 	if (SelectLoadedResource(SOUNDEFFECT, SOUNDEFFECT_LOAD, countof(SOUNDEFFECT_LOAD), String[SP][CP], String[SP][CP + 1])) {
-		++CP;
+		CP += 2;
 	}
 }
 
