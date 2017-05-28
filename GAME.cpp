@@ -7153,204 +7153,44 @@ int FORMAT() {
 	return 0;
 }
 
-//スクリーンショット取得後の処理
-void SCREEN_SHOT_COUNT() {
-
-	WaitTimer(300);
-	SCREENSHOT_COUNT++;
-}
-
-//スクリーンショット01取得機能
-void SCREENSHOT_01() {
-
-	//スクリーンショット０１取得
-	if (SCREENSHOT_COUNT == 0 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT01.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット０１を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
-//スクリーンショット02取得機能
-void SCREENSHOT_02() {
-
-	//スクリーンショット０２取得
-	if (SCREENSHOT_COUNT == 1 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT02.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット０２を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
-//スクリーンショット03取得機能
-void SCREENSHOT_03() {
-
-	//スクリーンショット０３取得
-	if (SCREENSHOT_COUNT == 2 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT03.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット０３を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
-//スクリーンショット04取得機能
-void SCREENSHOT_04() {
-
-	//スクリーンショット０４取得
-	if (SCREENSHOT_COUNT == 3 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT04.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット０４を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
-//スクリーンショット05取得機能
-void SCREENSHOT_05() {
-
-	//スクリーンショット０５取得
-	if (SCREENSHOT_COUNT == 4 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT05.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット０５を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
-//スクリーンショット06取得機能
-void SCREENSHOT_06() {
-
-	//スクリーンショット０６取得
-	if (SCREENSHOT_COUNT == 5 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT06.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット０６を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
-//スクリーンショット07取得機能
-void SCREENSHOT_07() {
-
-	//スクリーンショット０７取得
-	if (SCREENSHOT_COUNT == 6 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT07.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット０７を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
-//スクリーンショット08取得機能
-void SCREENSHOT_08() {
-
-	//スクリーンショット０８取得
-	if (SCREENSHOT_COUNT == 7 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT08.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット０８を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
-//スクリーンショット09取得機能
-void SCREENSHOT_09() {
-
-	//スクリーンショット０９取得
-	if (SCREENSHOT_COUNT == 8 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT09.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット０９を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
-//スクリーンショット10取得機能
-void SCREENSHOT_10() {
-
-	//スクリーンショット１０取得
-	if (SCREENSHOT_COUNT == 9 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SCREENSHOT/SCREENSHOT10.png", 0);
-
-		LINKS_MessageBox_OK("スクリーンショット１０を取得しました！");
-
-		//スクリーンショット取得後の処理
-		SCREEN_SHOT_COUNT();
-	}
-}
-
 //スクリーンショット機能
 int SCREENSHOT() {
+	if (1 != CheckHitKey(KEY_INPUT_F12)) return 0;
 
-	//スクリーンショット01取得機能
-	SCREENSHOT_01();
-
-	//スクリーンショット02取得機能
-	SCREENSHOT_02();
-
-	//スクリーンショット03取得機能
-	SCREENSHOT_03();
-
-	//スクリーンショット04取得機能
-	SCREENSHOT_04();
-
-	//スクリーンショット05取得機能
-	SCREENSHOT_05();
-
-	//スクリーンショット06取得機能
-	SCREENSHOT_06();
-
-	//スクリーンショット07取得機能
-	SCREENSHOT_07();
-
-	//スクリーンショット08取得機能
-	SCREENSHOT_08();
-
-	//スクリーンショット09取得機能
-	SCREENSHOT_09();
-
-	//スクリーンショット10取得機能
-	SCREENSHOT_10();
-
-	//スクリーンショット取得限界メッセージ
-	if (SCREENSHOT_COUNT >= 10 && CheckHitKey(KEY_INPUT_F12) == 1) {
-
+	if (SCREENSHOT_COUNT < 1 || 9 < SCREENSHOT_COUNT) {
 		LINKS_MessageBox_OK("これ以上スクリーンショットを取得できません");
-
-		WaitTimer(300);
 	}
-
+	else {
+		static const char* const ScreenShotFileNames[] = {
+			"DATA/SCREENSHOT/SCREENSHOT01.png",
+			"DATA/SCREENSHOT/SCREENSHOT02.png",
+			"DATA/SCREENSHOT/SCREENSHOT03.png",
+			"DATA/SCREENSHOT/SCREENSHOT04.png",
+			"DATA/SCREENSHOT/SCREENSHOT05.png",
+			"DATA/SCREENSHOT/SCREENSHOT06.png",
+			"DATA/SCREENSHOT/SCREENSHOT07.png",
+			"DATA/SCREENSHOT/SCREENSHOT08.png",
+			"DATA/SCREENSHOT/SCREENSHOT09.png",
+			"DATA/SCREENSHOT/SCREENSHOT10.png",
+		};
+		static const char* const ScreenShotMessages[] = {
+			"スクリーンショット０１を取得しました！",
+			"スクリーンショット０２を取得しました！",
+			"スクリーンショット０３を取得しました！",
+			"スクリーンショット０４を取得しました！",
+			"スクリーンショット０５を取得しました！",
+			"スクリーンショット０６を取得しました！",
+			"スクリーンショット０７を取得しました！",
+			"スクリーンショット０８を取得しました！",
+			"スクリーンショット０９を取得しました！",
+			"スクリーンショット１０を取得しました！",
+		};
+		static_assert(countof(ScreenShotFileNames) == countof(ScreenShotMessages), "invalid array size.");
+		SaveDrawScreenToPNG(0, 0, 640, 480, ScreenShotFileNames[SCREENSHOT_COUNT], 0);
+		LINKS_MessageBox_OK(ScreenShotMessages[SCREENSHOT_COUNT]);
+		++SCREENSHOT_COUNT;
+	}
+	WaitTimer(300);
 	return 0;
 }
 
