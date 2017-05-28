@@ -230,7 +230,7 @@ static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const cha
 #ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
 		if(-1 == sprintf_s(FilePathString, dest_arr_num, format, i + 1)) return false;
 #else
-		if(0 > snprintf(FilePathString, format, i) return false;
+		if(0 > snprintf(FilePathString, dest_arr_num, format, i) return false;
 #endif
 		dest_arr[i] = LoadFunc(FilePathString);
 	}
@@ -1965,7 +1965,7 @@ void BACKLOG_SCREENSHOT_DRAW() {
 #ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
 		sprintf_s(Message, countof(Message), "バックログ%d", LOG);
 #else
-		snprintf(FilePathString, format, i);
+		snprintf(FilePathString, countof(Message), format, i);
 #endif
 		DrawString(0, 450, Message, Cr);
 	}
