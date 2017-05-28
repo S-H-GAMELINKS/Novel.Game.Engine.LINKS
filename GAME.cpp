@@ -24,19 +24,19 @@ int DrawPointX = 0, DrawPointY = 0;
 int SP = 0, CP = 0;
 
 //キャラクター画像読込変数
-long CHARACTER_LOAD[99];
+int CHARACTER_LOAD[99];
 int CHARACTER, CHARACTER_DUMMY;
 
 //背景画像読込変数
-long BACKGROUND_LOAD[99];
+int BACKGROUND_LOAD[99];
 int BACKGROUND;
 
 //背景音楽読込変数
-long BACKGROUNDMUSIC_LOAD[99];
+int BACKGROUNDMUSIC_LOAD[99];
 int BACKGROUNDMUSIC;
 
 //効果音変数
-long SOUNDEFFECT_LOAD[99];
+int SOUNDEFFECT_LOAD[99];
 int SOUNDEFFECT;
 
 //スクリプト用読込配列
@@ -222,7 +222,7 @@ static int LINKS_MessageBox_OK(LPCTSTR lpText)
 }
 
 
-static bool SerialNumberFileLoader(long* dest_arr, size_t dest_arr_num, const char* format) {
+static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const char* format) {
 	assert(dest_arr_num <= 40);
 	for (unsigned int i = 0; i < dest_arr_num; ++i) {
 		char FilePathString[40] = {};
