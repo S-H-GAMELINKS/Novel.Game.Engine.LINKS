@@ -2782,20 +2782,13 @@ void SCRIPT_OUTPUT_CHARACTER_NAME() {
 	if (soundnovel_winownovel == 1) {
 
 		//キャラクター名を読み込む
-		CHARACTER_NAME[0] = String[SP][CP + 1];
-		CHARACTER_NAME[1] = String[SP][CP + 2];
-		CHARACTER_NAME[2] = String[SP][CP + 3];
-		CHARACTER_NAME[3] = String[SP][CP + 4];
-		CHARACTER_NAME[4] = String[SP][CP + 5];
-		CHARACTER_NAME[5] = String[SP][CP + 6];
-		CHARACTER_NAME[6] = String[SP][CP + 7];
-		CHARACTER_NAME[7] = String[SP][CP + 8];
-		CHARACTER_NAME[8] = String[SP][CP + 9];
+		static_assert(10 <= countof(CHARACTER_NAME) && 9 <= countof(String[0]), "array length must be over 10");
+		assert(countof(String[SP]) < CP + 10);
+		memcpy(CHARACTER_NAME, &String[SP][CP + 1], 9);
 		CHARACTER_NAME[9] = '\0';
 
 		//キャラクター名の背景
-		int	Window_Color = GetColor(0, 0, 0);
-
+		const int Window_Color = GetColor(0, 0, 0);
 		DrawBox(30, 360, 150, 385, Window_Color, TRUE);
 
 		// １文字描画
