@@ -2495,7 +2495,7 @@ void SCRIPT_OUTPUT_CHOICE_READ() {
 	if (1 <= EndFlag && EndFlag <= 7) {
 		for (int i : {0, 1}) {
 			Choices[i] = FileRead_open(ChoiceFiles[EndFlag - 1][i]);
-			FileRead_gets(ChoiceStrings[i], RETU, Choices[i]);
+			FileRead_gets(ChoiceStrings[i], countof(ChoiceStrings[i]), Choices[i]);
 		}
 	}
 }
@@ -2550,7 +2550,7 @@ void SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ() {
 		const int index = EndFlag / 2;
 		for (int i : {0, 1}) {
 			Choices[i] = FileRead_open(ChoiceFiles[index][i]);
-			FileRead_gets(ChoiceStrings[i], RETU, Choices[i]);
+			FileRead_gets(ChoiceStrings[i], countof(ChoiceStrings[i]), Choices[i]);
 		}
 	}
 }
