@@ -50,8 +50,18 @@ unsigned int Cr;
 int GAMEOVER;
 
 //選択肢読込変数
-char ChoiceA[RETU], ChoiceB[RETU];
-int Choice1, Choice2;
+static char ChoiceStrings[2][RETU];
+static int Choices[2];
+static const char* const ChoiceFiles[][2] = {
+	{ "DATA/STR/CHOICE/A.txt", "DATA/STR/CHOICE/B.txt" },
+	{ "DATA/STR/CHOICE/C.txt", "DATA/STR/CHOICE/D.txt" },
+	{ "DATA/STR/CHOICE/E.txt", "DATA/STR/CHOICE/F.txt" },
+	{ "DATA/STR/CHOICE/G.txt", "DATA/STR/CHOICE/H.txt" },
+	{ "DATA/STR/CHOICE/I.txt", "DATA/STR/CHOICE/J.txt" },
+	{ "DATA/STR/CHOICE/K.txt", "DATA/STR/CHOICE/L.txt" },
+	{ "DATA/STR/CHOICE/M.txt", "DATA/STR/CHOICE/N.txt" }
+};
+
 
 //エンドフラグ
 int EndFlag = 99;
@@ -2238,8 +2248,9 @@ void sentakusi(int Cr, int y) {
 	DrawString(SENTAKUSIX, y, "■", Cr);
 
 	//選択肢の描画
-	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI1, ChoiceA, Cr);
-	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI2, ChoiceB, Cr);
+	for (int i : {0, 1}) {
+		DrawString(SENTAKUSIX + CURSOR, SENTAKUSI1, ChoiceStrings[i], Cr);
+	}
 }
 
 // 改行関数
@@ -2561,20 +2572,11 @@ void SCRIPT_OUTPUT_CHOICE_LOOP_DRAW() {
 
 //選択肢ファイルの読み込み(描画用)
 void SCRIPT_OUTPUT_CHOICE_READ() {
-	static const char* const ChoiceFiles[][2] = {
-		{ "DATA/STR/CHOICE/A.txt", "DATA/STR/CHOICE/B.txt" },
-		{ "DATA/STR/CHOICE/C.txt", "DATA/STR/CHOICE/D.txt" },
-		{ "DATA/STR/CHOICE/E.txt", "DATA/STR/CHOICE/F.txt" },
-		{ "DATA/STR/CHOICE/G.txt", "DATA/STR/CHOICE/H.txt" },
-		{ "DATA/STR/CHOICE/I.txt", "DATA/STR/CHOICE/J.txt" },
-		{ "DATA/STR/CHOICE/K.txt", "DATA/STR/CHOICE/L.txt" },
-		{ "DATA/STR/CHOICE/M.txt", "DATA/STR/CHOICE/N.txt" }
-	};
 	if (1 <= EndFlag && EndFlag <= 7) {
-		Choice1 = FileRead_open(ChoiceFiles[EndFlag - 1][0]);
-		FileRead_gets(ChoiceA, RETU, Choice1);
-		Choice2 = FileRead_open(ChoiceFiles[EndFlag - 1][1]);
-		FileRead_gets(ChoiceB, RETU, Choice2);
+		for (int i : {0, 1}) {
+			Choices[i] = FileRead_open(ChoiceFiles[EndFlag - 1][i]);
+			FileRead_gets(ChoiceStrings[i], RETU, Choices[i]);
+		}
 	}
 }
 
@@ -2625,20 +2627,11 @@ void SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN() {
 //選択肢時のバックログ取得(選択肢の読み込み)
 void SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ() {
 	if (2 <= EndFlag && EndFlag <= 15) {
-		static const char* const ChoiceFiles[][2] = {
-			{ "DATA/STR/CHOICE/A.txt", "DATA/STR/CHOICE/B.txt" },
-			{ "DATA/STR/CHOICE/C.txt", "DATA/STR/CHOICE/D.txt" },
-			{ "DATA/STR/CHOICE/E.txt", "DATA/STR/CHOICE/F.txt" },
-			{ "DATA/STR/CHOICE/G.txt", "DATA/STR/CHOICE/H.txt" },
-			{ "DATA/STR/CHOICE/I.txt", "DATA/STR/CHOICE/J.txt" },
-			{ "DATA/STR/CHOICE/K.txt", "DATA/STR/CHOICE/L.txt" },
-			{ "DATA/STR/CHOICE/M.txt", "DATA/STR/CHOICE/N.txt" }
-		};
 		const int index = EndFlag / 2;
-		Choice1 = FileRead_open(ChoiceFiles[index][0]);
-		FileRead_gets(ChoiceA, RETU, Choice1);
-		Choice2 = FileRead_open(ChoiceFiles[index][1]);
-		FileRead_gets(ChoiceB, RETU, Choice2);
+		for (int i : {0, 1}) {
+			Choices[i] = FileRead_open(ChoiceFiles[index][i]);
+			FileRead_gets(ChoiceStrings[i], RETU, Choices[i]);
+		}
 	}
 }
 
@@ -3214,10 +3207,9 @@ int FORMAT() {
 	// 参照文字位置をセット
 	SP = 0;	// １行目の
 	CP = 0;	// ０文字
-
-	FileRead_close(Choice1);
-	FileRead_close(Choice2);
-
+	for (int i : {0, 1}) {
+		FileRead_close(Choices[i]);
+	}
 	return 0;
 }
 
