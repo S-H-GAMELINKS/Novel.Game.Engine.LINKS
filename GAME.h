@@ -1,74 +1,77 @@
-//Še‘fÞƒf[ƒ^“ÇžŠÖ”
+ï»¿//Yes/Noã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹
+int LINKS_MessageBox_YESNO(LPCTSTR lpText);
+
+//å„ç´ æãƒ‡ãƒ¼ã‚¿èª­è¾¼é–¢æ•°
 void MATERIAL_LOAD();
 
-//ƒXƒNƒŠƒvƒg“ÇžŠÖ”
+//ã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼é–¢æ•°
 int SCRIPT_READ();
 
-//–îˆóƒL[‘€ìŠÖ”
+//çŸ¢å°ã‚­ãƒ¼æ“ä½œé–¢æ•°
 int MoveKey(int KeyStateBuf[]);
 
-//ƒ^ƒCƒgƒ‹ƒƒjƒ…[ƒJ[ƒ\ƒ‹ŠÖ”
+//ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚«ãƒ¼ã‚½ãƒ«é–¢æ•°
 void title(int Cr, int y);
 
-//ƒZ[ƒuƒ[ƒhƒƒjƒ…[ƒJ[ƒ\ƒ‹ŠÖ”
+//ã‚»ãƒ¼ãƒ–ãƒ­ãƒ¼ãƒ‰ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚«ãƒ¼ã‚½ãƒ«é–¢æ•°
 void SAVE_LOAD_MENU(int Cr, int SAVE_y);
 
-//ƒQ[ƒ€ƒƒjƒ…[ƒJ[ƒ\ƒ‹ŠÖ”
+//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚«ãƒ¼ã‚½ãƒ«é–¢æ•°
 void GAME_MENU_CURSOR(int Cr, int GAME_y);
 
-//ƒZ[ƒuƒf[ƒ^ƒ[ƒhŠÖ”
+//ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿ãƒ­ãƒ¼ãƒ‰é–¢æ•°
 int SAVEDATA_LOAD();
 
-//SKIP_READ LOADŠÖ”
+//SKIP_READ LOADé–¢æ•°
 int SKIP_READ_LOAD();
 
-//SKIP_READ SAVEŠÖ”
+//SKIP_READ SAVEé–¢æ•°
 int SKIP_READ_SAVE();
 
-//CONFIG_SAVEŠÖ”
+//CONFIG_SAVEé–¢æ•°
 int CONFIG_SAVE();
 
-//CONFIG_LOADŠÖ”
+//CONFIG_LOADé–¢æ•°
 int CONFIG_LOAD();
 
-//ƒNƒCƒbƒNƒ[ƒh
+//ã‚¯ã‚¤ãƒƒã‚¯ãƒ­ãƒ¼ãƒ‰
 int QUICKSAVE_LOAD();
 
-//ƒRƒ“ƒeƒBƒjƒ…[—pƒ[ƒh
+//ã‚³ãƒ³ãƒ†ã‚£ãƒ‹ãƒ¥ãƒ¼ç”¨ãƒ­ãƒ¼ãƒ‰
 int CONTINUE_LOAD();
 
-//ƒZ[ƒuEƒ[ƒhEƒXƒLƒbƒvEƒI[ƒg‘¼ ƒQ[ƒ€ƒƒjƒ…[
+//ã‚»ãƒ¼ãƒ–ãƒ»ãƒ­ãƒ¼ãƒ‰ãƒ»ã‚¹ã‚­ãƒƒãƒ—ãƒ»ã‚ªãƒ¼ãƒˆä»– ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 int GAMEMENU();
 
-//‘I‘ðŽˆ‹@”\
+//é¸æŠžè‚¢æ©Ÿèƒ½
 void sentakusi(int Cr, int y);
 
-// ‰üsŠÖ”
+// æ”¹è¡Œé–¢æ•°
 int Kaigyou(void);
 
-//ƒXƒNƒŠƒvƒgƒ^ƒOˆ—ŠÖ”
+//ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚¿ã‚°å‡¦ç†é–¢æ•°
 int SCRIPT_OUTPUT();
 
-//I—¹ƒEƒCƒ“ƒhƒE
+//çµ‚äº†ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦
 int GAME_FINISH();
 
-//‰Šú‰»
+//åˆæœŸåŒ–
 int FORMAT();
 
-//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‹@”\
+//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆæ©Ÿèƒ½
 int SCREENSHOT();
 
-//ƒ}ƒEƒX‘€ì
+//ãƒžã‚¦ã‚¹æ“ä½œ
 int Mouse_Move();
 
-//ƒRƒ“ƒtƒBƒO(ƒ^ƒCƒgƒ‹‰æ–Ê)
+//ã‚³ãƒ³ãƒ•ã‚£ã‚°(ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢)
 void CONFIG();
 
-//I—¹ƒEƒCƒ“ƒhƒE
+//çµ‚äº†ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦
 int GAME_FINISH();
 
-//‰æ–ÊƒNƒŠƒAˆ—
+//ç”»é¢ã‚¯ãƒªã‚¢å‡¦ç†
 void SCREEN_CLEAR();
 
-//ŠeŽíF1`F11ƒL[
+//å„ç¨®F1ï½žF11ã‚­ãƒ¼
 void SHORTCUT_KEY();

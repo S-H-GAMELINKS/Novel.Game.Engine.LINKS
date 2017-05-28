@@ -1,30 +1,30 @@
-//ƒQ[ƒ€ƒŠƒ“ƒNƒXŠJ”­ ŠÈˆÕƒmƒxƒ‹ƒQ[ƒ€ƒGƒ“ƒWƒ“u‚k‚h‚m‚j‚rvver3.00
+ï»¿//ã‚²ãƒ¼ãƒ ãƒªãƒ³ã‚¯ã‚¹é–‹ç™º ç°¡æ˜“ãƒŽãƒ™ãƒ«ã‚²ãƒ¼ãƒ ã‚¨ãƒ³ã‚¸ãƒ³ã€Œï¼¬ï¼©ï¼®ï¼«ï¼³ã€ver3.00
 #include "DxLib.h"
 #include "stdio.h"
 #include "GAME.h"
 #include "DEF.h"
 #include "resource.h"
 
-// •¶Žš—ñ•`‰æ‚ÌˆÊ’u
+// æ–‡å­—åˆ—æç”»ã®ä½ç½®
 extern int DrawPointX, DrawPointY;
 
-// ŽQÆ‚·‚é•¶Žš—ñ”Ô†‚Æ•¶Žš—ñ’†‚Ì•¶Žšƒ|ƒCƒ“ƒ^
+// å‚ç…§ã™ã‚‹æ–‡å­—åˆ—ç•ªå·ã¨æ–‡å­—åˆ—ä¸­ã®æ–‡å­—ãƒã‚¤ãƒ³ã‚¿
 extern int SP, CP;
 
-//ƒXƒNƒŠƒvƒg“Çž•Ï”
+//ã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼å¤‰æ•°
 extern int ScriptFile;
 
-//ƒXƒNƒŠƒvƒg—p“Çž”z—ñ
+//ã‚¹ã‚¯ãƒªãƒ—ãƒˆç”¨èª­è¾¼é…åˆ—
 extern char String[GYOU][RETU];
 
-//ƒ^ƒCƒgƒ‹ŠÖ˜A
+//ã‚¿ã‚¤ãƒˆãƒ«é–¢é€£
 extern int TITLE;
 extern unsigned int Cr;
 
-//ƒGƒ“ƒhƒtƒ‰ƒO
+//ã‚¨ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°
 extern int EndFlag;
 
-//Šù“ÇƒXƒLƒbƒv•Ï”
+//æ—¢èª­ã‚¹ã‚­ãƒƒãƒ—å¤‰æ•°
 extern int LINKS;
 extern int A;
 extern int B;
@@ -41,90 +41,90 @@ extern int L;
 extern int M;
 extern int N;
 
-//Ý’è—p•Ï”
+//è¨­å®šç”¨å¤‰æ•°
 extern int BGM_VOL;
 extern int SE_VOL;
 extern int BGM_VOL_COUNT;
 extern int SE_VOL_COUNT;
 
-//ƒoƒbƒNƒƒO•Ï”
+//ãƒãƒƒã‚¯ãƒ­ã‚°å¤‰æ•°
 extern char *BACKLOG_DELETE;
 
-//ƒZ[ƒu—p•Ï”
+//ã‚»ãƒ¼ãƒ–ç”¨å¤‰æ•°
 extern int SAVE, SAVE_CHOICE;
 extern char *SAVESNAP_CHOICE_DELETE;
 
-//ƒXƒLƒbƒvEƒI[ƒgƒ‚[ƒh—p•Ï”
+//ã‚¹ã‚­ãƒƒãƒ—ãƒ»ã‚ªãƒ¼ãƒˆãƒ¢ãƒ¼ãƒ‰ç”¨å¤‰æ•°
 extern int skip_auto;
 extern int SKIP_SPEED;
 extern int SKIP_SPEED_COUNT;
 extern int AUTO_SPEED;
 extern int AUTO_SPEED_COUNT;
 
-//ƒL[‘€ì
+//ã‚­ãƒ¼æ“ä½œ
 extern int Key[256];
 extern int y;
 extern int SAVE_y;
 extern int GAME_y;
 
-//DXƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»‘Oˆ—
+//DXãƒ©ã‚¤ãƒ–ãƒ©ãƒªåˆæœŸåŒ–å‰å‡¦ç†
 void DXLib_PREP() {
 
-	//ƒƒO‚Ì’Šo
+	//ãƒ­ã‚°ã®æŠ½å‡º
 	SetOutApplicationLogValidFlag(FALSE);
 
-	//ƒAƒCƒRƒ“
+	//ã‚¢ã‚¤ã‚³ãƒ³
 	SetWindowIconID(101);
 
-	//ƒEƒCƒ“ƒhƒE‚É•\Ž¦‚³‚ê‚éƒQ[ƒ€ƒ\ƒtƒg–¼
-	SetWindowText("ƒmƒxƒ‹ƒQ[ƒ€ƒGƒ“ƒWƒ“uLINKSv");
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã«è¡¨ç¤ºã•ã‚Œã‚‹ã‚²ãƒ¼ãƒ ã‚½ãƒ•ãƒˆå
+	SetWindowText("ãƒŽãƒ™ãƒ«ã‚²ãƒ¼ãƒ ã‚¨ãƒ³ã‚¸ãƒ³ã€ŒLINKSã€");
 
-	//ƒEƒCƒ“ƒhƒE‚ðŽ©—R‚É•ÏX‚Å‚«‚é
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’è‡ªç”±ã«å¤‰æ›´ã§ãã‚‹
 	SetWindowSizeChangeEnableFlag(TRUE, TRUE);
 
-	//ƒEƒCƒ“ƒhƒE•`‰æ‚ÌŽí—Þ
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦æç”»ã®ç¨®é¡ž
 	SetDrawMode(DX_DRAWMODE_NEAREST);
 
-	//ƒEƒCƒ“ƒhƒE‚ÌŽí—Þ
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ç¨®é¡ž
 	SetWindowStyleMode(7);
 
-	//‰ŠúƒEƒCƒ“ƒhƒEƒTƒCƒY
+	//åˆæœŸã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚º
 	SetWindowSize(640, 480);
 
-	//ƒEƒCƒ“ƒhƒEƒ‚[ƒh‚Å‹N“®
+	//ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•
 	ChangeWindowMode(TRUE);
 }
 
-//DXƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»Œãˆ—
+//DXãƒ©ã‚¤ãƒ–ãƒ©ãƒªåˆæœŸåŒ–å¾Œå‡¦ç†
 void DXLib_POST_PREP() {
 
-	//ƒ}ƒEƒX•`‰æÝ’è
+	//ãƒžã‚¦ã‚¹æç”»è¨­å®š
 	SetMouseDispFlag(TRUE);
 
-	//DXƒA[ƒJƒCƒu‹@”\‚ÌŽg—p
+	//DXã‚¢ãƒ¼ã‚«ã‚¤ãƒ–æ©Ÿèƒ½ã®ä½¿ç”¨
 	SetUseDXArchiveFlag(TRUE);
 
-	//Še‘fÞƒf[ƒ^“Çž
+	//å„ç´ æãƒ‡ãƒ¼ã‚¿èª­è¾¼
 	MATERIAL_LOAD();
 
-	// ƒtƒHƒ“ƒg‚ÌƒTƒCƒYƒZƒbƒg
+	// ãƒ•ã‚©ãƒ³ãƒˆã®ã‚µã‚¤ã‚ºã‚»ãƒƒãƒˆ
 	SetFontSize(MOJI_SIZE);
 
-	//ƒtƒHƒ“ƒg‚ÌÝ’è
+	//ãƒ•ã‚©ãƒ³ãƒˆã®è¨­å®š
 	ChangeFontType(DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
 
-	//ƒQ[ƒ€ƒŠƒ“ƒNƒXƒƒS•\Ž¦
+	//ã‚²ãƒ¼ãƒ ãƒªãƒ³ã‚¯ã‚¹ãƒ­ã‚´è¡¨ç¤º
 	PlayMovie("DATA/MOVIE/OP.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 
-	//OP‰æ–Ê‚Ìíœ
+	//OPç”»é¢ã®å‰Šé™¤
 	ClearDrawScreen();
 	WaitTimer(600);
 
-	//Ý’è‚Ì“Çž
+	//è¨­å®šã®èª­è¾¼
 	CONFIG_LOAD();
 }
 
-//ƒ^ƒCƒgƒ‹ƒƒjƒ…[(ƒL[‘€ì)
+//ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼(ã‚­ãƒ¼æ“ä½œ)
 void TITLE_MENU_KEY_MOVE() {
 
 	if (Key[KEY_INPUT_DOWN] == 1) {
@@ -140,15 +140,10 @@ void TITLE_MENU_KEY_MOVE() {
 	}
 }
 
-//ƒ^ƒCƒgƒ‹ƒƒjƒ…[I—¹ˆ—
+//ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼çµ‚äº†å‡¦ç†
 void TITLE_MENU_END() {
 
-	SAVE = MessageBox(
-		NULL,
-		"I—¹‚µ‚Ü‚·‚©H",
-		"ƒmƒxƒ‹ƒQ[ƒ€ƒGƒ“ƒWƒ“uLINKSv",
-		MB_YESNO
-	);
+	SAVE = LINKS_MessageBox_YESNO("çµ‚äº†ã—ã¾ã™ã‹ï¼Ÿ");
 
 	if (SAVE == IDYES)
 		EndFlag = 99999;
@@ -156,7 +151,7 @@ void TITLE_MENU_END() {
 	WaitTimer(300);
 }
 
-//ƒ^ƒCƒgƒ‹ƒƒjƒ…[(‘I‘ðˆ—)
+//ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼(é¸æŠžå‡¦ç†)
 void TITLE_MENU_CHOICE() {
 
 	if (y == GAMESTART && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == GAMESTART && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
@@ -178,45 +173,45 @@ void TITLE_MENU_CHOICE() {
 		TITLE_MENU_END();
 }
 
-//ƒ^ƒCƒgƒ‹ƒƒjƒ…[ŠÖ”
+//ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼é–¢æ•°
 void TITLE_MENU() {
 
-	//ƒ^ƒCƒgƒ‹ƒƒjƒ…[
+	//ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 	if (EndFlag == 99) {
 
 		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag == 99) {
 
-			//ƒ^ƒCƒgƒ‹•\Ž¦
+			//ã‚¿ã‚¤ãƒˆãƒ«è¡¨ç¤º
 			DrawGraph(0, 0, TITLE, TRUE);
 
-			//ƒ^ƒCƒgƒ‹ƒƒjƒ…[•\Ž¦
+			//ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤º
 			title(Cr, y);
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‹@”\
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆæ©Ÿèƒ½
 			SCREENSHOT();
 
-			//ƒ}ƒEƒX‘€ì
+			//ãƒžã‚¦ã‚¹æ“ä½œ
 			Mouse_Move();
 
-			//ƒL[‘€ìŠÖ˜A
+			//ã‚­ãƒ¼æ“ä½œé–¢é€£
 			TITLE_MENU_KEY_MOVE();
 
-			//‰æ–ÊƒNƒŠƒAˆ—
+			//ç”»é¢ã‚¯ãƒªã‚¢å‡¦ç†
 			SCREEN_CLEAR();
 
-			//ƒ^ƒCƒgƒ‹ƒƒjƒ…[(‘I‘ðˆ—)
+			//ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼(é¸æŠžå‡¦ç†)
 			TITLE_MENU_CHOICE();
 
-			//I—¹ƒEƒCƒ“ƒhƒE
+			//çµ‚äº†ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦
 			GAME_FINISH();
 		}
 	}
 }
 
-//ŽQÆ•¶Žš—ñˆ—
+//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 void WORD_FORMAT() {
 
-	// ŽQÆ•¶Žš—ñ‚ÌI’[‚Ü‚Ås‚Á‚Ä‚¢‚½‚çŽQÆ•¶Žš—ñ‚ði‚ß‚é
+	// å‚ç…§æ–‡å­—åˆ—ã®çµ‚ç«¯ã¾ã§è¡Œã£ã¦ã„ãŸã‚‰å‚ç…§æ–‡å­—åˆ—ã‚’é€²ã‚ã‚‹
 	if (String[SP][CP] == '\0')
 	{
 		SP++;
@@ -224,37 +219,37 @@ void WORD_FORMAT() {
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(LINKS)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(LINKS)
 void GAME_LOOP_LINKS() {
 
-	//ƒƒCƒ“ƒ‹[ƒg
+	//ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 1) {
 
 		if (LINKS == 0)
 			skip_auto = 0;
 
-		//ƒƒCƒ“ƒXƒNƒŠƒvƒg“Çž
+		//ãƒ¡ã‚¤ãƒ³ã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//ƒƒCƒ“ƒ‹[ƒv(LINKS)
+		//ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—(LINKS)
 		while (EndFlag != 99 && ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª1‚Å‚È‚©‚Á‚½‚çI—¹‚·‚éB
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ1ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹ã€‚
 			if (EndFlag != 1 && EndFlag != 99999) {
 
 				if (SAVE_CHOICE == 0)
@@ -268,43 +263,43 @@ void GAME_LOOP_LINKS() {
 			if (EndFlag == 99999)
 				break;
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(A)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(A)
 void GAME_LOOP_A() {
 
-	//Aƒ‹[ƒg
+	//Aãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 2) {
 
 		if (A == 0)
 			skip_auto = 0;
 
-		//Aƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Aãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//‚`ƒ‹[ƒgƒ‹[ƒv
+		//ï¼¡ãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª2‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ2ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 2 && EndFlag != 99999) {
 
 				if (SAVE_CHOICE == 0)
@@ -318,43 +313,43 @@ void GAME_LOOP_A() {
 			if (EndFlag == 99999)
 				break;
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(B)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(B)
 void GAME_LOOP_B() {
 
-	//Bƒ‹[ƒg
+	//Bãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 3) {
 
 		if (B == 0)
 			skip_auto = 0;
 
-		//Bƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Bãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Bƒ‹[ƒgƒ‹[ƒv
+		//Bãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª3‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ3ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 3 && EndFlag != 99999) {
 
 				if (SAVE_CHOICE == 0)
@@ -368,43 +363,43 @@ void GAME_LOOP_B() {
 			if (EndFlag == 99999)
 				break;
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(C)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(C)
 void GAME_LOOP_C() {
 
-	//Cƒ‹[ƒg
+	//Cãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 4) {
 
 		if (C == 0)
 			skip_auto = 0;
 
-		//Cƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Cãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Cƒ‹[ƒgƒ‹[ƒv
+		//Cãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª4‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ4ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 4 && EndFlag != 99999) {
 
 				if (SAVE_CHOICE == 0)
@@ -418,43 +413,43 @@ void GAME_LOOP_C() {
 			if (EndFlag == 99999)
 				break;
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(D)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(D)
 void GAME_LOOP_D() {
 
-	//Dƒ‹[ƒg
+	//Dãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 5) {
 
 		if (D == 0)
 			skip_auto = 0;
 
-		//Dƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Dãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Dƒ‹[ƒgƒ‹[ƒv
+		//Dãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª5‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ5ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 5 && EndFlag != 99999) {
 
 				if (SAVE_CHOICE == 0)
@@ -468,43 +463,43 @@ void GAME_LOOP_D() {
 			if (EndFlag == 99999)
 				break;
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(E)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(E)
 void GAME_LOOP_E() {
 
-	//Eƒ‹[ƒg
+	//Eãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 6) {
 
 		if (E == 0)
 			skip_auto = 0;
 
-		//Eƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Eãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Eƒ‹[ƒgƒ‹[ƒv
+		//Eãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª2‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ2ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 6 && EndFlag != 99999) {
 
 				if (SAVE_CHOICE == 0)
@@ -518,43 +513,43 @@ void GAME_LOOP_E() {
 			if (EndFlag == 99999)
 				break;
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(F)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(F)
 void GAME_LOOP_F() {
 
-	//Fƒ‹[ƒg
+	//Fãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 7) {
 
 		if (F == 0)
 			skip_auto = 0;
 
-		//Fƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Fãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Fƒ‹[ƒgƒ‹[ƒv
+		//Fãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª7‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ7ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 7 && EndFlag != 99999) {
 
 				if (SAVE_CHOICE == 0)
@@ -568,43 +563,43 @@ void GAME_LOOP_F() {
 			if (EndFlag == 99999)
 				break;
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(G)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(G)
 void GAME_LOOP_G() {
 
-	//Gƒ‹[ƒg
+	//Gãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 8) {
 
 		if (G == 0)
 			skip_auto = 0;
 
-		//Gƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Gãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Gƒ‹[ƒgƒ‹[ƒv
+		//Gãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª7‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ7ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 8) {
 
 				if (SAVE_CHOICE == 0)
@@ -613,43 +608,43 @@ void GAME_LOOP_G() {
 				break;
 			}
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(H)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(H)
 void GAME_LOOP_H() {
 
-	//Hƒ‹[ƒg
+	//Hãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 9) {
 
 		if (H == 0)
 			skip_auto = 0;
 
-		//Hƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Hãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Hƒ‹[ƒgƒ‹[ƒv
+		//Hãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª7‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ7ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 9) {
 
 				if (SAVE_CHOICE == 0)
@@ -658,43 +653,43 @@ void GAME_LOOP_H() {
 				break;
 			}
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(I)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(I)
 void GAME_LOOP_I() {
 
-	//Iƒ‹[ƒg
+	//Iãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 10) {
 
 		if (I == 0)
 			skip_auto = 0;
 
-		//Iƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Iãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Iƒ‹[ƒgƒ‹[ƒv
+		//Iãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª7‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ7ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 10) {
 
 				if (SAVE_CHOICE == 0)
@@ -703,43 +698,43 @@ void GAME_LOOP_I() {
 				break;
 			}
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(J)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(J)
 void GAME_LOOP_J() {
 
-	//Jƒ‹[ƒg
+	//Jãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 11) {
 
 		if (J == 0)
 			skip_auto = 0;
 
-		//Jƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Jãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Jƒ‹[ƒgƒ‹[ƒv
+		//Jãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª7‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ7ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 11) {
 
 				if (SAVE_CHOICE == 0)
@@ -748,43 +743,43 @@ void GAME_LOOP_J() {
 				break;
 			}
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(K)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(K)
 void GAME_LOOP_K() {
 
-	//Kƒ‹[ƒg
+	//Kãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 12) {
 
 		if (K == 0)
 			skip_auto = 0;
 
-		//Kƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Kãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Kƒ‹[ƒgƒ‹[ƒv
+		//Kãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª7‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ7ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 12) {
 
 				if (SAVE_CHOICE == 0)
@@ -793,43 +788,43 @@ void GAME_LOOP_K() {
 				break;
 			}
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(L)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(L)
 void GAME_LOOP_L() {
 
-	//Lƒ‹[ƒg
+	//Lãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 13) {
 
 		if (L == 0)
 			skip_auto = 0;
 
-		//Lƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Lãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Lƒ‹[ƒgƒ‹[ƒv
+		//Lãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª7‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ7ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 13) {
 
 				if (SAVE_CHOICE == 0)
@@ -838,43 +833,43 @@ void GAME_LOOP_L() {
 				break;
 			}
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(M)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(M)
 void GAME_LOOP_M() {
 
-	//Mƒ‹[ƒg
+	//Mãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 14) {
 
 		if (M == 0)
 			skip_auto = 0;
 
-		//Mƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Mãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Mƒ‹[ƒgƒ‹[ƒv
+		//Mãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª7‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ7ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 14) {
 
 				if (SAVE_CHOICE == 0)
@@ -883,43 +878,43 @@ void GAME_LOOP_M() {
 				break;
 			}
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv(N)
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(N)
 void GAME_LOOP_N() {
 
-	//Nƒ‹[ƒg
+	//Nãƒ«ãƒ¼ãƒˆ
 	if (EndFlag == 15) {
 
 		if (N == 0)
 			skip_auto = 0;
 
-		//Nƒ‹[ƒgƒXƒNƒŠƒvƒg“Çž
+		//Nãƒ«ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼
 		SCRIPT_READ();
 
-		//Nƒ‹[ƒgƒ‹[ƒv
+		//Nãƒ«ãƒ¼ãƒˆãƒ«ãƒ¼ãƒ—
 		while (ProcessMessage() == 0)
 		{
-			//ƒ^ƒOˆ—
+			//ã‚¿ã‚°å‡¦ç†
 			SCRIPT_OUTPUT();
 
-			//ƒQ[ƒ€ƒƒjƒ…[
+			//ã‚²ãƒ¼ãƒ ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 			GAMEMENU();
 
-			//ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒgŽæ“¾
+			//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆå–å¾—
 			SCREENSHOT();
 
-			//ƒVƒ‡[ƒgƒJƒbƒgƒL[
+			//ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼
 			SHORTCUT_KEY();
 
-			//I—¹
+			//çµ‚äº†
 			GAME_FINISH();
 
-			// I—¹ƒtƒ‰ƒO‚ª7‚Å‚È‚©‚Á‚½‚çI—¹‚·‚é
+			// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒ7ã§ãªã‹ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 			if (EndFlag != 15) {
 
 				if (SAVE_CHOICE == 0)
@@ -928,98 +923,98 @@ void GAME_LOOP_N() {
 				break;
 			}
 
-			//ŽQÆ•¶Žš—ñˆ—
+			//å‚ç…§æ–‡å­—åˆ—å‡¦ç†
 			WORD_FORMAT();
 		}
 	}
 }
 
-//ƒQ[ƒ€‚Ìƒ‹[ƒv
+//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—
 void GAME_LOOP() {
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(LINKS)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(LINKS)
 	GAME_LOOP_LINKS();
-	
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(A)
+
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(A)
 	GAME_LOOP_A();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(B)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(B)
 	GAME_LOOP_B();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(C)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(C)
 	GAME_LOOP_C();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(D)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(D)
 	GAME_LOOP_D();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(E)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(E)
 	GAME_LOOP_E();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(F)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(F)
 	GAME_LOOP_F();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(G)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(G)
 	GAME_LOOP_G();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(H)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(H)
 	GAME_LOOP_H();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(I)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(I)
 	GAME_LOOP_I();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(J)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(J)
 	GAME_LOOP_J();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(K)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(K)
 	GAME_LOOP_K();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(L)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(L)
 	GAME_LOOP_L();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(M)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(M)
 	GAME_LOOP_M();
 
-	//ƒQ[ƒ€‚Ìƒ‹[ƒv(N)
+	//ã‚²ãƒ¼ãƒ ã®ãƒ«ãƒ¼ãƒ—(N)
 	GAME_LOOP_N();
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
-	//DXƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»‘Oˆ—
+	//DXãƒ©ã‚¤ãƒ–ãƒ©ãƒªåˆæœŸåŒ–å‰å‡¦ç†
 	DXLib_PREP();
 
-	// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
-	if (DxLib_Init() == -1)	
+	// ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªåˆæœŸåŒ–å‡¦ç†
+	if (DxLib_Init() == -1)
 	{
-		// ƒGƒ‰[‚ª‹N‚«‚½‚ç’¼‚¿‚ÉI—¹
+		// ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸã‚‰ç›´ã¡ã«çµ‚äº†
 		return -1;
 	}
 
-	//DXƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»Œãˆ—
+	//DXãƒ©ã‚¤ãƒ–ãƒ©ãƒªåˆæœŸåŒ–å¾Œå‡¦ç†
 	DXLib_POST_PREP();
 
 	while (ProcessMessage() == 0 && EndFlag != 99999) {
 
-		//ƒ^ƒCƒgƒ‹ƒƒjƒ…[
+		//ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 		TITLE_MENU();
 
-		//ŠeŽíƒQ[ƒ€ƒ‹[ƒv
+		//å„ç¨®ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
 		GAME_LOOP();
 	}
 
-	//Ý’è‚Ì•Û‘¶
+	//è¨­å®šã®ä¿å­˜
 	CONFIG_SAVE();
 
-	//ƒoƒbƒNƒƒO‰æ‘œ‚Ìíœ
+	//ãƒãƒƒã‚¯ãƒ­ã‚°ç”»åƒã®å‰Šé™¤
 	BACKLOG_DELETE = "DATA/BACKLOG/BACKLOG1.png";
 	remove(BACKLOG_DELETE);
 
-	//‘I‘ðŽˆƒZ[ƒuƒXƒiƒbƒvíœ
+	//é¸æŠžè‚¢ã‚»ãƒ¼ãƒ–ã‚¹ãƒŠãƒƒãƒ—å‰Šé™¤
 	SAVESNAP_CHOICE_DELETE = "DATA/SAVE/SAVESNAP_CHOICE.png";
 	remove(SAVESNAP_CHOICE_DELETE);
 
-	DxLib_End();				// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠŽg—p‚ÌI—¹ˆ—
+	DxLib_End();				// ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªä½¿ç”¨ã®çµ‚äº†å‡¦ç†
 
-	return 0;					// ƒ\ƒtƒg‚ÌI—¹
+	return 0;					// ã‚½ãƒ•ãƒˆã®çµ‚äº†
 }
