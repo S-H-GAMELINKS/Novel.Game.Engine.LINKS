@@ -2,8 +2,8 @@
 #include "GAME.h"
 #include "DxLib.h"
 #include "DEF.h"
+#include <initializer_list>
 #include <cassert>
-#include <functional>
 
 #if defined(_MSC_VER) && 1400 <= _MSC_VER
 #	define LINKS_HAS_CRT_SECURE_FUNCTIONS 1
@@ -70,21 +70,7 @@ int EndFlag = 99;
 static int GAMEMENU_COUNT;
 
 //既読スキップ変数
-int LINKS = 0;
-int A = 0;
-int B = 0;
-int C = 0;
-int D = 0;
-int E = 0;
-int F = 0;
-int G = 0;
-int H = 0;
-int I = 0;
-int J = 0;
-int K = 0;
-int L = 0;
-int M = 0;
-int N = 0;
+SkipData_t TextIgnoredFlag = {};
 
 //バックログ変数
 static int BACKLOG_CHOICE = 0;
@@ -98,12 +84,6 @@ static int SAVESNAP1, SAVESNAP2, SAVESNAP3, SAVETITLE;
 static int SAVESNAP_HANDLE1 = 0, SAVESNAP_HANDLE2 = 0, SAVESNAP_HANDLE3 = 0, SAVESNAP_CHOICE = 0;
 char *SAVESNAP_CHOICE_DELETE;
 
-//スキップ・オートモード用変数
-int skip_auto = 0;
-int SKIP_SPEED = 100;
-int SKIP_SPEED_COUNT = 10;
-int AUTO_SPEED = 100;
-int AUTO_SPEED_COUNT = 10;
 
 //非アクティブ用変数
 static char WindowActive = TRUE;
@@ -114,27 +94,30 @@ static char OneMojiBuf[3];
 //キャラクター名配列
 static char CHARACTER_NAME[10];
 
-//文字描画速度用変数
-static int STRING_SPEED = 100;
-static int STRING_SPEED_COUNT = 10;
-
-//サウンドノベル風とウインドウ風の切り替え変数
-static int soundnovel_winownovel = 0;
-
-//マウス操作とキー操作の切り替え変数
-static int mouse_key_move = 1;
-
 //キー操作
 int Key[256];
 int y = MENUY;
 int SAVE_y = SAVE_Y;
 int GAME_y = GAMEMENU_y;
 
+//スキップ・オートモード用変数
+int skip_auto = 0;
+
 //設定用変数
-int BGM_VOL = 100;
-int SE_VOL = 100;
-int BGM_VOL_COUNT = 10;
-int SE_VOL_COUNT = 10;
+ConfigData_t ConfigData = {
+	/*BGM_VOL               :*/100,
+	/*BGM_VOL_COUNT         :*/10,
+	/*SE_VOL                :*/100,
+	/*SE_VOL_COUNT          :*/10,
+	/*SKIP_SPEED            :*/100,
+	/*SKIP_SPEED_COUNT      :*/10,
+	/*AUTO_SPEED            :*/100,
+	/*AUTO_SPEED_COUNT      :*/10,
+	/*STRING_SPEED          :*/100,
+	/*STRING_SPEED_COUNT    :*/10,
+	/*soundnovel_winownovel :*/0,
+	/*mouse_key_move        :*/1
+};
 static int Config = 0;
 
 //スクリーンショット用変数
@@ -177,40 +160,12 @@ typedef struct {
 	int SAVE_CHOICE;//選択肢画面でのセーブ情報
 }ContinueSaveData_t;
 
-//既読スキップ
-typedef struct {
-	int LINKS;		//メインルートの既読情報
-	int A;			//Aルートの既読情報
-	int B;			//Bルートの既読情報
-	int C;			//Cルートの既読情報
-	int D;			//Dルートの既読情報
-	int E;			//Eルートの既読情報
-	int F;			//Fルートの既読情報
-	int G;			//Gルートの既読情報
-	int H;			//Hルートの既読情報
-	int I;			//Iルートの既読情報
-	int J;			//Jルートの既読情報
-	int K;			//Kルートの既読情報
-	int L;			//Lルートの既読情報
-	int M;			//Mルートの既読情報
-	int N;			//Nルートの既読情報
-}SkipData_t;
-
-//設定データ
-typedef struct {
-	int BGM_VOL;				//BGM音量情報
-	int BGM_VOL_COUNT;			//BGM音量メーター情報
-	int SE_VOL;					//SE音量情報
-	int SE_VOL_COUNT;			//SE音量メーター情報
-	int SKIP_SPEED;				//スキップ速度情報
-	int SKIP_SPEED_COUNT;		//スキップ速度メーター情報
-	int AUTO_SPEED;				//オート速度情報
-	int AUTO_SPEED_COUNT;		//オート速度メーター情報
-	int STRING_SPEED;			//文字列描画速度
-	int STRING_SPEED_COUNT;		//文字列描画速度メーター情報
-	int soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報
-	int mouse_key_move;			//マウス操作とキー操作の情報
-}ConfigData_t;
+union SkipDataConv {
+	alignas(4) SkipData_t flag;
+	alignas(4) std::int32_t arr[15];
+};
+static_assert(alignof(SkipData_t) == alignof(std::int32_t[15]), "err");
+static_assert(sizeof(SkipData_t) == sizeof(std::int32_t[15]), "err");
 
 int LINKS_MessageBox_YESNO(LPCTSTR lpText)
 {
@@ -356,7 +311,7 @@ void SCREEN_CLEAR() {
 //各処理後のゲーム画面の描画(サウンドノベル風)
 void SOUNDNOVEL() {
 
-	if (soundnovel_winownovel == 0) {
+	if (ConfigData.soundnovel_winownovel == 0) {
 
 		SCREEN_CLEAR();
 
@@ -400,7 +355,7 @@ void SOUNDNOVEL() {
 void WINDOWNOVEL() {
 
 	//ウインドウ風描画時の処理
-	if (soundnovel_winownovel == 1) {
+	if (ConfigData.soundnovel_winownovel == 1) {
 
 		SCREEN_CLEAR();
 
@@ -448,7 +403,7 @@ void WINDOWNOVEL() {
 int MoveKey(int KeyStateBuf[]) {
 
 	//キー操作が有効な場合
-	if (mouse_key_move == 0) {
+	if (ConfigData.mouse_key_move == 0) {
 
 		//キー入力用変数
 		char GetHitKeyStateAll_Key[256];
@@ -598,7 +553,7 @@ int Mouse_Move() {
 	//マウスの位置を取得
 	GetMousePoint(&MouseX, &MouseY);
 
-	if (mouse_key_move == 1) {
+	if (ConfigData.mouse_key_move == 1) {
 
 		//タイトルメニュー
 		Mouse_Move_TITLE(MouseY);
@@ -621,8 +576,6 @@ int Mouse_Move() {
 //SKIP_READ LOAD関数
 int SKIP_READ_LOAD()
 {
-	//既読データを読み込んで、各変数に代入
-	SkipData_t Data;
 	FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
 	const errno_t er = fopen_s(&fp, "DATA/SAVE/SKIP_READ.dat", "rb");
@@ -635,30 +588,13 @@ int SKIP_READ_LOAD()
 		return 0;
 	}
 #endif
-	fread(&Data, sizeof(Data), 1, fp);
-	LINKS = Data.LINKS;
-	A = Data.A;
-	B = Data.B;
-	C = Data.C;
-	D = Data.D;
-	E = Data.E;
-	F = Data.F;
-	G = Data.G;
-	H = Data.H;
-	I = Data.I;
-	J = Data.J;
-	K = Data.K;
-	L = Data.L;
-	M = Data.M;
-	N = Data.N;
+	fread(&TextIgnoredFlag, sizeof(SkipData_t), 1, fp);
 	return 0;
 }
 
 //SKIP_READ SAVE関数
 int SKIP_READ_SAVE()
 {
-		//既読スキップデータ保存
-		SkipData_t Data = { LINKS, A, B, C, D, E, F, G, H, I, J, K, L, M, N };
 		FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
 		const errno_t er = fopen_s(&fp, "DATA/SAVE/SKIP_READ.dat", "wb");
@@ -671,7 +607,7 @@ int SKIP_READ_SAVE()
 			return 0;
 		}
 #endif
-		fwrite(&Data, sizeof(Data), 1, fp); // SkipData_t構造体の中身を出力
+		fwrite(&TextIgnoredFlag, sizeof(SkipData_t), 1, fp); // SkipData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 
 	return 0;
@@ -682,7 +618,6 @@ int SKIP_READ_SAVE()
 int CONFIG_SAVE()
 {
 	//設定データ保存
-	ConfigData_t Data = { BGM_VOL, BGM_VOL_COUNT, SE_VOL, SE_VOL_COUNT, SKIP_SPEED, SKIP_SPEED_COUNT, AUTO_SPEED, AUTO_SPEED_COUNT, STRING_SPEED, STRING_SPEED_COUNT, soundnovel_winownovel, mouse_key_move };
 	FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
 	const errno_t er = fopen_s(&fp, "DATA/SAVE/Config.dat", "wb");
@@ -695,7 +630,7 @@ int CONFIG_SAVE()
 		return 0;
 	}
 #endif
-	fwrite(&Data, sizeof(Data), 1, fp); // ConfigData_t構造体の中身を出力
+	fwrite(&ConfigData, sizeof(ConfigData_t), 1, fp); // ConfigData_t構造体の中身を出力
 	fclose(fp);//ファイルを閉じる
 
 	return 0;
@@ -705,7 +640,6 @@ int CONFIG_SAVE()
 int CONFIG_LOAD()
 {
 	//設定データの読み込み
-	ConfigData_t Data;
 	FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
 	const errno_t er = fopen_s(&fp, "DATA/SAVE/Config.dat", "rb");
@@ -718,24 +652,10 @@ int CONFIG_LOAD()
 		return 0;
 	}
 #endif
-	fread(&Data, sizeof(Data), 1, fp);
-
-	//各種変数に代入
-	BGM_VOL = Data.BGM_VOL;
-	BGM_VOL_COUNT = Data.BGM_VOL_COUNT;
-	SE_VOL = Data.SE_VOL;
-	SE_VOL_COUNT = Data.SE_VOL_COUNT;
-	SKIP_SPEED = Data.SKIP_SPEED;
-	SKIP_SPEED_COUNT = Data.SKIP_SPEED_COUNT;
-	AUTO_SPEED = Data.AUTO_SPEED;
-	AUTO_SPEED_COUNT = Data.AUTO_SPEED_COUNT;
-	STRING_SPEED = Data.STRING_SPEED;
-	STRING_SPEED_COUNT = Data.STRING_SPEED_COUNT;
-	soundnovel_winownovel = Data.soundnovel_winownovel;
-	mouse_key_move = Data.mouse_key_move;
+	fread(&ConfigData, sizeof(ConfigData_t), 1, fp);
+	fclose(fp);//ファイルを閉じる
 
 	return 0;
-
 }
 
 //クイックセーブ時のメッセージ
@@ -923,12 +843,12 @@ void BGM_VOL_CHANGE() {
 
 		WaitTimer(300);
 
-		BGM_VOL += 10;
-		BGM_VOL_COUNT += 1;
+		ConfigData.BGM_VOL += 10;
+		ConfigData.BGM_VOL_COUNT += 1;
 
-		if (BGM_VOL_COUNT >= 10) {
-			BGM_VOL = 100;
-			BGM_VOL_COUNT = 10;
+		if (ConfigData.BGM_VOL_COUNT >= 10) {
+			ConfigData.BGM_VOL = 100;
+			ConfigData.BGM_VOL_COUNT = 10;
 		}
 	}
 
@@ -936,12 +856,12 @@ void BGM_VOL_CHANGE() {
 
 		WaitTimer(300);
 
-		BGM_VOL -= 10;
-		BGM_VOL_COUNT -= 1;
+		ConfigData.BGM_VOL -= 10;
+		ConfigData.BGM_VOL_COUNT -= 1;
 
-		if (BGM_VOL_COUNT <= 0) {
-			BGM_VOL = 0;
-			BGM_VOL_COUNT = 0;
+		if (ConfigData.BGM_VOL_COUNT <= 0) {
+			ConfigData.BGM_VOL = 0;
+			ConfigData.BGM_VOL_COUNT = 0;
 		}
 	}
 
@@ -955,12 +875,12 @@ void SE_VOL_CHANGE() {
 
 		WaitTimer(300);
 
-		SE_VOL += 10;
-		SE_VOL_COUNT += 1;
+		ConfigData.SE_VOL += 10;
+		ConfigData.SE_VOL_COUNT += 1;
 
-		if (SE_VOL_COUNT >= 10) {
-			SE_VOL = 100;
-			SE_VOL_COUNT = 10;
+		if (ConfigData.SE_VOL_COUNT >= 10) {
+			ConfigData.SE_VOL = 100;
+			ConfigData.SE_VOL_COUNT = 10;
 		}
 	}
 
@@ -968,12 +888,12 @@ void SE_VOL_CHANGE() {
 
 		WaitTimer(300);
 
-		SE_VOL -= 10;
-		SE_VOL_COUNT -= 1;
+		ConfigData.SE_VOL -= 10;
+		ConfigData.SE_VOL_COUNT -= 1;
 
-		if (SE_VOL_COUNT <= 0) {
-			SE_VOL = 0;
-			SE_VOL_COUNT = 0;
+		if (ConfigData.SE_VOL_COUNT <= 0) {
+			ConfigData.SE_VOL = 0;
+			ConfigData.SE_VOL_COUNT = 0;
 		}
 	}
 }
@@ -986,12 +906,12 @@ void AUTO_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		AUTO_SPEED += 10;
-		AUTO_SPEED_COUNT += 1;
+		ConfigData.AUTO_SPEED += 10;
+		ConfigData.AUTO_SPEED_COUNT += 1;
 
-		if (AUTO_SPEED_COUNT >= 10) {
-			AUTO_SPEED = 100;
-			AUTO_SPEED_COUNT = 10;
+		if (ConfigData.AUTO_SPEED_COUNT >= 10) {
+			ConfigData.AUTO_SPEED = 100;
+			ConfigData.AUTO_SPEED_COUNT = 10;
 		}
 	}
 
@@ -999,12 +919,12 @@ void AUTO_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		AUTO_SPEED -= 10;
-		AUTO_SPEED_COUNT -= 1;
+		ConfigData.AUTO_SPEED -= 10;
+		ConfigData.AUTO_SPEED_COUNT -= 1;
 
-		if (AUTO_SPEED_COUNT <= 0) {
-			AUTO_SPEED = 0;
-			AUTO_SPEED_COUNT = 0;
+		if (ConfigData.AUTO_SPEED_COUNT <= 0) {
+			ConfigData.AUTO_SPEED = 0;
+			ConfigData.AUTO_SPEED_COUNT = 0;
 		}
 	}
 }
@@ -1017,12 +937,12 @@ void SKIP_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		SKIP_SPEED += 10;
-		SKIP_SPEED_COUNT += 1;
+		ConfigData.SKIP_SPEED += 10;
+		ConfigData.SKIP_SPEED_COUNT += 1;
 
-		if (SKIP_SPEED_COUNT >= 10) {
-			SKIP_SPEED = 100;
-			SKIP_SPEED_COUNT = 10;
+		if (ConfigData.SKIP_SPEED_COUNT >= 10) {
+			ConfigData.SKIP_SPEED = 100;
+			ConfigData.SKIP_SPEED_COUNT = 10;
 		}
 	}
 
@@ -1030,12 +950,12 @@ void SKIP_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		SKIP_SPEED -= 10;
-		SKIP_SPEED_COUNT -= 1;
+		ConfigData.SKIP_SPEED -= 10;
+		ConfigData.SKIP_SPEED_COUNT -= 1;
 
-		if (SKIP_SPEED_COUNT <= 0) {
-			SKIP_SPEED = 0;
-			SKIP_SPEED_COUNT = 0;
+		if (ConfigData.SKIP_SPEED_COUNT <= 0) {
+			ConfigData.SKIP_SPEED = 0;
+			ConfigData.SKIP_SPEED_COUNT = 0;
 		}
 
 	}
@@ -1049,12 +969,12 @@ void STRING_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		STRING_SPEED += 10;
-		STRING_SPEED_COUNT += 1;
+		ConfigData.STRING_SPEED += 10;
+		ConfigData.STRING_SPEED_COUNT += 1;
 
-		if (STRING_SPEED_COUNT >= 10) {
-			STRING_SPEED = 100;
-			STRING_SPEED_COUNT = 10;
+		if (ConfigData.STRING_SPEED_COUNT >= 10) {
+			ConfigData.STRING_SPEED = 100;
+			ConfigData.STRING_SPEED_COUNT = 10;
 		}
 	}
 
@@ -1062,12 +982,12 @@ void STRING_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		STRING_SPEED -= 10;
-		STRING_SPEED_COUNT -= 1;
+		ConfigData.STRING_SPEED -= 10;
+		ConfigData.STRING_SPEED_COUNT -= 1;
 
-		if (STRING_SPEED_COUNT <= 0) {
-			STRING_SPEED = 0;
-			STRING_SPEED_COUNT = 0;
+		if (ConfigData.STRING_SPEED_COUNT <= 0) {
+			ConfigData.STRING_SPEED = 0;
+			ConfigData.STRING_SPEED_COUNT = 0;
 		}
 	}
 }
@@ -1079,13 +999,13 @@ void SOUNDNOVEL_WINDOWNOVEL_CHANGE() {
 	if (GAME_y == GAMEMENU_y * 6 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == GAMEMENU_y * 6 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 		WaitTimer(300);
-		soundnovel_winownovel = 0;
+		ConfigData.soundnovel_winownovel = 0;
 	}
 
 	if (GAME_y == GAMEMENU_y * 6 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == GAMEMENU_y * 6 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
 
 		WaitTimer(300);
-		soundnovel_winownovel = 1;
+		ConfigData.soundnovel_winownovel = 1;
 	}
 }
 
@@ -1120,7 +1040,7 @@ void MOUSE_KEY_MOVE() {
 
 		WaitTimer(300);
 
-		mouse_key_move = 1;
+		ConfigData.mouse_key_move = 1;
 	}
 
 	//キー操作を有効に
@@ -1128,7 +1048,7 @@ void MOUSE_KEY_MOVE() {
 
 		WaitTimer(300);
 
-		mouse_key_move = 0;
+		ConfigData.mouse_key_move = 0;
 	}
 }
 
@@ -1148,26 +1068,26 @@ void CONFIG_MENU() {
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 9, "戻る", Cr);
 
 	//BGM音量目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, Cr, "%d", BGM_VOL);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, Cr, "%d", ConfigData.BGM_VOL);
 
 	//SE音量目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, Cr, "%d", SE_VOL);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, Cr, "%d", ConfigData.SE_VOL);
 
 	//オート速度目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, Cr, "%d", AUTO_SPEED);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, Cr, "%d", ConfigData.AUTO_SPEED);
 
 	//スキップ速度目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, Cr, "%d", SKIP_SPEED);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, Cr, "%d", ConfigData.SKIP_SPEED);
 
 	//文字描画速度目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, Cr, "%d", STRING_SPEED);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, Cr, "%d", ConfigData.STRING_SPEED);
 
 	//サウンドノベル風
-	if (soundnovel_winownovel == 0)
+	if (ConfigData.soundnovel_winownovel == 0)
 		DrawString(SAVE_NAME_X + CURSOR * 6, GAMEMENU_y * 6, "サウンドノベル風", Cr);
 
 	//ウインドウ風
-	if (soundnovel_winownovel == 1)
+	if (ConfigData.soundnovel_winownovel == 1)
 		DrawString(SAVE_NAME_X + CURSOR * 6, GAMEMENU_y * 6, "ウインドウ風", Cr);
 
 	//非アクティブ時の処理
@@ -1178,11 +1098,11 @@ void CONFIG_MENU() {
 		DrawString(SAVE_NAME_X + CURSOR * 7, GAMEMENU_y * 7, "未処理", Cr);
 
 	//マウス操作
-	if (mouse_key_move == 1)
+	if (ConfigData.mouse_key_move == 1)
 		DrawString(SAVE_NAME_X + CURSOR * 8, GAMEMENU_y * 8, "マウス操作", Cr);
 
 	//キー操作
-	if (mouse_key_move == 0)
+	if (ConfigData.mouse_key_move == 0)
 		DrawString(SAVE_NAME_X + CURSOR * 8, GAMEMENU_y * 8, "キー操作", Cr);
 }
 
@@ -1869,9 +1789,9 @@ void SKIP_READ_CHECK() {
 	//既読スキップメッセージ
 	SKIP_READ_MESSAGE();
 
-	const int TextIgnoredflags[] = { LINKS, A, B, C, D, E, F, G, H, I, J, K, L, M, N };
+	const SkipDataConv* conv = reinterpret_cast<const SkipDataConv*>(&TextIgnoredFlag);
 	//既読データ読み込み時の判定
-	if (IDYES == SAVE && 0 < EndFlag && EndFlag <= countof(TextIgnoredflags) && 1 == TextIgnoredflags[EndFlag - 1]) {
+	if (IDYES == SAVE && 0 < EndFlag && EndFlag <= countof(conv->arr) && 1 == conv->arr[EndFlag - 1]) {
 		skip_auto = 2;
 	}
 	//ショートカットキー時の事後処理
@@ -2256,7 +2176,7 @@ void sentakusi(int Cr, int y) {
 // 改行関数
 int Kaigyou(void)
 {
-	if (soundnovel_winownovel == 0) {
+	if (ConfigData.soundnovel_winownovel == 0) {
 
 		int TempGraph;
 
@@ -2289,7 +2209,7 @@ int Kaigyou(void)
 		}
 	}
 
-	if (soundnovel_winownovel == 1) {
+	if (ConfigData.soundnovel_winownovel == 1) {
 
 		// 描画行位置を一つ下げる
 		DrawPointY += 20;
@@ -2306,7 +2226,7 @@ int Kaigyou(void)
 void SCRIPT_OUTPUT_CHARACTER_DRAW() {
 
 	//サウンドノベル風時の処理
-	if (soundnovel_winownovel == 0) {
+	if (ConfigData.soundnovel_winownovel == 0) {
 		//背景画像を切り抜き、立ち絵の上にペースト
 		CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
 		DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
@@ -2317,7 +2237,7 @@ void SCRIPT_OUTPUT_CHARACTER_DRAW() {
 	}
 
 	//ウインドウ風時の処理
-	if (soundnovel_winownovel == 1) {
+	if (ConfigData.soundnovel_winownovel == 1) {
 		//背景画像を切り抜き、立ち絵の上にペースト
 		CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
 		DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
@@ -2338,7 +2258,7 @@ void SCRIPT_OUTPUT_BACKGROUND() {
 	DrawGraph(0, 0, BACKGROUND, TRUE);
 
 	//ウインドウ風時の処理
-	if (soundnovel_winownovel == 1) {
+	if (ConfigData.soundnovel_winownovel == 1) {
 
 		//ウインドウの色選択
 		int	Window_Color = GetColor(0, 0, 0);
@@ -2356,7 +2276,7 @@ void SCRIPT_OUTPUT_BACKGROUND() {
 void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
 
 	// 音量の設定
-	ChangeVolumeSoundMem(255 * BGM_VOL / 100, BACKGROUNDMUSIC);
+	ChangeVolumeSoundMem(255 * ConfigData.BGM_VOL / 100, BACKGROUNDMUSIC);
 
 	//BGM再生
 	PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
@@ -2372,7 +2292,7 @@ void SCRIPT_OUTPUT_SOUNDEFFECT() {
 	StopSoundMem(SOUNDEFFECT);
 
 	// 音量の設定
-	ChangeVolumeSoundMem(255 * SE_VOL / 100, SOUNDEFFECT);
+	ChangeVolumeSoundMem(255 * ConfigData.SE_VOL / 100, SOUNDEFFECT);
 
 	//SEの再生
 	PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
@@ -2426,7 +2346,7 @@ void SCRIPT_UTPUT_KEYWAIT() {
 		SAVESNAP();
 
 		//少し待って、次の文字列を描画
-		WaitTimer(1800 * AUTO_SPEED / 100);
+		WaitTimer(1800 * ConfigData.AUTO_SPEED / 100);
 		CP++;
 	}
 
@@ -2502,7 +2422,7 @@ void SCRIPT_OUTPUT_GAMEOVER() {
 	BACKGROUND = GAMEOVER;
 	DrawGraph(0, 0, BACKGROUND, TRUE);
 
-	if (soundnovel_winownovel == 1) {
+	if (ConfigData.soundnovel_winownovel == 1) {
 
 		int	Window_Color = GetColor(0, 0, 0);
 
@@ -2537,7 +2457,7 @@ void SCRIPT_OUTPUT_SESTOP() {
 //選択肢ループ用描画処理(サウンドノベル風)
 void SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL() {
 
-	if (soundnovel_winownovel == 0 && SAVE_CHOICE == 1) {
+	if (ConfigData.soundnovel_winownovel == 0 && SAVE_CHOICE == 1) {
 
 		DrawGraph(0, 0, BACKGROUND, TRUE);
 
@@ -2548,7 +2468,7 @@ void SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL() {
 //選択肢ループ用描画処理(ウインドウ風)
 void SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL() {
 
-	if (soundnovel_winownovel == 1 && SAVE_CHOICE == 1) {
+	if (ConfigData.soundnovel_winownovel == 1 && SAVE_CHOICE == 1) {
 
 		int	Window_Color = GetColor(0, 0, 0);
 
@@ -2743,9 +2663,9 @@ void SCRIPT_OUTPUT_CHOICE() {
 
 //スクリプトタグ処理(終了文字)
 void SCRIPT_OUTPUT_END() {
-	const std::reference_wrapper<int> TextIgnoredflags[] = { LINKS, A, B, C, D, E, F, G, H, I, J, K, L, M, N };
-	if (1 <= EndFlag && EndFlag <= countof(TextIgnoredflags)) {
-		TextIgnoredflags[EndFlag].get() = 1;
+	SkipDataConv* conv = reinterpret_cast<SkipDataConv*>(&TextIgnoredFlag);
+	if (1 <= EndFlag && EndFlag <= countof(conv->arr)) {
+		conv->arr[EndFlag] = 1;
 	}
 	SKIP_READ_SAVE();
 	// 終了フラグを立てるおよび参照文字位置を一つ進める
@@ -2757,14 +2677,14 @@ void SCRIPT_OUTPUT_END() {
 void SCRIPT_OUTPUT_CHARACTER_REMOVE() {
 
 	//サウンドノベル風時の処理
-	if (soundnovel_winownovel == 0) {
+	if (ConfigData.soundnovel_winownovel == 0) {
 		CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
 		DrawGraph(CHARACTERX, CHARACTERY, CHARACTER_DUMMY, TRUE);
 		CP++;
 	}
 
 	//ウインドウ風時の処理
-	if (soundnovel_winownovel == 1) {
+	if (ConfigData.soundnovel_winownovel == 1) {
 		CHARACTER_DUMMY = DerivationGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_GRAPH_X, CHARACTER_GRAPH_Y, BACKGROUND);
 		DrawGraph(CHARACTERX, CHARACTERY - CHARACTERY, CHARACTER_DUMMY, TRUE);
 		CP++;
@@ -2775,13 +2695,13 @@ void SCRIPT_OUTPUT_CHARACTER_REMOVE() {
 void SCRIPT_OUTPUT_CHARACTER_NAME() {
 
 	//サウンドノベル風時の処理
-	if (soundnovel_winownovel == 0) {
+	if (ConfigData.soundnovel_winownovel == 0) {
 		SP++;
 		CP++;
 	}
 
 	//ウインドウ風時の処理
-	if (soundnovel_winownovel == 1) {
+	if (ConfigData.soundnovel_winownovel == 1) {
 
 		//キャラクター名を読み込む
 		static_assert(10 <= countof(CHARACTER_NAME) && 9 <= countof(String[0]), "array length must be over 10");
@@ -2809,15 +2729,15 @@ void SCRIPT_OUTPUT_STRING_DRAW() {
 	OneMojiBuf[1] = String[SP][CP + 1];
 	OneMojiBuf[2] = '\0';
 
-	if (soundnovel_winownovel == 1 && DrawPointY <= 399)
+	if (ConfigData.soundnovel_winownovel == 1 && DrawPointY <= 399)
 		DrawPointY = 400;
 
-	if (soundnovel_winownovel == 0) {
+	if (ConfigData.soundnovel_winownovel == 0) {
 		// １文字描画
 		DrawString(DrawPointX * MOJI_SIZE, DrawPointY * MOJI_SIZE, OneMojiBuf, GetColor(255, 255, 255));
 	}
 
-	if (soundnovel_winownovel == 1) {
+	if (ConfigData.soundnovel_winownovel == 1) {
 		// １文字描画
 		DrawString(DrawPointX * MOJI_SIZE, DrawPointY, OneMojiBuf, GetColor(255, 255, 255));
 	}
@@ -2835,19 +2755,19 @@ void SCRIPT_OUTPUT_STRING_DRAW_SPEED() {
 	//スキップ・オート変数がＯＦＦの場合
 	if (skip_auto == 0) {
 		// 少し待つ
-		WaitTimer(30 * STRING_SPEED / 100);
+		WaitTimer(30 * ConfigData.STRING_SPEED / 100);
 	}
 
 	//スキップ・オート変数がＯＮの場合(オートモード)
 	if (skip_auto == 1) {
 		// 少し待つ
-		WaitTimer(30 * AUTO_SPEED / 100);
+		WaitTimer(30 * ConfigData.AUTO_SPEED / 100);
 	}
 
 	//スキップ・オート変数がＯＮの場合（スキップ）
 	if (skip_auto == 2) {
 		//速く処理
-		WaitTimer(10 * SKIP_SPEED / 100);
+		WaitTimer(10 * ConfigData.SKIP_SPEED / 100);
 	}
 }
 
@@ -2863,7 +2783,7 @@ void SCRIPT_OUTPUT_STRING_KAIGYO() {
 void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
 
 	//サウンドノベル風時の改ページ処理
-	if (soundnovel_winownovel == 0) {
+	if (ConfigData.soundnovel_winownovel == 0) {
 
 		if (DrawPointY * MOJI_SIZE + MOJI_SIZE > CHARACTERY + MOJI_SIZE) {
 
@@ -2902,7 +2822,7 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
 void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
 
 	//ウインドウ風時の改ページ処理
-	if (soundnovel_winownovel == 1) {
+	if (ConfigData.soundnovel_winownovel == 1) {
 
 		if (DrawPointY > 480) {
 
@@ -2931,7 +2851,7 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
 			if (BACKGROUND != 0)
 				DrawGraph(0, 0, BACKGROUND, TRUE);
 
-			if (soundnovel_winownovel == 1) {
+			if (ConfigData.soundnovel_winownovel == 1) {
 
 				int	Window_Color = GetColor(0, 0, 0);
 

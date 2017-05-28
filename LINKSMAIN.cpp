@@ -163,7 +163,7 @@ void GAME_LOOP_LINKS() {
 	//メインルート
 	if (EndFlag == 1) {
 
-		if (LINKS == 0)
+		if (TextIgnoredFlag.LINKS == 0)
 			skip_auto = 0;
 
 		//メインスクリプト読込
@@ -193,7 +193,7 @@ void GAME_LOOP_LINKS() {
 				if (SAVE_CHOICE == 0)
 					FORMAT();
 
-				LINKS = 1;
+				TextIgnoredFlag.LINKS = 1;
 				SKIP_READ_SAVE();
 				break;
 			}
@@ -213,7 +213,7 @@ void GAME_LOOP_A() {
 	//Aルート
 	if (EndFlag == 2) {
 
-		if (A == 0)
+		if (TextIgnoredFlag.A == 0)
 			skip_auto = 0;
 
 		//Aルートスクリプト読込
@@ -243,7 +243,7 @@ void GAME_LOOP_A() {
 				if (SAVE_CHOICE == 0)
 					FORMAT();
 
-				A = 1;
+				TextIgnoredFlag.A = 1;
 				SKIP_READ_SAVE();
 				break;
 			}
@@ -263,7 +263,7 @@ void GAME_LOOP_B() {
 	//Bルート
 	if (EndFlag == 3) {
 
-		if (B == 0)
+		if (TextIgnoredFlag.B == 0)
 			skip_auto = 0;
 
 		//Bルートスクリプト読込
@@ -293,7 +293,7 @@ void GAME_LOOP_B() {
 				if (SAVE_CHOICE == 0)
 					FORMAT();
 
-				B = 1;
+				TextIgnoredFlag.B = 1;
 				SKIP_READ_SAVE();
 				break;
 			}
@@ -313,7 +313,7 @@ void GAME_LOOP_C() {
 	//Cルート
 	if (EndFlag == 4) {
 
-		if (C == 0)
+		if (TextIgnoredFlag.C == 0)
 			skip_auto = 0;
 
 		//Cルートスクリプト読込
@@ -343,7 +343,7 @@ void GAME_LOOP_C() {
 				if (SAVE_CHOICE == 0)
 					FORMAT();
 
-				C = 1;
+				TextIgnoredFlag.C = 1;
 				SKIP_READ_SAVE();
 				break;
 			}
@@ -363,7 +363,7 @@ void GAME_LOOP_D() {
 	//Dルート
 	if (EndFlag == 5) {
 
-		if (D == 0)
+		if (TextIgnoredFlag.D == 0)
 			skip_auto = 0;
 
 		//Dルートスクリプト読込
@@ -393,7 +393,7 @@ void GAME_LOOP_D() {
 				if (SAVE_CHOICE == 0)
 					FORMAT();
 
-				D = 1;
+				TextIgnoredFlag.D = 1;
 				SKIP_READ_SAVE();
 				break;
 			}
@@ -413,7 +413,7 @@ void GAME_LOOP_E() {
 	//Eルート
 	if (EndFlag == 6) {
 
-		if (E == 0)
+		if (TextIgnoredFlag.E == 0)
 			skip_auto = 0;
 
 		//Eルートスクリプト読込
@@ -443,7 +443,7 @@ void GAME_LOOP_E() {
 				if (SAVE_CHOICE == 0)
 					FORMAT();
 
-				E = 1;
+				TextIgnoredFlag.E = 1;
 				SKIP_READ_SAVE();
 				break;
 			}
@@ -463,7 +463,7 @@ void GAME_LOOP_F() {
 	//Fルート
 	if (EndFlag == 7) {
 
-		if (F == 0)
+		if (TextIgnoredFlag.F == 0)
 			skip_auto = 0;
 
 		//Fルートスクリプト読込
@@ -493,7 +493,7 @@ void GAME_LOOP_F() {
 				if (SAVE_CHOICE == 0)
 					FORMAT();
 
-				F = 1;
+				TextIgnoredFlag.F = 1;
 				SKIP_READ_SAVE();
 				break;
 			}
@@ -513,7 +513,7 @@ void GAME_LOOP_G() {
 	//Gルート
 	if (EndFlag == 8) {
 
-		if (G == 0)
+		if (TextIgnoredFlag.G == 0)
 			skip_auto = 0;
 
 		//Gルートスクリプト読込
@@ -558,7 +558,7 @@ void GAME_LOOP_H() {
 	//Hルート
 	if (EndFlag == 9) {
 
-		if (H == 0)
+		if (TextIgnoredFlag.H == 0)
 			skip_auto = 0;
 
 		//Hルートスクリプト読込
@@ -603,7 +603,7 @@ void GAME_LOOP_I() {
 	//Iルート
 	if (EndFlag == 10) {
 
-		if (I == 0)
+		if (TextIgnoredFlag.I == 0)
 			skip_auto = 0;
 
 		//Iルートスクリプト読込
@@ -648,7 +648,7 @@ void GAME_LOOP_J() {
 	//Jルート
 	if (EndFlag == 11) {
 
-		if (J == 0)
+		if (TextIgnoredFlag.J == 0)
 			skip_auto = 0;
 
 		//Jルートスクリプト読込
@@ -693,7 +693,7 @@ void GAME_LOOP_K() {
 	//Kルート
 	if (EndFlag == 12) {
 
-		if (K == 0)
+		if (TextIgnoredFlag.K == 0)
 			skip_auto = 0;
 
 		//Kルートスクリプト読込
@@ -738,7 +738,7 @@ void GAME_LOOP_L() {
 	//Lルート
 	if (EndFlag == 13) {
 
-		if (L == 0)
+		if (TextIgnoredFlag.L == 0)
 			skip_auto = 0;
 
 		//Lルートスクリプト読込
@@ -783,7 +783,7 @@ void GAME_LOOP_M() {
 	//Mルート
 	if (EndFlag == 14) {
 
-		if (M == 0)
+		if (TextIgnoredFlag.M == 0)
 			skip_auto = 0;
 
 		//Mルートスクリプト読込
@@ -828,7 +828,7 @@ void GAME_LOOP_N() {
 	//Nルート
 	if (EndFlag == 15) {
 
-		if (N == 0)
+		if (TextIgnoredFlag.N == 0)
 			skip_auto = 0;
 
 		//Nルートスクリプト読込

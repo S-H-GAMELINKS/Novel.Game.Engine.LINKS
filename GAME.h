@@ -3,6 +3,43 @@
 
 #include <Windows.h>
 #include "DEF.h"
+#include <cstdint>
+
+//既読スキップ
+struct alignas(4) SkipData_t {
+	std::int32_t LINKS;		//メインルートの既読情報
+	std::int32_t A;			//Aルートの既読情報
+	std::int32_t B;			//Bルートの既読情報
+	std::int32_t C;			//Cルートの既読情報
+	std::int32_t D;			//Dルートの既読情報
+	std::int32_t E;			//Eルートの既読情報
+	std::int32_t F;			//Fルートの既読情報
+	std::int32_t G;			//Gルートの既読情報
+	std::int32_t H;			//Hルートの既読情報
+	std::int32_t I;			//Iルートの既読情報
+	std::int32_t J;			//Jルートの既読情報
+	std::int32_t K;			//Kルートの既読情報
+	std::int32_t L;			//Lルートの既読情報
+	std::int32_t M;			//Mルートの既読情報
+	std::int32_t N;			//Nルートの既読情報
+};
+
+//設定データ
+struct alignas(4) ConfigData_t {
+	std::int32_t BGM_VOL;				//BGM音量情報
+	std::int32_t BGM_VOL_COUNT;			//BGM音量メーター情報
+	std::int32_t SE_VOL;					//SE音量情報
+	std::int32_t SE_VOL_COUNT;			//SE音量メーター情報
+	std::int32_t SKIP_SPEED;				//スキップ速度情報
+	std::int32_t SKIP_SPEED_COUNT;		//スキップ速度メーター情報
+	std::int32_t AUTO_SPEED;				//オート速度情報
+	std::int32_t AUTO_SPEED_COUNT;		//オート速度メーター情報
+	std::int32_t STRING_SPEED;			//文字列描画速度
+	std::int32_t STRING_SPEED_COUNT;		//文字列描画速度メーター情報
+	std::int32_t soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報
+	std::int32_t mouse_key_move;			//マウス操作とキー操作の情報
+};
+
 
 // 文字列描画の位置
 extern int DrawPointX, DrawPointY;
@@ -21,27 +58,10 @@ extern unsigned int Cr;
 extern int EndFlag;
 
 //既読スキップ変数
-extern int LINKS;
-extern int A;
-extern int B;
-extern int C;
-extern int D;
-extern int E;
-extern int F;
-extern int G;
-extern int H;
-extern int I;
-extern int J;
-extern int K;
-extern int L;
-extern int M;
-extern int N;
+extern SkipData_t TextIgnoredFlag;
 
 //設定用変数
-extern int BGM_VOL;
-extern int SE_VOL;
-extern int BGM_VOL_COUNT;
-extern int SE_VOL_COUNT;
+extern ConfigData_t ConfigData;
 
 //バックログ変数
 extern char *BACKLOG_DELETE;
@@ -52,10 +72,6 @@ extern char *SAVESNAP_CHOICE_DELETE;
 
 //スキップ・オートモード用変数
 extern int skip_auto;
-extern int SKIP_SPEED;
-extern int SKIP_SPEED_COUNT;
-extern int AUTO_SPEED;
-extern int AUTO_SPEED_COUNT;
 
 //キー操作
 extern int Key[256];
