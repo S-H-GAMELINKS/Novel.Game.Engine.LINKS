@@ -11,9 +11,6 @@ extern int DrawPointX, DrawPointY;
 // 参照する文字列番号と文字列中の文字ポインタ
 extern int SP, CP;
 
-//スクリプト読込変数
-extern int ScriptFile;
-
 //スクリプト用読込配列
 extern char String[GYOU][RETU];
 

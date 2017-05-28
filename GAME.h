@@ -1,4 +1,5 @@
-﻿//Yes/Noのメッセージボックス
+﻿#include <Windows.h>
+//Yes/Noのメッセージボックス
 int LINKS_MessageBox_YESNO(LPCTSTR lpText);
 
 //各素材データ読込関数
