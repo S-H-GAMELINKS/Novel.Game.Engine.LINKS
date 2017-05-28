@@ -1,8 +1,9 @@
 ﻿//ライブラリとヘッダの読み込み
+#include "GAME.h"
 #include "DxLib.h"
 #include "DEF.h"
 #include <cassert>
-#include "GAME.h"
+#include <functional>
 
 #if defined(_MSC_VER) && 1400 <= _MSC_VER
 #	define LINKS_HAS_CRT_SECURE_FUNCTIONS 1
@@ -2740,54 +2741,11 @@ void SCRIPT_OUTPUT_CHOICE() {
 
 //スクリプトタグ処理(終了文字)
 void SCRIPT_OUTPUT_END() {
-
-	if (EndFlag == 1)
-		LINKS = 1;
-
-	if (EndFlag == 2)
-		A = 1;
-
-	if (EndFlag == 3)
-		B = 1;
-
-	if (EndFlag == 4)
-		C = 1;
-
-	if (EndFlag == 5)
-		D = 1;
-
-	if (EndFlag == 6)
-		E = 1;
-
-	if (EndFlag == 7)
-		F = 1;
-
-	if (EndFlag == 8)
-		G = 1;
-
-	if (EndFlag == 9)
-		H = 1;
-
-	if (EndFlag == 10)
-		I = 1;
-
-	if (EndFlag == 11)
-		J = 1;
-
-	if (EndFlag == 12)
-		K = 1;
-
-	if (EndFlag == 13)
-		L = 1;
-
-	if (EndFlag == 14)
-		M = 1;
-
-	if (EndFlag == 15)
-		N = 1;
-
+	const std::reference_wrapper<int> TextIgnoredflags[] = { LINKS, A, B, C, D, E, F, G, H, I, J, K, L, M, N };
+	if (1 <= EndFlag && EndFlag <= countof(TextIgnoredflags)) {
+		TextIgnoredflags[EndFlag].get() = 1;
+	}
 	SKIP_READ_SAVE();
-
 	// 終了フラグを立てるおよび参照文字位置を一つ進める
 	EndFlag = 99999;
 	CP++;
