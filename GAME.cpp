@@ -335,7 +335,7 @@ int SCRIPT_READ() {
 	};
 	if (0 < EndFlag && EndFlag <= countof(ScriptFileNames)) {
 		// スクリプトファイルを開く
-		const int ScriptFile = FileRead_open(ScriptFileNames[EndFlag]);
+		const int ScriptFile = FileRead_open(ScriptFileNames[EndFlag - 1]);
 		SCRIPT_TO_ARRAY(ScriptFile);
 		FileRead_close(ScriptFile);
 	}
