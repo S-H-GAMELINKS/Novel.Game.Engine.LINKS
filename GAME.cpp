@@ -24,20 +24,20 @@ int DrawPointX = 0, DrawPointY = 0;
 int SP = 0, CP = 0;
 
 //キャラクター画像読込変数
-int CHARACTER_LOAD[99];
-int CHARACTER, CHARACTER_DUMMY;
+static int CHARACTER_LOAD[99];
+static int CHARACTER, CHARACTER_DUMMY;
 
 //背景画像読込変数
-int BACKGROUND_LOAD[99];
-int BACKGROUND;
+static int BACKGROUND_LOAD[99];
+static int BACKGROUND;
 
 //背景音楽読込変数
-int BACKGROUNDMUSIC_LOAD[99];
-int BACKGROUNDMUSIC;
+static int BACKGROUNDMUSIC_LOAD[99];
+static int BACKGROUNDMUSIC;
 
 //効果音変数
-int SOUNDEFFECT_LOAD[99];
-int SOUNDEFFECT;
+static int SOUNDEFFECT_LOAD[99];
+static int SOUNDEFFECT;
 
 //スクリプト用読込配列
 char String[GYOU][RETU];
@@ -47,7 +47,7 @@ int TITLE;
 unsigned int Cr;
 
 //ゲームオーバー
-int GAMEOVER;
+static int GAMEOVER;
 
 //選択肢読込変数
 static char ChoiceStrings[2][RETU];
@@ -67,7 +67,7 @@ static const char* const ChoiceFiles[][2] = {
 int EndFlag = 99;
 
 //ゲームメニュー変数
-int GAMEMENU_COUNT;
+static int GAMEMENU_COUNT;
 
 //既読スキップ変数
 int LINKS = 0;
@@ -87,15 +87,15 @@ int M = 0;
 int N = 0;
 
 //バックログ変数
-int BACKLOG_CHOICE = 0;
-int BACKLOG_HANDLE, BACKLOG[11], BACKLOG_BACKGROUND;
-int LOG = 1, BACKLOG_COUNT = 1;
+static int BACKLOG_CHOICE = 0;
+static int BACKLOG_HANDLE, BACKLOG[11], BACKLOG_BACKGROUND;
+static int LOG = 1, BACKLOG_COUNT = 1;
 char *BACKLOG_DELETE;
 
 //セーブ用変数
 int SAVE, SAVE_CHOICE = 0;
-int SAVESNAP1, SAVESNAP2, SAVESNAP3, SAVETITLE;
-int SAVESNAP_HANDLE1 = 0, SAVESNAP_HANDLE2 = 0, SAVESNAP_HANDLE3 = 0, SAVESNAP_CHOICE = 0;
+static int SAVESNAP1, SAVESNAP2, SAVESNAP3, SAVETITLE;
+static int SAVESNAP_HANDLE1 = 0, SAVESNAP_HANDLE2 = 0, SAVESNAP_HANDLE3 = 0, SAVESNAP_CHOICE = 0;
 char *SAVESNAP_CHOICE_DELETE;
 
 //スキップ・オートモード用変数
@@ -106,23 +106,23 @@ int AUTO_SPEED = 100;
 int AUTO_SPEED_COUNT = 10;
 
 //非アクティブ用変数
-char WindowActive = TRUE;
+static char WindowActive = TRUE;
 
 // １文字分一時記憶配列
-char OneMojiBuf[3];
+static char OneMojiBuf[3];
 
 //キャラクター名配列
-char CHARACTER_NAME[10];
+static char CHARACTER_NAME[10];
 
 //文字描画速度用変数
-int STRING_SPEED = 100;
-int STRING_SPEED_COUNT = 10;
+static int STRING_SPEED = 100;
+static int STRING_SPEED_COUNT = 10;
 
 //サウンドノベル風とウインドウ風の切り替え変数
-int soundnovel_winownovel = 0;
+static int soundnovel_winownovel = 0;
 
 //マウス操作とキー操作の切り替え変数
-int mouse_key_move = 1;
+static int mouse_key_move = 1;
 
 //キー操作
 int Key[256];
@@ -131,17 +131,17 @@ int SAVE_y = SAVE_Y;
 int GAME_y = GAMEMENU_y;
 
 //設定用変数
-int BGM_VOL_COUNT = 10;
-int SE_VOL_COUNT = 10;
 int BGM_VOL = 100;
 int SE_VOL = 100;
-int Config = 0;
+int BGM_VOL_COUNT = 10;
+int SE_VOL_COUNT = 10;
+static int Config = 0;
 
 //スクリーンショット用変数
-int SCREENSHOT_COUNT = 0;
+static int SCREENSHOT_COUNT = 0;
 
 //ショートカットキー用変数
-short SHORTCUT_KEY_FLAG = 0;
+static short SHORTCUT_KEY_FLAG = 0;
 
 //セーブ・ロード関連
 //通常セーブデータ
