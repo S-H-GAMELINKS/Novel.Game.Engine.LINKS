@@ -221,8 +221,9 @@ static int LINKS_MessageBox_OK(LPCTSTR lpText)
 	);
 }
 
-
-static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const char* format) {
+template<typename Func>
+static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const char* format, Func&& LoadFunc) {
+	if (NULL == dest_arr) return false;
 	assert(dest_arr_num <= 40);
 	for (unsigned int i = 0; i < dest_arr_num; ++i) {
 		char FilePathString[40] = {};
@@ -231,29 +232,37 @@ static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const cha
 #else
 		if(0 > snprintf(FilePathString, format, i) return false;
 #endif
-		dest_arr[i] = LoadGraph(FilePathString);
+		dest_arr[i] = LoadFunc(FilePathString);
 	}
 	return true;
 }
 
 //立ち絵素材読込
 void MATERIAL_LOAD_CHARACTER() {
-	assert(SerialNumberFileLoader(CHARACTER_LOAD, countof(CHARACTER_LOAD), "DATA/CHARACTER/CHAR%02u.png"));
+	assert(SerialNumberFileLoader(CHARACTER_LOAD, countof(CHARACTER_LOAD), "DATA/CHARACTER/CHAR%02u.png", [](const TCHAR* FileName) {
+		return LoadGraph(FileName);
+	}));
 }
 
 //背景画像読込
 void MATERIAL_LOAD_BACKGROUND() {
-	assert(SerialNumberFileLoader(BACKGROUND_LOAD, countof(BACKGROUND_LOAD), "DATA/BACKGROUND/BG%02u.png"));
+	assert(SerialNumberFileLoader(BACKGROUND_LOAD, countof(BACKGROUND_LOAD), "DATA/BACKGROUND/BG%02u.png", [](const TCHAR* FileName) {
+		return LoadGraph(FileName);
+	}));
 }
 
 //ＢＧＭ読込
 void MATERIAL_LOAD_BACKGROUNDMUSIC() {
-	assert(SerialNumberFileLoader(BACKGROUNDMUSIC_LOAD, countof(BACKGROUNDMUSIC_LOAD), "DATA/BACKGROUNDMUSIC/BGM%02u.ogg"));
+	assert(SerialNumberFileLoader(BACKGROUNDMUSIC_LOAD, countof(BACKGROUNDMUSIC_LOAD), "DATA/BACKGROUNDMUSIC/BGM%02u.ogg", [](const TCHAR* FileName) {
+		return LoadSoundMem(FileName);
+	}));
 }
 
 //ＳＥ読込
 void MATERIAL_LOAD_SOUNDEFFECT(){
-	assert(SerialNumberFileLoader(SOUNDEFFECT_LOAD, countof(SOUNDEFFECT_LOAD), "DATA/SOUNDEFFECT/SE%02u.ogg"));
+	assert(SerialNumberFileLoader(SOUNDEFFECT_LOAD, countof(SOUNDEFFECT_LOAD), "DATA/SOUNDEFFECT/SE%02u.ogg", [](const TCHAR* FileName) {
+		return LoadSoundMem(FileName);
+	}));
 }
 
 //各素材データ読込関数
