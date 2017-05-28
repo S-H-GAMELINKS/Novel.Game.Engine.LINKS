@@ -38,9 +38,6 @@ int BACKGROUNDMUSIC;
 long SOUNDEFFECT_LOAD[99];
 int SOUNDEFFECT;
 
-//スクリプト読込変数
-int ScriptFile;
-
 //スクリプト用読込配列
 char String[GYOU][RETU];
 
@@ -287,7 +284,7 @@ void MATERIAL_LOAD() {
 }
 
 //スクリプト配列流しこみ関数
-int SCRIPT_TO_ARRAY() {
+int SCRIPT_TO_ARRAY(int ScriptFile) {
 
 	//スクリプトファイルを配列へ流し込む
 	for (int i = 0; i < GYOU; i++) {
@@ -318,9 +315,9 @@ int SCRIPT_READ() {
 	};
 	if (0 < EndFlag && EndFlag <= countof(ScriptFileNames)) {
 		// スクリプトファイルを開く
-		ScriptFile = FileRead_open(ScriptFileNames[EndFlag]);
-		//スクリプトファイルを配列に流しこみ
-		SCRIPT_TO_ARRAY();
+		const int ScriptFile = FileRead_open(ScriptFileNames[EndFlag]);
+		SCRIPT_TO_ARRAY(ScriptFile);
+		FileRead_close(ScriptFile);
 	}
 	return 0;
 }
@@ -1417,9 +1414,9 @@ static int CreateSaveData(int* SaveSnapHandle, const char* Message, const char* 
 //セーブデータ１にセーブ
 int SAVEDATA_1_SAVE() {
 	return CreateSaveData(
-		&SAVESNAP_HANDLE1, 
-		"セーブデータ1にセーブしますか？", 
-		"DATA/SAVE/SAVESNAP1.png", 
+		&SAVESNAP_HANDLE1,
+		"セーブデータ1にセーブしますか？",
+		"DATA/SAVE/SAVESNAP1.png",
 		"DATA/SAVE/SAVEDATA1.dat"
 	);
 }
@@ -7150,7 +7147,6 @@ int FORMAT() {
 	SP = 0;	// １行目の
 	CP = 0;	// ０文字
 
-	FileRead_close(ScriptFile);
 	FileRead_close(Choice1);
 	FileRead_close(Choice2);
 
