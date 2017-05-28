@@ -2554,74 +2554,19 @@ void SCRIPT_OUTPUT_CHOICE_LOOP_DRAW() {
 
 //選択肢ファイルの読み込み(描画用)
 void SCRIPT_OUTPUT_CHOICE_READ() {
-
-	if (EndFlag == 1) {
-		//選択肢Aを開く
-		Choice1 = FileRead_open("DATA/STR/CHOICE/A.txt");
+	const char* ChoiceFiles[][2] = {
+		{ "DATA/STR/CHOICE/A.txt", "DATA/STR/CHOICE/B.txt" },
+		{ "DATA/STR/CHOICE/C.txt", "DATA/STR/CHOICE/D.txt" },
+		{ "DATA/STR/CHOICE/E.txt", "DATA/STR/CHOICE/F.txt" },
+		{ "DATA/STR/CHOICE/G.txt", "DATA/STR/CHOICE/H.txt" },
+		{ "DATA/STR/CHOICE/I.txt", "DATA/STR/CHOICE/J.txt" },
+		{ "DATA/STR/CHOICE/K.txt", "DATA/STR/CHOICE/L.txt" },
+		{ "DATA/STR/CHOICE/M.txt", "DATA/STR/CHOICE/N.txt" }
+	};
+	if (1 <= EndFlag && EndFlag <= 7) {
+		Choice1 = FileRead_open(ChoiceFiles[EndFlag - 1][0]);
 		FileRead_gets(ChoiceA, RETU, Choice1);
-
-		//選択肢Bを開く
-		Choice2 = FileRead_open("DATA/STR/CHOICE/B.txt");
-		FileRead_gets(ChoiceB, RETU, Choice2);
-	}
-
-	if (EndFlag == 2) {
-		//選択肢Cを開く
-		Choice1 = FileRead_open("DATA/STR/CHOICE/C.txt");
-		FileRead_gets(ChoiceA, RETU, Choice1);
-
-		//選択肢Dを開く
-		Choice2 = FileRead_open("DATA/STR/CHOICE/D.txt");
-		FileRead_gets(ChoiceB, RETU, Choice2);
-	}
-
-	if (EndFlag == 3) {
-		//選択肢Eを開く
-		Choice1 = FileRead_open("DATA/STR/CHOICE/E.txt");
-		FileRead_gets(ChoiceA, RETU, Choice1);
-
-		//選択肢Fを開く
-		Choice2 = FileRead_open("DATA/STR/CHOICE/F.txt");
-		FileRead_gets(ChoiceB, RETU, Choice2);
-	}
-
-	if (EndFlag == 4) {
-		//選択肢Gを開く
-		Choice1 = FileRead_open("DATA/STR/CHOICE/G.txt");
-		FileRead_gets(ChoiceA, RETU, Choice1);
-
-		//選択肢Hを開く
-		Choice2 = FileRead_open("DATA/STR/CHOICE/H.txt");
-		FileRead_gets(ChoiceB, RETU, Choice2);
-	}
-
-	if (EndFlag == 5) {
-		//選択肢Iを開く
-		Choice1 = FileRead_open("DATA/STR/CHOICE/I.txt");
-		FileRead_gets(ChoiceA, RETU, Choice1);
-
-		//選択肢Jを開く
-		Choice2 = FileRead_open("DATA/STR/CHOICE/J.txt");
-		FileRead_gets(ChoiceB, RETU, Choice2);
-	}
-
-	if (EndFlag == 6) {
-		//選択肢Kを開く
-		Choice1 = FileRead_open("DATA/STR/CHOICE/K.txt");
-		FileRead_gets(ChoiceA, RETU, Choice1);
-
-		//選択肢Lを開く
-		Choice2 = FileRead_open("DATA/STR/CHOICE/L.txt");
-		FileRead_gets(ChoiceB, RETU, Choice2);
-	}
-
-	if (EndFlag == 7) {
-		//選択肢Mを開く
-		Choice1 = FileRead_open("DATA/STR/CHOICE/M.txt");
-		FileRead_gets(ChoiceA, RETU, Choice1);
-
-		//選択肢Nを開く
-		Choice2 = FileRead_open("DATA/STR/CHOICE/N.txt");
+		Choice2 = FileRead_open(ChoiceFiles[EndFlag - 1][1]);
 		FileRead_gets(ChoiceB, RETU, Choice2);
 	}
 }
