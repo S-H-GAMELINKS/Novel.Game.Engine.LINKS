@@ -26,16 +26,16 @@ struct alignas(4) SkipData_t {
 
 //設定データ
 struct alignas(4) ConfigData_t {
-	std::int32_t BGM_VOL;				//BGM音量情報
-	std::int32_t BGM_VOL_COUNT;			//BGM音量メーター情報
-	std::int32_t SE_VOL;					//SE音量情報
-	std::int32_t SE_VOL_COUNT;			//SE音量メーター情報
-	std::int32_t SKIP_SPEED;				//スキップ速度情報
-	std::int32_t SKIP_SPEED_COUNT;		//スキップ速度メーター情報
-	std::int32_t AUTO_SPEED;				//オート速度情報
-	std::int32_t AUTO_SPEED_COUNT;		//オート速度メーター情報
-	std::int32_t STRING_SPEED;			//文字列描画速度
-	std::int32_t STRING_SPEED_COUNT;		//文字列描画速度メーター情報
+	std::int32_t bgm_vol;				//BGM音量情報
+	std::int32_t bgm_vol_count;			//BGM音量メーター情報
+	std::int32_t se_vol;					//SE音量情報
+	std::int32_t se_vol_count;			//SE音量メーター情報
+	std::int32_t skip_speed;				//スキップ速度情報
+	std::int32_t skip_speed_count;		//スキップ速度メーター情報
+	std::int32_t auto_speed;				//オート速度情報
+	std::int32_t auto_speed_count;		//オート速度メーター情報
+	std::int32_t string_speed;			//文字列描画速度
+	std::int32_t string_speed_count;		//文字列描画速度メーター情報
 	std::int32_t soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報
 	std::int32_t mouse_key_move;			//マウス操作とキー操作の情報
 };

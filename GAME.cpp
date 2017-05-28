@@ -105,16 +105,16 @@ int skip_auto = 0;
 
 //設定用変数
 ConfigData_t ConfigData = {
-	/*BGM_VOL               :*/100,
-	/*BGM_VOL_COUNT         :*/10,
-	/*SE_VOL                :*/100,
-	/*SE_VOL_COUNT          :*/10,
-	/*SKIP_SPEED            :*/100,
-	/*SKIP_SPEED_COUNT      :*/10,
-	/*AUTO_SPEED            :*/100,
-	/*AUTO_SPEED_COUNT      :*/10,
-	/*STRING_SPEED          :*/100,
-	/*STRING_SPEED_COUNT    :*/10,
+	/*bgm_vol               :*/100,
+	/*bgm_vol_count         :*/10,
+	/*se_vol                :*/100,
+	/*se_vol_count          :*/10,
+	/*skip_speed            :*/100,
+	/*skip_speed_count      :*/10,
+	/*auto_speed            :*/100,
+	/*auto_speed_count      :*/10,
+	/*string_speed          :*/100,
+	/*string_speed_count    :*/10,
 	/*soundnovel_winownovel :*/0,
 	/*mouse_key_move        :*/1
 };
@@ -844,12 +844,12 @@ void BGM_VOL_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.BGM_VOL += 10;
-		ConfigData.BGM_VOL_COUNT += 1;
+		ConfigData.bgm_vol += 10;
+		ConfigData.bgm_vol_count += 1;
 
-		if (ConfigData.BGM_VOL_COUNT >= 10) {
-			ConfigData.BGM_VOL = 100;
-			ConfigData.BGM_VOL_COUNT = 10;
+		if (ConfigData.bgm_vol_count >= 10) {
+			ConfigData.bgm_vol = 100;
+			ConfigData.bgm_vol_count = 10;
 		}
 	}
 
@@ -857,12 +857,12 @@ void BGM_VOL_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.BGM_VOL -= 10;
-		ConfigData.BGM_VOL_COUNT -= 1;
+		ConfigData.bgm_vol -= 10;
+		ConfigData.bgm_vol_count -= 1;
 
-		if (ConfigData.BGM_VOL_COUNT <= 0) {
-			ConfigData.BGM_VOL = 0;
-			ConfigData.BGM_VOL_COUNT = 0;
+		if (ConfigData.bgm_vol_count <= 0) {
+			ConfigData.bgm_vol = 0;
+			ConfigData.bgm_vol_count = 0;
 		}
 	}
 
@@ -876,12 +876,12 @@ void SE_VOL_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.SE_VOL += 10;
-		ConfigData.SE_VOL_COUNT += 1;
+		ConfigData.se_vol += 10;
+		ConfigData.se_vol_count += 1;
 
-		if (ConfigData.SE_VOL_COUNT >= 10) {
-			ConfigData.SE_VOL = 100;
-			ConfigData.SE_VOL_COUNT = 10;
+		if (ConfigData.se_vol_count >= 10) {
+			ConfigData.se_vol = 100;
+			ConfigData.se_vol_count = 10;
 		}
 	}
 
@@ -889,12 +889,12 @@ void SE_VOL_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.SE_VOL -= 10;
-		ConfigData.SE_VOL_COUNT -= 1;
+		ConfigData.se_vol -= 10;
+		ConfigData.se_vol_count -= 1;
 
-		if (ConfigData.SE_VOL_COUNT <= 0) {
-			ConfigData.SE_VOL = 0;
-			ConfigData.SE_VOL_COUNT = 0;
+		if (ConfigData.se_vol_count <= 0) {
+			ConfigData.se_vol = 0;
+			ConfigData.se_vol_count = 0;
 		}
 	}
 }
@@ -907,12 +907,12 @@ void AUTO_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.AUTO_SPEED += 10;
-		ConfigData.AUTO_SPEED_COUNT += 1;
+		ConfigData.auto_speed += 10;
+		ConfigData.auto_speed_count += 1;
 
-		if (ConfigData.AUTO_SPEED_COUNT >= 10) {
-			ConfigData.AUTO_SPEED = 100;
-			ConfigData.AUTO_SPEED_COUNT = 10;
+		if (ConfigData.auto_speed_count >= 10) {
+			ConfigData.auto_speed = 100;
+			ConfigData.auto_speed_count = 10;
 		}
 	}
 
@@ -920,12 +920,12 @@ void AUTO_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.AUTO_SPEED -= 10;
-		ConfigData.AUTO_SPEED_COUNT -= 1;
+		ConfigData.auto_speed -= 10;
+		ConfigData.auto_speed_count -= 1;
 
-		if (ConfigData.AUTO_SPEED_COUNT <= 0) {
-			ConfigData.AUTO_SPEED = 0;
-			ConfigData.AUTO_SPEED_COUNT = 0;
+		if (ConfigData.auto_speed_count <= 0) {
+			ConfigData.auto_speed = 0;
+			ConfigData.auto_speed_count = 0;
 		}
 	}
 }
@@ -938,12 +938,12 @@ void SKIP_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.SKIP_SPEED += 10;
-		ConfigData.SKIP_SPEED_COUNT += 1;
+		ConfigData.skip_speed += 10;
+		ConfigData.skip_speed_count += 1;
 
-		if (ConfigData.SKIP_SPEED_COUNT >= 10) {
-			ConfigData.SKIP_SPEED = 100;
-			ConfigData.SKIP_SPEED_COUNT = 10;
+		if (ConfigData.skip_speed_count >= 10) {
+			ConfigData.skip_speed = 100;
+			ConfigData.skip_speed_count = 10;
 		}
 	}
 
@@ -951,12 +951,12 @@ void SKIP_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.SKIP_SPEED -= 10;
-		ConfigData.SKIP_SPEED_COUNT -= 1;
+		ConfigData.skip_speed -= 10;
+		ConfigData.skip_speed_count -= 1;
 
-		if (ConfigData.SKIP_SPEED_COUNT <= 0) {
-			ConfigData.SKIP_SPEED = 0;
-			ConfigData.SKIP_SPEED_COUNT = 0;
+		if (ConfigData.skip_speed_count <= 0) {
+			ConfigData.skip_speed = 0;
+			ConfigData.skip_speed_count = 0;
 		}
 
 	}
@@ -970,12 +970,12 @@ void STRING_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.STRING_SPEED += 10;
-		ConfigData.STRING_SPEED_COUNT += 1;
+		ConfigData.string_speed += 10;
+		ConfigData.string_speed_count += 1;
 
-		if (ConfigData.STRING_SPEED_COUNT >= 10) {
-			ConfigData.STRING_SPEED = 100;
-			ConfigData.STRING_SPEED_COUNT = 10;
+		if (ConfigData.string_speed_count >= 10) {
+			ConfigData.string_speed = 100;
+			ConfigData.string_speed_count = 10;
 		}
 	}
 
@@ -983,12 +983,12 @@ void STRING_SPEED_CHANGE() {
 
 		WaitTimer(300);
 
-		ConfigData.STRING_SPEED -= 10;
-		ConfigData.STRING_SPEED_COUNT -= 1;
+		ConfigData.string_speed -= 10;
+		ConfigData.string_speed_count -= 1;
 
-		if (ConfigData.STRING_SPEED_COUNT <= 0) {
-			ConfigData.STRING_SPEED = 0;
-			ConfigData.STRING_SPEED_COUNT = 0;
+		if (ConfigData.string_speed_count <= 0) {
+			ConfigData.string_speed = 0;
+			ConfigData.string_speed_count = 0;
 		}
 	}
 }
@@ -1069,19 +1069,19 @@ void CONFIG_MENU() {
 	DrawString(SAVE_NAME_X, GAMEMENU_y * 9, "戻る", Cr);
 
 	//BGM音量目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, Cr, "%d", ConfigData.BGM_VOL);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y, Cr, "%d", ConfigData.bgm_vol);
 
 	//SE音量目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, Cr, "%d", ConfigData.SE_VOL);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 2, Cr, "%d", ConfigData.se_vol);
 
 	//オート速度目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, Cr, "%d", ConfigData.AUTO_SPEED);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 3, Cr, "%d", ConfigData.auto_speed);
 
 	//スキップ速度目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, Cr, "%d", ConfigData.SKIP_SPEED);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 4, Cr, "%d", ConfigData.skip_speed);
 
 	//文字描画速度目盛り描画
-	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, Cr, "%d", ConfigData.STRING_SPEED);
+	DrawFormatString(SAVE_NAME_X + CURSOR * 5, GAMEMENU_y * 5, Cr, "%d", ConfigData.string_speed);
 
 	//サウンドノベル風
 	if (ConfigData.soundnovel_winownovel == 0)
@@ -2277,7 +2277,7 @@ void SCRIPT_OUTPUT_BACKGROUND() {
 void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
 
 	// 音量の設定
-	ChangeVolumeSoundMem(255 * ConfigData.BGM_VOL / 100, BACKGROUNDMUSIC);
+	ChangeVolumeSoundMem(255 * ConfigData.bgm_vol / 100, BACKGROUNDMUSIC);
 
 	//BGM再生
 	PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
@@ -2293,7 +2293,7 @@ void SCRIPT_OUTPUT_SOUNDEFFECT() {
 	StopSoundMem(SOUNDEFFECT);
 
 	// 音量の設定
-	ChangeVolumeSoundMem(255 * ConfigData.SE_VOL / 100, SOUNDEFFECT);
+	ChangeVolumeSoundMem(255 * ConfigData.se_vol / 100, SOUNDEFFECT);
 
 	//SEの再生
 	PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
@@ -2347,7 +2347,7 @@ void SCRIPT_UTPUT_KEYWAIT() {
 		SAVESNAP();
 
 		//少し待って、次の文字列を描画
-		WaitTimer(1800 * ConfigData.AUTO_SPEED / 100);
+		WaitTimer(1800 * ConfigData.auto_speed / 100);
 		CP++;
 	}
 
@@ -2756,19 +2756,19 @@ void SCRIPT_OUTPUT_STRING_DRAW_SPEED() {
 	//スキップ・オート変数がＯＦＦの場合
 	if (skip_auto == 0) {
 		// 少し待つ
-		WaitTimer(30 * ConfigData.STRING_SPEED / 100);
+		WaitTimer(30 * ConfigData.string_speed / 100);
 	}
 
 	//スキップ・オート変数がＯＮの場合(オートモード)
 	if (skip_auto == 1) {
 		// 少し待つ
-		WaitTimer(30 * ConfigData.AUTO_SPEED / 100);
+		WaitTimer(30 * ConfigData.auto_speed / 100);
 	}
 
 	//スキップ・オート変数がＯＮの場合（スキップ）
 	if (skip_auto == 2) {
 		//速く処理
-		WaitTimer(10 * ConfigData.SKIP_SPEED / 100);
+		WaitTimer(10 * ConfigData.skip_speed / 100);
 	}
 }
 
