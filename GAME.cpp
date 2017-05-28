@@ -23,19 +23,19 @@ int DrawPointX = 0, DrawPointY = 0;
 int SP = 0, CP = 0;
 
 //キャラクター画像読込変数
-long CHARACTER_LOAD[100];
+long CHARACTER_LOAD[99];
 int CHARACTER, CHARACTER_DUMMY;
 
 //背景画像読込変数
-long BACKGROUND_LOAD[100];
+long BACKGROUND_LOAD[99];
 int BACKGROUND;
 
 //背景音楽読込変数
-long BACKGROUNDMUSIC_LOAD[100];
+long BACKGROUNDMUSIC_LOAD[99];
 int BACKGROUNDMUSIC;
 
 //効果音変数
-long SOUNDEFFECT_LOAD[100];
+long SOUNDEFFECT_LOAD[99];
 int SOUNDEFFECT;
 
 //スクリプト読込変数
@@ -229,7 +229,7 @@ static bool SerialNumberFileLoader(long* dest_arr, size_t dest_arr_num, const ch
 	for (unsigned int i = 0; i < dest_arr_num; ++i) {
 		char FilePathString[40] = {};
 #ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
-		if(-1 == sprintf_s(FilePathString, dest_arr_num, format, i)) return false;
+		if(-1 == sprintf_s(FilePathString, dest_arr_num, format, i + 1)) return false;
 #else
 		if(0 > snprintf(FilePathString, format, i) return false;
 #endif
