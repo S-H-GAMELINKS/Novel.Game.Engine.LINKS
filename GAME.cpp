@@ -2247,9 +2247,8 @@ void sentakusi(int Cr, int y) {
 	DrawString(SENTAKUSIX, y, "■", Cr);
 
 	//選択肢の描画
-	for (int i : {0, 1}) {
-		DrawString(SENTAKUSIX + CURSOR, SENTAKUSI1, ChoiceStrings[i], Cr);
-	}
+	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI1, ChoiceStrings[0], Cr);
+	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI2, ChoiceStrings[1], Cr);
 }
 
 // 改行関数
