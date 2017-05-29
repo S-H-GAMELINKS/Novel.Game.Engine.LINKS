@@ -240,7 +240,7 @@ static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const cha
 #ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
 		if(-1 == sprintf_s(FilePathString, dest_arr_num, format, i + 1)) return false;
 #else
-		if(0 > snprintf(FilePathString, dest_arr_num, format, i) return false;
+		if (0 > snprintf(FilePathString, dest_arr_num, format, i + 1) return false;
 #endif
 		dest_arr[i] = LoadFunc(FilePathString);
 	}
@@ -2987,11 +2987,12 @@ void SOUNDEFFECT_START() {
 void MOVIE_START() {
 	if (isdigit(String[SP][CP]) && isdigit(String[SP][CP + 1])) {
 		const size_t CharactorNumber = (ctoui(String[SP][CP]) * 10) + ctoui(String[SP][CP + 1]) - 1;
+		if (99 <= CharactorNumber) return;
 		char MovieFilePath[25] = {};
 #ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
 		if (-1 == sprintf_s(MovieFilePath, countof(MovieFilePath), "DATA/MOVIE/MOVIE%c%c.wmv", String[SP][CP], String[SP][CP + 1])) return;
 #else
-		if (0 > snprintf(MovieFilePath, countof(MovieFilePath), format, i) return;
+		if (0 > snprintf(MovieFilePath, countof(MovieFilePath), "DATA/MOVIE/MOVIE%c%c.wmv", String[SP][CP], String[SP][CP + 1]) return;
 #endif
 		PlayMovie(MovieFilePath, 1, DX_MOVIEPLAYTYPE_BCANCEL);
 		CP += 2;
