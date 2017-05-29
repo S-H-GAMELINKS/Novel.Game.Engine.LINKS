@@ -238,9 +238,9 @@ static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const cha
 	for (unsigned int i = 0; i < dest_arr_num; ++i) {
 		char FilePathString[40] = {};
 #ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
-		if(-1 == sprintf_s(FilePathString, dest_arr_num, format, i + 1)) return false;
+		if(-1 == sprintf_s(FilePathString, countof(FilePathString), format, i + 1)) return false;
 #else
-		if (0 > snprintf(FilePathString, dest_arr_num, format, i + 1) return false;
+		if (0 > snprintf(FilePathString, countof(FilePathString), format, i + 1) return false;
 #endif
 		dest_arr[i] = LoadFunc(FilePathString);
 	}
