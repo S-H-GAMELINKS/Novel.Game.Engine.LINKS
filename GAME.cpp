@@ -234,7 +234,7 @@ static int LINKS_MessageBox_OK(LPCTSTR lpText)
 template<typename Func>
 static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const char* format, Func&& LoadFunc) {
 	if (NULL == dest_arr) return false;
-	assert(dest_arr_num <= 40);
+	assert(40 < dest_arr_num);
 	for (unsigned int i = 0; i < dest_arr_num; ++i) {
 		char FilePathString[40] = {};
 #ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
