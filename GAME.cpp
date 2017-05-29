@@ -2987,6 +2987,7 @@ void SOUNDEFFECT_START() {
 void MOVIE_START() {
 	if (isdigit(String[SP][CP]) && isdigit(String[SP][CP + 1])) {
 		const size_t CharactorNumber = (ctoui(String[SP][CP]) * 10) + ctoui(String[SP][CP + 1]) - 1;
+		if (99 <= CharactorNumber) return;
 		char MovieFilePath[25] = {};
 #ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
 		if (-1 == sprintf_s(MovieFilePath, countof(MovieFilePath), "DATA/MOVIE/MOVIE%c%c.wmv", String[SP][CP], String[SP][CP + 1])) return;
