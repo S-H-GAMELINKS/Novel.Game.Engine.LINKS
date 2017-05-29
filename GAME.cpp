@@ -2,6 +2,7 @@
 #include "GAME.h"
 #include "DxLib.h"
 #include "DEF.h"
+#include <cstddef>
 #include <cassert>
 #include <functional>
 
@@ -231,16 +232,14 @@ static int LINKS_MessageBox_OK(LPCTSTR lpText)
 	);
 }
 
-template<typename Func>
-static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const char* format, Func&& LoadFunc) {
-	if (NULL == dest_arr) return false;
-	assert(dest_arr_num <= 40);
+template<std::size_t dest_arr_num, typename Func>
+static bool SerialNumberFileLoader(int (&dest_arr)[dest_arr_num], const char* format, Func&& LoadFunc) {
 	for (unsigned int i = 0; i < dest_arr_num; ++i) {
 		char FilePathString[40] = {};
 #ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
-		if(-1 == sprintf_s(FilePathString, dest_arr_num, format, i + 1)) return false;
+		if(-1 == sprintf_s(FilePathString, countof(FilePathString), format, i + 1)) return false;
 #else
-		if (0 > snprintf(FilePathString, dest_arr_num, format, i + 1) return false;
+		if (0 > snprintf(FilePathString, countof(FilePathString), format, i + 1) return false;
 #endif
 		dest_arr[i] = LoadFunc(FilePathString);
 	}
@@ -249,28 +248,28 @@ static bool SerialNumberFileLoader(int* dest_arr, size_t dest_arr_num, const cha
 
 //立ち絵素材読込
 void MATERIAL_LOAD_CHARACTER() {
-	assert(SerialNumberFileLoader(CHARACTER_LOAD, countof(CHARACTER_LOAD), "DATA/CHARACTER/CHAR%02u.png", [](const TCHAR* FileName) {
+	assert(SerialNumberFileLoader(CHARACTER_LOAD, "DATA/CHARACTER/CHAR%02u.png", [](const TCHAR* FileName) {
 		return LoadGraph(FileName);
 	}));
 }
 
 //背景画像読込
 void MATERIAL_LOAD_BACKGROUND() {
-	assert(SerialNumberFileLoader(BACKGROUND_LOAD, countof(BACKGROUND_LOAD), "DATA/BACKGROUND/BG%02u.png", [](const TCHAR* FileName) {
+	assert(SerialNumberFileLoader(BACKGROUND_LOAD, "DATA/BACKGROUND/BG%02u.png", [](const TCHAR* FileName) {
 		return LoadGraph(FileName);
 	}));
 }
 
 //ＢＧＭ読込
 void MATERIAL_LOAD_BACKGROUNDMUSIC() {
-	assert(SerialNumberFileLoader(BACKGROUNDMUSIC_LOAD, countof(BACKGROUNDMUSIC_LOAD), "DATA/BACKGROUNDMUSIC/BGM%02u.ogg", [](const TCHAR* FileName) {
+	assert(SerialNumberFileLoader(BACKGROUNDMUSIC_LOAD, "DATA/BACKGROUNDMUSIC/BGM%02u.ogg", [](const TCHAR* FileName) {
 		return LoadSoundMem(FileName);
 	}));
 }
 
 //ＳＥ読込
 void MATERIAL_LOAD_SOUNDEFFECT(){
-	assert(SerialNumberFileLoader(SOUNDEFFECT_LOAD, countof(SOUNDEFFECT_LOAD), "DATA/SOUNDEFFECT/SE%02u.ogg", [](const TCHAR* FileName) {
+	assert(SerialNumberFileLoader(SOUNDEFFECT_LOAD, "DATA/SOUNDEFFECT/SE%02u.ogg", [](const TCHAR* FileName) {
 		return LoadSoundMem(FileName);
 	}));
 }
@@ -2945,7 +2944,8 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
 }
 static bool isdigit(char c) { return '0' <= c && c <= '9'; }
 static unsigned int ctoui(char c) { return c - '0'; }
-static bool SelectLoadedResource(int& out, const int* LoadedArray, size_t LoadedArrayNum, char c0, char c1) {
+template<std::size_t LoadedArrayNum>
+static bool SelectLoadedResource(int& out, const int (&LoadedArray)[LoadedArrayNum], char c0, char c1) {
 	if (NULL == LoadedArray) return false;
 	if (isdigit(c0) && isdigit(c1)) {
 		const size_t CharactorNumber = (ctoui(c0) * 10) + ctoui(c1) - 1;
@@ -2957,28 +2957,28 @@ static bool SelectLoadedResource(int& out, const int* LoadedArray, size_t Loaded
 }
 //キャラクター描画処理
 void CHARACTER_DRAW() {
-	if (SelectLoadedResource(CHARACTER, CHARACTER_LOAD, countof(CHARACTER_LOAD), String[SP][CP], String[SP][CP + 1])) {
+	if (SelectLoadedResource(CHARACTER, CHARACTER_LOAD, String[SP][CP], String[SP][CP + 1])) {
 		CP += 2;
 	}
 }
 
 //背景描画処理
 void BACKGROUND_DRAW() {
-	if (SelectLoadedResource(BACKGROUND, BACKGROUND_LOAD, countof(BACKGROUND_LOAD), String[SP][CP], String[SP][CP + 1])) {
+	if (SelectLoadedResource(BACKGROUND, BACKGROUND_LOAD, String[SP][CP], String[SP][CP + 1])) {
 		CP += 2;
 	}
 }
 
 //BGM再生処理
 void BACKGROUNDMUSIC_START() {
-	if (SelectLoadedResource(BACKGROUNDMUSIC, BACKGROUNDMUSIC_LOAD, countof(BACKGROUNDMUSIC_LOAD), String[SP][CP], String[SP][CP + 1])) {
+	if (SelectLoadedResource(BACKGROUNDMUSIC, BACKGROUNDMUSIC_LOAD, String[SP][CP], String[SP][CP + 1])) {
 		CP += 2;
 	}
 }
 
 //SE再生処理
 void SOUNDEFFECT_START() {
-	if (SelectLoadedResource(SOUNDEFFECT, SOUNDEFFECT_LOAD, countof(SOUNDEFFECT_LOAD), String[SP][CP], String[SP][CP + 1])) {
+	if (SelectLoadedResource(SOUNDEFFECT, SOUNDEFFECT_LOAD, String[SP][CP], String[SP][CP + 1])) {
 		CP += 2;
 	}
 }
