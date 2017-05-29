@@ -2709,6 +2709,11 @@ void SCRIPT_OUTPUT_CHOICE_LOOP() {
 
 		if (y == SENTAKUSI2 && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == SENTAKUSI2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
+			BACKLOG_COUNT++;
+
+			//選択肢時のバックログ取得
+			SCRIPT_OUTPUT_CHOICE_BACKLOG();
+
 			//選択後の分岐処理(選択肢↑)
 			SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN();
 			CP++;
