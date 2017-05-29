@@ -1,6 +1,8 @@
 ﻿#ifndef LINKS_DEF_H_
 #define LINKS_DEF_H_
 
+#include <cstddef>
+
 // 文字のサイズ
 #define MOJI_SIZE 21
 
