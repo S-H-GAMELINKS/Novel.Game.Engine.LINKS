@@ -2158,8 +2158,8 @@ void sentakusi(int Cr, int y) {
 	DrawString(choise_pos_x, y, "■", Cr);
 
 	//選択肢の描画
-	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI1, ChoiceStrings[0], Cr);
-	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI2, ChoiceStrings[1], Cr);
+	DrawString(choise_pos_x + cursor_move_unit, choise_pos_y[0], ChoiceStrings[0], Cr);
+	DrawString(choise_pos_x + cursor_move_unit, choise_pos_y[1], ChoiceStrings[1], Cr);
 }
 
 // 改行関数
@@ -2505,13 +2505,13 @@ void SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE() {
 
 	if (Key[KEY_INPUT_DOWN] == 1) {
 		y += cursor_move_unit;
-		if (y == (choise_pos2_y + cursor_move_unit))                         // y座標が260なら(選択が一番下なら)
-			y = choise_pos1_y;                        // 選択座標を一番上に
+		if (y == (choise_pos_y[1] + cursor_move_unit))                         // y座標が260なら(選択が一番下なら)
+			y = choise_pos_y[0];                        // 選択座標を一番上に
 	}
 	if (Key[KEY_INPUT_UP] == 1) {
 		y -= cursor_move_unit;
-		if (y == (choise_pos1_y - cursor_move_unit))
-			y = choise_pos2_y;
+		if (y == (choise_pos_y[0] - cursor_move_unit))
+			y = choise_pos_y[1];
 	}
 }
 
@@ -2605,7 +2605,7 @@ void SCRIPT_OUTPUT_CHOICE_LOOP() {
 		//画面クリア処理
 		SCREEN_CLEAR();
 
-		if (y == choise_pos1_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos1_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+		if (y == choise_pos_y[0] && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos_y[0] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			BACKLOG_COUNT++;
 
@@ -2618,7 +2618,7 @@ void SCRIPT_OUTPUT_CHOICE_LOOP() {
 			break;
 		}
 
-		if (y == choise_pos2_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos2_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+		if (y == choise_pos_y[1] && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos_y[1] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			BACKLOG_COUNT++;
 
