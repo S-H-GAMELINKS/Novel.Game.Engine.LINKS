@@ -154,154 +154,70 @@ void WORD_FORMAT() {
 }
 
 static void GameLoopType1(const int RouteNumber, int32_t& TextIgnoredFlag){
-	if (EndFlag == RouteNumber) {
-		if (TextIgnoredFlag == 0) skip_auto = 0;
-		SCRIPT_READ();
-		//Ａルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-			//ゲームメニュー
-			GAMEMENU();
-			//スクリーンショット取得
-			SCREENSHOT();
-			//ショートカットキー
-			SHORTCUT_KEY();
-			//終了
-			GAME_FINISH();
-			// 終了フラグが2でなかったら終了する
-			if (EndFlag != RouteNumber && EndFlag != 99999) {
-				if (SAVE_CHOICE == 0) FORMAT();
-				TextIgnoredFlag = 1;
-				SKIP_READ_SAVE();
-				break;
-			}
-			if (EndFlag == 99999) break;
-			//参照文字列処理
-			WORD_FORMAT();
+	if (TextIgnoredFlag == 0) skip_auto = 0;
+	SCRIPT_READ();
+	//Ａルートループ
+	while (ProcessMessage() == 0)
+	{
+		//タグ処理
+		SCRIPT_OUTPUT();
+		//ゲームメニュー
+		GAMEMENU();
+		//スクリーンショット取得
+		SCREENSHOT();
+		//ショートカットキー
+		SHORTCUT_KEY();
+		//終了
+		GAME_FINISH();
+		// 終了フラグが2でなかったら終了する
+		if (EndFlag != RouteNumber && EndFlag != 99999) {
+			if (SAVE_CHOICE == 0) FORMAT();
+			TextIgnoredFlag = 1;
+			SKIP_READ_SAVE();
+			break;
 		}
+		if (EndFlag == 99999) break;
+		//参照文字列処理
+		WORD_FORMAT();
 	}
 }
 
 static void GameLoopType2(const int RouteNumber, const int32_t TextIgnoredFlag){
-	if (EndFlag == RouteNumber) {
-		if (TextIgnoredFlag == 0) skip_auto = 0;
-		SCRIPT_READ();
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-			//ゲームメニュー
-			GAMEMENU();
-			//スクリーンショット取得
-			SCREENSHOT();
-			//ショートカットキー
-			SHORTCUT_KEY();
-			//終了
-			GAME_FINISH();
-			if (EndFlag != RouteNumber) {
-				if (SAVE_CHOICE == 0) FORMAT();
-				break;
-			}
-			//参照文字列処理
-			WORD_FORMAT();
+	if (TextIgnoredFlag == 0) skip_auto = 0;
+	SCRIPT_READ();
+	while (ProcessMessage() == 0)
+	{
+		//タグ処理
+		SCRIPT_OUTPUT();
+		//ゲームメニュー
+		GAMEMENU();
+		//スクリーンショット取得
+		SCREENSHOT();
+		//ショートカットキー
+		SHORTCUT_KEY();
+		//終了
+		GAME_FINISH();
+		if (EndFlag != RouteNumber) {
+			if (SAVE_CHOICE == 0) FORMAT();
+			break;
 		}
+		//参照文字列処理
+		WORD_FORMAT();
 	}
-}
-//ゲームのループ(LINKS)
-void GAME_LOOP_LINKS() {
-	//メインルート
-	GameLoopType1(1, TextIgnoredFlag.LINKS);
-}
-
-//ゲームのループ(A)
-void GAME_LOOP_A() {
-	GameLoopType1(2, TextIgnoredFlag.A);
-}
-
-//ゲームのループ(B)
-void GAME_LOOP_B() {
-	GameLoopType1(3, TextIgnoredFlag.B);
-}
-
-//ゲームのループ(C)
-void GAME_LOOP_C() {
-	GameLoopType1(4, TextIgnoredFlag.C);
-}
-
-//ゲームのループ(D)
-void GAME_LOOP_D() {
-	GameLoopType1(5, TextIgnoredFlag.D);
-}
-
-//ゲームのループ(E)
-void GAME_LOOP_E() {
-	GameLoopType1(6, TextIgnoredFlag.E);
-}
-
-//ゲームのループ(F)
-void GAME_LOOP_F() {
-	GameLoopType1(7, TextIgnoredFlag.F);
-}
-
-//ゲームのループ(G)
-void GAME_LOOP_G() {
-	GameLoopType2(8, TextIgnoredFlag.G);
-}
-
-//ゲームのループ(H)
-void GAME_LOOP_H() {
-	GameLoopType2(9, TextIgnoredFlag.H);
-}
-
-//ゲームのループ(I)
-void GAME_LOOP_I() {
-	GameLoopType2(10, TextIgnoredFlag.I);
-}
-
-//ゲームのループ(J)
-void GAME_LOOP_J() {
-	GameLoopType2(11, TextIgnoredFlag.J);
-}
-
-//ゲームのループ(K)
-void GAME_LOOP_K() {
-	GameLoopType2(12, TextIgnoredFlag.K);
-}
-
-//ゲームのループ(L)
-void GAME_LOOP_L() {
-	GameLoopType2(13, TextIgnoredFlag.L);
-}
-
-//ゲームのループ(M)
-void GAME_LOOP_M() {
-	GameLoopType2(14, TextIgnoredFlag.M);
-}
-
-//ゲームのループ(N)
-void GAME_LOOP_N() {
-	GameLoopType2(15, TextIgnoredFlag.N);
 }
 
 //ゲームのループ
 void GAME_LOOP() {
-	GAME_LOOP_LINKS();
-	GAME_LOOP_A();
-	GAME_LOOP_B();
-	GAME_LOOP_C();
-	GAME_LOOP_D();
-	GAME_LOOP_E();
-	GAME_LOOP_F();
-	GAME_LOOP_G();
-	GAME_LOOP_H();
-	GAME_LOOP_I();
-	GAME_LOOP_J();
-	GAME_LOOP_K();
-	GAME_LOOP_L();
-	GAME_LOOP_M();
-	GAME_LOOP_N();
+	if (EndFlag < 1 || 15 < EndFlag) return;
+	SkipDataConv* conv = reinterpret_cast<SkipDataConv*>(&TextIgnoredFlag);
+	if (/*1 <= EndFlag && */EndFlag <= 7) {
+		//main, A-F
+		GameLoopType1(EndFlag, conv->arr[EndFlag - 1]);
+	}
+	else /*if(8 <= EndFlag && EndFlag <= 15)*/ {
+		//G-N
+		GameLoopType2(EndFlag, conv->arr[EndFlag - 1]);
+	}
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,

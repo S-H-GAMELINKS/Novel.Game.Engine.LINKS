@@ -24,6 +24,14 @@ struct alignas(4) SkipData_t {
 	std::int32_t N;			//Nルートの既読情報
 };
 
+union SkipDataConv {
+	alignas(4) SkipData_t flag;
+	alignas(4) std::int32_t arr[15];
+};
+static_assert(alignof(std::int32_t) == 4, "err");
+static_assert(alignof(SkipData_t) == alignof(std::int32_t[15]), "err");
+static_assert(sizeof(SkipData_t) == sizeof(std::int32_t[15]), "err");
+
 //設定データ
 struct alignas(4) ConfigData_t {
 	std::int32_t bgm_vol;				//BGM音量情報
