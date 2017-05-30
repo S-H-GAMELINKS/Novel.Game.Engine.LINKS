@@ -48,7 +48,7 @@ extern int DrawPointX, DrawPointY;
 extern int SP, CP;
 
 //スクリプト用読込配列
-extern char String[GYOU][RETU];
+extern char String[script_line_num_lim][script_line_string_len_lim];
 
 //タイトル関連
 extern int TITLE;

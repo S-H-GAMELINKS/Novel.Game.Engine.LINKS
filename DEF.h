@@ -4,48 +4,50 @@
 #include <cstddef>
 
 // 文字のサイズ
-#define MOJI_SIZE 21
+constexpr int font_size = 21;
 
 //スクリプト読込数
-#define GYOU 500000
-#define RETU 1024
+constexpr std::size_t script_line_num_lim = 500000;
+constexpr std::size_t script_line_string_len_lim = 1024;
 
 //タイトルメニュー位置
-#define GAMESTART 300
-#define GAMELOAD 330
-#define GAMECONFIG 360
-#define QUICKLOAD 390
-#define CONTINUE 420
-#define GAMEQUIT 450
-#define MENUY 330
-#define MENUX 400
+constexpr int title_menu_game_start_pos_y = 300;
+constexpr int title_menu_game_load_pos_y = 330;
+constexpr int title_menu_game_config_pos_y = 360;
+constexpr int title_menu_quick_load_pos_y = 390;
+constexpr int title_menu_continue_pos_y = 420;
+constexpr int title_menu_game_quit_pos_y = 450;
+
+constexpr int menu_init_pos_y = 330;
+constexpr int menu_pos_x = 400;
 
 //選択肢
-#define SENTAKUSI1 200
-#define SENTAKUSI2 230
-#define SENTAKUSIY 200
-#define SENTAKUSIX 100
+constexpr int choise_pos1_y = 200;
+constexpr int choise_pos2_y = 230;
+constexpr int choise_init_pos_y = choise_pos1_y;
+constexpr int choise_pos_x = 100;
 
 //カーソルの移動量
-#define CURSOR 30
+constexpr int cursor_move_unit = 30;
 
 //キャラクターの位置
-#define CHARACTERX 150
-#define CHARACTERY 130
+constexpr int charactor_pos_x = 150;
+constexpr int charactor_pos_y = 130;
 
 //キャラクター画像サイズ
-#define CHARACTER_GRAPH_X 300
-#define CHARACTER_GRAPH_Y 400
+constexpr int character_graph_size_x = 300;
+constexpr int character_graph_size_y = 400;
 
 //セーブ・ロード画面関係
-#define SAVE_X 400
-#define SAVE_Y 100
-#define SAVE_Y_MAX 300
-#define SAVE_MOVE 100
-#define SAVE_SNAP_X 150
-#define SAVE_NAME_X 250
+constexpr std::size_t save_max_num = 3;
+constexpr int save_base_pos_x = 400;
+constexpr int save_base_pos_y = 100;
+constexpr int save_move_unit = 100;
+constexpr int save_buttom_y = save_base_pos_y + save_move_unit * save_max_num;
+constexpr int saved_snap_draw_pos_x = 150;
+constexpr int save_name_pos_x = 250;
 
 //ゲームメニュー位置関係
-#define GAMEMENU_y 30
+constexpr int game_menu_base_pos_y = 30;
 
 #endif //LINKS_DEF_H_
