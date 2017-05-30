@@ -2158,8 +2158,9 @@ void sentakusi(int Cr, int y) {
 	DrawString(choise_pos_x, y, "■", Cr);
 
 	//選択肢の描画
-	DrawString(choise_pos_x + cursor_move_unit, choise_pos_y[0], ChoiceStrings[0], Cr);
-	DrawString(choise_pos_x + cursor_move_unit, choise_pos_y[1], ChoiceStrings[1], Cr);
+	for (std::size_t i : {0, 1}) {
+		DrawString(choise_pos_x + cursor_move_unit, choise_pos_y[i], ChoiceStrings[i], Cr);
+	}
 }
 
 // 改行関数
