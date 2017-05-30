@@ -153,762 +153,154 @@ void WORD_FORMAT() {
 	}
 }
 
-//ゲームのループ(LINKS)
-void GAME_LOOP_LINKS() {
-
-	//メインルート
-	if (EndFlag == 1) {
-
-		if (TextIgnoredFlag.LINKS == 0)
-			skip_auto = 0;
-
-		//メインスクリプト読込
+static void GameLoopType1(const int RouteNumber, int32_t& TextIgnoredFlag){
+	if (EndFlag == RouteNumber) {
+		if (TextIgnoredFlag == 0) skip_auto = 0;
 		SCRIPT_READ();
-
-		//メインループ(LINKS)
-		while (EndFlag != 99 && ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが1でなかったら終了する。
-			if (EndFlag != 1 && EndFlag != 99999) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				TextIgnoredFlag.LINKS = 1;
-				SKIP_READ_SAVE();
-				break;
-			}
-
-			if (EndFlag == 99999)
-				break;
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
-}
-
-//ゲームのループ(A)
-void GAME_LOOP_A() {
-
-	//Aルート
-	if (EndFlag == 2) {
-
-		if (TextIgnoredFlag.A == 0)
-			skip_auto = 0;
-
-		//Aルートスクリプト読込
-		SCRIPT_READ();
-
 		//Ａルートループ
 		while (ProcessMessage() == 0)
 		{
 			//タグ処理
 			SCRIPT_OUTPUT();
-
 			//ゲームメニュー
 			GAMEMENU();
-
 			//スクリーンショット取得
 			SCREENSHOT();
-
 			//ショートカットキー
 			SHORTCUT_KEY();
-
 			//終了
 			GAME_FINISH();
-
 			// 終了フラグが2でなかったら終了する
-			if (EndFlag != 2 && EndFlag != 99999) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				TextIgnoredFlag.A = 1;
+			if (EndFlag != RouteNumber && EndFlag != 99999) {
+				if (SAVE_CHOICE == 0) FORMAT();
+				TextIgnoredFlag = 1;
 				SKIP_READ_SAVE();
 				break;
 			}
-
-			if (EndFlag == 99999)
-				break;
-
+			if (EndFlag == 99999) break;
 			//参照文字列処理
 			WORD_FORMAT();
 		}
 	}
+}
+
+static void GameLoopType2(const int RouteNumber, const int32_t TextIgnoredFlag){
+	if (EndFlag == RouteNumber) {
+		if (TextIgnoredFlag == 0) skip_auto = 0;
+		SCRIPT_READ();
+		while (ProcessMessage() == 0)
+		{
+			//タグ処理
+			SCRIPT_OUTPUT();
+			//ゲームメニュー
+			GAMEMENU();
+			//スクリーンショット取得
+			SCREENSHOT();
+			//ショートカットキー
+			SHORTCUT_KEY();
+			//終了
+			GAME_FINISH();
+			if (EndFlag != RouteNumber) {
+				if (SAVE_CHOICE == 0) FORMAT();
+				break;
+			}
+			//参照文字列処理
+			WORD_FORMAT();
+		}
+	}
+}
+//ゲームのループ(LINKS)
+void GAME_LOOP_LINKS() {
+	//メインルート
+	GameLoopType1(1, TextIgnoredFlag.LINKS);
+}
+
+//ゲームのループ(A)
+void GAME_LOOP_A() {
+	GameLoopType1(2, TextIgnoredFlag.A);
 }
 
 //ゲームのループ(B)
 void GAME_LOOP_B() {
-
-	//Bルート
-	if (EndFlag == 3) {
-
-		if (TextIgnoredFlag.B == 0)
-			skip_auto = 0;
-
-		//Bルートスクリプト読込
-		SCRIPT_READ();
-
-		//Bルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが3でなかったら終了する
-			if (EndFlag != 3 && EndFlag != 99999) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				TextIgnoredFlag.B = 1;
-				SKIP_READ_SAVE();
-				break;
-			}
-
-			if (EndFlag == 99999)
-				break;
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType1(3, TextIgnoredFlag.B);
 }
 
 //ゲームのループ(C)
 void GAME_LOOP_C() {
-
-	//Cルート
-	if (EndFlag == 4) {
-
-		if (TextIgnoredFlag.C == 0)
-			skip_auto = 0;
-
-		//Cルートスクリプト読込
-		SCRIPT_READ();
-
-		//Cルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが4でなかったら終了する
-			if (EndFlag != 4 && EndFlag != 99999) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				TextIgnoredFlag.C = 1;
-				SKIP_READ_SAVE();
-				break;
-			}
-
-			if (EndFlag == 99999)
-				break;
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType1(4, TextIgnoredFlag.C);
 }
 
 //ゲームのループ(D)
 void GAME_LOOP_D() {
-
-	//Dルート
-	if (EndFlag == 5) {
-
-		if (TextIgnoredFlag.D == 0)
-			skip_auto = 0;
-
-		//Dルートスクリプト読込
-		SCRIPT_READ();
-
-		//Dルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが5でなかったら終了する
-			if (EndFlag != 5 && EndFlag != 99999) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				TextIgnoredFlag.D = 1;
-				SKIP_READ_SAVE();
-				break;
-			}
-
-			if (EndFlag == 99999)
-				break;
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType1(5, TextIgnoredFlag.D);
 }
 
 //ゲームのループ(E)
 void GAME_LOOP_E() {
-
-	//Eルート
-	if (EndFlag == 6) {
-
-		if (TextIgnoredFlag.E == 0)
-			skip_auto = 0;
-
-		//Eルートスクリプト読込
-		SCRIPT_READ();
-
-		//Eルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが2でなかったら終了する
-			if (EndFlag != 6 && EndFlag != 99999) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				TextIgnoredFlag.E = 1;
-				SKIP_READ_SAVE();
-				break;
-			}
-
-			if (EndFlag == 99999)
-				break;
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType1(6, TextIgnoredFlag.E);
 }
 
 //ゲームのループ(F)
 void GAME_LOOP_F() {
-
-	//Fルート
-	if (EndFlag == 7) {
-
-		if (TextIgnoredFlag.F == 0)
-			skip_auto = 0;
-
-		//Fルートスクリプト読込
-		SCRIPT_READ();
-
-		//Fルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが7でなかったら終了する
-			if (EndFlag != 7 && EndFlag != 99999) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				TextIgnoredFlag.F = 1;
-				SKIP_READ_SAVE();
-				break;
-			}
-
-			if (EndFlag == 99999)
-				break;
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType1(7, TextIgnoredFlag.F);
 }
 
 //ゲームのループ(G)
 void GAME_LOOP_G() {
-
-	//Gルート
-	if (EndFlag == 8) {
-
-		if (TextIgnoredFlag.G == 0)
-			skip_auto = 0;
-
-		//Gルートスクリプト読込
-		SCRIPT_READ();
-
-		//Gルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが7でなかったら終了する
-			if (EndFlag != 8) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				break;
-			}
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType2(8, TextIgnoredFlag.G);
 }
 
 //ゲームのループ(H)
 void GAME_LOOP_H() {
-
-	//Hルート
-	if (EndFlag == 9) {
-
-		if (TextIgnoredFlag.H == 0)
-			skip_auto = 0;
-
-		//Hルートスクリプト読込
-		SCRIPT_READ();
-
-		//Hルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが7でなかったら終了する
-			if (EndFlag != 9) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				break;
-			}
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType2(9, TextIgnoredFlag.H);
 }
 
 //ゲームのループ(I)
 void GAME_LOOP_I() {
-
-	//Iルート
-	if (EndFlag == 10) {
-
-		if (TextIgnoredFlag.I == 0)
-			skip_auto = 0;
-
-		//Iルートスクリプト読込
-		SCRIPT_READ();
-
-		//Iルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが7でなかったら終了する
-			if (EndFlag != 10) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				break;
-			}
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType2(10, TextIgnoredFlag.I);
 }
 
 //ゲームのループ(J)
 void GAME_LOOP_J() {
-
-	//Jルート
-	if (EndFlag == 11) {
-
-		if (TextIgnoredFlag.J == 0)
-			skip_auto = 0;
-
-		//Jルートスクリプト読込
-		SCRIPT_READ();
-
-		//Jルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが7でなかったら終了する
-			if (EndFlag != 11) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				break;
-			}
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType2(11, TextIgnoredFlag.J);
 }
 
 //ゲームのループ(K)
 void GAME_LOOP_K() {
-
-	//Kルート
-	if (EndFlag == 12) {
-
-		if (TextIgnoredFlag.K == 0)
-			skip_auto = 0;
-
-		//Kルートスクリプト読込
-		SCRIPT_READ();
-
-		//Kルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが7でなかったら終了する
-			if (EndFlag != 12) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				break;
-			}
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType2(12, TextIgnoredFlag.K);
 }
 
 //ゲームのループ(L)
 void GAME_LOOP_L() {
-
-	//Lルート
-	if (EndFlag == 13) {
-
-		if (TextIgnoredFlag.L == 0)
-			skip_auto = 0;
-
-		//Lルートスクリプト読込
-		SCRIPT_READ();
-
-		//Lルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが7でなかったら終了する
-			if (EndFlag != 13) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				break;
-			}
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType2(13, TextIgnoredFlag.L);
 }
 
 //ゲームのループ(M)
 void GAME_LOOP_M() {
-
-	//Mルート
-	if (EndFlag == 14) {
-
-		if (TextIgnoredFlag.M == 0)
-			skip_auto = 0;
-
-		//Mルートスクリプト読込
-		SCRIPT_READ();
-
-		//Mルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが7でなかったら終了する
-			if (EndFlag != 14) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				break;
-			}
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType2(14, TextIgnoredFlag.M);
 }
 
 //ゲームのループ(N)
 void GAME_LOOP_N() {
-
-	//Nルート
-	if (EndFlag == 15) {
-
-		if (TextIgnoredFlag.N == 0)
-			skip_auto = 0;
-
-		//Nルートスクリプト読込
-		SCRIPT_READ();
-
-		//Nルートループ
-		while (ProcessMessage() == 0)
-		{
-			//タグ処理
-			SCRIPT_OUTPUT();
-
-			//ゲームメニュー
-			GAMEMENU();
-
-			//スクリーンショット取得
-			SCREENSHOT();
-
-			//ショートカットキー
-			SHORTCUT_KEY();
-
-			//終了
-			GAME_FINISH();
-
-			// 終了フラグが7でなかったら終了する
-			if (EndFlag != 15) {
-
-				if (SAVE_CHOICE == 0)
-					FORMAT();
-
-				break;
-			}
-
-			//参照文字列処理
-			WORD_FORMAT();
-		}
-	}
+	GameLoopType2(15, TextIgnoredFlag.N);
 }
 
 //ゲームのループ
 void GAME_LOOP() {
-
-	//ゲームのループ(LINKS)
 	GAME_LOOP_LINKS();
-
-	//ゲームのループ(A)
 	GAME_LOOP_A();
-
-	//ゲームのループ(B)
 	GAME_LOOP_B();
-
-	//ゲームのループ(C)
 	GAME_LOOP_C();
-
-	//ゲームのループ(D)
 	GAME_LOOP_D();
-
-	//ゲームのループ(E)
 	GAME_LOOP_E();
-
-	//ゲームのループ(F)
 	GAME_LOOP_F();
-
-	//ゲームのループ(G)
 	GAME_LOOP_G();
-
-	//ゲームのループ(H)
 	GAME_LOOP_H();
-
-	//ゲームのループ(I)
 	GAME_LOOP_I();
-
-	//ゲームのループ(J)
 	GAME_LOOP_J();
-
-	//ゲームのループ(K)
 	GAME_LOOP_K();
-
-	//ゲームのループ(L)
 	GAME_LOOP_L();
-
-	//ゲームのループ(M)
 	GAME_LOOP_M();
-
-	//ゲームのループ(N)
 	GAME_LOOP_N();
 }
 
