@@ -2158,9 +2158,8 @@ void sentakusi(int Cr, int y) {
 	DrawString(choise_pos_x, y, "■", Cr);
 
 	//選択肢の描画
-	for (int i : {0, 1}) {
-		DrawString(choise_pos_x + cursor_move_unit, choise_pos1_y, ChoiceStrings[i], Cr);
-	}
+	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI1, ChoiceStrings[0], Cr);
+	DrawString(SENTAKUSIX + CURSOR, SENTAKUSI2, ChoiceStrings[1], Cr);
 }
 
 // 改行関数
@@ -2620,6 +2619,11 @@ void SCRIPT_OUTPUT_CHOICE_LOOP() {
 		}
 
 		if (y == choise_pos2_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos2_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+			BACKLOG_COUNT++;
+
+			//選択肢時のバックログ取得
+			SCRIPT_OUTPUT_CHOICE_BACKLOG();
 
 			//選択後の分岐処理(選択肢↑)
 			SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN();
