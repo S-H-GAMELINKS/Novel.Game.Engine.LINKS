@@ -1,4 +1,92 @@
-﻿#include <Windows.h>
+﻿#ifndef LINKS_GAME_H_
+#define LINKS_GAME_H_
+
+#include <Windows.h>
+#include "DEF.h"
+#include <cstdint>
+
+//既読スキップ
+struct alignas(4) SkipData_t {
+	std::int32_t LINKS;		//メインルートの既読情報
+	std::int32_t A;			//Aルートの既読情報
+	std::int32_t B;			//Bルートの既読情報
+	std::int32_t C;			//Cルートの既読情報
+	std::int32_t D;			//Dルートの既読情報
+	std::int32_t E;			//Eルートの既読情報
+	std::int32_t F;			//Fルートの既読情報
+	std::int32_t G;			//Gルートの既読情報
+	std::int32_t H;			//Hルートの既読情報
+	std::int32_t I;			//Iルートの既読情報
+	std::int32_t J;			//Jルートの既読情報
+	std::int32_t K;			//Kルートの既読情報
+	std::int32_t L;			//Lルートの既読情報
+	std::int32_t M;			//Mルートの既読情報
+	std::int32_t N;			//Nルートの既読情報
+};
+
+union SkipDataConv {
+	alignas(4) SkipData_t flag;
+	alignas(4) std::int32_t arr[15];
+};
+static_assert(alignof(std::int32_t) == 4, "err");
+static_assert(alignof(SkipData_t) == alignof(std::int32_t[15]), "err");
+static_assert(sizeof(SkipData_t) == sizeof(std::int32_t[15]), "err");
+
+//設定データ
+struct alignas(4) ConfigData_t {
+	std::int32_t bgm_vol;				//BGM音量情報
+	std::int32_t bgm_vol_count;			//BGM音量メーター情報
+	std::int32_t se_vol;					//SE音量情報
+	std::int32_t se_vol_count;			//SE音量メーター情報
+	std::int32_t skip_speed;				//スキップ速度情報
+	std::int32_t skip_speed_count;		//スキップ速度メーター情報
+	std::int32_t auto_speed;				//オート速度情報
+	std::int32_t auto_speed_count;		//オート速度メーター情報
+	std::int32_t string_speed;			//文字列描画速度
+	std::int32_t string_speed_count;		//文字列描画速度メーター情報
+	std::int32_t soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報
+	std::int32_t mouse_key_move;			//マウス操作とキー操作の情報
+};
+
+
+// 文字列描画の位置
+extern int DrawPointX, DrawPointY;
+
+// 参照する文字列番号と文字列中の文字ポインタ
+extern int SP, CP;
+
+//スクリプト用読込配列
+extern char String[script_line_num_lim][script_line_string_len_lim];
+
+//タイトル関連
+extern int TITLE;
+extern unsigned int Cr;
+
+//エンドフラグ
+extern int EndFlag;
+
+//既読スキップ変数
+extern SkipData_t TextIgnoredFlag;
+
+//設定用変数
+extern ConfigData_t ConfigData;
+
+//バックログ変数
+extern char *BACKLOG_DELETE;
+
+//セーブ用変数
+extern int SAVE, SAVE_CHOICE;
+extern char *SAVESNAP_CHOICE_DELETE;
+
+//スキップ・オートモード用変数
+extern int skip_auto;
+
+//キー操作
+extern int Key[256];
+extern int y;
+extern int SAVE_y;
+extern int GAME_y;
+
 //Yes/Noのメッセージボックス
 int LINKS_MessageBox_YESNO(LPCTSTR lpText);
 
@@ -76,3 +164,5 @@ void SCREEN_CLEAR();
 
 //各種F1～F11キー
 void SHORTCUT_KEY();
+
+#endif //LINKS_GAME_H_
