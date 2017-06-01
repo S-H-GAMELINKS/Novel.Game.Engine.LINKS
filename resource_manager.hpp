@@ -49,9 +49,9 @@ public:
 	ImageResourceManager& operator=(const ImageResourceManager&) = delete;
 	ImageResourceManager& operator=(ImageResourceManager&&) = delete;
 	bool load(const TCHAR* format) noexcept;
-	int DrawGraph(int x, int y, bool transFlag);
-	int DrawRectGraph(int destX, int destY, int srcX, int srcY, int width, int height, bool transFlag, bool turnFlag = false);
-	int DerivationGraph(int srcX, int srcY, int width, int height);
+	int DrawGraph(int x, int y, bool transFlag) noexcept;
+	int DrawRectGraph(int destX, int destY, int srcX, int srcY, int width, int height, bool transFlag, bool turnFlag = false) noexcept;
+	int DerivationGraph(int srcX, int srcY, int width, int height) noexcept;
 };
 class SoundResourceManager : public ResourceManagerBase {
 public:

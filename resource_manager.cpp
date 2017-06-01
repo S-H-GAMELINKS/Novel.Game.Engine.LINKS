@@ -58,19 +58,19 @@ bool ImageResourceManager::load(const TCHAR * format) noexcept
 	return false;
 }
 
-int ImageResourceManager::DrawGraph(int x, int y, bool transFlag)
+int ImageResourceManager::DrawGraph(int x, int y, bool transFlag) noexcept
 {
 	if (0 < this->activeResource()) return DxLib::DrawGraph(x, y, this->activeResource(), transFlag);
 	return -1;
 }
 
-int ImageResourceManager::DrawRectGraph(int destX, int destY, int srcX, int srcY, int width, int height, bool transFlag, bool turnFlag)
+int ImageResourceManager::DrawRectGraph(int destX, int destY, int srcX, int srcY, int width, int height, bool transFlag, bool turnFlag) noexcept
 {
 	if (0 < this->activeResource()) return DxLib::DrawRectGraph(destX, destY, srcX, srcY, width, height, this->activeResource(), transFlag,turnFlag);
 	return -1;
 }
 
-int ImageResourceManager::DerivationGraph(int srcX, int srcY, int width, int height)
+int ImageResourceManager::DerivationGraph(int srcX, int srcY, int width, int height) noexcept
 {
 	if (0 < this->activeResource()) return DxLib::DerivationGraph(srcX, srcY, width, height, this->activeResource());
 	return -1;
