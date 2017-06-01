@@ -4,6 +4,7 @@
 #include "DEF.h"
 #include <initializer_list>
 #include <cassert>
+#include "resource_manager.hpp"
 
 #if defined(_MSC_VER) && 1400 <= _MSC_VER
 #	define LINKS_HAS_CRT_SECURE_FUNCTIONS 1
@@ -22,22 +23,6 @@ int DrawPointX = 0, DrawPointY = 0;
 
 // 参照する文字列番号と文字列中の文字ポインタ
 int SP = 0, CP = 0;
-
-//キャラクター画像読込変数
-static int CHARACTER_LOAD[99];
-static int CHARACTER, CHARACTER_DUMMY;
-
-//背景画像読込変数
-static int BACKGROUND_LOAD[99];
-static int BACKGROUND;
-
-//背景音楽読込変数
-static int BACKGROUNDMUSIC_LOAD[99];
-static int BACKGROUNDMUSIC;
-
-//効果音変数
-static int SOUNDEFFECT_LOAD[99];
-static int SOUNDEFFECT;
 
 //スクリプト用読込配列
 char String[script_line_num_lim][script_line_string_len_lim];
@@ -168,67 +153,6 @@ void SAVEDATA_KEY_MOVE();
 //
 // function Definition
 //
-int LINKS_MessageBox_YESNO(LPCTSTR lpText)
-{
-	return MessageBox(
-		GetMainWindowHandle(),
-		lpText,
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
-}
-static int LINKS_MessageBox_OK(LPCTSTR lpText)
-{
-	return MessageBox(
-		GetMainWindowHandle(),
-		lpText,
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_OK
-	);
-}
-
-template<std::size_t dest_arr_num, typename Func>
-static bool SerialNumberFileLoader(int (&dest_arr)[dest_arr_num], const char* format, Func&& LoadFunc) {
-	for (unsigned int i = 0; i < dest_arr_num; ++i) {
-		char FilePathString[40] = {};
-#ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
-		if(-1 == sprintf_s(FilePathString, countof(FilePathString), format, i + 1)) return false;
-#else
-		if (0 > snprintf(FilePathString, countof(FilePathString), format, i + 1) return false;
-#endif
-		dest_arr[i] = LoadFunc(FilePathString);
-	}
-	return true;
-}
-
-//立ち絵素材読込
-void MATERIAL_LOAD_CHARACTER() {
-	assert(SerialNumberFileLoader(CHARACTER_LOAD, "DATA/CHARACTER/CHAR%02u.png", [](const TCHAR* FileName) {
-		return LoadGraph(FileName);
-	}));
-}
-
-//背景画像読込
-void MATERIAL_LOAD_BACKGROUND() {
-	assert(SerialNumberFileLoader(BACKGROUND_LOAD, "DATA/BACKGROUND/BG%02u.png", [](const TCHAR* FileName) {
-		return LoadGraph(FileName);
-	}));
-}
-
-//ＢＧＭ読込
-void MATERIAL_LOAD_BACKGROUNDMUSIC() {
-	assert(SerialNumberFileLoader(BACKGROUNDMUSIC_LOAD, "DATA/BACKGROUNDMUSIC/BGM%02u.ogg", [](const TCHAR* FileName) {
-		return LoadSoundMem(FileName);
-	}));
-}
-
-//ＳＥ読込
-void MATERIAL_LOAD_SOUNDEFFECT(){
-	assert(SerialNumberFileLoader(SOUNDEFFECT_LOAD, "DATA/SOUNDEFFECT/SE%02u.ogg", [](const TCHAR* FileName) {
-		return LoadSoundMem(FileName);
-	}));
-}
-
 //各素材データ読込関数
 void MATERIAL_LOAD() {
 
@@ -236,16 +160,16 @@ void MATERIAL_LOAD() {
 	SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
 
 	//キャラクター画像読込
-	MATERIAL_LOAD_CHARACTER();
+	assert(charactor.load("DATA/CHARACTER/CHAR{0:02d}.png"));
 
 	//背景画像読込
-	MATERIAL_LOAD_BACKGROUND();
+	assert(background.load("DATA/BACKGROUND/BG{0:02d}.png"));
 
 	//ＢＧＭ読込
-	MATERIAL_LOAD_BACKGROUNDMUSIC();
+	assert(backgroundMusic.load("DATA/BACKGROUNDMUSIC/BGM{0:02d}.ogg"));
 
 	//ＳＥ読込
-	MATERIAL_LOAD_SOUNDEFFECT();
+	assert(soundEffect.load("DATA/SOUNDEFFECT/SE{0:02d}.ogg"));
 
 	//ゲームオーバー画面
 	GAMEOVER = LoadGraph("DATA/BACKGROUND/GAMEOVER.png");
@@ -314,19 +238,11 @@ void SOUNDNOVEL() {
 		SCREEN_CLEAR();
 
 		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
+		background.DrawGraph(0, 0, true);
 		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER, TRUE);
-		}
-
+		charactor.DrawGraph(charactor_pos_x, charactor_pos_y, true);
 		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
+		backgroundMusic.play(DX_PLAYTYPE_LOOP);
 
 		DrawPointY = 0;
 		DrawPointX = 0;
@@ -358,23 +274,13 @@ void WINDOWNOVEL() {
 		SCREEN_CLEAR();
 
 		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
+		background.DrawGraph(0, 0, true);
+		static const int windowColor = GetColor(0, 0, 0);
+		DrawBox(0, 400, 640, 480, windowColor, TRUE);
 		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER, TRUE);
-		}
-
+		charactor.DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, true);
 		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
+		backgroundMusic.play(DX_PLAYTYPE_LOOP);
 
 		DrawPointY = 400;
 		DrawPointX = 0;
@@ -657,7 +563,7 @@ int QUICKSAVE_SAVE(){
 	if (SAVE == IDYES) {
 
 		//クイックセーブデータの作成
-		QuickSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
+		QuickSaveData_t Data = { EndFlag, SP, 0, charactor.activeResource(), background.activeResource(), backgroundMusic.activeResource(), SAVE_CHOICE };
 		FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
 		const errno_t er = fopen_s(&fp, "DATA/SAVE/QUICKSAVEDATA.dat", "wb");
@@ -709,9 +615,9 @@ int QUICKSAVE_LOAD() {
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
 		CP = Data.CP;
-		CHARACTER = Data.CHAR;
-		BACKGROUND = Data.BG;
-		BACKGROUNDMUSIC = Data.BGM;
+		charactor.activeResource(Data.CHAR);
+		background.activeResource(Data.BG);
+		backgroundMusic.activeResource(Data.BGM);
 		SAVE_CHOICE = Data.SAVE_CHOICE;
 
 		GAMEMENU_COUNT = 1;
@@ -733,7 +639,7 @@ int QUICKSAVE_LOAD() {
 int CONTINUE_SAVE() {
 
 	//クイックセーブデータの作成
-	ContinueSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
+	ContinueSaveData_t Data = { EndFlag, SP, 0, charactor.activeResource(), background.activeResource(), backgroundMusic.activeResource(), SAVE_CHOICE };
 	FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
 	const errno_t er = fopen_s(&fp, "DATA/SAVE/CONTINUESAVEDATA.dat", "wb");
@@ -783,9 +689,9 @@ int CONTINUE_LOAD() {
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
 		CP = Data.CP;
-		CHARACTER = Data.CHAR;
-		BACKGROUND = Data.BG;
-		BACKGROUNDMUSIC = Data.BGM;
+		charactor.activeResource(Data.CHAR);
+		background.activeResource(Data.BG);
+		backgroundMusic.activeResource(Data.BGM);
 		SAVE_CHOICE = Data.SAVE_CHOICE;
 
 		GAMEMENU_COUNT = 1;
@@ -1308,7 +1214,7 @@ static int CreateSaveData(int* SaveSnapHandle, const char* Message, const char* 
 		}
 
 		//セーブデータの作成
-		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
+		SaveData_t Data = { EndFlag, SP, 0, charactor.activeResource(), background.activeResource(), backgroundMusic.activeResource(), SAVE_CHOICE };
 		FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
 		const errno_t er = fopen_s(&fp, SaveDataPath, "wb");
@@ -1495,9 +1401,9 @@ static int LoadSaveData(const char* Message, const char* ErrorMessage, const cha
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
 		CP = Data.CP;
-		CHARACTER = Data.CHAR;
-		BACKGROUND = Data.BG;
-		BACKGROUNDMUSIC = Data.BGM;
+		charactor.activeResource(Data.CHAR);
+		background.activeResource(Data.BG);
+		backgroundMusic.activeResource(Data.BGM);
 		SAVE_CHOICE = Data.SAVE_CHOICE;
 
 		//ロード後のメッセージ
@@ -1932,16 +1838,15 @@ void GAMEMENU_TITLE_BACK() {
 
 		ClearDrawScreen();
 
-		if (SHORTCUT_KEY_FLAG == 1)
-			StopSoundMem(BACKGROUNDMUSIC);
+		if (SHORTCUT_KEY_FLAG == 1) backgroundMusic.stop();
 
 		GAMEMENU_COUNT = 1;
 		EndFlag = 99;
 		y = menu_init_pos_y;
 		skip_auto = 0;
-		CHARACTER = 0;
-		BACKGROUND = 0;
-		BACKGROUNDMUSIC = 0;
+		charactor.reset();
+		background.reset();
+		backgroundMusic.reset();
 	}
 }
 
@@ -2114,7 +2019,7 @@ int GAMEMENU() {
 
 		GAMEMENU_COUNT = 0;
 		ClearDrawScreen();
-		StopSoundMem(BACKGROUNDMUSIC);
+		backgroundMusic.stop();
 		GAME_y = game_menu_base_pos_y;
 
 		//ゲームメニューループ
@@ -2210,45 +2115,35 @@ void SCRIPT_OUTPUT_CHARACTER_DRAW() {
 	//サウンドノベル風時の処理
 	if (ConfigData.soundnovel_winownovel == 0) {
 		//背景画像を切り抜き、立ち絵の上にペースト
-		CHARACTER_DUMMY = DerivationGraph(charactor_pos_x, charactor_pos_y, character_graph_size_x, character_graph_size_y, BACKGROUND);
-		DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER_DUMMY, TRUE);
-
+		const int charactorDummy = background.DerivationGraph(charactor_pos_x, charactor_pos_y, character_graph_size_x, character_graph_size_y);
+		DxLib::DrawGraph(charactor_pos_x, charactor_pos_y, charactorDummy, true);
+		DxLib::DeleteGraph(charactorDummy);
 		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER, TRUE);
-
+		charactor.DrawGraph(charactor_pos_x, charactor_pos_y, true);
 	}
-
 	//ウインドウ風時の処理
 	if (ConfigData.soundnovel_winownovel == 1) {
 		//背景画像を切り抜き、立ち絵の上にペースト
-		CHARACTER_DUMMY = DerivationGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, character_graph_size_x, character_graph_size_y, BACKGROUND);
-		DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER_DUMMY, TRUE);
-
+		const int charactorDummy = background.DerivationGraph(charactor_pos_x, 0, character_graph_size_x, character_graph_size_y);
+		DxLib::DrawGraph(charactor_pos_x, charactor_pos_y, charactorDummy, true);
+		DxLib::DeleteGraph(charactorDummy);
 		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER, TRUE);
+		charactor.DrawGraph(charactor_pos_x, 0, true);
 	}
-
 	//文字を進める
 	CP++;
-
 }
 
 //スクリプトタグ処理(背景描画)
 void SCRIPT_OUTPUT_BACKGROUND() {
 
 	// 読みこんだグラフィックを画面左上に描画
-	DrawGraph(0, 0, BACKGROUND, TRUE);
-
+	background.DrawGraph(0, 0, true);
 	//ウインドウ風時の処理
 	if (ConfigData.soundnovel_winownovel == 1) {
-
-		//ウインドウの色選択
-		int	Window_Color = GetColor(0, 0, 0);
-
-		//ウインドウの描画
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+		static const int windowColor = GetColor(0, 0, 0);
+		DrawBox(0, 400, 640, 480, windowColor, TRUE);
 	}
-
 	//文字を進める
 	CP++;
 
@@ -2256,32 +2151,19 @@ void SCRIPT_OUTPUT_BACKGROUND() {
 
 //スクリプトタグ処理(BGM再生)
 void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
-
-	// 音量の設定
-	ChangeVolumeSoundMem(255 * ConfigData.bgm_vol / 100, BACKGROUNDMUSIC);
-
-	//BGM再生
-	PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-
+	backgroundMusic.changeVolume(255 * ConfigData.bgm_vol / 100);
+	backgroundMusic.play(DX_PLAYTYPE_LOOP);
 	//文字を進める
 	CP++;
-
 }
 
 //スクリプトタグ処理(SE再生)
 void SCRIPT_OUTPUT_SOUNDEFFECT() {
-
-	StopSoundMem(SOUNDEFFECT);
-
-	// 音量の設定
-	ChangeVolumeSoundMem(255 * ConfigData.se_vol / 100, SOUNDEFFECT);
-
-	//SEの再生
-	PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-
+	soundEffect.stop();
+	soundEffect.changeVolume(255 * ConfigData.se_vol / 100);
+	soundEffect.play(DX_PLAYTYPE_BACK);
 	//文字を進める
 	CP++;
-
 }
 
 //セーブデータ用スクリーンショット保存
@@ -2376,8 +2258,8 @@ void SCRIPT_OUTPUT_SCREENCLEAR() {
 	ClearDrawScreen();
 	DrawPointY = 0;
 	DrawPointX = 0;
-	CHARACTER = 0;
-	BACKGROUND = 0;
+	charactor.reset();
+	background.reset();
 	CP++;
 
 	SetDrawScreen(DX_SCREEN_FRONT);
@@ -2400,17 +2282,12 @@ void SCRIPT_OUTPUT_WAIT() {
 
 //スクリプトタグ処理(ゲームオーバー)
 void SCRIPT_OUTPUT_GAMEOVER() {
-
-	BACKGROUND = GAMEOVER;
-	DrawGraph(0, 0, BACKGROUND, TRUE);
-
+	background.activeResource(GAMEOVER);
+	background.DrawGraph(0, 0, true);
 	if (ConfigData.soundnovel_winownovel == 1) {
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+		static const int windowColor = GetColor(0, 0, 0);
+		DrawBox(0, 400, 640, 480, windowColor, TRUE);
 	}
-
 	CP++;
 }
 
@@ -2423,42 +2300,32 @@ void SCRIPT_OUTPUT_ENDING() {
 
 //スクリプトタグ処理(BGM再生終了)
 void SCRIPT_OUTPUT_BGMSTOP() {
-
-	StopSoundMem(BACKGROUNDMUSIC);
-	BACKGROUNDMUSIC = 0;
+	backgroundMusic.stop();
+	backgroundMusic.reset();
 	CP++;
 }
 
 //スクリプトタグ処理(SE再生終了)
 void SCRIPT_OUTPUT_SESTOP() {
-
-	StopSoundMem(SOUNDEFFECT);
+	soundEffect.stop();
 	CP++;
 }
 
 //選択肢ループ用描画処理(サウンドノベル風)
 void SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL() {
-
 	if (ConfigData.soundnovel_winownovel == 0 && SAVE_CHOICE == 1) {
-
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-
-		DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER, TRUE);
+		background.DrawGraph(0, 0, true);
+		charactor.DrawGraph(charactor_pos_x, charactor_pos_y, true);
 	}
 }
 
 //選択肢ループ用描画処理(ウインドウ風)
 void SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL() {
-
 	if (ConfigData.soundnovel_winownovel == 1 && SAVE_CHOICE == 1) {
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-		DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER, TRUE);
+		static const int windowColor = GetColor(0, 0, 0);
+		background.DrawGraph(0, 0, true);
+		DxLib::DrawBox(0, 400, 640, 480, windowColor, TRUE);
+		charactor.DrawGraph(charactor_pos_x, 0, true);
 	}
 }
 
@@ -2560,8 +2427,8 @@ void SCRIPT_OUTPUT_CHOICE_BACKLOG() {
 	ClearDrawScreen();
 	DrawPointY = 0;
 	DrawPointX = 0;
-	BACKGROUND = 0;
-	CHARACTER = 0;
+	background.reset();
+	charactor.reset();
 
 	SetDrawScreen(DX_SCREEN_FRONT);
 }
@@ -2630,9 +2497,6 @@ void SCRIPT_OUTPUT_CHOICE_LOOP() {
 //スクリプトタグ処理(選択肢処理)
 void SCRIPT_OUTPUT_CHOICE() {
 
-	int temp_CHARACTER = CHARACTER;
-	int temp_BACKGROUND = BACKGROUND;
-
 	y = choise_init_pos_y;
 
 	if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
@@ -2662,18 +2526,14 @@ void SCRIPT_OUTPUT_END() {
 
 //立ち絵クリア処理
 void SCRIPT_OUTPUT_CHARACTER_REMOVE() {
-
 	//サウンドノベル風時の処理
 	if (ConfigData.soundnovel_winownovel == 0) {
-		CHARACTER_DUMMY = DerivationGraph(charactor_pos_x, charactor_pos_y, character_graph_size_x, character_graph_size_y, BACKGROUND);
-		DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER_DUMMY, TRUE);
+		background.DrawRectGraph(charactor_pos_x, charactor_pos_y, charactor_pos_x, charactor_pos_y, character_graph_size_x, character_graph_size_y, true);
 		CP++;
 	}
-
 	//ウインドウ風時の処理
 	if (ConfigData.soundnovel_winownovel == 1) {
-		CHARACTER_DUMMY = DerivationGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, character_graph_size_x, character_graph_size_y, BACKGROUND);
-		DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER_DUMMY, TRUE);
+		background.DrawRectGraph(charactor_pos_x, 0, charactor_pos_x, 0, character_graph_size_x, character_graph_size_y, true);
 		CP++;
 	}
 }
@@ -2697,8 +2557,8 @@ void SCRIPT_OUTPUT_CHARACTER_NAME() {
 		CHARACTER_NAME[9] = '\0';
 
 		//キャラクター名の背景
-		const int Window_Color = GetColor(0, 0, 0);
-		DrawBox(30, 360, 150, 385, Window_Color, TRUE);
+		static const int windowColor = GetColor(0, 0, 0);
+		DrawBox(30, 360, 150, 385, windowColor, TRUE);
 
 		// １文字描画
 		DrawString(30, 360, CHARACTER_NAME, GetColor(255, 255, 255));
@@ -2785,8 +2645,8 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
 			ClearDrawScreen();
 			DrawPointY = 0;
 			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
+			charactor.reset();
+			background.reset();
 			CP++;
 
 			SetDrawScreen(DX_SCREEN_FRONT);
@@ -2796,11 +2656,8 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
 			DrawPointY = 0;
 			DrawPointX = 0;
 
-			if (BACKGROUND != 0)
-				DrawGraph(0, 0, BACKGROUND, TRUE);
-
-			if (CHARACTER != 0)
-				DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER, TRUE);
+			background.DrawGraph(0, 0, true);
+			charactor.DrawGraph(charactor_pos_x, charactor_pos_y, true);
 		}
 	}
 }
@@ -2824,8 +2681,8 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
 			ClearDrawScreen();
 			DrawPointY = 0;
 			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
+			charactor.reset();
+			background.reset();
 			CP++;
 
 			SetDrawScreen(DX_SCREEN_FRONT);
@@ -2835,59 +2692,13 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
 			DrawPointY = 400;
 			DrawPointX = 0;
 
-			if (BACKGROUND != 0)
-				DrawGraph(0, 0, BACKGROUND, TRUE);
-
+			background.DrawGraph(0, 0, true);
 			if (ConfigData.soundnovel_winownovel == 1) {
-
-				int	Window_Color = GetColor(0, 0, 0);
-
-				DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+				static const int windowColor = GetColor(0, 0, 0);
+				DrawBox(0, 400, 640, 480, windowColor, TRUE);
 			}
-
-			if (CHARACTER != 0)
-				DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER, TRUE);
+			charactor.DrawGraph(charactor_pos_x, 0, true);
 		}
-	}
-}
-static bool isdigit(char c) { return '0' <= c && c <= '9'; }
-static unsigned int ctoui(char c) { return c - '0'; }
-template<std::size_t LoadedArrayNum>
-static bool SelectLoadedResource(int& out, const int (&LoadedArray)[LoadedArrayNum], char c0, char c1) {
-	if (NULL == LoadedArray) return false;
-	if (isdigit(c0) && isdigit(c1)) {
-		const size_t CharactorNumber = (ctoui(c0) * 10) + ctoui(c1) - 1;
-		if (LoadedArrayNum <= CharactorNumber) return false;
-		out = LoadedArray[CharactorNumber];
-		return true;
-	}
-	return false;
-}
-//キャラクター描画処理
-void CHARACTER_DRAW() {
-	if (SelectLoadedResource(CHARACTER, CHARACTER_LOAD, String[SP][CP], String[SP][CP + 1])) {
-		CP += 2;
-	}
-}
-
-//背景描画処理
-void BACKGROUND_DRAW() {
-	if (SelectLoadedResource(BACKGROUND, BACKGROUND_LOAD, String[SP][CP], String[SP][CP + 1])) {
-		CP += 2;
-	}
-}
-
-//BGM再生処理
-void BACKGROUNDMUSIC_START() {
-	if (SelectLoadedResource(BACKGROUNDMUSIC, BACKGROUNDMUSIC_LOAD, String[SP][CP], String[SP][CP + 1])) {
-		CP += 2;
-	}
-}
-
-//SE再生処理
-void SOUNDEFFECT_START() {
-	if (SelectLoadedResource(SOUNDEFFECT, SOUNDEFFECT_LOAD, String[SP][CP], String[SP][CP + 1])) {
-		CP += 2;
 	}
 }
 
@@ -2933,48 +2744,34 @@ int SCRIPT_OUTPUT() {
 
 		//キャラクター描画処理
 	case 'C':
-
 		CP++;
-
-		CHARACTER_DRAW();
-
+		if(charactor.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//背景描画処理
 	case 'B':
-
 		CP++;
-
-		BACKGROUND_DRAW();
-
+		if (background.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
 		break;
 
 		//BGM再生処理
 	case 'M':
-
 		CP++;
-
-		StopSoundMem(BACKGROUNDMUSIC);
-
-		BACKGROUNDMUSIC_START();
-
+		backgroundMusic.stop();
+		if (backgroundMusic.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
 		//BGM再生処理
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 		//SE再生処理
 	case 'S':
-
 		CP++;
-
-		StopSoundMem(SOUNDEFFECT);
-
-		SOUNDEFFECT_START();
-
+		soundEffect.stop();
+		if (soundEffect.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
 		//SE再生処理
 		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;

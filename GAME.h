@@ -3,6 +3,7 @@
 
 #include <Windows.h>
 #include "DEF.h"
+#include "utility.hpp"
 #include <cstdint>
 
 //既読スキップ
@@ -86,9 +87,6 @@ extern int Key[256];
 extern int y;
 extern int SAVE_y;
 extern int GAME_y;
-
-//Yes/Noのメッセージボックス
-int LINKS_MessageBox_YESNO(LPCTSTR lpText);
 
 //各素材データ読込関数
 void MATERIAL_LOAD();

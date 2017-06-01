@@ -19,13 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="fmt\fmt\format.cc" />
     <ClCompile Include="GAME.cpp" />
     <ClCompile Include="LINKSMAIN.cpp" />
+    <ClCompile Include="resource_manager.cpp" />
+    <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEF.h" />
+    <ClInclude Include="fmt\fmt\format.h" />
     <ClInclude Include="GAME.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="resource_manager.hpp" />
+    <ClInclude Include="utility.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LINKS.rc" />
