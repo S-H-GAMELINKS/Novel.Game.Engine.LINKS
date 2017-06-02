@@ -66,18 +66,14 @@ extern unsigned int Cr;
 //エンドフラグ
 extern int EndFlag;
 
+//ゲームメニュー変数
+extern bool GAMEMENU_COUNT;
+
 //既読スキップ変数
 extern SkipData_t TextIgnoredFlag;
 
 //設定用変数
 extern ConfigData_t ConfigData;
-
-//バックログ変数
-extern char *BACKLOG_DELETE;
-
-//セーブ用変数
-extern int SAVE, SAVE_CHOICE;
-extern char *SAVESNAP_CHOICE_DELETE;
 
 //スキップ・オートモード用変数
 extern int skip_auto;
@@ -85,7 +81,6 @@ extern int skip_auto;
 //キー操作
 extern int Key[256];
 extern int y;
-extern int SAVE_y;
 extern int GAME_y;
 
 //各素材データ読込関数
@@ -105,9 +100,6 @@ void SAVE_LOAD_MENU(int Cr, int SAVE_y);
 
 //ゲームメニューカーソル関数
 void GAME_MENU_CURSOR(int Cr, int GAME_y);
-
-//セーブデータロード関数
-int SAVEDATA_LOAD();
 
 //SKIP_READ LOAD関数
 int SKIP_READ_LOAD();
@@ -157,10 +149,14 @@ void CONFIG();
 //終了ウインドウ
 int GAME_FINISH();
 
-//画面クリア処理
-void SCREEN_CLEAR();
-
 //各種F1～F11キー
 void SHORTCUT_KEY();
 
+//各処理後のゲーム画面の描画(サウンドノベル風)
+void SOUNDNOVEL();
+
+//各処理後のゲーム画面の描画(ウインドウ風)
+void WINDOWNOVEL();
+//ショートカットキー処理後の描画
+void SHORTCUT_KEY_DRAW();
 #endif //LINKS_GAME_H_

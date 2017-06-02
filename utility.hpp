@@ -1,9 +1,12 @@
 ﻿#ifndef LINKS_UTILITY_HPP_
 #define LINKS_UTILITY_HPP_
 #include <Windows.h>
-//Yes/Noのメッセージボックス
-int LINKS_MessageBox_YESNO(LPCTSTR lpText);
-int LINKS_MessageBox_OK(LPCTSTR lpText);
-constexpr bool isdigit(char c) { return '0' <= c && c <= '9'; }
-constexpr unsigned int ctoui(char c) { return c - '0'; }
+
+int LINKS_MessageBox_YESNO(LPCTSTR lpText) noexcept;
+int LINKS_MessageBox_OK(LPCTSTR lpText) noexcept;
+//画面クリア処理関数
+void SCREEN_CLEAR() noexcept;
+
+constexpr bool isdigit(char c) noexcept { return '0' <= c && c <= '9'; }
+constexpr unsigned int ctoui(char c) noexcept { return c - '0'; }
 #endif

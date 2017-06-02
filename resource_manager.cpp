@@ -52,10 +52,14 @@ ImageResourceManager::ImageResourceManager() noexcept : ResourceManagerBase() {}
 
 bool ImageResourceManager::load(const TCHAR * format) noexcept
 {
-	for (std::size_t i = 0; i < resource_limit_num; ++i) {
-		this->resources_[i] = DxLib::LoadGraph(fmt::format(format, i).c_str());
+	try {
+		for (std::size_t i = 0; i < resource_limit_num; ++i) {
+			this->resources_[i] = DxLib::LoadGraph(fmt::format(format, i + 1).c_str());
+		}
+		return true;
+	} catch (...) {
+		return false;
 	}
-	return false;
 }
 
 int ImageResourceManager::DrawGraph(int x, int y, bool transFlag) noexcept
@@ -80,10 +84,15 @@ SoundResourceManager::SoundResourceManager() noexcept : ResourceManagerBase() {}
 
 bool SoundResourceManager::load(const TCHAR * format) noexcept
 {
-	for (std::size_t i = 0; i < resource_limit_num; ++i) {
-		this->resources_[i] = DxLib::LoadSoundMem(fmt::format(format, i).c_str());
+	try {
+		for (std::size_t i = 0; i < resource_limit_num; ++i) {
+			this->resources_[i] = DxLib::LoadSoundMem(fmt::format(format, i + 1).c_str());
+		}
+		return true;
 	}
-	return false;
+	catch (...) {
+		return false;
+	}
 }
 
 int SoundResourceManager::changeVolume(int volumePal) noexcept

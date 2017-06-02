@@ -49,4 +49,17 @@ constexpr int save_name_pos_x = 250;
 //ゲームメニュー位置関係
 constexpr int game_menu_base_pos_y = 30;
 
+#if defined(_MSC_VER) && 1400 <= _MSC_VER
+#	define LINKS_HAS_CRT_SECURE_FUNCTIONS 1
+#endif
+#if defined(__STDC_LIB_EXT1__) || defined(LINKS_HAS_CRT_SECURE_FUNCTIONS)
+#	define LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS 1
+#	define LINKS_HAS_FOPEN_S 1
+#endif
+#ifdef _countof
+#	define countof _countof
+#else
+#	define countof( arr ) ( sizeof(arr) / sizeof(*arr) )
+#endif
+
 #endif //LINKS_DEF_H_

@@ -1,6 +1,6 @@
 ﻿#include "utility.hpp"
 #include <DxLib.h>
-int LINKS_MessageBox_YESNO(LPCTSTR lpText)
+int LINKS_MessageBox_YESNO(LPCTSTR lpText) noexcept
 {
 	return MessageBox(
 		DxLib::GetMainWindowHandle(),
@@ -9,7 +9,7 @@ int LINKS_MessageBox_YESNO(LPCTSTR lpText)
 		MB_YESNO
 	);
 }
-int LINKS_MessageBox_OK(LPCTSTR lpText)
+int LINKS_MessageBox_OK(LPCTSTR lpText) noexcept
 {
 	return MessageBox(
 		DxLib::GetMainWindowHandle(),
@@ -17,4 +17,11 @@ int LINKS_MessageBox_OK(LPCTSTR lpText)
 		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
 		MB_OK
 	);
+}
+
+//画面クリア処理関数
+void SCREEN_CLEAR() noexcept {
+	SetDrawScreen(DX_SCREEN_BACK);
+	ClearDrawScreen();
+	SetDrawScreen(DX_SCREEN_FRONT);
 }

@@ -3,7 +3,9 @@
 #include "stdio.h"
 #include "GAME.h"
 #include "DEF.h"
+#include "back_log.hpp"
 #include "resource.h"
+#include "save.hpp"
 
 //DXライブラリ初期化前処理
 void DXLib_PREP() {
