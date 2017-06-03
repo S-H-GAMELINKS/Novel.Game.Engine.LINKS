@@ -136,6 +136,7 @@ void MATERIAL_LOAD() {
 	TITLE = LoadGraph("DATA/BACKGROUND/TITLE.png");
 }
 
+
 //スクリプト配列流しこみ関数
 int SCRIPT_TO_ARRAY(int ScriptFile) {
 
@@ -610,21 +611,14 @@ int CONTINUE_LOAD() {
 
 //ゲームメニュー項目描画関数
 void GAMEMENU_DRAW() {
-
+	static constexpr const char* menuStrings[] = {
+		"セーブ", "ロード", "セーブデータ削除", "既読スキップ", "スキップ", "オート",
+		"オート/スキップ停止", "バックログ参照", "設定", "タイトルに戻る", "ゲームに戻る", "ゲーム終了"
+	};
 	//各メニュー描画
-	DrawString(save_name_pos_x, game_menu_base_pos_y, "セーブ", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 2, "ロード", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 3, "セーブデータ削除", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 4, "既読スキップ", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 5, "スキップ", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 6, "オート", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 7, "オート/スキップ停止", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 8, "バックログ参照", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 9, "設定", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 10, "タイトルに戻る", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 11, "ゲームに戻る", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 12, "ゲーム終了", Cr);
-
+	for (std::size_t i = 0; i < countof(menuStrings); ++i) {
+		DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), menuStrings[i], Cr);
+	}
 }
 
 //ゲームメニュー(キー操作)
@@ -943,56 +937,21 @@ int GAME_FINISH() {
 
 //各種設定情報描画 
 void CONFIG_MENU() {
-
-	//セーブデータ名描画 
-	DrawString(save_name_pos_x, game_menu_base_pos_y, "ＢＧＭ音量", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 2, "ＳＥ音量", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 3, "オート速度", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 4, "スキップ速度", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 5, "文字描画速度", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 6, "描画方法", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 7, "非アクティブ時", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 8, "マウス/キー操作", Cr);
-
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 9, "戻る", Cr);
-
-	//BGM音量目盛り描画 
+	static constexpr const char* saveDataName[] = {
+		"ＢＧＭ音量", "ＳＥ音量", "オート速度", "スキップ速度", "文字描画速度", "描画方法", "非アクティブ時", "マウス/キー操作",
+		"戻る"
+	};
+	for (std::size_t i = 0; i < countof(saveDataName); ++i) {
+		DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), saveDataName[i], Cr);
+	}
 	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y, Cr, "%d", ConfigData.bgm_vol);
-
-	//SE音量目盛り描画 
 	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 2, Cr, "%d", ConfigData.se_vol);
-
-	//オート速度目盛り描画 
 	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 3, Cr, "%d", ConfigData.auto_speed);
-
-	//スキップ速度目盛り描画 
 	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 4, Cr, "%d", ConfigData.skip_speed);
-
-	//文字描画速度目盛り描画 
 	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 5, Cr, "%d", ConfigData.string_speed);
-
-	//サウンドノベル風 
-	if (ConfigData.soundnovel_winownovel == 0)
-		DrawString(save_name_pos_x + cursor_move_unit * 6, game_menu_base_pos_y * 6, "サウンドノベル風", Cr);
-
-	//ウインドウ風 
-	if (ConfigData.soundnovel_winownovel == 1)
-		DrawString(save_name_pos_x + cursor_move_unit * 6, game_menu_base_pos_y * 6, "ウインドウ風", Cr);
-
-	//非アクティブ時の処理 
-	if (WindowActive == TRUE)
-		DrawString(save_name_pos_x + cursor_move_unit * 7, game_menu_base_pos_y * 7, "処理", Cr);
-
-	if (WindowActive == FALSE)
-		DrawString(save_name_pos_x + cursor_move_unit * 7, game_menu_base_pos_y * 7, "未処理", Cr);
-
-	//マウス操作 
-	if (ConfigData.mouse_key_move == 1)
-		DrawString(save_name_pos_x + cursor_move_unit * 8, game_menu_base_pos_y * 8, "マウス操作", Cr);
-
-	//キー操作 
-	if (ConfigData.mouse_key_move == 0)
-		DrawString(save_name_pos_x + cursor_move_unit * 8, game_menu_base_pos_y * 8, "キー操作", Cr);
+	DrawString(save_name_pos_x + cursor_move_unit * 6, game_menu_base_pos_y * 6, ((1 == ConfigData.soundnovel_winownovel) ? "ウインドウ風" : "サウンドノベル風"), Cr);
+	DrawString(save_name_pos_x + cursor_move_unit * 7, game_menu_base_pos_y * 7, ((WindowActive) ? "処理" : "未処理"), Cr);
+	DrawString(save_name_pos_x + cursor_move_unit * 8, game_menu_base_pos_y * 8, ((1 == ConfigData.mouse_key_move) ? "マウス操作" : "キー操作"), Cr);
 }
 
 //コンフィグ(タイトル/ゲームメニューへ戻る) 
@@ -1590,24 +1549,16 @@ void SCRIPT_OUTPUT_CHARACTER_REMOVE() {
 	//サウンドノベル風時の処理
 	if (ConfigData.soundnovel_winownovel == 0) {
 		background.DrawRectGraph(charactor_pos_x, charactor_pos_y, charactor_pos_x, charactor_pos_y, character_graph_size_x, character_graph_size_y, true);
-		CP++;
 	}
 	//ウインドウ風時の処理
-	if (ConfigData.soundnovel_winownovel == 1) {
+	else if (ConfigData.soundnovel_winownovel == 1) {
 		background.DrawRectGraph(charactor_pos_x, 0, charactor_pos_x, 0, character_graph_size_x, character_graph_size_y, true);
-		CP++;
 	}
+	CP++;
 }
 
 //キャラクター名描画処理
 void SCRIPT_OUTPUT_CHARACTER_NAME() {
-
-	//サウンドノベル風時の処理
-	if (ConfigData.soundnovel_winownovel == 0) {
-		SP++;
-		CP++;
-	}
-
 	//ウインドウ風時の処理
 	if (ConfigData.soundnovel_winownovel == 1) {
 		char CHARACTER_NAME[10] = {};
@@ -1628,6 +1579,8 @@ void SCRIPT_OUTPUT_CHARACTER_NAME() {
 		SP++;
 		CP++;
 	}
+	SP++;
+	CP++;
 }
 
 //文字列の描画
@@ -1637,10 +1590,6 @@ void SCRIPT_OUTPUT_STRING_DRAW() {
 	OneMojiBuf[0] = String[SP][CP];
 	OneMojiBuf[1] = String[SP][CP + 1];
 	OneMojiBuf[2] = '\0';
-
-	if (ConfigData.soundnovel_winownovel == 1 && DrawPointY <= 399)
-		DrawPointY = 400;
-
 	static const auto charColor = GetColor(255, 255, 255);
 	if (ConfigData.soundnovel_winownovel == 0) {
 		// １文字描画
@@ -1648,6 +1597,7 @@ void SCRIPT_OUTPUT_STRING_DRAW() {
 	}
 
 	if (ConfigData.soundnovel_winownovel == 1) {
+		if(DrawPointY <= 399) DrawPointY = 400;
 		// １文字描画
 		DrawString(DrawPointX * font_size, DrawPointY, OneMojiBuf, charColor);
 	}
@@ -1661,10 +1611,8 @@ void SCRIPT_OUTPUT_STRING_DRAW() {
 
 //文字列の改行
 void SCRIPT_OUTPUT_STRING_KAIGYO() {
-
 	// 画面からはみ出たら改行する
-	if (DrawPointX * font_size + font_size > 640)
-		Kaigyou();
+	if (DrawPointX * font_size + font_size > 640) Kaigyou();
 }
 
 //サウンドノベル風時の改ページ処理
