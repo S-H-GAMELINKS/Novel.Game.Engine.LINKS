@@ -1,6 +1,6 @@
 ﻿#include "utility.hpp"
 #include <DxLib.h>
-int LINKS_MessageBox_YESNO(LPCTSTR lpText) noexcept
+int MessageBoxYesNo(LPCTSTR lpText) noexcept
 {
 	return MessageBox(
 		DxLib::GetMainWindowHandle(),

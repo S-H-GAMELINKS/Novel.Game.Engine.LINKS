@@ -476,18 +476,9 @@ int CONFIG_LOAD()
 	return 0;
 }
 
-//クイックセーブ時のメッセージ
-void QUICKSAVE_SAVE_MESSAGE() {
-	SAVE = LINKS_MessageBox_YESNO("クイックセーブを実行しますか？");
-}
-
 //クイックセーブ
 int QUICKSAVE_SAVE(){
-
-	//クイックセーブ時のメッセージ
-	QUICKSAVE_SAVE_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("クイックセーブを実行しますか？")) {
 
 		//クイックセーブデータの作成
 		QuickSaveData_t Data = { EndFlag, SP, 0, charactor.activeResource(), background.activeResource(), backgroundMusic.activeResource(), SAVE_CHOICE };
@@ -511,18 +502,9 @@ int QUICKSAVE_SAVE(){
 
 }
 
-//クイックロード時のメッセージ
-void QUICKSAVE_LOAD_MESSAGE() {
-	SAVE = LINKS_MessageBox_YESNO("クイックロードを実行しますか？");
-}
-
 //クイックロード
 int QUICKSAVE_LOAD() {
-
-	//クイックロード時のメッセージ
-	QUICKSAVE_LOAD_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("クイックロードを実行しますか？")) {
 
 		//クイックセーブデータの読み込み
 		QuickSaveData_t Data;
@@ -585,18 +567,9 @@ int CONTINUE_SAVE() {
 	return 0;
 }
 
-//コンティニュー用ロード時のメッセージ
-void CONTINUE_LOAD_MESSAGE() {
-	SAVE = LINKS_MessageBox_YESNO("前回遊んだところから再開しますか？");
-}
-
 //コンティニュー用ロード
 int CONTINUE_LOAD() {
-
-	//コンティニュー用ロード時のメッセージ
-	CONTINUE_LOAD_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("前回遊んだところから再開しますか？")) {
 
 		//コンティニューセーブデータの読み込み
 		ContinueSaveData_t Data;
@@ -909,10 +882,7 @@ void MOUSE_KEY_MOVE() {
 
 //タイトルに戻る
 void GAMEMENU_TITLE_BACK() {
-
-	SAVE = LINKS_MessageBox_YESNO("タイトル画面に戻りますか？");
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
 
 		ClearDrawScreen();
 
@@ -930,10 +900,7 @@ void GAMEMENU_TITLE_BACK() {
 
 //ゲームに戻る
 void GAMEMENU_GAME_BACK() {
-
-	SAVE = LINKS_MessageBox_YESNO("ゲームに戻りますか？");
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("ゲームに戻りますか？")) {
 
 		GAMEMENU_COUNT = true;
 
@@ -947,10 +914,7 @@ void GAMEMENU_GAME_BACK() {
 
 //ゲーム終了
 void GAMEMENU_GAME_FINISH() {
-
-	SAVE = LINKS_MessageBox_YESNO("終了しますか？");
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("終了しますか？")) {
 
 		//コンティニュー用セーブ
 		CONTINUE_SAVE();
@@ -965,10 +929,7 @@ void GAMEMENU_GAME_FINISH() {
 int GAME_FINISH() {
 
 	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {
-
-		SAVE = LINKS_MessageBox_YESNO("終了しますか？");
-
-		if (SAVE == IDYES) {
+		if (IDYES == MessageBoxYesNo("終了しますか？")) {
 
 			//コンティニュー用セーブ
 			CONTINUE_SAVE();
@@ -1042,11 +1003,7 @@ void CONFIG_TITLE_BACK() {
 
 	//タイトルに戻る/ゲームメニューに戻る 
 	if (GAME_y == game_menu_base_pos_y * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == game_menu_base_pos_y * 9 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		//戻る 
-		SAVE = LINKS_MessageBox_YESNO("戻りますか？");
-
-		if (SAVE == IDYES) {
+		if (IDYES == MessageBoxYesNo("戻りますか？")) {
 
 			ClearDrawScreen();
 			GAME_y = game_menu_base_pos_y;
@@ -1055,19 +1012,9 @@ void CONFIG_TITLE_BACK() {
 	}
 }
 
-//コンフィグ(メッセージ) 
-void CONFIG_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("設定を変更しますか？");
-}
-
 //コンフィグ 
 void CONFIG() {
-
-	//コンフィグ(メッセージ) 
-	CONFIG_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("設定を変更しますか？")) {
 
 		Config = 1;
 

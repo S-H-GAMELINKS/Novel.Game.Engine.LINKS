@@ -79,12 +79,9 @@ void TITLE_MENU_KEY_MOVE() {
 
 //タイトルメニュー終了処理
 void TITLE_MENU_END() {
-
-	SAVE = LINKS_MessageBox_YESNO("終了しますか？");
-
-	if (SAVE == IDYES)
+	if (IDYES == MessageBoxYesNo("終了しますか？")) {
 		EndFlag = 99999;
-
+	}
 	WaitTimer(300);
 }
 

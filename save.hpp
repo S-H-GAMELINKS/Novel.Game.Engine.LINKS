@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-extern int SAVE, SAVE_CHOICE;
+extern int SAVE_CHOICE;
 extern char *SAVESNAP_CHOICE_DELETE;
 
 void SAVEDATA_DELETE();

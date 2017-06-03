@@ -2,8 +2,8 @@
 #define LINKS_UTILITY_HPP_
 #include <Windows.h>
 
-int LINKS_MessageBox_YESNO(LPCTSTR lpText) noexcept;
-int LINKS_MessageBox_OK(LPCTSTR lpText) noexcept;
+int MessageBoxYesNo(LPCTSTR lpText) noexcept;
+int MessageBoxOk(LPCTSTR lpText) noexcept;
 //画面クリア処理関数
 void SCREEN_CLEAR() noexcept;
 

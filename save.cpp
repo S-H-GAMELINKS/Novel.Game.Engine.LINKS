@@ -5,7 +5,7 @@
 #include "GAME.h"
 #include <DxLib.h>
 
-int SAVE, SAVE_CHOICE = 0;
+int SAVE_CHOICE = 0;
 static int SAVESNAP1, SAVESNAP2, SAVESNAP3, SAVETITLE;
 static int SAVESNAP_HANDLE1 = 0, SAVESNAP_HANDLE2 = 0, SAVESNAP_HANDLE3 = 0, SAVESNAP_CHOICE = 0;
 char *SAVESNAP_CHOICE_DELETE;
@@ -49,7 +49,7 @@ namespace {
 	//セーブ後のメッセージ
 	void SAVE_MESSAGE() {
 
-		LINKS_MessageBox_OK("セーブしました！");
+		MessageBoxOk("セーブしました！");
 	}
 
 	//セーブ後の処理(サウンドノベル風)
@@ -75,8 +75,7 @@ namespace {
 	}
 
 	static int CreateSaveData(int* SaveSnapHandle, const char* Message, const char* ImagePath, const char* SaveDataPath) {
-		SAVE = LINKS_MessageBox_YESNO(Message);
-		if (SAVE == IDYES) {
+		if (IDYES == MessageBoxYesNo(Message)) {
 			//セーブデータ１用のスクリーンショット取得変数
 			*SaveSnapHandle = 1;
 
@@ -215,10 +214,7 @@ namespace {
 
 			//画面に戻る
 			if (SAVE_y == (save_base_pos_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				SAVE = LINKS_MessageBox_YESNO("戻りますか？");
-
-				if (SAVE == IDYES) {
+				if (IDYES == MessageBoxYesNo("戻りますか？")) {
 
 					ClearDrawScreen();
 
@@ -229,20 +225,10 @@ namespace {
 			}
 		}
 	}
-
-	//セーブ前のメッセージ
-	void SAVEDATA_SAVE_MESSAGE() {
-
-		SAVE = LINKS_MessageBox_YESNO("セーブ画面に移行しますか？");
-	}
 }
 //セーブデータセーブ関数
 void SAVEDATA_SAVE() {
-
-	//セーブ前のメッセージ
-	SAVEDATA_SAVE_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("セーブ画面に移行しますか？")) {
 		ClearDrawScreen();
 		SAVE_y = save_base_pos_y;
 
@@ -255,16 +241,10 @@ void SAVEDATA_SAVE() {
 }
 
 namespace {
-	//ロード前のメッセージ
-	void SAVEDATA_LOAD_MESSAGE() {
-
-		SAVE = LINKS_MessageBox_YESNO("ロード画面に移行しますか？");
-	}
-
 	//ロード後のメッセージ
 	void LOAD_MESSAGE() {
 
-		LINKS_MessageBox_OK("ロードしました！");
+		MessageBoxOk("ロードしました！");
 	}
 
 	//ロード後の処理(サウンドノベル風)
@@ -286,20 +266,19 @@ namespace {
 	}
 
 	static int LoadSaveData(const char* Message, const char* ErrorMessage, const char* SaveDataPath) {
-		SAVE = LINKS_MessageBox_YESNO(Message);
-		if (SAVE == IDYES) {
+		if (IDYES == MessageBoxYesNo(Message)) {
 			SaveData_t Data;
 			FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
 			const errno_t er = fopen_s(&fp, SaveDataPath, "rb");
 			if (0 != er) {
-				LINKS_MessageBox_OK(ErrorMessage);
+				MessageBoxOk(ErrorMessage);
 				return 0;
 			}
 #else
 			fp = fopen(SaveDataPath, "rb");
 			if (fp == nullptr) {
-				LINKS_MessageBox_OK(ErrorMessage);
+				MessageBoxOk(ErrorMessage);
 				return 0;
 			}
 #endif
@@ -383,10 +362,7 @@ namespace {
 
 			//戻る
 			if (SAVE_y == (save_base_pos_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				SAVE = LINKS_MessageBox_YESNO("戻りますか？");
-
-				if (SAVE == IDYES) {
+				if (IDYES == MessageBoxYesNo("戻りますか？")) {
 
 					ClearDrawScreen();
 
@@ -401,11 +377,7 @@ namespace {
 
 //セーブデータロード関数
 int SAVEDATA_LOAD() {
-
-	//ロード前のメッセージ
-	SAVEDATA_LOAD_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("ロード画面に移行しますか？")) {
 
 		ClearDrawScreen();
 		SAVE_y = save_base_pos_y;
@@ -420,16 +392,10 @@ int SAVEDATA_LOAD() {
 }
 
 namespace {
-	//削除前のメッセージ
-	void SAVEDATA_DELETE_MESSAGE() {
-
-		SAVE = LINKS_MessageBox_YESNO("セーブデータ削除画面に移行しますか？");
-	}
-
 	//削除後のメッセージ
 	static void DELETE_MESSAGE() {
 
-		LINKS_MessageBox_OK("削除しました！");
+		MessageBoxOk("削除しました！");
 	}
 
 	//削除後の処理(サウンドノベル風)
@@ -451,9 +417,7 @@ namespace {
 	}
 
 	static void DeleteSaveData(const char* Message, const char* ImagePath, const char* SaveDataPath) {
-		SAVE = LINKS_MessageBox_YESNO(Message);
-
-		if (SAVE == IDYES) {
+		if (IDYES == MessageBoxYesNo(Message)) {
 			remove(SaveDataPath);
 			remove(ImagePath);
 			//削除後のメッセージ
@@ -522,10 +486,7 @@ namespace {
 			}
 
 			if (SAVE_y == (save_base_pos_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				SAVE = LINKS_MessageBox_YESNO("戻りますか？");
-
-				if (SAVE == IDYES) {
+				if (IDYES == MessageBoxYesNo("戻りますか？")) {
 
 					ClearDrawScreen();
 
@@ -540,11 +501,7 @@ namespace {
 
 //セーブデータ削除処理
 void SAVEDATA_DELETE() {
-
-	//削除前のメッセージ
-	SAVEDATA_DELETE_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("セーブデータ削除画面に移行しますか？")) {
 
 		ClearDrawScreen();
 		SAVE_y = save_base_pos_y;

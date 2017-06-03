@@ -19,18 +19,18 @@ void disableSkip() noexcept {
 
 namespace {
 	//既読スキップメッセージ
-	void SKIP_READ_MESSAGE() noexcept {
-		SAVE = LINKS_MessageBox_YESNO("既読スキップを実行しますか？");
+	int SKIP_READ_MESSAGE() noexcept {
+		return MessageBoxYesNo("既読スキップを実行しますか？");
 	}
 
 	//オート処理メッセージ
-	void AUTO_MESSAGE() noexcept {
-		SAVE = LINKS_MessageBox_YESNO("オートモードを実行しますか？");
+	int AUTO_MESSAGE() noexcept {
+		return MessageBoxYesNo("オートモードを実行しますか？");
 	}
 
 	//オート/スキップ停止処理メッセージ
-	void AUTO_SKIP_MESSAGE() noexcept {
-		SAVE = LINKS_MessageBox_YESNO("スキップ又はオートモードを終了しますか？");
+	int AUTO_SKIP_MESSAGE() noexcept {
+		return MessageBoxYesNo("スキップ又はオートモードを終了しますか？");
 	}
 
 	//既読スキップ後の処理(サウンドノベル風)
@@ -50,11 +50,9 @@ namespace {
 }
 //既読スキップ判定
 void SKIP_READ_CHECK() noexcept {
-	//既読スキップメッセージ
-	SKIP_READ_MESSAGE();
 	const SkipDataConv* conv = reinterpret_cast<const SkipDataConv*>(&TextIgnoredFlag);
 	//既読データ読み込み時の判定
-	if (IDYES == SAVE && 0 < EndFlag && EndFlag <= countof(conv->arr) && 1 == conv->arr[EndFlag - 1]) {
+	if (IDYES == SKIP_READ_MESSAGE() && 0 < EndFlag && EndFlag <= countof(conv->arr) && 1 == conv->arr[EndFlag - 1]) {
 		skip_auto = Skiptype::skip;
 	}
 	//ショートカットキー時の事後処理
@@ -63,8 +61,7 @@ void SKIP_READ_CHECK() noexcept {
 
 //スキップ処理
 void SKIP_START() noexcept {
-	SAVE = LINKS_MessageBox_YESNO("スキップを実行しますか？");
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("スキップを実行しますか？")) {
 		skip_auto = Skiptype::skip;
 		GAMEMENU_COUNT = true;
 		//サウンドノベル風描画時の処理
@@ -76,9 +73,7 @@ void SKIP_START() noexcept {
 
 //オート処理
 void AUTO_START() noexcept {
-	//オート処理メッセージ
-	AUTO_MESSAGE();
-	if (SAVE == IDYES) {
+	if (IDYES == AUTO_MESSAGE()) {
 		skip_auto = Skiptype::automatic;
 		GAMEMENU_COUNT = true;
 		//サウンドノベル風描画時の処理
@@ -90,9 +85,7 @@ void AUTO_START() noexcept {
 
 //オート/スキップ停止処理
 void AUTO_SKIP_STOP() noexcept {
-	//オート/スキップ停止処理メッセージ
-	AUTO_SKIP_MESSAGE();
-	if (SAVE == IDYES) {
+	if (IDYES == AUTO_SKIP_MESSAGE()) {
 		skip_auto = Skiptype::off;
 		GAMEMENU_COUNT = true;
 		//サウンドノベル風描画時の処理

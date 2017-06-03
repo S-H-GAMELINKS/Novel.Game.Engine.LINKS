@@ -14,7 +14,7 @@ namespace {
 
 	//バックログ参照メッセージ
 	int backLogMessage() noexcept {
-		return LINKS_MessageBox_YESNO("バックログ画面に移行しますか？");
+		return MessageBoxYesNo("バックログ画面に移行しますか？");
 	}
 
 	//バックログ(キー操作関連)
