@@ -1694,15 +1694,24 @@ namespace {
 	}
 
 	//動画再生処理
-	void MOVIE_START() {
+	void MOVIE_START() noexcept {
 		if (isdigit(String[SP][CP]) && isdigit(String[SP][CP + 1])) {
 			const size_t CharactorNumber = (ctoui(String[SP][CP]) * 10) + ctoui(String[SP][CP + 1]) - 1;
 			if (99 <= CharactorNumber) return;
-			DxLib::PlayMovie(
-				fmt::format("DATA/MOVIE/MOVIE{0:c}{1:c}.wmv", String[SP][CP], String[SP][CP + 1]).c_str(),
-				1,
-				DX_MOVIEPLAYTYPE_BCANCEL
-			);
+			try {
+				DxLib::PlayMovie(
+					fmt::format("DATA/MOVIE/MOVIE{0:c}{1:c}.wmv", String[SP][CP], String[SP][CP + 1]).c_str(),
+					1,
+					DX_MOVIEPLAYTYPE_BCANCEL
+				);
+			}
+#if defined(_MSC_VER) && defined(_DEBUG)
+			catch (const std::exception& er) {
+				//例外が投げられた場合特にできることがないので握りつぶす
+				OutputDebugStringA(er.what());
+			}
+#endif
+			catch (...) {}
 			CP += 2;
 		}
 	}

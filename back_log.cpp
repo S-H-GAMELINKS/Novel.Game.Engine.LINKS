@@ -41,9 +41,8 @@ namespace {
 				//例外が投げられた場合特にできることがないので握りつぶす
 				OutputDebugStringA(er.what());
 			}
-#else
-			catch (...) {}
 #endif
+			catch (...) {}
 		}
 	}
 }
