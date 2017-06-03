@@ -15,7 +15,7 @@ namespace {
 	}
 
 	//バックログ(キー操作関連)
-	void BACKLOG_KEY_MOVE() {
+	void BACKLOG_KEY_MOVE() noexcept {
 
 		//バックログ（キー操作関連）
 		if (LOG != 10 && CheckHitKey(KEY_INPUT_UP) == 1 || LOG != 10 && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
@@ -30,15 +30,25 @@ namespace {
 	}
 
 	//バックログの描画関数
-	void BACKLOG_SCREENSHOT_DRAW() {
+	void BACKLOG_SCREENSHOT_DRAW() noexcept {
 		if (0 < LOG && LOG <= 10) {
 			DrawGraph(0, 0, BACKLOG[LOG - 1], TRUE);
-			DrawString(0, 450, fmt::format("バックログ{0}", LOG).c_str(), Cr);
+			try {
+				DrawString(0, 450, fmt::format("バックログ{0}", LOG).c_str(), Cr);
+			}
+#if defined(_MSC_VER) && defined(_DEBUG)
+			catch (const std::exception& er) {
+				//例外が投げられた場合特にできることがないので握りつぶす
+				OutputDebugStringA(er.what());
+			}
+#else
+			catch (...) {}
+#endif
 		}
 	}
 }
 //バックログ参照
-void BACKLOG_DRAW() {
+void BACKLOG_DRAW() noexcept {
 	//バックログ参照メッセージ
 	if (backLogMessage() == IDYES) {
 
@@ -75,7 +85,7 @@ void BACKLOG_DRAW() {
 }
 
 //バックログ取得関数
-void BACKLOG_GET() {
+void BACKLOG_GET() noexcept {
 	if (0 < BACKLOG_COUNT) {
 		const int BacklogCount = (10 < BACKLOG_COUNT) ? 10 : BACKLOG_COUNT;
 		if (1 < BacklogCount) {
