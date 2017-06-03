@@ -9,7 +9,7 @@ int MessageBoxYesNo(LPCTSTR lpText) noexcept
 		MB_YESNO
 	);
 }
-int LINKS_MessageBox_OK(LPCTSTR lpText) noexcept
+int MessageBoxOk(LPCTSTR lpText) noexcept
 {
 	return MessageBox(
 		DxLib::GetMainWindowHandle(),

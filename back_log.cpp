@@ -5,9 +5,6 @@
 #include "fmt/fmt/format.h"
 #include "GAME.h"
 
-//バックログ変数
-char *BACKLOG_DELETE;
-
 namespace {
 	int BACKLOG_HANDLE, BACKLOG[11], BACKLOG_BACKGROUND;
 	int LOG = 1, BACKLOG_COUNT = 1;

@@ -537,7 +537,7 @@ int QUICKSAVE_LOAD() {
 		//ウインドウ風描画時の処理
 		WINDOWNOVEL();
 
-		LINKS_MessageBox_OK("ロードしました！");
+		MessageBoxOk("ロードしました！");
 
 		fclose(fp);
 	}
@@ -602,7 +602,7 @@ int CONTINUE_LOAD() {
 		//ウインドウ風描画時の処理
 		WINDOWNOVEL();
 
-		LINKS_MessageBox_OK("ロードしました！");
+		MessageBoxOk("ロードしました！");
 
 		fclose(fp);
 	}
@@ -1966,7 +1966,7 @@ int SCREENSHOT() {
 	if (1 != CheckHitKey(KEY_INPUT_F12)) return 0;
 
 	if (SCREENSHOT_COUNT < 1 || 9 < SCREENSHOT_COUNT) {
-		LINKS_MessageBox_OK("これ以上スクリーンショットを取得できません");
+		MessageBoxOk("これ以上スクリーンショットを取得できません");
 	}
 	else {
 		static const char* const ScreenShotFileNames[] = {
@@ -1995,7 +1995,7 @@ int SCREENSHOT() {
 		};
 		static_assert(countof(ScreenShotFileNames) == countof(ScreenShotMessages), "invalid array size.");
 		SaveDrawScreenToPNG(0, 0, 640, 480, ScreenShotFileNames[SCREENSHOT_COUNT], 0);
-		LINKS_MessageBox_OK(ScreenShotMessages[SCREENSHOT_COUNT]);
+		MessageBoxOk(ScreenShotMessages[SCREENSHOT_COUNT]);
 		++SCREENSHOT_COUNT;
 	}
 	WaitTimer(300);

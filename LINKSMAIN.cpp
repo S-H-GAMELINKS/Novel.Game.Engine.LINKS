@@ -249,12 +249,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	CONFIG_SAVE();
 
 	//バックログ画像の削除
-	BACKLOG_DELETE = "DATA/BACKLOG/BACKLOG1.png";
-	remove(BACKLOG_DELETE);
+	remove("DATA/BACKLOG/BACKLOG1.png");
 
 	//選択肢セーブスナップ削除
-	SAVESNAP_CHOICE_DELETE = "DATA/SAVE/SAVESNAP_CHOICE.png";
-	remove(SAVESNAP_CHOICE_DELETE);
+	remove("DATA/SAVE/SAVESNAP_CHOICE.png");
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 
