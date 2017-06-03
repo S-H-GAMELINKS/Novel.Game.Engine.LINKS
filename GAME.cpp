@@ -8,6 +8,7 @@
 #include "back_log.hpp"
 #include "save.hpp"
 #include "auto_skip.hpp"
+#include "fmt/fmt/format.h"
 
 // 文字列描画の位置
 int DrawPointX = 0, DrawPointY = 0;
@@ -1697,13 +1698,11 @@ namespace {
 		if (isdigit(String[SP][CP]) && isdigit(String[SP][CP + 1])) {
 			const size_t CharactorNumber = (ctoui(String[SP][CP]) * 10) + ctoui(String[SP][CP + 1]) - 1;
 			if (99 <= CharactorNumber) return;
-			char MovieFilePath[25] = {};
-#ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
-			if (-1 == sprintf_s(MovieFilePath, countof(MovieFilePath), "DATA/MOVIE/MOVIE%c%c.wmv", String[SP][CP], String[SP][CP + 1])) return;
-#else
-			if (0 > snprintf(MovieFilePath, countof(MovieFilePath), "DATA/MOVIE/MOVIE%c%c.wmv", String[SP][CP], String[SP][CP + 1]) return;
-#endif
-			PlayMovie(MovieFilePath, 1, DX_MOVIEPLAYTYPE_BCANCEL);
+			DxLib::PlayMovie(
+				fmt::format("DATA/MOVIE/MOVIE{0:c}{1:c}.wmv", String[SP][CP], String[SP][CP + 1]).c_str(),
+				1,
+				DX_MOVIEPLAYTYPE_BCANCEL
+			);
 			CP += 2;
 		}
 	}
