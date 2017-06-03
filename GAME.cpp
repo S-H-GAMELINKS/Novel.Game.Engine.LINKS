@@ -29,7 +29,7 @@ static int GAMEOVER;
 //選択肢読込変数
 static char ChoiceStrings[2][script_line_string_len_lim];
 static int Choices[2];
-static const char* const ChoiceFiles[][2] = {
+static constexpr const char* const ChoiceFiles[][2] = {
 	{ "DATA/STR/CHOICE/A.txt", "DATA/STR/CHOICE/B.txt" },
 	{ "DATA/STR/CHOICE/C.txt", "DATA/STR/CHOICE/D.txt" },
 	{ "DATA/STR/CHOICE/E.txt", "DATA/STR/CHOICE/F.txt" },
@@ -1917,7 +1917,7 @@ int SCREENSHOT() {
 		MessageBoxOk("これ以上スクリーンショットを取得できません");
 	}
 	else {
-		static const char* const ScreenShotFileNames[] = {
+		static constexpr const char* const ScreenShotFileNames[] = {
 			"DATA/SCREENSHOT/SCREENSHOT01.png",
 			"DATA/SCREENSHOT/SCREENSHOT02.png",
 			"DATA/SCREENSHOT/SCREENSHOT03.png",
@@ -1929,7 +1929,7 @@ int SCREENSHOT() {
 			"DATA/SCREENSHOT/SCREENSHOT09.png",
 			"DATA/SCREENSHOT/SCREENSHOT10.png",
 		};
-		static const char* const ScreenShotMessages[] = {
+		static constexpr const char* const ScreenShotMessages[] = {
 			"スクリーンショット０１を取得しました！",
 			"スクリーンショット０２を取得しました！",
 			"スクリーンショット０３を取得しました！",
