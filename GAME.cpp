@@ -54,9 +54,6 @@ static char WindowActive = TRUE;
 // １文字分一時記憶配列
 static char OneMojiBuf[3];
 
-//キャラクター名配列
-static char CHARACTER_NAME[10];
-
 //キー操作
 int Key[256];
 int y = menu_init_pos_y;
@@ -1613,7 +1610,7 @@ void SCRIPT_OUTPUT_CHARACTER_NAME() {
 
 	//ウインドウ風時の処理
 	if (ConfigData.soundnovel_winownovel == 1) {
-
+		char CHARACTER_NAME[10] = {};
 		//キャラクター名を読み込む
 		static_assert(10 <= countof(CHARACTER_NAME) && 9 <= countof(String[0]), "array length must be over 10");
 		assert(countof(String[SP]) < CP + 10);
