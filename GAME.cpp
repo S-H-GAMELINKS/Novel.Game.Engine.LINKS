@@ -248,7 +248,7 @@ void WINDOWNOVEL() noexcept {
 }
 
 //矢印キー操作関数
-int MoveKey(int KeyStateBuf[]) {
+int MoveKey(int (&KeyStateBuf)[256]) {
 
 	//キー操作が有効な場合
 	if (ConfigData.mouse_key_move == 0) {

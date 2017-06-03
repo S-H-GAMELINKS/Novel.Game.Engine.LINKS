@@ -87,7 +87,7 @@ void MATERIAL_LOAD();
 int SCRIPT_READ();
 
 //矢印キー操作関数
-int MoveKey(int KeyStateBuf[]);
+int MoveKey(int (&KeyStateBuf)[256]);
 
 //タイトルメニューカーソル関数
 void title(int Cr, int y);
