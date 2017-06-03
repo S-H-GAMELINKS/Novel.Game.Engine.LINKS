@@ -75,14 +75,6 @@ extern SkipData_t TextIgnoredFlag;
 //設定用変数
 extern ConfigData_t ConfigData;
 
-enum class Skiptype : int {
-	off = 0,
-	automatic = 1,
-	skip = 2
-};
-//スキップ・オートモード用変数
-extern Skiptype skip_auto;
-
 //キー操作
 extern int Key[256];
 extern int y;
@@ -158,10 +150,11 @@ int GAME_FINISH();
 void SHORTCUT_KEY();
 
 //各処理後のゲーム画面の描画(サウンドノベル風)
-void SOUNDNOVEL();
+void SOUNDNOVEL() noexcept;
 
 //各処理後のゲーム画面の描画(ウインドウ風)
-void WINDOWNOVEL();
+void WINDOWNOVEL() noexcept;
+
 //ショートカットキー処理後の描画
-void SHORTCUT_KEY_DRAW();
+void SHORTCUT_KEY_DRAW() noexcept;
 #endif //LINKS_GAME_H_

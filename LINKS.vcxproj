@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="auto_skip.cpp" />
     <ClCompile Include="back_log.cpp" />
     <ClCompile Include="fmt\fmt\format.cc" />
     <ClCompile Include="GAME.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="auto_skip.hpp" />
     <ClInclude Include="back_log.hpp" />
     <ClInclude Include="DEF.h" />
     <ClInclude Include="fmt\fmt\format.h" />

@@ -7,6 +7,7 @@
 #include "resource_manager.hpp"
 #include "back_log.hpp"
 #include "save.hpp"
+#include "auto_skip.hpp"
 
 // 文字列描画の位置
 int DrawPointX = 0, DrawPointY = 0;
@@ -60,9 +61,6 @@ static char CHARACTER_NAME[10];
 int Key[256];
 int y = menu_init_pos_y;
 int GAME_y = game_menu_base_pos_y;
-
-//スキップ・オートモード用変数
-Skiptype skip_auto = Skiptype::off;
 
 //設定用変数
 ConfigData_t ConfigData = {
@@ -180,7 +178,7 @@ int SCRIPT_READ() {
 }
 
 //各処理後のゲーム画面の描画(サウンドノベル風)
-void SOUNDNOVEL() {
+void SOUNDNOVEL() noexcept {
 
 	if (ConfigData.soundnovel_winownovel == 0) {
 
@@ -215,7 +213,7 @@ void SOUNDNOVEL() {
 }
 
 //各処理後のゲーム画面の描画(ウインドウ風)
-void WINDOWNOVEL() {
+void WINDOWNOVEL() noexcept {
 
 	//ウインドウ風描画時の処理
 	if (ConfigData.soundnovel_winownovel == 1) {
@@ -273,7 +271,7 @@ int MoveKey(int KeyStateBuf[]) {
 }
 
 //ショートカットキー処理後の描画
-void SHORTCUT_KEY_DRAW() {
+void SHORTCUT_KEY_DRAW() noexcept {
 
 	if (SHORTCUT_KEY_FLAG == 1) {
 
@@ -675,113 +673,6 @@ void GAMEMENU_KEY_MOVE() {
 	}
 }
 
-//既読スキップメッセージ
-void SKIP_READ_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("既読スキップを実行しますか？");
-}
-
-//既読スキップ後の処理(サウンドノベル風)
-void SKIP_READ_SOUNDNOVEL() {
-
-	GAMEMENU_COUNT = true;
-
-	//サウンドノベル風描画時の処理
-	SOUNDNOVEL();
-}
-
-//既読スキップ後の処理(ウインドウ風)
-void SKIP_READ_WINDOWNOVEL() {
-
-	GAMEMENU_COUNT = true;
-
-	//既読スキップ後の処理(ウインドウ風)
-	WINDOWNOVEL();
-}
-
-//既読スキップ判定
-void SKIP_READ_CHECK() {
-
-	//既読スキップメッセージ
-	SKIP_READ_MESSAGE();
-
-	const SkipDataConv* conv = reinterpret_cast<const SkipDataConv*>(&TextIgnoredFlag);
-	//既読データ読み込み時の判定
-	if (IDYES == SAVE && 0 < EndFlag && EndFlag <= countof(conv->arr) && 1 == conv->arr[EndFlag - 1]) {
-		skip_auto = Skiptype::skip;
-	}
-	//ショートカットキー時の事後処理
-	SHORTCUT_KEY_DRAW();
-}
-
-//スキップ処理
-void SKIP_START() {
-
-	SAVE = LINKS_MessageBox_YESNO("スキップを実行しますか？");
-
-	if (SAVE == IDYES) {
-
-		skip_auto = Skiptype::skip;
-		GAMEMENU_COUNT = true;
-
-		//サウンドノベル風描画時の処理
-		SOUNDNOVEL();
-
-		//ウインドウ風描画時の処理
-		WINDOWNOVEL();
-	}
-}
-
-//オート処理メッセージ
-void AUTO_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("オートモードを実行しますか？");
-}
-
-//オート処理
-void AUTO_START() {
-
-	//オート処理メッセージ
-	AUTO_MESSAGE();
-
-	if (SAVE == IDYES) {
-
-		skip_auto = Skiptype::automatic;
-		GAMEMENU_COUNT = true;
-
-		//サウンドノベル風描画時の処理
-		SOUNDNOVEL();
-
-		//既読スキップ後の処理(ウインドウ風)
-		WINDOWNOVEL();
-	}
-}
-
-//オート/スキップ停止処理メッセージ
-void AUTO_SKIP_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("スキップ又はオートモードを終了しますか？");
-}
-
-//オート/スキップ停止処理
-void AUTO_SKIP_STOP() {
-
-	//オート/スキップ停止処理メッセージ
-	AUTO_SKIP_MESSAGE();
-
-	if (SAVE == IDYES) {
-
-		skip_auto = Skiptype::off;
-		GAMEMENU_COUNT = true;
-
-		//サウンドノベル風描画時の処理
-		SOUNDNOVEL();
-
-		//ウインドウ風描画時の処理
-		WINDOWNOVEL();
-	}
-}
-
 //コンフィグ(キー操作) 
 void CONFIG_KEY_MOVE() {
 
@@ -1030,7 +921,7 @@ void GAMEMENU_TITLE_BACK() {
 		GAMEMENU_COUNT = true;
 		EndFlag = 99;
 		y = menu_init_pos_y;
-		skip_auto = Skiptype::off;
+		disableSkip();
 		charactor.reset();
 		background.reset();
 		backgroundMusic.reset();
@@ -1495,45 +1386,6 @@ void SCRIPT_OUTPUT_SOUNDEFFECT() {
 	CP++;
 }
 
-//スクリプトタグ処理(クリック待ち)
-void SCRIPT_UTPUT_KEYWAIT() {
-
-	//スキップ・オート変数がＯＦＦの場合
-	if (skip_auto == Skiptype::off) {
-
-		//セーブデータ用スクリーンショット保存
-		SAVESNAP();
-
-		// ボタン押し待ちおよび参照文字位置を一つ進める
-		WaitKey();
-
-		//エンターキーで次へ
-		if (CheckHitKey(KEY_INPUT_RETURN) == 1 || (GetMouseInput() & MOUSE_INPUT_LEFT) == 1)
-			CP++;
-	}
-
-	//スキップ・オート変数がＯＮの場合（オートモード）
-	if (skip_auto == Skiptype::automatic) {
-
-		//セーブデータ用スクリーンショット保存
-		SAVESNAP();
-
-		//少し待って、次の文字列を描画
-		WaitTimer(1800 * ConfigData.auto_speed / 100);
-		CP++;
-	}
-
-	//スキップ・オート変数がＯＮの場合(スキップ)
-	if (skip_auto == Skiptype::skip) {
-
-		//セーブデータ用スクリーンショット保存
-		SAVESNAP();
-
-		CP++;
-	}
-
-}
-
 //スクリプトタグ処理(ゲーム画面のクリア処理)
 void SCRIPT_OUTPUT_SCREENCLEAR() {
 
@@ -1554,20 +1406,6 @@ void SCRIPT_OUTPUT_SCREENCLEAR() {
 
 	SetDrawScreen(DX_SCREEN_FRONT);
 
-}
-
-//スクリプトタグ処理(少し待つ)
-void SCRIPT_OUTPUT_WAIT() {
-
-	//オート又は通常時、3秒待つ
-	if (skip_auto != Skiptype::skip) {
-		WaitTimer(1800);
-		CP++;
-	}
-
-	//スキップ時、3秒待たずに次へ
-	if (skip_auto == Skiptype::skip)
-		CP++;
 }
 
 //スクリプトタグ処理(ゲームオーバー)
@@ -1873,28 +1711,6 @@ void SCRIPT_OUTPUT_STRING_DRAW() {
 
 	// カーソルを一文字文進める
 	DrawPointX++;
-}
-
-//文字列の描画速度
-void SCRIPT_OUTPUT_STRING_DRAW_SPEED() {
-
-	//スキップ・オート変数がＯＦＦの場合
-	if (skip_auto == Skiptype::off) {
-		// 少し待つ
-		WaitTimer(30 * ConfigData.string_speed / 100);
-	}
-
-	//スキップ・オート変数がＯＮの場合(オートモード)
-	if (skip_auto == Skiptype::automatic) {
-		// 少し待つ
-		WaitTimer(30 * ConfigData.auto_speed / 100);
-	}
-
-	//スキップ・オート変数がＯＮの場合（スキップ）
-	if (skip_auto == Skiptype::skip) {
-		//速く処理
-		WaitTimer(10 * ConfigData.skip_speed / 100);
-	}
 }
 
 //文字列の改行

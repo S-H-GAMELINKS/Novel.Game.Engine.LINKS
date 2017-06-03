@@ -6,6 +6,7 @@
 #include "back_log.hpp"
 #include "resource.h"
 #include "save.hpp"
+#include "auto_skip.hpp"
 
 //DXライブラリ初期化前処理
 void DXLib_PREP() {
@@ -156,7 +157,7 @@ void WORD_FORMAT() {
 }
 
 static void GameLoopType1(const int RouteNumber, int32_t& TextIgnoredFlag){
-	if (TextIgnoredFlag == 0) skip_auto = Skiptype::off;
+	if (TextIgnoredFlag == 0) disableSkip();
 	SCRIPT_READ();
 	//Ａルートループ
 	while (ProcessMessage() == 0)
@@ -185,7 +186,7 @@ static void GameLoopType1(const int RouteNumber, int32_t& TextIgnoredFlag){
 }
 
 static void GameLoopType2(const int RouteNumber, const int32_t TextIgnoredFlag){
-	if (TextIgnoredFlag == 0) skip_auto = Skiptype::off;
+	if (TextIgnoredFlag == 0) disableSkip();
 	SCRIPT_READ();
 	while (ProcessMessage() == 0)
 	{
