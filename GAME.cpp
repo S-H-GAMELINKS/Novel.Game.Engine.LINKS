@@ -4,6 +4,7 @@
 #include "DEF.h"
 #include <initializer_list>
 #include <cassert>
+#include <type_traits>
 #include "resource_manager.hpp"
 #include "back_log.hpp"
 #include "save.hpp"
@@ -22,6 +23,10 @@ char String[script_line_num_lim][script_line_string_len_lim];
 //タイトル関連
 int TITLE;
 unsigned int Cr;
+static_assert(
+	std::is_same<decltype(Cr), decltype(DxLib::GetColor(std::declval<int>(), std::declval<int>(), std::declval<int>()))>::value,
+	"Your DxLib version is too old."
+);
 
 //ゲームオーバー
 static int GAMEOVER;
