@@ -1225,7 +1225,7 @@ void sentakusi(int Cr, int y) {
 }
 
 // 改行関数
-int Kaigyou(void)
+int Kaigyou()
 {
 	if (ConfigData.soundnovel_winownovel == 0) {
 

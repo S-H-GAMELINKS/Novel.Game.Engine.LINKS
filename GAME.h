@@ -92,9 +92,6 @@ int MoveKey(int (&KeyStateBuf)[256]);
 //タイトルメニューカーソル関数
 void title(int Cr, int y);
 
-//セーブロードメニューカーソル関数
-void SAVE_LOAD_MENU(int Cr, int SAVE_y);
-
 //ゲームメニューカーソル関数
 void GAME_MENU_CURSOR(int Cr, int GAME_y);
 
@@ -123,7 +120,7 @@ int GAMEMENU();
 void sentakusi(int Cr, int y);
 
 // 改行関数
-int Kaigyou(void);
+int Kaigyou();
 
 //スクリプトタグ処理関数
 int SCRIPT_OUTPUT();
@@ -142,9 +139,6 @@ int Mouse_Move();
 
 //コンフィグ(タイトル画面)
 void CONFIG();
-
-//終了ウインドウ
-int GAME_FINISH();
 
 //各種F1～F11キー
 void SHORTCUT_KEY();
