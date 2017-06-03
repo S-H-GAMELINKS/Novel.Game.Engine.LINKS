@@ -62,7 +62,7 @@ int y = menu_init_pos_y;
 int GAME_y = game_menu_base_pos_y;
 
 //スキップ・オートモード用変数
-int skip_auto = 0;
+Skiptype skip_auto = Skiptype::off;
 
 //設定用変数
 ConfigData_t ConfigData = {
@@ -708,7 +708,7 @@ void SKIP_READ_CHECK() {
 	const SkipDataConv* conv = reinterpret_cast<const SkipDataConv*>(&TextIgnoredFlag);
 	//既読データ読み込み時の判定
 	if (IDYES == SAVE && 0 < EndFlag && EndFlag <= countof(conv->arr) && 1 == conv->arr[EndFlag - 1]) {
-		skip_auto = 2;
+		skip_auto = Skiptype::skip;
 	}
 	//ショートカットキー時の事後処理
 	SHORTCUT_KEY_DRAW();
@@ -721,7 +721,7 @@ void SKIP_START() {
 
 	if (SAVE == IDYES) {
 
-		skip_auto = 2;
+		skip_auto = Skiptype::skip;
 		GAMEMENU_COUNT = true;
 
 		//サウンドノベル風描画時の処理
@@ -746,7 +746,7 @@ void AUTO_START() {
 
 	if (SAVE == IDYES) {
 
-		skip_auto = 1;
+		skip_auto = Skiptype::automatic;
 		GAMEMENU_COUNT = true;
 
 		//サウンドノベル風描画時の処理
@@ -771,7 +771,7 @@ void AUTO_SKIP_STOP() {
 
 	if (SAVE == IDYES) {
 
-		skip_auto = 0;
+		skip_auto = Skiptype::off;
 		GAMEMENU_COUNT = true;
 
 		//サウンドノベル風描画時の処理
@@ -1030,7 +1030,7 @@ void GAMEMENU_TITLE_BACK() {
 		GAMEMENU_COUNT = true;
 		EndFlag = 99;
 		y = menu_init_pos_y;
-		skip_auto = 0;
+		skip_auto = Skiptype::off;
 		charactor.reset();
 		background.reset();
 		backgroundMusic.reset();
@@ -1499,7 +1499,7 @@ void SCRIPT_OUTPUT_SOUNDEFFECT() {
 void SCRIPT_UTPUT_KEYWAIT() {
 
 	//スキップ・オート変数がＯＦＦの場合
-	if (skip_auto == 0) {
+	if (skip_auto == Skiptype::off) {
 
 		//セーブデータ用スクリーンショット保存
 		SAVESNAP();
@@ -1513,7 +1513,7 @@ void SCRIPT_UTPUT_KEYWAIT() {
 	}
 
 	//スキップ・オート変数がＯＮの場合（オートモード）
-	if (skip_auto == 1) {
+	if (skip_auto == Skiptype::automatic) {
 
 		//セーブデータ用スクリーンショット保存
 		SAVESNAP();
@@ -1524,7 +1524,7 @@ void SCRIPT_UTPUT_KEYWAIT() {
 	}
 
 	//スキップ・オート変数がＯＮの場合(スキップ)
-	if (skip_auto == 2) {
+	if (skip_auto == Skiptype::skip) {
 
 		//セーブデータ用スクリーンショット保存
 		SAVESNAP();
@@ -1560,13 +1560,13 @@ void SCRIPT_OUTPUT_SCREENCLEAR() {
 void SCRIPT_OUTPUT_WAIT() {
 
 	//オート又は通常時、3秒待つ
-	if (skip_auto != 2) {
+	if (skip_auto != Skiptype::skip) {
 		WaitTimer(1800);
 		CP++;
 	}
 
 	//スキップ時、3秒待たずに次へ
-	if (skip_auto == 2)
+	if (skip_auto == Skiptype::skip)
 		CP++;
 }
 
@@ -1879,19 +1879,19 @@ void SCRIPT_OUTPUT_STRING_DRAW() {
 void SCRIPT_OUTPUT_STRING_DRAW_SPEED() {
 
 	//スキップ・オート変数がＯＦＦの場合
-	if (skip_auto == 0) {
+	if (skip_auto == Skiptype::off) {
 		// 少し待つ
 		WaitTimer(30 * ConfigData.string_speed / 100);
 	}
 
 	//スキップ・オート変数がＯＮの場合(オートモード)
-	if (skip_auto == 1) {
+	if (skip_auto == Skiptype::automatic) {
 		// 少し待つ
 		WaitTimer(30 * ConfigData.auto_speed / 100);
 	}
 
 	//スキップ・オート変数がＯＮの場合（スキップ）
-	if (skip_auto == 2) {
+	if (skip_auto == Skiptype::skip) {
 		//速く処理
 		WaitTimer(10 * ConfigData.skip_speed / 100);
 	}

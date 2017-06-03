@@ -156,7 +156,7 @@ void WORD_FORMAT() {
 }
 
 static void GameLoopType1(const int RouteNumber, int32_t& TextIgnoredFlag){
-	if (TextIgnoredFlag == 0) skip_auto = 0;
+	if (TextIgnoredFlag == 0) skip_auto = Skiptype::off;
 	SCRIPT_READ();
 	//Ａルートループ
 	while (ProcessMessage() == 0)
@@ -185,7 +185,7 @@ static void GameLoopType1(const int RouteNumber, int32_t& TextIgnoredFlag){
 }
 
 static void GameLoopType2(const int RouteNumber, const int32_t TextIgnoredFlag){
-	if (TextIgnoredFlag == 0) skip_auto = 0;
+	if (TextIgnoredFlag == 0) skip_auto = Skiptype::off;
 	SCRIPT_READ();
 	while (ProcessMessage() == 0)
 	{

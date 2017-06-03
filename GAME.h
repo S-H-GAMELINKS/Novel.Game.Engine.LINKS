@@ -75,8 +75,13 @@ extern SkipData_t TextIgnoredFlag;
 //設定用変数
 extern ConfigData_t ConfigData;
 
+enum class Skiptype : int {
+	off = 0,
+	automatic = 1,
+	skip = 2
+};
 //スキップ・オートモード用変数
-extern int skip_auto;
+extern Skiptype skip_auto;
 
 //キー操作
 extern int Key[256];
