@@ -404,7 +404,7 @@ int SKIP_READ_LOAD()
 	}
 #else
 	fp = fopen("DATA/SAVE/SKIP_READ.dat", "rb");
-	if (fp == NULL) {
+	if (fp == nullptr) {
 		return 0;
 	}
 #endif
@@ -423,7 +423,7 @@ int SKIP_READ_SAVE()
 		}
 #else
 		fp = fopen("DATA/SAVE/SKIP_READ.dat", "wb");//バイナリファイルを開く
-		if (fp == NULL) {//エラーが起きたらNULLを返す
+		if (fp == nullptr) {//エラーが起きたらnullptrを返す
 			return 0;
 		}
 #endif
@@ -446,7 +446,7 @@ int CONFIG_SAVE()
 	}
 #else
 	fp = fopen("DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
-	if (fp == NULL) {//エラーが起きたらNULLを返す
+	if (fp == nullptr) {//エラーが起きたらnullptrを返す
 		return 0;
 	}
 #endif
@@ -468,7 +468,7 @@ int CONFIG_LOAD()
 	}
 #else
 	fp = fopen("DATA/SAVE/Config.dat", "rb");
-	if (fp == NULL) {
+	if (fp == nullptr) {
 		return 0;
 	}
 #endif
@@ -501,7 +501,7 @@ int QUICKSAVE_SAVE(){
 		}
 #else
 		fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "wb");//バイナリファイルを開く
-		if (fp == NULL) {//エラーが起きたらNULLを返す
+		if (fp == nullptr) {//エラーが起きたらnullptrを返す
 			return 0;
 		}
 #endif
@@ -536,7 +536,7 @@ int QUICKSAVE_LOAD() {
 		}
 #else
 		fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "rb");
-		if (fp == NULL) {
+		if (fp == nullptr) {
 			return 0;
 		}
 #endif
@@ -577,7 +577,7 @@ int CONTINUE_SAVE() {
 	}
 #else
 	fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "wb");//バイナリファイルを開く
-	if (fp == NULL) {//エラーが起きたらNULLを返す
+	if (fp == nullptr) {//エラーが起きたらnullptrを返す
 		return 0;
 	}
 #endif
@@ -610,7 +610,7 @@ int CONTINUE_LOAD() {
 		}
 #else
 		fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "rb");
-		if (fp == NULL) {
+		if (fp == nullptr) {
 			return 0;
 		}
 #endif

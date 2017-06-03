@@ -101,7 +101,7 @@ namespace {
 			}
 #else
 			fp = fopen(SaveDataPath, "wb");//バイナリファイルを開く
-			if (fp == NULL) {//エラーが起きたらNULLを返す
+			if (fp == nullptr) {//エラーが起きたらnullptrを返す
 				return 0;
 			}
 #endif
@@ -298,7 +298,7 @@ namespace {
 			}
 #else
 			fp = fopen(SaveDataPath, "rb");
-			if (fp == NULL) {
+			if (fp == nullptr) {
 				LINKS_MessageBox_OK(ErrorMessage);
 				return 0;
 			}
