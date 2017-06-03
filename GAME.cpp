@@ -222,7 +222,7 @@ void WINDOWNOVEL() noexcept {
 
 		//背景の表示
 		background.DrawGraph(0, 0, true);
-		static const int windowColor = GetColor(0, 0, 0);
+		static const auto windowColor = GetColor(0, 0, 0);
 		DrawBox(0, 400, 640, 480, windowColor, TRUE);
 		//立ち絵の表示
 		charactor.DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, true);
@@ -1308,7 +1308,7 @@ void SCRIPT_OUTPUT_BACKGROUND() {
 	background.DrawGraph(0, 0, true);
 	//ウインドウ風時の処理
 	if (ConfigData.soundnovel_winownovel == 1) {
-		static const int windowColor = GetColor(0, 0, 0);
+		static const auto windowColor = GetColor(0, 0, 0);
 		DrawBox(0, 400, 640, 480, windowColor, TRUE);
 	}
 	//文字を進める
@@ -1360,7 +1360,7 @@ void SCRIPT_OUTPUT_GAMEOVER() {
 	background.activeResource(GAMEOVER);
 	background.DrawGraph(0, 0, true);
 	if (ConfigData.soundnovel_winownovel == 1) {
-		static const int windowColor = GetColor(0, 0, 0);
+		static const auto windowColor = GetColor(0, 0, 0);
 		DrawBox(0, 400, 640, 480, windowColor, TRUE);
 	}
 	CP++;
@@ -1397,7 +1397,7 @@ void SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL() {
 //選択肢ループ用描画処理(ウインドウ風)
 void SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL() {
 	if (ConfigData.soundnovel_winownovel == 1 && SAVE_CHOICE == 1) {
-		static const int windowColor = GetColor(0, 0, 0);
+		static const auto windowColor = GetColor(0, 0, 0);
 		background.DrawGraph(0, 0, true);
 		DxLib::DrawBox(0, 400, 640, 480, windowColor, TRUE);
 		charactor.DrawGraph(charactor_pos_x, 0, true);
@@ -1621,11 +1621,12 @@ void SCRIPT_OUTPUT_CHARACTER_NAME() {
 		CHARACTER_NAME[9] = '\0';
 
 		//キャラクター名の背景
-		static const int windowColor = GetColor(0, 0, 0);
+		static const auto windowColor = GetColor(0, 0, 0);
 		DrawBox(30, 360, 150, 385, windowColor, TRUE);
 
+		static const auto charColor = GetColor(255, 255, 255);
 		// １文字描画
-		DrawString(30, 360, CHARACTER_NAME, GetColor(255, 255, 255));
+		DrawString(30, 360, CHARACTER_NAME, charColor);
 
 		SP++;
 		CP++;
@@ -1643,14 +1644,15 @@ void SCRIPT_OUTPUT_STRING_DRAW() {
 	if (ConfigData.soundnovel_winownovel == 1 && DrawPointY <= 399)
 		DrawPointY = 400;
 
+	static const auto charColor = GetColor(255, 255, 255);
 	if (ConfigData.soundnovel_winownovel == 0) {
 		// １文字描画
-		DrawString(DrawPointX * font_size, DrawPointY * font_size, OneMojiBuf, GetColor(255, 255, 255));
+		DrawString(DrawPointX * font_size, DrawPointY * font_size, OneMojiBuf, charColor);
 	}
 
 	if (ConfigData.soundnovel_winownovel == 1) {
 		// １文字描画
-		DrawString(DrawPointX * font_size, DrawPointY, OneMojiBuf, GetColor(255, 255, 255));
+		DrawString(DrawPointX * font_size, DrawPointY, OneMojiBuf, charColor);
 	}
 
 	// 参照文字位置を２バイト勧める
@@ -1736,7 +1738,7 @@ void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
 
 			background.DrawGraph(0, 0, true);
 			if (ConfigData.soundnovel_winownovel == 1) {
-				static const int windowColor = GetColor(0, 0, 0);
+				static const auto windowColor = GetColor(0, 0, 0);
 				DrawBox(0, 400, 640, 480, windowColor, TRUE);
 			}
 			charactor.DrawGraph(charactor_pos_x, 0, true);
