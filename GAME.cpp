@@ -49,7 +49,7 @@ bool GAMEMENU_COUNT;
 SkipData_t TextIgnoredFlag = {};
 
 //非アクティブ用変数
-static char WindowActive = TRUE;
+static bool WindowActive = true;
 
 // １文字分一時記憶配列
 static char OneMojiBuf[3];
@@ -835,7 +835,7 @@ void WINDOWACTIVE() {
 	if (GAME_y == game_menu_base_pos_y * 7 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 7 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 		WaitTimer(300);
-		WindowActive = FALSE;
+		WindowActive = false;
 
 		//非アクティブ状態ではゲームを実行しない 
 		SetAlwaysRunFlag(WindowActive);
@@ -844,7 +844,7 @@ void WINDOWACTIVE() {
 	if (GAME_y == game_menu_base_pos_y * 7 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 7 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
 
 		WaitTimer(300);
-		WindowActive = TRUE;
+		WindowActive = true;
 
 		//非アクティブ状態でもゲームを実行 
 		SetAlwaysRunFlag(WindowActive);

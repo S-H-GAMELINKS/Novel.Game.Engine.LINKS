@@ -45,8 +45,8 @@ struct alignas(4) ConfigData_t {
 	std::int32_t auto_speed_count;		//オート速度メーター情報
 	std::int32_t string_speed;			//文字列描画速度
 	std::int32_t string_speed_count;		//文字列描画速度メーター情報
-	std::int32_t soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報
-	std::int32_t mouse_key_move;			//マウス操作とキー操作の情報
+	std::int32_t soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報 true/false
+	std::int32_t mouse_key_move;			//マウス操作とキー操作の情報 true/false
 };
 
 
