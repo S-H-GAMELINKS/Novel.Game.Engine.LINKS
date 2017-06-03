@@ -136,18 +136,6 @@ void MATERIAL_LOAD() {
 	TITLE = LoadGraph("DATA/BACKGROUND/TITLE.png");
 }
 
-namespace {
-	//スクリプト配列流しこみ関数
-	int SCRIPT_TO_ARRAY(int ScriptFile) {
-
-		//スクリプトファイルを配列へ流し込む
-		for (auto&& s : String) {
-			FileRead_scanf(ScriptFile, "%s", s);
-		}
-		return 0;
-	}
-}
-
 //スクリプト読込関数
 int SCRIPT_READ() {
 	const char* ScriptFileNames[] = {
@@ -170,7 +158,7 @@ int SCRIPT_READ() {
 	if (0 < EndFlag && EndFlag <= countof(ScriptFileNames)) {
 		// スクリプトファイルを開く
 		const int ScriptFile = FileRead_open(ScriptFileNames[EndFlag - 1]);
-		SCRIPT_TO_ARRAY(ScriptFile);
+		for (auto&& s : String) FileRead_scanf(ScriptFile, "%s", s);
 		FileRead_close(ScriptFile);
 	}
 	return 0;
