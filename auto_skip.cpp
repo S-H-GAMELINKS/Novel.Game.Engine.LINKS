@@ -97,10 +97,10 @@ void AUTO_SKIP_STOP() noexcept {
 
 //スクリプトタグ処理(クリック待ち)
 void SCRIPT_UTPUT_KEYWAIT() noexcept {
+	//セーブデータ用スクリーンショット保存
+	SAVESNAP();
 	//スキップ・オート変数がＯＦＦの場合
 	if (skip_auto == Skiptype::off) {
-		//セーブデータ用スクリーンショット保存
-		SAVESNAP();
 		// ボタン押し待ちおよび参照文字位置を一つ進める
 		DxLib::WaitKey();
 		//エンターキーで次へ
@@ -108,23 +108,13 @@ void SCRIPT_UTPUT_KEYWAIT() noexcept {
 			CP++;
 		}
 	}
-
-	//スキップ・オート変数がＯＮの場合（オートモード）
-	if (skip_auto == Skiptype::automatic) {
-		//セーブデータ用スクリーンショット保存
-		SAVESNAP();
-		//少し待って、次の文字列を描画
-		DxLib::WaitTimer(1800 * ConfigData.auto_speed / 100);
+	else {
+		if (skip_auto == Skiptype::automatic) {
+			//少し待って、次の文字列を描画
+			DxLib::WaitTimer(1800 * ConfigData.auto_speed / 100);
+		}
 		CP++;
 	}
-
-	//スキップ・オート変数がＯＮの場合(スキップ)
-	if (skip_auto == Skiptype::skip) {
-		//セーブデータ用スクリーンショット保存
-		SAVESNAP();
-		CP++;
-	}
-
 }
 
 //スクリプトタグ処理(少し待つ)
@@ -132,29 +122,23 @@ void SCRIPT_OUTPUT_WAIT() noexcept {
 	//オート又は通常時、3秒待つ
 	if (skip_auto != Skiptype::skip) {
 		DxLib::WaitTimer(1800);
-		CP++;
 	}
-	//スキップ時、3秒待たずに次へ
-	if (skip_auto == Skiptype::skip) {
-		CP++;
-	}
+	CP++;
 }
 
 //文字列の描画速度
 void SCRIPT_OUTPUT_STRING_DRAW_SPEED() noexcept {
-	//スキップ・オート変数がＯＦＦの場合
-	if (skip_auto == Skiptype::off) {
+	switch (skip_auto) {
+	case Skiptype::off:
 		// 少し待つ
-		DxLib::WaitTimer(30 * ConfigData.string_speed / 100);
-	}
-	//スキップ・オート変数がＯＮの場合(オートモード)
-	if (skip_auto == Skiptype::automatic) {
+		DxLib::WaitTimer(30 * ConfigData.string_speed / 100); break;
+	case Skiptype::automatic:
 		// 少し待つ
-		DxLib::WaitTimer(30 * ConfigData.auto_speed / 100);
-	}
-	//スキップ・オート変数がＯＮの場合（スキップ）
-	if (skip_auto == Skiptype::skip) {
+		DxLib::WaitTimer(30 * ConfigData.auto_speed / 100); break;
+	case Skiptype::skip:
 		//速く処理
-		DxLib::WaitTimer(10 * ConfigData.skip_speed / 100);
+		DxLib::WaitTimer(10 * ConfigData.skip_speed / 100); break;
+	default:
+		break;
 	}
 }
