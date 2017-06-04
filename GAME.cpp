@@ -4,40 +4,18 @@
 #include "DEF.h"
 #include <initializer_list>
 #include <cassert>
+#include <type_traits>
+#include "resource_manager.hpp"
+#include "back_log.hpp"
+#include "save.hpp"
+#include "auto_skip.hpp"
+#include "fmt/fmt/format.h"
 
-#if defined(_MSC_VER) && 1400 <= _MSC_VER
-#	define LINKS_HAS_CRT_SECURE_FUNCTIONS 1
-#endif
-#if defined(__STDC_LIB_EXT1__) || defined(LINKS_HAS_CRT_SECURE_FUNCTIONS)
-#	define LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS 1
-#	define LINKS_HAS_FOPEN_S 1
-#endif
-#ifdef _countof
-#	define countof _countof
-#else
-#	define countof( arr ) ( sizeof(arr) / sizeof(*arr) )
-#endif
 // 文字列描画の位置
 int DrawPointX = 0, DrawPointY = 0;
 
 // 参照する文字列番号と文字列中の文字ポインタ
 int SP = 0, CP = 0;
-
-//キャラクター画像読込変数
-static int CHARACTER_LOAD[99];
-static int CHARACTER, CHARACTER_DUMMY;
-
-//背景画像読込変数
-static int BACKGROUND_LOAD[99];
-static int BACKGROUND;
-
-//背景音楽読込変数
-static int BACKGROUNDMUSIC_LOAD[99];
-static int BACKGROUNDMUSIC;
-
-//効果音変数
-static int SOUNDEFFECT_LOAD[99];
-static int SOUNDEFFECT;
 
 //スクリプト用読込配列
 char String[script_line_num_lim][script_line_string_len_lim];
@@ -45,6 +23,10 @@ char String[script_line_num_lim][script_line_string_len_lim];
 //タイトル関連
 int TITLE;
 unsigned int Cr;
+static_assert(
+	std::is_same<decltype(Cr), decltype(DxLib::GetColor(std::declval<int>(), std::declval<int>(), std::declval<int>()))>::value,
+	"Your DxLib version is too old."
+);
 
 //ゲームオーバー
 static int GAMEOVER;
@@ -52,7 +34,7 @@ static int GAMEOVER;
 //選択肢読込変数
 static char ChoiceStrings[2][script_line_string_len_lim];
 static int Choices[2];
-static const char* const ChoiceFiles[][2] = {
+static constexpr const char* const ChoiceFiles[][2] = {
 	{ "DATA/STR/CHOICE/A.txt", "DATA/STR/CHOICE/B.txt" },
 	{ "DATA/STR/CHOICE/C.txt", "DATA/STR/CHOICE/D.txt" },
 	{ "DATA/STR/CHOICE/E.txt", "DATA/STR/CHOICE/F.txt" },
@@ -67,41 +49,21 @@ static const char* const ChoiceFiles[][2] = {
 int EndFlag = 99;
 
 //ゲームメニュー変数
-static int GAMEMENU_COUNT;
+bool GAMEMENU_COUNT;
 
 //既読スキップ変数
 SkipData_t TextIgnoredFlag = {};
 
-//バックログ変数
-static int BACKLOG_CHOICE = 0;
-static int BACKLOG_HANDLE, BACKLOG[11], BACKLOG_BACKGROUND;
-static int LOG = 1, BACKLOG_COUNT = 1;
-char *BACKLOG_DELETE;
-
-//セーブ用変数
-int SAVE, SAVE_CHOICE = 0;
-static int SAVESNAP1, SAVESNAP2, SAVESNAP3, SAVETITLE;
-static int SAVESNAP_HANDLE1 = 0, SAVESNAP_HANDLE2 = 0, SAVESNAP_HANDLE3 = 0, SAVESNAP_CHOICE = 0;
-char *SAVESNAP_CHOICE_DELETE;
-
-
 //非アクティブ用変数
-static char WindowActive = TRUE;
+static bool WindowActive = true;
 
 // １文字分一時記憶配列
 static char OneMojiBuf[3];
 
-//キャラクター名配列
-static char CHARACTER_NAME[10];
-
 //キー操作
 int Key[256];
 int y = menu_init_pos_y;
-int SAVE_y = save_base_pos_y;
 int GAME_y = game_menu_base_pos_y;
-
-//スキップ・オートモード用変数
-int skip_auto = 0;
 
 //設定用変数
 ConfigData_t ConfigData = {
@@ -127,17 +89,6 @@ static int SCREENSHOT_COUNT = 0;
 static short SHORTCUT_KEY_FLAG = 0;
 
 //セーブ・ロード関連
-//通常セーブデータ
-struct alignas(4) SaveData_t {
-	std::int32_t ENDFLAG;    //ENDFLAG
-	std::int32_t SP;			//行数
-	std::int32_t CP;			//文字位置
-	std::int32_t CHAR;		//立ち絵情報
-	std::int32_t BG;			//背景画像情報
-	std::int32_t BGM;		//BGM情報
-	std::int32_t SAVE_CHOICE;//選択肢画面でのセーブ情報
-};
-
 //クイックセーブデータ
 struct alignas(4) QuickSaveData_t {
 	std::int32_t ENDFLAG;    //ENDFLAG
@@ -161,74 +112,8 @@ struct alignas(4) ContinueSaveData_t {
 };
 
 //
-// forward decreation
-//
-void SAVEDATA_KEY_MOVE();
-
-//
 // function Definition
 //
-int LINKS_MessageBox_YESNO(LPCTSTR lpText)
-{
-	return MessageBox(
-		GetMainWindowHandle(),
-		lpText,
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_YESNO
-	);
-}
-static int LINKS_MessageBox_OK(LPCTSTR lpText)
-{
-	return MessageBox(
-		GetMainWindowHandle(),
-		lpText,
-		"ゲームリンクス制作のノベルゲームエンジン「LINKS」",
-		MB_OK
-	);
-}
-
-template<std::size_t dest_arr_num, typename Func>
-static bool SerialNumberFileLoader(int (&dest_arr)[dest_arr_num], const char* format, Func&& LoadFunc) {
-	for (unsigned int i = 0; i < dest_arr_num; ++i) {
-		char FilePathString[40] = {};
-#ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
-		if(-1 == sprintf_s(FilePathString, countof(FilePathString), format, i + 1)) return false;
-#else
-		if (0 > snprintf(FilePathString, countof(FilePathString), format, i + 1) return false;
-#endif
-		dest_arr[i] = LoadFunc(FilePathString);
-	}
-	return true;
-}
-
-//立ち絵素材読込
-void MATERIAL_LOAD_CHARACTER() {
-	assert(SerialNumberFileLoader(CHARACTER_LOAD, "DATA/CHARACTER/CHAR%02u.png", [](const TCHAR* FileName) {
-		return LoadGraph(FileName);
-	}));
-}
-
-//背景画像読込
-void MATERIAL_LOAD_BACKGROUND() {
-	assert(SerialNumberFileLoader(BACKGROUND_LOAD, "DATA/BACKGROUND/BG%02u.png", [](const TCHAR* FileName) {
-		return LoadGraph(FileName);
-	}));
-}
-
-//ＢＧＭ読込
-void MATERIAL_LOAD_BACKGROUNDMUSIC() {
-	assert(SerialNumberFileLoader(BACKGROUNDMUSIC_LOAD, "DATA/BACKGROUNDMUSIC/BGM%02u.ogg", [](const TCHAR* FileName) {
-		return LoadSoundMem(FileName);
-	}));
-}
-
-//ＳＥ読込
-void MATERIAL_LOAD_SOUNDEFFECT(){
-	assert(SerialNumberFileLoader(SOUNDEFFECT_LOAD, "DATA/SOUNDEFFECT/SE%02u.ogg", [](const TCHAR* FileName) {
-		return LoadSoundMem(FileName);
-	}));
-}
-
 //各素材データ読込関数
 void MATERIAL_LOAD() {
 
@@ -236,16 +121,16 @@ void MATERIAL_LOAD() {
 	SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
 
 	//キャラクター画像読込
-	MATERIAL_LOAD_CHARACTER();
+	assert(charactor.load("DATA/CHARACTER/CHAR{0:02d}.png"));
 
 	//背景画像読込
-	MATERIAL_LOAD_BACKGROUND();
+	assert(background.load("DATA/BACKGROUND/BG{0:02d}.png"));
 
 	//ＢＧＭ読込
-	MATERIAL_LOAD_BACKGROUNDMUSIC();
+	assert(backgroundMusic.load("DATA/BACKGROUNDMUSIC/BGM{0:02d}.ogg"));
 
 	//ＳＥ読込
-	MATERIAL_LOAD_SOUNDEFFECT();
+	assert(soundEffect.load("DATA/SOUNDEFFECT/SE{0:02d}.ogg"));
 
 	//ゲームオーバー画面
 	GAMEOVER = LoadGraph("DATA/BACKGROUND/GAMEOVER.png");
@@ -255,16 +140,6 @@ void MATERIAL_LOAD() {
 
 	//タイトルメニュー背景画像読込
 	TITLE = LoadGraph("DATA/BACKGROUND/TITLE.png");
-}
-
-//スクリプト配列流しこみ関数
-int SCRIPT_TO_ARRAY(int ScriptFile) {
-
-	//スクリプトファイルを配列へ流し込む
-	for (auto&& s : String) {
-		FileRead_scanf(ScriptFile, "%s", s);
-	}
-	return 0;
 }
 
 //スクリプト読込関数
@@ -289,44 +164,25 @@ int SCRIPT_READ() {
 	if (0 < EndFlag && EndFlag <= countof(ScriptFileNames)) {
 		// スクリプトファイルを開く
 		const int ScriptFile = FileRead_open(ScriptFileNames[EndFlag - 1]);
-		SCRIPT_TO_ARRAY(ScriptFile);
+		for (auto&& s : String) FileRead_scanf(ScriptFile, "%s", s);
 		FileRead_close(ScriptFile);
 	}
 	return 0;
 }
 
-//画面クリア処理関数
-void SCREEN_CLEAR() {
-
-	//画面処理
-	SetDrawScreen(DX_SCREEN_BACK);
-
-	ClearDrawScreen();
-
-	SetDrawScreen(DX_SCREEN_FRONT);
-}
-
 //各処理後のゲーム画面の描画(サウンドノベル風)
-void SOUNDNOVEL() {
+void SOUNDNOVEL() noexcept {
 
 	if (ConfigData.soundnovel_winownovel == 0) {
 
 		SCREEN_CLEAR();
 
 		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
+		background.DrawGraph(0, 0, true);
 		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER, TRUE);
-		}
-
+		charactor.DrawGraph(charactor_pos_x, charactor_pos_y, true);
 		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
+		backgroundMusic.play(DX_PLAYTYPE_LOOP);
 
 		DrawPointY = 0;
 		DrawPointX = 0;
@@ -350,7 +206,7 @@ void SOUNDNOVEL() {
 }
 
 //各処理後のゲーム画面の描画(ウインドウ風)
-void WINDOWNOVEL() {
+void WINDOWNOVEL() noexcept {
 
 	//ウインドウ風描画時の処理
 	if (ConfigData.soundnovel_winownovel == 1) {
@@ -358,23 +214,13 @@ void WINDOWNOVEL() {
 		SCREEN_CLEAR();
 
 		//背景の表示
-		if (BACKGROUND != 0) {
-			DrawGraph(0, 0, BACKGROUND, TRUE);
-		}
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
+		background.DrawGraph(0, 0, true);
+		static const auto windowColor = GetColor(0, 0, 0);
+		DrawBox(0, 400, 640, 480, windowColor, TRUE);
 		//立ち絵の表示
-		if (CHARACTER != 0) {
-			DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER, TRUE);
-		}
-
+		charactor.DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, true);
 		//ＢＧＭの再生
-		if (BACKGROUNDMUSIC != 0) {
-			PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-		}
+		backgroundMusic.play(DX_PLAYTYPE_LOOP);
 
 		DrawPointY = 400;
 		DrawPointX = 0;
@@ -398,7 +244,7 @@ void WINDOWNOVEL() {
 }
 
 //矢印キー操作関数
-int MoveKey(int KeyStateBuf[]) {
+int MoveKey(int (&KeyStateBuf)[256]) {
 
 	//キー操作が有効な場合
 	if (ConfigData.mouse_key_move == 0) {
@@ -418,7 +264,7 @@ int MoveKey(int KeyStateBuf[]) {
 }
 
 //ショートカットキー処理後の描画
-void SHORTCUT_KEY_DRAW() {
+void SHORTCUT_KEY_DRAW() noexcept {
 
 	if (SHORTCUT_KEY_FLAG == 1) {
 
@@ -447,85 +293,67 @@ void title(int Cr, int y) {
 	DrawString(menu_pos_x + cursor_move_unit, title_menu_game_quit_pos_y, "QUIT", Cr);
 }
 
-//セーブロードメニューカーソル関数
-void SAVE_LOAD_MENU(int Cr, int SAVE_y) {
-
-	//カーソルの描画
-	DrawString(save_base_pos_x, SAVE_y, "■", Cr);
-
-	SAVEDATA_KEY_MOVE();
-}
-
 //ゲームメニューカーソル関数
 void GAME_MENU_CURSOR(int Cr, int GAME_y) {
 	DrawString(save_base_pos_x - (cursor_move_unit * 6), GAME_y, "■", Cr);
 }
 
-//マウス操作(タイトルメニュー)
-void Mouse_Move_TITLE(int MouseY) {
-	//タイトルメニュー
-	if (EndFlag == 99) {
-		y = (MouseY <= 329) ? 300
-			: (MouseY <= 359) ? 330
-			: (MouseY <= 389) ? 360
-			: (MouseY <= 419) ? 390
-			: (MouseY <= 449) ? 420
-			: 450;
+namespace {
+	//マウス操作(タイトルメニュー)
+	void Mouse_Move_TITLE(int MouseY) {
+		//タイトルメニュー
+		if (EndFlag == 99) {
+			y = (MouseY <= 329) ? 300
+				: (MouseY <= 359) ? 330
+				: (MouseY <= 389) ? 360
+				: (MouseY <= 419) ? 390
+				: (MouseY <= 449) ? 420
+				: 450;
+		}
 	}
-}
 
-//マウス操作(ゲームメニュー)
-void Mouse_Move_GAME(int MouseY) {
-	//ゲームメニュー
-	if (EndFlag == 99 || EndFlag != 99 && GAMEMENU_COUNT == 0 && Config == 0) {
-		GAME_y = (MouseY <= 59) ? 30
-			: (MouseY <= 89) ? 60
-			: (MouseY <= 119) ? 90
-			: (MouseY <= 149) ? 120
-			: (MouseY <= 179) ? 150
-			: (MouseY <= 209) ? 180
-			: (MouseY <= 239) ? 210
-			: (MouseY <= 269) ? 240
-			: (MouseY <= 299) ? 270
-			: (MouseY <= 329) ? 300
-			: (MouseY <= 359) ? 330
-			: 360;
+	//マウス操作(ゲームメニュー)
+	void Mouse_Move_GAME(int MouseY) {
+		//ゲームメニュー
+		if (EndFlag == 99 || EndFlag != 99 && false == GAMEMENU_COUNT && Config == 0) {
+			GAME_y = (MouseY <= 59) ? 30
+				: (MouseY <= 89) ? 60
+				: (MouseY <= 119) ? 90
+				: (MouseY <= 149) ? 120
+				: (MouseY <= 179) ? 150
+				: (MouseY <= 209) ? 180
+				: (MouseY <= 239) ? 210
+				: (MouseY <= 269) ? 240
+				: (MouseY <= 299) ? 270
+				: (MouseY <= 329) ? 300
+				: (MouseY <= 359) ? 330
+				: 360;
+		}
 	}
-}
 
-//マウス操作(セーブ画面関連)
-void Mouse_Move_SAVE(int MouseY) {
-
-	if (GAMEMENU_COUNT == 0 && EndFlag != 99 || EndFlag == 99) {
-		SAVE_y = (MouseY <= 199) ? 100
-			: (MouseY <= 299) ? 200
-			: (MouseY <= 399) ? 300
-			: 400;
+	//マウス操作(選択肢画面)
+	void Mouse_Move_CHOICE(int MouseY) {
+		//選択肢画面
+		if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
+			y = (MouseY <= 229) ? 200 : 230;
+		}
 	}
-}
 
-//マウス操作(選択肢画面)
-void Mouse_Move_CHOICE(int MouseY) {
-	//選択肢画面
-	if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
-		y = (MouseY <= 229) ? 200 : 230;
-	}
-}
+	//マウス操作(コンフィグ)
+	void Mouse_Move_CONFIG(int MouseY) {
 
-//マウス操作(コンフィグ)
-void Mouse_Move_CONFIG(int MouseY) {
-
-	//コンフィグ画面
-	if (Config == 1) {
-		GAME_y = (MouseY <= 59) ? 30
-			: (MouseY <= 89) ? 60
-			: (MouseY <= 119) ? 90
-			: (MouseY <= 149) ? 120
-			: (MouseY <= 179) ? 150
-			: (MouseY <= 209) ? 180
-			: (MouseY <= 239) ? 210
-			: (MouseY <= 269) ? 240
-			: 270;
+		//コンフィグ画面
+		if (Config == 1) {
+			GAME_y = (MouseY <= 59) ? 30
+				: (MouseY <= 89) ? 60
+				: (MouseY <= 119) ? 90
+				: (MouseY <= 149) ? 120
+				: (MouseY <= 179) ? 150
+				: (MouseY <= 209) ? 180
+				: (MouseY <= 239) ? 210
+				: (MouseY <= 269) ? 240
+				: 270;
+		}
 	}
 }
 
@@ -569,7 +397,7 @@ int SKIP_READ_LOAD()
 	}
 #else
 	fp = fopen("DATA/SAVE/SKIP_READ.dat", "rb");
-	if (fp == NULL) {
+	if (fp == nullptr) {
 		return 0;
 	}
 #endif
@@ -588,7 +416,7 @@ int SKIP_READ_SAVE()
 		}
 #else
 		fp = fopen("DATA/SAVE/SKIP_READ.dat", "wb");//バイナリファイルを開く
-		if (fp == NULL) {//エラーが起きたらNULLを返す
+		if (fp == nullptr) {//エラーが起きたらnullptrを返す
 			return 0;
 		}
 #endif
@@ -611,7 +439,7 @@ int CONFIG_SAVE()
 	}
 #else
 	fp = fopen("DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
-	if (fp == NULL) {//エラーが起きたらNULLを返す
+	if (fp == nullptr) {//エラーが起きたらnullptrを返す
 		return 0;
 	}
 #endif
@@ -633,7 +461,7 @@ int CONFIG_LOAD()
 	}
 #else
 	fp = fopen("DATA/SAVE/Config.dat", "rb");
-	if (fp == NULL) {
+	if (fp == nullptr) {
 		return 0;
 	}
 #endif
@@ -643,53 +471,37 @@ int CONFIG_LOAD()
 	return 0;
 }
 
-//クイックセーブ時のメッセージ
-void QUICKSAVE_SAVE_MESSAGE() {
-	SAVE = LINKS_MessageBox_YESNO("クイックセーブを実行しますか？");
-}
+namespace {
+	//クイックセーブ
+	int QUICKSAVE_SAVE() {
+		if (IDYES == MessageBoxYesNo("クイックセーブを実行しますか？")) {
 
-//クイックセーブ
-int QUICKSAVE_SAVE(){
-
-	//クイックセーブ時のメッセージ
-	QUICKSAVE_SAVE_MESSAGE();
-
-	if (SAVE == IDYES) {
-
-		//クイックセーブデータの作成
-		QuickSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-		FILE *fp;
+			//クイックセーブデータの作成
+			QuickSaveData_t Data = { EndFlag, SP, 0, charactor.activeResource(), background.activeResource(), backgroundMusic.activeResource(), SAVE_CHOICE };
+			FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, "DATA/SAVE/QUICKSAVEDATA.dat", "wb");
-		if (0 != er) {
-			return 0;
-		}
+			const errno_t er = fopen_s(&fp, "DATA/SAVE/QUICKSAVEDATA.dat", "wb");
+			if (0 != er) {
+				return 0;
+			}
 #else
-		fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "wb");//バイナリファイルを開く
-		if (fp == NULL) {//エラーが起きたらNULLを返す
-			return 0;
-		}
+			fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "wb");//バイナリファイルを開く
+			if (fp == nullptr) {//エラーが起きたらnullptrを返す
+				return 0;
+			}
 #endif
-		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
-		fclose(fp);//ファイルを閉じる
+			fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
+			fclose(fp);//ファイルを閉じる
+		}
+
+		return 0;
+
 	}
-
-	return 0;
-
-}
-
-//クイックロード時のメッセージ
-void QUICKSAVE_LOAD_MESSAGE() {
-	SAVE = LINKS_MessageBox_YESNO("クイックロードを実行しますか？");
 }
 
 //クイックロード
 int QUICKSAVE_LOAD() {
-
-	//クイックロード時のメッセージ
-	QUICKSAVE_LOAD_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("クイックロードを実行しますか？")) {
 
 		//クイックセーブデータの読み込み
 		QuickSaveData_t Data;
@@ -701,7 +513,7 @@ int QUICKSAVE_LOAD() {
 		}
 #else
 		fp = fopen("DATA/SAVE/QUICKSAVEDATA.dat", "rb");
-		if (fp == NULL) {
+		if (fp == nullptr) {
 			return 0;
 		}
 #endif
@@ -709,12 +521,12 @@ int QUICKSAVE_LOAD() {
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
 		CP = Data.CP;
-		CHARACTER = Data.CHAR;
-		BACKGROUND = Data.BG;
-		BACKGROUNDMUSIC = Data.BGM;
+		charactor.activeResource(Data.CHAR);
+		background.activeResource(Data.BG);
+		backgroundMusic.activeResource(Data.BGM);
 		SAVE_CHOICE = Data.SAVE_CHOICE;
 
-		GAMEMENU_COUNT = 1;
+		GAMEMENU_COUNT = true;
 
 		//サウンドノベル風描画時の処理
 		SOUNDNOVEL();
@@ -722,48 +534,41 @@ int QUICKSAVE_LOAD() {
 		//ウインドウ風描画時の処理
 		WINDOWNOVEL();
 
-		LINKS_MessageBox_OK("ロードしました！");
+		MessageBoxOk("ロードしました！");
 
 		fclose(fp);
 	}
 	return 0;
 }
 
-//コンティニュー用セーブ
-int CONTINUE_SAVE() {
+namespace {
+	//コンティニュー用セーブ
+	int CONTINUE_SAVE() {
 
-	//クイックセーブデータの作成
-	ContinueSaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-	FILE *fp;
+		//クイックセーブデータの作成
+		ContinueSaveData_t Data = { EndFlag, SP, 0, charactor.activeResource(), background.activeResource(), backgroundMusic.activeResource(), SAVE_CHOICE };
+		FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
-	const errno_t er = fopen_s(&fp, "DATA/SAVE/CONTINUESAVEDATA.dat", "wb");
-	if (0 != er) {
-		return 0;
-	}
+		const errno_t er = fopen_s(&fp, "DATA/SAVE/CONTINUESAVEDATA.dat", "wb");
+		if (0 != er) {
+			return 0;
+		}
 #else
-	fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "wb");//バイナリファイルを開く
-	if (fp == NULL) {//エラーが起きたらNULLを返す
+		fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "wb");//バイナリファイルを開く
+		if (fp == nullptr) {//エラーが起きたらnullptrを返す
+			return 0;
+		}
+#endif
+		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
+		fclose(fp);//ファイルを閉じる
+
 		return 0;
 	}
-#endif
-	fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
-	fclose(fp);//ファイルを閉じる
-
-	return 0;
-}
-
-//コンティニュー用ロード時のメッセージ
-void CONTINUE_LOAD_MESSAGE() {
-	SAVE = LINKS_MessageBox_YESNO("前回遊んだところから再開しますか？");
 }
 
 //コンティニュー用ロード
 int CONTINUE_LOAD() {
-
-	//コンティニュー用ロード時のメッセージ
-	CONTINUE_LOAD_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("前回遊んだところから再開しますか？")) {
 
 		//コンティニューセーブデータの読み込み
 		ContinueSaveData_t Data;
@@ -775,7 +580,7 @@ int CONTINUE_LOAD() {
 		}
 #else
 		fp = fopen("DATA/SAVE/CONTINUESAVEDATA.dat", "rb");
-		if (fp == NULL) {
+		if (fp == nullptr) {
 			return 0;
 		}
 #endif
@@ -783,12 +588,12 @@ int CONTINUE_LOAD() {
 		EndFlag = Data.ENDFLAG;
 		SP = Data.SP;
 		CP = Data.CP;
-		CHARACTER = Data.CHAR;
-		BACKGROUND = Data.BG;
-		BACKGROUNDMUSIC = Data.BGM;
+		charactor.activeResource(Data.CHAR);
+		background.activeResource(Data.BG);
+		backgroundMusic.activeResource(Data.BGM);
 		SAVE_CHOICE = Data.SAVE_CHOICE;
 
-		GAMEMENU_COUNT = 1;
+		GAMEMENU_COUNT = true;
 
 		//サウンドノベル風描画時の処理
 		SOUNDNOVEL();
@@ -796,332 +601,379 @@ int CONTINUE_LOAD() {
 		//ウインドウ風描画時の処理
 		WINDOWNOVEL();
 
-		LINKS_MessageBox_OK("ロードしました！");
+		MessageBoxOk("ロードしました！");
 
 		fclose(fp);
 	}
 	return 0;
 }
 
-//コンフィグ(キー操作)
-void CONFIG_KEY_MOVE() {
-
-	//キー操作関連
-	if (Key[KEY_INPUT_DOWN] == 1) {
-		GAME_y += game_menu_base_pos_y;
-		if (GAME_y == (game_menu_base_pos_y * 10))
-			GAME_y = game_menu_base_pos_y;
-	}
-
-	if (Key[KEY_INPUT_UP] == 1) {
-		GAME_y -= game_menu_base_pos_y;
-		if (GAME_y == (game_menu_base_pos_y - game_menu_base_pos_y))
-			GAME_y = (game_menu_base_pos_y * 9);
-	}
-}
-
-//コンフィグ(BGM音量調節)
-void BGM_VOL_CHANGE() {
-
-	//ＢＧＭ音量調整
-	if (GAME_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		WaitTimer(300);
-
-		ConfigData.bgm_vol += 10;
-		ConfigData.bgm_vol_count += 1;
-
-		if (ConfigData.bgm_vol_count >= 10) {
-			ConfigData.bgm_vol = 100;
-			ConfigData.bgm_vol_count = 10;
+namespace {
+	//ゲームメニュー項目描画関数
+	void GAMEMENU_DRAW() {
+		static constexpr const char* menuStrings[] = {
+			"セーブ", "ロード", "セーブデータ削除", "既読スキップ", "スキップ", "オート",
+			"オート/スキップ停止", "バックログ参照", "設定", "タイトルに戻る", "ゲームに戻る", "ゲーム終了"
+		};
+		//各メニュー描画
+		for (std::size_t i = 0; i < countof(menuStrings); ++i) {
+			DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), menuStrings[i], Cr);
 		}
 	}
 
-	if (GAME_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+	//ゲームメニュー(キー操作)
+	void GAMEMENU_KEY_MOVE() {
 
-		WaitTimer(300);
+		if (Key[KEY_INPUT_DOWN] == 1) {
+			GAME_y += game_menu_base_pos_y;
+			if (GAME_y == (game_menu_base_pos_y * 13))
+				GAME_y = game_menu_base_pos_y;
+		}
 
-		ConfigData.bgm_vol -= 10;
-		ConfigData.bgm_vol_count -= 1;
-
-		if (ConfigData.bgm_vol_count <= 0) {
-			ConfigData.bgm_vol = 0;
-			ConfigData.bgm_vol_count = 0;
+		if (Key[KEY_INPUT_UP] == 1) {
+			GAME_y -= game_menu_base_pos_y;
+			if (GAME_y == (game_menu_base_pos_y - game_menu_base_pos_y))
+				GAME_y = (game_menu_base_pos_y * 12);
 		}
 	}
 
-}
+	//コンフィグ(キー操作) 
+	void CONFIG_KEY_MOVE() {
 
-//コンフィグ(SE音量調整)
-void SE_VOL_CHANGE() {
+		//キー操作関連 
+		if (Key[KEY_INPUT_DOWN] == 1) {
+			GAME_y += game_menu_base_pos_y;
+			if (GAME_y == (game_menu_base_pos_y * 10))
+				GAME_y = game_menu_base_pos_y;
+		}
 
-	//ＳＥ音量調整
-	if (GAME_y == game_menu_base_pos_y * 2 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		WaitTimer(300);
-
-		ConfigData.se_vol += 10;
-		ConfigData.se_vol_count += 1;
-
-		if (ConfigData.se_vol_count >= 10) {
-			ConfigData.se_vol = 100;
-			ConfigData.se_vol_count = 10;
+		if (Key[KEY_INPUT_UP] == 1) {
+			GAME_y -= game_menu_base_pos_y;
+			if (GAME_y == (game_menu_base_pos_y - game_menu_base_pos_y))
+				GAME_y = (game_menu_base_pos_y * 9);
 		}
 	}
 
-	if (GAME_y == game_menu_base_pos_y * 2 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 2 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+	//コンフィグ(BGM音量調節) 
+	void BGM_VOL_CHANGE() {
 
-		WaitTimer(300);
+		//ＢＧＭ音量調整 
+		if (GAME_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-		ConfigData.se_vol -= 10;
-		ConfigData.se_vol_count -= 1;
+			WaitTimer(300);
 
-		if (ConfigData.se_vol_count <= 0) {
-			ConfigData.se_vol = 0;
-			ConfigData.se_vol_count = 0;
+			ConfigData.bgm_vol += 10;
+			ConfigData.bgm_vol_count += 1;
+
+			if (ConfigData.bgm_vol_count >= 10) {
+				ConfigData.bgm_vol = 100;
+				ConfigData.bgm_vol_count = 10;
+			}
 		}
-	}
-}
 
-//コンフィグ(オート速度調整)
-void AUTO_SPEED_CHANGE() {
+		if (GAME_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
 
-	//オート速度調整
-	if (GAME_y == game_menu_base_pos_y * 3 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 3 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			WaitTimer(300);
 
-		WaitTimer(300);
+			ConfigData.bgm_vol -= 10;
+			ConfigData.bgm_vol_count -= 1;
 
-		ConfigData.auto_speed += 10;
-		ConfigData.auto_speed_count += 1;
-
-		if (ConfigData.auto_speed_count >= 10) {
-			ConfigData.auto_speed = 100;
-			ConfigData.auto_speed_count = 10;
-		}
-	}
-
-	if (GAME_y == game_menu_base_pos_y * 3 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 3 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-		WaitTimer(300);
-
-		ConfigData.auto_speed -= 10;
-		ConfigData.auto_speed_count -= 1;
-
-		if (ConfigData.auto_speed_count <= 0) {
-			ConfigData.auto_speed = 0;
-			ConfigData.auto_speed_count = 0;
-		}
-	}
-}
-
-//コンフィグ(スキップ速度調整)
-void SKIP_SPEED_CHANGE() {
-
-	//スキップ速度調整
-	if (GAME_y == game_menu_base_pos_y * 4 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 4 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		WaitTimer(300);
-
-		ConfigData.skip_speed += 10;
-		ConfigData.skip_speed_count += 1;
-
-		if (ConfigData.skip_speed_count >= 10) {
-			ConfigData.skip_speed = 100;
-			ConfigData.skip_speed_count = 10;
-		}
-	}
-
-	if (GAME_y == game_menu_base_pos_y * 4 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 4 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
-
-		WaitTimer(300);
-
-		ConfigData.skip_speed -= 10;
-		ConfigData.skip_speed_count -= 1;
-
-		if (ConfigData.skip_speed_count <= 0) {
-			ConfigData.skip_speed = 0;
-			ConfigData.skip_speed_count = 0;
+			if (ConfigData.bgm_vol_count <= 0) {
+				ConfigData.bgm_vol = 0;
+				ConfigData.bgm_vol_count = 0;
+			}
 		}
 
 	}
-}
 
-//コンフィグ(文字描画)
-void STRING_SPEED_CHANGE() {
+	//コンフィグ(SE音量調整) 
+	void SE_VOL_CHANGE() {
 
-	//文字描画速度調整
-	if (GAME_y == game_menu_base_pos_y * 5 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 5 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+		//ＳＥ音量調整 
+		if (GAME_y == game_menu_base_pos_y * 2 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-		WaitTimer(300);
+			WaitTimer(300);
 
-		ConfigData.string_speed += 10;
-		ConfigData.string_speed_count += 1;
+			ConfigData.se_vol += 10;
+			ConfigData.se_vol_count += 1;
 
-		if (ConfigData.string_speed_count >= 10) {
-			ConfigData.string_speed = 100;
-			ConfigData.string_speed_count = 10;
+			if (ConfigData.se_vol_count >= 10) {
+				ConfigData.se_vol = 100;
+				ConfigData.se_vol_count = 10;
+			}
+		}
+
+		if (GAME_y == game_menu_base_pos_y * 2 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 2 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+			WaitTimer(300);
+
+			ConfigData.se_vol -= 10;
+			ConfigData.se_vol_count -= 1;
+
+			if (ConfigData.se_vol_count <= 0) {
+				ConfigData.se_vol = 0;
+				ConfigData.se_vol_count = 0;
+			}
 		}
 	}
 
-	if (GAME_y == game_menu_base_pos_y * 5 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 5 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+	//コンフィグ(オート速度調整) 
+	void AUTO_SPEED_CHANGE() {
 
-		WaitTimer(300);
+		//オート速度調整 
+		if (GAME_y == game_menu_base_pos_y * 3 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 3 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-		ConfigData.string_speed -= 10;
-		ConfigData.string_speed_count -= 1;
+			WaitTimer(300);
 
-		if (ConfigData.string_speed_count <= 0) {
-			ConfigData.string_speed = 0;
-			ConfigData.string_speed_count = 0;
+			ConfigData.auto_speed += 10;
+			ConfigData.auto_speed_count += 1;
+
+			if (ConfigData.auto_speed_count >= 10) {
+				ConfigData.auto_speed = 100;
+				ConfigData.auto_speed_count = 10;
+			}
+		}
+
+		if (GAME_y == game_menu_base_pos_y * 3 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 3 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+			WaitTimer(300);
+
+			ConfigData.auto_speed -= 10;
+			ConfigData.auto_speed_count -= 1;
+
+			if (ConfigData.auto_speed_count <= 0) {
+				ConfigData.auto_speed = 0;
+				ConfigData.auto_speed_count = 0;
+			}
 		}
 	}
-}
 
-//コンフィグ(サウンドノベル風とウインドウ風)
-void SOUNDNOVEL_WINDOWNOVEL_CHANGE() {
+	//コンフィグ(スキップ速度調整) 
+	void SKIP_SPEED_CHANGE() {
 
-	//サウンドノベル風とウインドウ風の切り替え
-	if (GAME_y == game_menu_base_pos_y * 6 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 6 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+		//スキップ速度調整 
+		if (GAME_y == game_menu_base_pos_y * 4 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 4 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-		WaitTimer(300);
-		ConfigData.soundnovel_winownovel = 0;
+			WaitTimer(300);
+
+			ConfigData.skip_speed += 10;
+			ConfigData.skip_speed_count += 1;
+
+			if (ConfigData.skip_speed_count >= 10) {
+				ConfigData.skip_speed = 100;
+				ConfigData.skip_speed_count = 10;
+			}
+		}
+
+		if (GAME_y == game_menu_base_pos_y * 4 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 4 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+			WaitTimer(300);
+
+			ConfigData.skip_speed -= 10;
+			ConfigData.skip_speed_count -= 1;
+
+			if (ConfigData.skip_speed_count <= 0) {
+				ConfigData.skip_speed = 0;
+				ConfigData.skip_speed_count = 0;
+			}
+
+		}
 	}
 
-	if (GAME_y == game_menu_base_pos_y * 6 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 6 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+	//コンフィグ(文字描画) 
+	void STRING_SPEED_CHANGE() {
 
-		WaitTimer(300);
-		ConfigData.soundnovel_winownovel = 1;
-	}
-}
+		//文字描画速度調整 
+		if (GAME_y == game_menu_base_pos_y * 5 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 5 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-//非アクティブ時の処理設定
-void WINDOWACTIVE() {
+			WaitTimer(300);
 
-	//非アクティブ時の処理の切り替え
-	if (GAME_y == game_menu_base_pos_y * 7 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 7 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			ConfigData.string_speed += 10;
+			ConfigData.string_speed_count += 1;
 
-		WaitTimer(300);
-		WindowActive = FALSE;
+			if (ConfigData.string_speed_count >= 10) {
+				ConfigData.string_speed = 100;
+				ConfigData.string_speed_count = 10;
+			}
+		}
 
-		//非アクティブ状態ではゲームを実行しない
-		SetAlwaysRunFlag(WindowActive);
-	}
+		if (GAME_y == game_menu_base_pos_y * 5 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 5 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
 
-	if (GAME_y == game_menu_base_pos_y * 7 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 7 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+			WaitTimer(300);
 
-		WaitTimer(300);
-		WindowActive = TRUE;
+			ConfigData.string_speed -= 10;
+			ConfigData.string_speed_count -= 1;
 
-		//非アクティブ状態でもゲームを実行
-		SetAlwaysRunFlag(WindowActive);
-	}
-}
-
-//コンフィグ(マウス/キー操作)
-void MOUSE_KEY_MOVE() {
-
-	//マウス操作を有効に
-	if (GAME_y == game_menu_base_pos_y * 8 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		WaitTimer(300);
-
-		ConfigData.mouse_key_move = 1;
+			if (ConfigData.string_speed_count <= 0) {
+				ConfigData.string_speed = 0;
+				ConfigData.string_speed_count = 0;
+			}
+		}
 	}
 
-	//キー操作を有効に
-	if (GAME_y == game_menu_base_pos_y * 8 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 8 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+	//コンフィグ(サウンドノベル風とウインドウ風) 
+	void SOUNDNOVEL_WINDOWNOVEL_CHANGE() {
 
-		WaitTimer(300);
+		//サウンドノベル風とウインドウ風の切り替え 
+		if (GAME_y == game_menu_base_pos_y * 6 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 6 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-		ConfigData.mouse_key_move = 0;
+			WaitTimer(300);
+			ConfigData.soundnovel_winownovel = 0;
+		}
+
+		if (GAME_y == game_menu_base_pos_y * 6 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 6 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
+
+			WaitTimer(300);
+			ConfigData.soundnovel_winownovel = 1;
+		}
 	}
-}
 
-//各種設定情報描画
-void CONFIG_MENU() {
+	//非アクティブ時の処理設定 
+	void WINDOWACTIVE() {
 
-	//セーブデータ名描画
-	DrawString(save_name_pos_x, game_menu_base_pos_y, "ＢＧＭ音量", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 2, "ＳＥ音量", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 3, "オート速度", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 4, "スキップ速度", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 5, "文字描画速度", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 6, "描画方法", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 7, "非アクティブ時", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 8, "マウス/キー操作", Cr);
+		//非アクティブ時の処理の切り替え 
+		if (GAME_y == game_menu_base_pos_y * 7 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 7 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 9, "戻る", Cr);
+			WaitTimer(300);
+			WindowActive = false;
 
-	//BGM音量目盛り描画
-	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y, Cr, "%d", ConfigData.bgm_vol);
+			//非アクティブ状態ではゲームを実行しない 
+			SetAlwaysRunFlag(WindowActive);
+		}
 
-	//SE音量目盛り描画
-	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 2, Cr, "%d", ConfigData.se_vol);
+		if (GAME_y == game_menu_base_pos_y * 7 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 7 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
 
-	//オート速度目盛り描画
-	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 3, Cr, "%d", ConfigData.auto_speed);
+			WaitTimer(300);
+			WindowActive = true;
 
-	//スキップ速度目盛り描画
-	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 4, Cr, "%d", ConfigData.skip_speed);
+			//非アクティブ状態でもゲームを実行 
+			SetAlwaysRunFlag(WindowActive);
+		}
+	}
 
-	//文字描画速度目盛り描画
-	DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 5, Cr, "%d", ConfigData.string_speed);
+	//コンフィグ(マウス/キー操作) 
+	void MOUSE_KEY_MOVE() {
 
-	//サウンドノベル風
-	if (ConfigData.soundnovel_winownovel == 0)
-		DrawString(save_name_pos_x + cursor_move_unit * 6, game_menu_base_pos_y * 6, "サウンドノベル風", Cr);
+		//マウス操作を有効に 
+		if (GAME_y == game_menu_base_pos_y * 8 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-	//ウインドウ風
-	if (ConfigData.soundnovel_winownovel == 1)
-		DrawString(save_name_pos_x + cursor_move_unit * 6, game_menu_base_pos_y * 6, "ウインドウ風", Cr);
+			WaitTimer(300);
 
-	//非アクティブ時の処理
-	if (WindowActive == TRUE)
-		DrawString(save_name_pos_x + cursor_move_unit * 7, game_menu_base_pos_y * 7, "処理", Cr);
+			ConfigData.mouse_key_move = 1;
+		}
 
-	if (WindowActive == FALSE)
-		DrawString(save_name_pos_x + cursor_move_unit * 7, game_menu_base_pos_y * 7, "未処理", Cr);
+		//キー操作を有効に 
+		if (GAME_y == game_menu_base_pos_y * 8 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 8 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
 
-	//マウス操作
-	if (ConfigData.mouse_key_move == 1)
-		DrawString(save_name_pos_x + cursor_move_unit * 8, game_menu_base_pos_y * 8, "マウス操作", Cr);
+			WaitTimer(300);
 
-	//キー操作
-	if (ConfigData.mouse_key_move == 0)
-		DrawString(save_name_pos_x + cursor_move_unit * 8, game_menu_base_pos_y * 8, "キー操作", Cr);
-}
+			ConfigData.mouse_key_move = 0;
+		}
+	}
 
-//コンフィグ(タイトル/ゲームメニューへ戻る)
-void CONFIG_TITLE_BACK() {
-
-	//タイトルに戻る/ゲームメニューに戻る
-	if (GAME_y == game_menu_base_pos_y * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == game_menu_base_pos_y * 9 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		//戻る
-		SAVE = LINKS_MessageBox_YESNO("戻りますか？");
-
-		if (SAVE == IDYES) {
+	//タイトルに戻る
+	void GAMEMENU_TITLE_BACK() {
+		if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
 
 			ClearDrawScreen();
-			GAME_y = game_menu_base_pos_y;
-			Config = 0;
+
+			if (SHORTCUT_KEY_FLAG == 1) backgroundMusic.stop();
+
+			GAMEMENU_COUNT = true;
+			EndFlag = 99;
+			y = menu_init_pos_y;
+			disableSkip();
+			charactor.reset();
+			background.reset();
+			backgroundMusic.reset();
+		}
+	}
+
+	//ゲームに戻る
+	void GAMEMENU_GAME_BACK() {
+		if (IDYES == MessageBoxYesNo("ゲームに戻りますか？")) {
+
+			GAMEMENU_COUNT = true;
+
+			//サウンドノベル風描画時の処理
+			SOUNDNOVEL();
+
+			//ウインドウ風描画時の処理
+			WINDOWNOVEL();
+		}
+	}
+
+	//ゲーム終了
+	void GAMEMENU_GAME_FINISH() {
+		if (IDYES == MessageBoxYesNo("終了しますか？")) {
+
+			//コンティニュー用セーブ
+			CONTINUE_SAVE();
+
+			EndFlag = 99999;
+
+			GAMEMENU_COUNT = true;
 		}
 	}
 }
 
-//コンフィグ(メッセージ)
-void CONFIG_MESSAGE() {
+//終了ウインドウ
+int GAME_FINISH() {
 
-	SAVE = LINKS_MessageBox_YESNO("設定を変更しますか？");
+	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {
+		if (IDYES == MessageBoxYesNo("終了しますか？")) {
+
+			//コンティニュー用セーブ
+			CONTINUE_SAVE();
+
+			EndFlag = 99999;
+
+			if (false == GAMEMENU_COUNT)
+				GAMEMENU_COUNT = true;
+		}
+	}
+
+	return 0;
 }
 
-//コンフィグ
+namespace {
+	//各種設定情報描画 
+	void CONFIG_MENU() {
+		static constexpr const char* saveDataName[] = {
+			"ＢＧＭ音量", "ＳＥ音量", "オート速度", "スキップ速度", "文字描画速度", "描画方法", "非アクティブ時", "マウス/キー操作",
+			"戻る"
+		};
+		for (std::size_t i = 0; i < countof(saveDataName); ++i) {
+			DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), saveDataName[i], Cr);
+		}
+		DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y, Cr, "%d", ConfigData.bgm_vol);
+		DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 2, Cr, "%d", ConfigData.se_vol);
+		DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 3, Cr, "%d", ConfigData.auto_speed);
+		DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 4, Cr, "%d", ConfigData.skip_speed);
+		DrawFormatString(save_name_pos_x + cursor_move_unit * 5, game_menu_base_pos_y * 5, Cr, "%d", ConfigData.string_speed);
+		DrawString(save_name_pos_x + cursor_move_unit * 6, game_menu_base_pos_y * 6, ((1 == ConfigData.soundnovel_winownovel) ? "ウインドウ風" : "サウンドノベル風"), Cr);
+		DrawString(save_name_pos_x + cursor_move_unit * 7, game_menu_base_pos_y * 7, ((WindowActive) ? "処理" : "未処理"), Cr);
+		DrawString(save_name_pos_x + cursor_move_unit * 8, game_menu_base_pos_y * 8, ((1 == ConfigData.mouse_key_move) ? "マウス操作" : "キー操作"), Cr);
+	}
+
+	//コンフィグ(タイトル/ゲームメニューへ戻る) 
+	void CONFIG_TITLE_BACK() {
+
+		//タイトルに戻る/ゲームメニューに戻る 
+		if (GAME_y == game_menu_base_pos_y * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == game_menu_base_pos_y * 9 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			if (IDYES == MessageBoxYesNo("戻りますか？")) {
+
+				ClearDrawScreen();
+				GAME_y = game_menu_base_pos_y;
+				Config = 0;
+			}
+		}
+	}
+}
+
+//コンフィグ 
 void CONFIG() {
-
-	//コンフィグ(メッセージ)
-	CONFIG_MESSAGE();
-
-	if (SAVE == IDYES) {
+	if (IDYES == MessageBoxYesNo("設定を変更しますか？")) {
 
 		Config = 1;
 
@@ -1135,975 +987,157 @@ void CONFIG() {
 
 			GAME_MENU_CURSOR(Cr, GAME_y);
 
-			//各種設定情報描画
+			//各種設定情報描画 
 			CONFIG_MENU();
 
-			//BGM音量調節
+			//BGM音量調節 
 			BGM_VOL_CHANGE();
 
-			//SE音量調整
+			//SE音量調整 
 			SE_VOL_CHANGE();
 
-			//オート速度調整
+			//オート速度調整 
 			AUTO_SPEED_CHANGE();
 
-			//スキップ速度調整
+			//スキップ速度調整 
 			SKIP_SPEED_CHANGE();
 
-			//文字列描画速度
+			//文字列描画速度 
 			STRING_SPEED_CHANGE();
 
-			//サウンドノベル風とウインドウ風描画設定
+			//サウンドノベル風とウインドウ風描画設定 
 			SOUNDNOVEL_WINDOWNOVEL_CHANGE();
 
-			//非アクティブ時の処理設定
+			//非アクティブ時の処理設定 
 			WINDOWACTIVE();
 
-			//マウス操作とキー操作設定
+			//マウス操作とキー操作設定 
 			MOUSE_KEY_MOVE();
 
-			//タイトルに戻る
+			//タイトルに戻る 
 			CONFIG_TITLE_BACK();
 
-			//マウス操作関連
+			//マウス操作関連 
 			Mouse_Move();
 
-			//コンフィグ(キー操作)
+			//コンフィグ(キー操作) 
 			CONFIG_KEY_MOVE();
 
-			//画面クリア処理
+			//画面クリア処理 
 			SCREEN_CLEAR();
 		}
 
-		//ショートカットキー時の事後処理
+		//ショートカットキー時の事後処理 
 		SHORTCUT_KEY_DRAW();
 	}
 }
 
-//ゲームメニュー項目描画関数
-void GAMEMENU_DRAW() {
+namespace {
+	//各ゲームメニュー選択時処理
+	static void GAMEMENU_CHOICE() {
 
-	//各メニュー描画
-	DrawString(save_name_pos_x, game_menu_base_pos_y, "セーブ", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 2, "ロード", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 3, "セーブデータ削除", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 4, "既読スキップ", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 5, "スキップ", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 6, "オート", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 7, "オート/スキップ停止", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 8, "バックログ参照", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 9, "設定", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 10, "タイトルに戻る", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 11, "ゲームに戻る", Cr);
-	DrawString(save_name_pos_x, game_menu_base_pos_y * 12, "ゲーム終了", Cr);
+		//セーブ
+		if (GAME_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == game_menu_base_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-}
-
-//ゲームメニュー(キー操作)
-void GAMEMENU_KEY_MOVE() {
-
-	if (Key[KEY_INPUT_DOWN] == 1) {
-		GAME_y += game_menu_base_pos_y;
-		if (GAME_y == (game_menu_base_pos_y * 13))
-			GAME_y = game_menu_base_pos_y;
-	}
-
-	if (Key[KEY_INPUT_UP] == 1) {
-		GAME_y -= game_menu_base_pos_y;
-		if (GAME_y == (game_menu_base_pos_y - game_menu_base_pos_y))
-			GAME_y = (game_menu_base_pos_y * 12);
-	}
-}
-
-//セーブデータ一覧描画
-void SAVEDATA_DRAW() {
-
-	//スクリーンショット描画
-	DrawRotaGraph(saved_snap_draw_pos_x, save_base_pos_y, 0.2f, 0, SAVESNAP1, TRUE);
-	DrawRotaGraph(saved_snap_draw_pos_x, save_base_pos_y * 2, 0.2f, 0, SAVESNAP2, TRUE);
-	DrawRotaGraph(saved_snap_draw_pos_x, save_base_pos_y * 3, 0.2f, 0, SAVESNAP3, TRUE);
-
-	//セーブデータ名描画
-	DrawString(save_name_pos_x, save_base_pos_y, "セーブデータ1", Cr);
-	DrawString(save_name_pos_x, save_base_pos_y * 2, "セーブデータ2", Cr);
-	DrawString(save_name_pos_x, save_base_pos_y * 3, "セーブデータ3", Cr);
-
-	DrawString(save_name_pos_x - cursor_move_unit, save_base_pos_y * 4, "戻る", Cr);
-	static_assert(0 < (save_name_pos_x - cursor_move_unit), "error");
-}
-
-//セーブ画面(キー操作)
-void SAVEDATA_KEY_MOVE() {
-
-	if (Key[KEY_INPUT_DOWN] == 1) {
-		SAVE_y = (SAVE_y == (save_buttom_y)) ? save_base_pos_y : SAVE_y + save_move_unit;
-	}
-
-	if (Key[KEY_INPUT_UP] == 1) {
-		SAVE_y = (save_base_pos_y == SAVE_y) ? save_buttom_y : SAVE_y - save_move_unit;
-	}
-}
-
-//セーブデータスクリーンショット読込
-void SAVEDATA_SCREENSHOT_READ() {
-
-	//セーブ時のスクリーンショット読込
-	SAVESNAP1 = LoadGraph("DATA/SAVE/SAVESNAP1.png");
-	SAVESNAP2 = LoadGraph("DATA/SAVE/SAVESNAP2.png");
-	SAVESNAP3 = LoadGraph("DATA/SAVE/SAVESNAP3.png");
-	SAVETITLE = LoadGraph("DATA/BACKGROUND/SAVE.png");
-
-	WaitTimer(600);
-}
-
-//セーブ前のメッセージ
-void SAVEDATA_SAVE_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("セーブ画面に移行しますか？");
-}
-
-//セーブ後のメッセージ
-void SAVE_MESSAGE() {
-
-	LINKS_MessageBox_OK("セーブしました！");
-}
-
-//セーブ後の処理(サウンドノベル風)
-void SAVE_SOUNDNOVEL() {
-
-	//サウンドノベル風描画時の処理
-	SOUNDNOVEL();
-
-	SAVE_CHOICE = 0;
-
-	GAMEMENU_COUNT = 1;
-}
-
-//セーブ後の処理(ウインドウ風)
-void SAVE_WINDOWNOVEL() {
-
-	//ウインドウ風描画時の処理
-	WINDOWNOVEL();
-
-	SAVE_CHOICE = 0;
-
-	GAMEMENU_COUNT = 1;
-}
-
-static int CreateSaveData(int* SaveSnapHandle, const char* Message, const char* ImagePath, const char* SaveDataPath) {
-	SAVE = LINKS_MessageBox_YESNO(Message);
-	if (SAVE == IDYES) {
-		//セーブデータ１用のスクリーンショット取得変数
-		*SaveSnapHandle = 1;
-
-		//選択肢画面でのセーブ処理
-		if (SAVESNAP_CHOICE != 0) {
-			SetDrawScreen(DX_SCREEN_BACK);
-			DrawGraph(0, 0, SAVESNAP_CHOICE, TRUE);
-			SaveDrawScreenToPNG(0, 0, 640, 480, ImagePath, 0);
-			SAVESNAP_CHOICE = 0;
-			*SaveSnapHandle = 0;
-			SetDrawScreen(DX_SCREEN_FRONT);
-
+			//セーブデータセーブ処理
+			SAVEDATA_SAVE();
+			WaitTimer(300);
 		}
 
-		//セーブデータの作成
-		SaveData_t Data = { EndFlag, SP, 0, CHARACTER, BACKGROUND, BACKGROUNDMUSIC, SAVE_CHOICE };
-		FILE *fp;
-#ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, SaveDataPath, "wb");
-		if (0 != er) {
-			return 0;
-		}
-#else
-		fp = fopen(SaveDataPath, "wb");//バイナリファイルを開く
-		if (fp == NULL) {//エラーが起きたらNULLを返す
-			return 0;
-		}
-#endif
-		fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
-		fclose(fp);
-		//セーブ後のメッセージ
-		SAVE_MESSAGE();
-		//サウンドノベル風描画時の処理
-		SAVE_SOUNDNOVEL();
-		//ウインドウ風描画時の処理
-		SAVE_WINDOWNOVEL();
-	}
-
-	return 0;
-}
-//セーブデータ１にセーブ
-int SAVEDATA_1_SAVE() {
-	return CreateSaveData(
-		&SAVESNAP_HANDLE1,
-		"セーブデータ1にセーブしますか？",
-		"DATA/SAVE/SAVESNAP1.png",
-		"DATA/SAVE/SAVEDATA1.dat"
-	);
-}
-
-//セーブデータ2にセーブ
-int SAVEDATA_2_SAVE() {
-	return CreateSaveData(
-		&SAVESNAP_HANDLE2,
-		"セーブデータ2にセーブしますか？",
-		"DATA/SAVE/SAVESNAP2.png",
-		"DATA/SAVE/SAVEDATA2.dat"
-	);
-}
-
-//セーブデータ3にセーブ
-int SAVEDATA_3_SAVE() {
-	return CreateSaveData(
-		&SAVESNAP_HANDLE3,
-		"セーブデータ3にセーブしますか？",
-		"DATA/SAVE/SAVESNAP3.png",
-		"DATA/SAVE/SAVEDATA3.dat"
-	);
-}
-
-//セーブデータ・セーブ画面ループ
-void SAVEDATA_SAVE_LOOP() {
-
-	//セーブデータ・セーブ画面ループ
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && GAMEMENU_COUNT == 0) {
-
-			//背景描画
-			DrawGraph(0, 0, SAVETITLE, TRUE);
-
-			//カーソル描画
-			SAVE_LOAD_MENU(Cr, SAVE_y);
-
-			//セーブ画面描画
-			SAVEDATA_DRAW();
-
-			//マウス操作
-			Mouse_Move();
-
-			//キー操作関連
-			SAVEDATA_KEY_MOVE();
-
-			//画面クリア処理
-			SCREEN_CLEAR();
-
-			//セーブデータ１にセーブ
-			if (SAVE_y == save_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == save_base_pos_y && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				//セーブデータ１にセーブ
-				SAVEDATA_1_SAVE();
-			}
-
-			//セーブデータ２にセーブ
-			if (SAVE_y == (save_base_pos_y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				//セーブデータ２にセーブ
-				SAVEDATA_2_SAVE();
-			}
-
-			//セーブデータ３にセーブ
-			if (SAVE_y == (save_base_pos_y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				//セーブデータ３にセーブ
-				SAVEDATA_3_SAVE();
-			}
-
-			//画面に戻る
-			if (SAVE_y == (save_base_pos_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				SAVE = LINKS_MessageBox_YESNO("戻りますか？");
-
-				if (SAVE == IDYES) {
-
-					ClearDrawScreen();
-
-					//ショートカットキー時の事後処理
-					SHORTCUT_KEY_DRAW();
-					break;
-				}
-			}
-		}
-}
-
-//セーブデータセーブ関数
-void SAVEDATA_SAVE() {
-
-	//セーブ前のメッセージ
-	SAVEDATA_SAVE_MESSAGE();
-
-	if (SAVE == IDYES) {
-		ClearDrawScreen();
-		SAVE_y = save_base_pos_y;
-
-		//セーブデータのスクリーンショットの読み込み
-		SAVEDATA_SCREENSHOT_READ();
-
-		//セーブデータ・セーブ画面ループ
-		SAVEDATA_SAVE_LOOP();
-	}
-}
-
-//ロード前のメッセージ
-void SAVEDATA_LOAD_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("ロード画面に移行しますか？");
-}
-
-//ロード後のメッセージ
-void LOAD_MESSAGE() {
-
-	LINKS_MessageBox_OK("ロードしました！");
-}
-
-//ロード後の処理(サウンドノベル風)
-void LOAD_SOUNDNOVEL() {
-
-	//サウンドノベル風描画時の処理
-	SOUNDNOVEL();
-
-	GAMEMENU_COUNT = 1;
-}
-
-//ロード後の処理(ウインドウ風)
-void LOAD_WINDOWNOVEL() {
-
-	//ウインドウ風描画時の処理
-	WINDOWNOVEL();
-
-	GAMEMENU_COUNT = 1;
-}
-
-static int LoadSaveData(const char* Message, const char* ErrorMessage, const char* SaveDataPath) {
-	SAVE = LINKS_MessageBox_YESNO(Message);
-	if (SAVE == IDYES) {
-		SaveData_t Data;
-		FILE *fp;
-#ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, SaveDataPath, "rb");
-		if (0 != er) {
-			LINKS_MessageBox_OK(ErrorMessage);
-			return 0;
-		}
-#else
-		fp = fopen(SaveDataPath, "rb");
-		if (fp == NULL) {
-			LINKS_MessageBox_OK(ErrorMessage);
-			return 0;
-		}
-#endif
-		fread(&Data, sizeof(Data), 1, fp);
-		EndFlag = Data.ENDFLAG;
-		SP = Data.SP;
-		CP = Data.CP;
-		CHARACTER = Data.CHAR;
-		BACKGROUND = Data.BG;
-		BACKGROUNDMUSIC = Data.BGM;
-		SAVE_CHOICE = Data.SAVE_CHOICE;
-
-		//ロード後のメッセージ
-		LOAD_MESSAGE();
-		//ロード後の処理(サウンドノベル風)
-		LOAD_SOUNDNOVEL();
-		//ロード後の処理(ウインドウ風)
-		LOAD_WINDOWNOVEL();
-		fclose(fp);
-	}
-	return 0;
-}
-//セーブデータ1のロード
-int SAVEDATA_1_LOAD() {
-	return LoadSaveData("セーブデータ1をロードしますか？", "セーブデータ1がありません！", "DATA/SAVE/SAVEDATA1.dat");
-}
-
-//セーブデータ2のロード
-int SAVEDATA_2_LOAD() {
-	return LoadSaveData("セーブデータ2をロードしますか？", "セーブデータ2がありません！", "DATA/SAVE/SAVEDATA2.dat");
-}
-
-//セーブデータ3をロード
-int SAVEDATA_3_LOAD() {
-	return LoadSaveData("セーブデータ3をロードしますか？", "セーブデータ3がありません！", "DATA/SAVE/SAVEDATA3.dat");
-}
-
-//セーブデータ・ロード画面ループ
-void SAVEDATA_LOAD_LOOP() {
-
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && GAMEMENU_COUNT == 0) {
-
-			//背景描画
-			DrawGraph(0, 0, SAVETITLE, TRUE);
-
-			//カーソル描画
-			SAVE_LOAD_MENU(Cr, SAVE_y);
-
-			//セーブデータ一覧描画
-			SAVEDATA_DRAW();
-
-			//マウス操作
-			Mouse_Move();
-
-			//セーブ画面(キー操作)
-			SAVEDATA_KEY_MOVE();
-
-			//画面クリア処理
-			SCREEN_CLEAR();
-
-			//セーブデータ１のロード
-			if (SAVE_y == save_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == save_base_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//セーブデータ１をロード
-				SAVEDATA_1_LOAD();
-			}
-
-			//セーブデータ２のロード
-			if (SAVE_y == (save_base_pos_y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 2) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//セーブデータ2をロード
-				SAVEDATA_2_LOAD();
-			}
-
-			//セーブデータ３のロード
-			if (SAVE_y == (save_base_pos_y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 3) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-				//セーブデータ2をロード
-				SAVEDATA_3_LOAD();
-			}
-
-			//戻る
-			if (SAVE_y == (save_base_pos_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-					SAVE = LINKS_MessageBox_YESNO("戻りますか？");
-
-					if (SAVE == IDYES) {
-
-						ClearDrawScreen();
-
-						//ショートカットキー時の事後処理
-						SHORTCUT_KEY_DRAW();
-						break;
-					}
-			}
-		}
-}
-
-//セーブデータロード関数
-int SAVEDATA_LOAD() {
-
-	//ロード前のメッセージ
-	SAVEDATA_LOAD_MESSAGE();
-
-	if (SAVE == IDYES) {
-
-		ClearDrawScreen();
-		SAVE_y = save_base_pos_y;
-
-		//セーブデータのスクリーンショット読込
-		SAVEDATA_SCREENSHOT_READ();
-
-		//セーブデータ・ロード画面ループ
-		SAVEDATA_LOAD_LOOP();
-	}
-	return 0;
-}
-
-//削除前のメッセージ
-void SAVEDATA_DELETE_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("セーブデータ削除画面に移行しますか？");
-}
-
-//削除後のメッセージ
-void DELETE_MESSAGE() {
-
-	LINKS_MessageBox_OK("削除しました！");
-}
-
-//削除後の処理(サウンドノベル風)
-void DELETE_SOUNDNOVEL() {
-
-	//サウンドノベル風描画時の処理
-	SOUNDNOVEL();
-
-	GAMEMENU_COUNT = 1;
-}
-
-//削除後の処理(ウインドウ風)
-void DELETE_WINDOWNOVEL() {
-
-	//削除後の処理(ウインドウ風)
-	WINDOWNOVEL();
-
-	GAMEMENU_COUNT = 1;
-}
-
-static void DeleteSaveData(const char* Message, const char* ImagePath, const char* SaveDataPath) {
-	SAVE = LINKS_MessageBox_YESNO(Message);
-
-	if (SAVE == IDYES) {
-		remove(SaveDataPath);
-		remove(ImagePath);
-		//削除後のメッセージ
-		DELETE_MESSAGE();
-		//削除後の処理(サウンドノベル風)
-		DELETE_SOUNDNOVEL();
-		//削除後の処理(ウインドウ風)
-		DELETE_WINDOWNOVEL();
-	}
-}
-//セーブデータ1削除
-void SAVEDATA_1_DELETE(){
-	DeleteSaveData("セーブデータ1を削除しますか？", "DATA/SAVE/SAVESNAP1.png", "DATA/SAVE/SAVEDATA1.dat");
-}
-
-//セーブデータ2削除
-void SAVEDATA_2_DELETE() {
-	DeleteSaveData("セーブデータ2を削除しますか？", "DATA/SAVE/SAVESNAP2.png", "DATA/SAVE/SAVEDATA2.dat");
-}
-
-//セーブデータ3削除
-void SAVEDATA_3_DELETE() {
-	DeleteSaveData("セーブデータ3を削除しますか？", "DATA/SAVE/SAVESNAP3.png", "DATA/SAVE/SAVEDATA3.dat");
-}
-
-//セーブデータ削除画面ループ
-void SAVEDATA_DELETE_LOOP() {
-
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && GAMEMENU_COUNT == 0) {
-
-		//背景描画
-		DrawGraph(0, 0, SAVETITLE, TRUE);
-
-		//カーソル描画
-		SAVE_LOAD_MENU(Cr, SAVE_y);
-
-		//セーブデータ一覧描画
-		SAVEDATA_DRAW();
-
-		//マウス操作
-		Mouse_Move();
-
-		//キー操作関連
-		SAVEDATA_KEY_MOVE();
-
-		//画面クリア処理
-		SCREEN_CLEAR();
-
-		if (SAVE_y == save_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == save_base_pos_y && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-			//セーブデータ1削除処理
-			SAVEDATA_1_DELETE();
+		//ロード
+		if (GAME_y == (game_menu_base_pos_y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 2) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+			//セーブデータロード処理
+			SAVEDATA_LOAD();
+			WaitTimer(300);
 		}
 
-		if (SAVE_y == (save_base_pos_y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+		//セーブデータ削除
+		if (GAME_y == (game_menu_base_pos_y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 3) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-			//セーブデータ2削除処理
-			SAVEDATA_2_DELETE();
+			//セーブデータ削除処理
+			SAVEDATA_DELETE();
+			WaitTimer(300);
 		}
 
-		if (SAVE_y == (save_base_pos_y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+		//既読スキップ
+		if (GAME_y == (game_menu_base_pos_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-			//セーブデータ3削除処理
-			SAVEDATA_3_DELETE();
+			//既読データの読み込み
+			SKIP_READ_LOAD();
+
+			//既読済みの部分を判定して、スキップ
+			SKIP_READ_CHECK();
+			WaitTimer(300);
 		}
 
-		if (SAVE_y == (save_base_pos_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
+		//スキップ
+		if (GAME_y == (game_menu_base_pos_y * 5) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 5) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-			SAVE = LINKS_MessageBox_YESNO("戻りますか？");
-
-			if (SAVE == IDYES) {
-
-				ClearDrawScreen();
-
-				//ショートカットキー時の事後処理
-				SHORTCUT_KEY_DRAW();
-				break;
-			}
+			//スキップ処理
+			SKIP_START();
+			WaitTimer(300);
 		}
-	}
-}
 
-//セーブデータ削除処理
-void SAVEDATA_DELETE() {
+		//オート
+		if (GAME_y == (game_menu_base_pos_y * 6) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 6) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-	//削除前のメッセージ
-	SAVEDATA_DELETE_MESSAGE();
-
-	if (SAVE == IDYES) {
-
-		ClearDrawScreen();
-		SAVE_y = save_base_pos_y;
-
-		//セーブ時のスクリーンショット読込
-		SAVEDATA_SCREENSHOT_READ();
-
-		//セーブデータ削除画面ループ
-		SAVEDATA_DELETE_LOOP();
-	}
-}
-
-//既読スキップメッセージ
-void SKIP_READ_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("既読スキップを実行しますか？");
-}
-
-//既読スキップ後の処理(サウンドノベル風)
-void SKIP_READ_SOUNDNOVEL() {
-
-	GAMEMENU_COUNT = 1;
-
-	//サウンドノベル風描画時の処理
-	SOUNDNOVEL();
-}
-
-//既読スキップ後の処理(ウインドウ風)
-void SKIP_READ_WINDOWNOVEL() {
-
-	GAMEMENU_COUNT = 1;
-
-	//既読スキップ後の処理(ウインドウ風)
-	WINDOWNOVEL();
-}
-
-//既読スキップ判定
-void SKIP_READ_CHECK() {
-
-	//既読スキップメッセージ
-	SKIP_READ_MESSAGE();
-
-	const SkipDataConv* conv = reinterpret_cast<const SkipDataConv*>(&TextIgnoredFlag);
-	//既読データ読み込み時の判定
-	if (IDYES == SAVE && 0 < EndFlag && EndFlag <= countof(conv->arr) && 1 == conv->arr[EndFlag - 1]) {
-		skip_auto = 2;
-	}
-	//ショートカットキー時の事後処理
-	SHORTCUT_KEY_DRAW();
-}
-
-//スキップ処理
-void SKIP_START() {
-
-	SAVE = LINKS_MessageBox_YESNO("スキップを実行しますか？");
-
-	if (SAVE == IDYES) {
-
-		skip_auto = 2;
-		GAMEMENU_COUNT = 1;
-
-		//サウンドノベル風描画時の処理
-		SOUNDNOVEL();
-
-		//ウインドウ風描画時の処理
-		WINDOWNOVEL();
-	}
-}
-
-//オート処理メッセージ
-void AUTO_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("オートモードを実行しますか？");
-}
-
-//オート処理
-void AUTO_START() {
-
-	//オート処理メッセージ
-	AUTO_MESSAGE();
-
-	if (SAVE == IDYES) {
-
-		skip_auto = 1;
-		GAMEMENU_COUNT = 1;
-
-		//サウンドノベル風描画時の処理
-		SOUNDNOVEL();
-
-		//既読スキップ後の処理(ウインドウ風)
-		WINDOWNOVEL();
-	}
-}
-
-//オート/スキップ停止処理メッセージ
-void AUTO_SKIP_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("スキップ又はオートモードを終了しますか？");
-}
-
-//オート/スキップ停止処理
-void AUTO_SKIP_STOP() {
-
-	//オート/スキップ停止処理メッセージ
-	AUTO_SKIP_MESSAGE();
-
-	if (SAVE == IDYES) {
-
-		skip_auto = 0;
-		GAMEMENU_COUNT = 1;
-
-		//サウンドノベル風描画時の処理
-		SOUNDNOVEL();
-
-		//ウインドウ風描画時の処理
-		WINDOWNOVEL();
-	}
-}
-
-//バックログ参照メッセージ
-void BACKLOG_MESSAGE() {
-
-	SAVE = LINKS_MessageBox_YESNO("バックログ画面に移行しますか？");
-}
-
-//バックログ(キー操作関連)
-void BACKLOG_KEY_MOVE() {
-
-	//バックログ（キー操作関連）
-	if (LOG != 10 && CheckHitKey(KEY_INPUT_UP) == 1 || LOG != 10 && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-		LOG++;
-		WaitTimer(300);
-	}
-
-	if (LOG != 1 && CheckHitKey(KEY_INPUT_DOWN) == 1 || LOG != 1 && (GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
-		LOG--;
-		WaitTimer(300);
-	}
-}
-
-//バックログの描画関数
-void BACKLOG_SCREENSHOT_DRAW() {
-	if (0 < LOG && LOG <= 10) {
-		DrawGraph(0, 0, BACKLOG[LOG - 1], TRUE);
-		char Message[15] = {};
-#ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
-		sprintf_s(Message, countof(Message), "バックログ%d", LOG);
-#else
-		snprintf(FilePathString, countof(Message), format, i);
-#endif
-		DrawString(0, 450, Message, Cr);
-	}
-}
-
-//バックログ参照
-void BACKLOG_DRAW() {
-
-	//バックログ参照メッセージ
-	BACKLOG_MESSAGE();
-
-	if (SAVE == IDYES) {
-
-		WaitTimer(600);
-
-		LOG = 1;
-
-		while (ProcessMessage() == 0) {
-
-			//バックログ（キー操作関連）
-			BACKLOG_KEY_MOVE();
-
-			//バックログの描画関数
-			BACKLOG_SCREENSHOT_DRAW();
-
-			//画面クリア処理
-			SCREEN_CLEAR();
-
-			//終了処理
-			if (CheckHitKey(KEY_INPUT_RETURN) == 1 || (GetMouseInput() & MOUSE_INPUT_RIGHT) != 0 && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
-
-				ClearDrawScreen();
-
-				DeleteGraph(BACKLOG[0]);
-
-				WaitTimer(300);
-
-				//ショートカットキー時の事後処理
-				SHORTCUT_KEY_DRAW();
-				break;
-			}
+			//オート処理
+			AUTO_START();
+			WaitTimer(300);
 		}
-	}
-}
 
-//タイトルに戻る
-void GAMEMENU_TITLE_BACK() {
+		//オート/スキップ停止
+		if (GAME_y == (game_menu_base_pos_y * 7) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 7) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-	SAVE = LINKS_MessageBox_YESNO("タイトル画面に戻りますか？");
-
-	if (SAVE == IDYES) {
-
-		ClearDrawScreen();
-
-		if (SHORTCUT_KEY_FLAG == 1)
-			StopSoundMem(BACKGROUNDMUSIC);
-
-		GAMEMENU_COUNT = 1;
-		EndFlag = 99;
-		y = menu_init_pos_y;
-		skip_auto = 0;
-		CHARACTER = 0;
-		BACKGROUND = 0;
-		BACKGROUNDMUSIC = 0;
-	}
-}
-
-//ゲームに戻る
-void GAMEMENU_GAME_BACK() {
-
-	SAVE = LINKS_MessageBox_YESNO("ゲームに戻りますか？");
-
-	if (SAVE == IDYES) {
-
-		GAMEMENU_COUNT = 1;
-
-		//サウンドノベル風描画時の処理
-		SOUNDNOVEL();
-
-		//ウインドウ風描画時の処理
-		WINDOWNOVEL();
-	}
-}
-
-//ゲーム終了
-void GAMEMENU_GAME_FINISH() {
-
-	SAVE = LINKS_MessageBox_YESNO("終了しますか？");
-
-	if (SAVE == IDYES) {
-
-		//コンティニュー用セーブ
-		CONTINUE_SAVE();
-
-		EndFlag = 99999;
-
-		GAMEMENU_COUNT = 1;
-	}
-}
-
-//終了ウインドウ
-int GAME_FINISH() {
-
-	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {
-
-		SAVE = LINKS_MessageBox_YESNO("終了しますか？");
-
-		if (SAVE == IDYES) {
-
-			//コンティニュー用セーブ
-			CONTINUE_SAVE();
-
-			EndFlag = 99999;
-
-			if (GAMEMENU_COUNT == 0)
-				GAMEMENU_COUNT = 1;
+			//オート/スキップ停止処理
+			AUTO_SKIP_STOP();
+			WaitTimer(300);
 		}
-	}
-
-	return 0;
-}
-
-//各ゲームメニュー選択時処理
-void GAMEMENU_CHOICE() {
-
-	//セーブ
-	if (GAME_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == game_menu_base_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		//セーブデータセーブ処理
-		SAVEDATA_SAVE();
-		WaitTimer(300);
-	}
-
-	//ロード
-	if (GAME_y == (game_menu_base_pos_y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 2) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		//セーブデータロード処理
-		SAVEDATA_LOAD();
-		WaitTimer(300);
-	}
-
-	//セーブデータ削除
-	if (GAME_y == (game_menu_base_pos_y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 3) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		//セーブデータ削除処理
-		SAVEDATA_DELETE();
-		WaitTimer(300);
-	}
-
-	//既読スキップ
-	if (GAME_y == (game_menu_base_pos_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 4) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		//既読データの読み込み
-		SKIP_READ_LOAD();
-
-		//既読済みの部分を判定して、スキップ
-		SKIP_READ_CHECK();
-		WaitTimer(300);
-	}
-
-	//スキップ
-	if (GAME_y == (game_menu_base_pos_y * 5) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 5) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		//スキップ処理
-		SKIP_START();
-		WaitTimer(300);
-	}
-
-	//オート
-	if (GAME_y == (game_menu_base_pos_y * 6) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 6) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		//オート処理
-		AUTO_START();
-		WaitTimer(300);
-	}
-
-	//オート/スキップ停止
-	if (GAME_y == (game_menu_base_pos_y * 7) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 7) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-		//オート/スキップ停止処理
-		AUTO_SKIP_STOP();
-		WaitTimer(300);
-	}
-
-	//バックログ参照
-	if (GAME_y == (game_menu_base_pos_y * 8) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 8) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 		//バックログ参照
-		BACKLOG_DRAW();
-		WaitTimer(300);
-	}
+		if (GAME_y == (game_menu_base_pos_y * 8) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 8) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-	//設定
-	if (GAME_y == (game_menu_base_pos_y * 9) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 9) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			//バックログ参照
+			BACKLOG_DRAW();
+			WaitTimer(300);
+		}
 
-		//設定画面の呼び出し
-		CONFIG();
-		WaitTimer(300);
-	}
+		//設定
+		if (GAME_y == (game_menu_base_pos_y * 9) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 9) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-	//タイトルに戻る
-	if (GAME_y == (game_menu_base_pos_y * 10) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 10) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			//設定画面の呼び出し
+			CONFIG();
+			WaitTimer(300);
+		}
 
 		//タイトルに戻る
-		GAMEMENU_TITLE_BACK();
-		WaitTimer(300);
-	}
+		if (GAME_y == (game_menu_base_pos_y * 10) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 10) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-	//ゲームに戻る
-	if (GAME_y == (game_menu_base_pos_y * 11) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 11) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			//タイトルに戻る
+			GAMEMENU_TITLE_BACK();
+			WaitTimer(300);
+		}
 
 		//ゲームに戻る
-		GAMEMENU_GAME_BACK();
-		WaitTimer(300);
-	}
+		if (GAME_y == (game_menu_base_pos_y * 11) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 11) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-	//ゲーム終了
-	if (GAME_y == (game_menu_base_pos_y * 12) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 12) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			//ゲームに戻る
+			GAMEMENU_GAME_BACK();
+			WaitTimer(300);
+		}
 
 		//ゲーム終了
-		GAMEMENU_GAME_FINISH();
-		WaitTimer(300);
-	}
+		if (GAME_y == (game_menu_base_pos_y * 12) && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == (game_menu_base_pos_y * 12) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-	//エスケープでゲーム終了
-	GAME_FINISH();
+			//ゲーム終了
+			GAMEMENU_GAME_FINISH();
+			WaitTimer(300);
+		}
+
+		//エスケープでゲーム終了
+		GAME_FINISH();
+	}
 }
 
 //ゲームメニュー
@@ -2112,13 +1146,13 @@ int GAMEMENU() {
 	//ゲームメニューを開く
 	if (CheckHitKey(KEY_INPUT_BACK) == 1 || (GetMouseInput() & MOUSE_INPUT_RIGHT) != 0) {
 
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		ClearDrawScreen();
-		StopSoundMem(BACKGROUNDMUSIC);
+		backgroundMusic.stop();
 		GAME_y = game_menu_base_pos_y;
 
 		//ゲームメニューループ
-		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && GAMEMENU_COUNT == 0) {
+		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && false == GAMEMENU_COUNT) {
 
 			//ゲームメニューの描画
 			GAMEMENU_DRAW();
@@ -2156,7 +1190,7 @@ void sentakusi(int Cr, int y) {
 }
 
 // 改行関数
-int Kaigyou(void)
+int Kaigyou()
 {
 	if (ConfigData.soundnovel_winownovel == 0) {
 
@@ -2204,719 +1238,500 @@ int Kaigyou(void)
 	return 0;
 }
 
-//スクリプトタグ処理(立ち絵描画)
-void SCRIPT_OUTPUT_CHARACTER_DRAW() {
+namespace {
+	//スクリプトタグ処理(立ち絵描画)
+	void SCRIPT_OUTPUT_CHARACTER_DRAW() {
 
-	//サウンドノベル風時の処理
-	if (ConfigData.soundnovel_winownovel == 0) {
-		//背景画像を切り抜き、立ち絵の上にペースト
-		CHARACTER_DUMMY = DerivationGraph(charactor_pos_x, charactor_pos_y, character_graph_size_x, character_graph_size_y, BACKGROUND);
-		DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER_DUMMY, TRUE);
-
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER, TRUE);
-
-	}
-
-	//ウインドウ風時の処理
-	if (ConfigData.soundnovel_winownovel == 1) {
-		//背景画像を切り抜き、立ち絵の上にペースト
-		CHARACTER_DUMMY = DerivationGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, character_graph_size_x, character_graph_size_y, BACKGROUND);
-		DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER_DUMMY, TRUE);
-
-		// 読みこんだグラフィックを画面左上に描画
-		DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER, TRUE);
-	}
-
-	//文字を進める
-	CP++;
-
-}
-
-//スクリプトタグ処理(背景描画)
-void SCRIPT_OUTPUT_BACKGROUND() {
-
-	// 読みこんだグラフィックを画面左上に描画
-	DrawGraph(0, 0, BACKGROUND, TRUE);
-
-	//ウインドウ風時の処理
-	if (ConfigData.soundnovel_winownovel == 1) {
-
-		//ウインドウの色選択
-		int	Window_Color = GetColor(0, 0, 0);
-
-		//ウインドウの描画
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-	}
-
-	//文字を進める
-	CP++;
-
-}
-
-//スクリプトタグ処理(BGM再生)
-void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
-
-	// 音量の設定
-	ChangeVolumeSoundMem(255 * ConfigData.bgm_vol / 100, BACKGROUNDMUSIC);
-
-	//BGM再生
-	PlaySoundMem(BACKGROUNDMUSIC, DX_PLAYTYPE_LOOP);
-
-	//文字を進める
-	CP++;
-
-}
-
-//スクリプトタグ処理(SE再生)
-void SCRIPT_OUTPUT_SOUNDEFFECT() {
-
-	StopSoundMem(SOUNDEFFECT);
-
-	// 音量の設定
-	ChangeVolumeSoundMem(255 * ConfigData.se_vol / 100, SOUNDEFFECT);
-
-	//SEの再生
-	PlaySoundMem(SOUNDEFFECT, DX_PLAYTYPE_BACK);
-
-	//文字を進める
-	CP++;
-
-}
-
-//セーブデータ用スクリーンショット保存
-void SAVESNAP() {
-
-	//セーブデータ用スクリーンショット保存
-	if (SAVESNAP_HANDLE1 == 1) {
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP1.png", 0);
-		SAVESNAP_HANDLE1 = 0;
-	}
-
-	if (SAVESNAP_HANDLE2 == 1) {
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP2.png", 0);
-		SAVESNAP_HANDLE2 = 0;
-	}
-
-	if (SAVESNAP_HANDLE3 == 1) {
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP3.png", 0);
-		SAVESNAP_HANDLE3 = 0;
-	}
-}
-
-//スクリプトタグ処理(クリック待ち)
-void SCRIPT_UTPUT_KEYWAIT() {
-
-	//スキップ・オート変数がＯＦＦの場合
-	if (skip_auto == 0) {
-
-		//セーブデータ用スクリーンショット保存
-		SAVESNAP();
-
-		// ボタン押し待ちおよび参照文字位置を一つ進める
-		WaitKey();
-
-		//エンターキーで次へ
-		if (CheckHitKey(KEY_INPUT_RETURN) == 1 || (GetMouseInput() & MOUSE_INPUT_LEFT) == 1)
-			CP++;
-	}
-
-	//スキップ・オート変数がＯＮの場合（オートモード）
-	if (skip_auto == 1) {
-
-		//セーブデータ用スクリーンショット保存
-		SAVESNAP();
-
-		//少し待って、次の文字列を描画
-		WaitTimer(1800 * ConfigData.auto_speed / 100);
+		//サウンドノベル風時の処理
+		if (ConfigData.soundnovel_winownovel == 0) {
+			//背景画像を切り抜き、立ち絵の上にペースト
+			const int charactorDummy = background.DerivationGraph(charactor_pos_x, charactor_pos_y, character_graph_size_x, character_graph_size_y);
+			DxLib::DrawGraph(charactor_pos_x, charactor_pos_y, charactorDummy, true);
+			DxLib::DeleteGraph(charactorDummy);
+			// 読みこんだグラフィックを画面左上に描画
+			charactor.DrawGraph(charactor_pos_x, charactor_pos_y, true);
+		}
+		//ウインドウ風時の処理
+		if (ConfigData.soundnovel_winownovel == 1) {
+			//背景画像を切り抜き、立ち絵の上にペースト
+			const int charactorDummy = background.DerivationGraph(charactor_pos_x, 0, character_graph_size_x, character_graph_size_y);
+			DxLib::DrawGraph(charactor_pos_x, charactor_pos_y, charactorDummy, true);
+			DxLib::DeleteGraph(charactorDummy);
+			// 読みこんだグラフィックを画面左上に描画
+			charactor.DrawGraph(charactor_pos_x, 0, true);
+		}
+		//文字を進める
 		CP++;
 	}
 
-	//スキップ・オート変数がＯＮの場合(スキップ)
-	if (skip_auto == 2) {
+	//スクリプトタグ処理(背景描画)
+	void SCRIPT_OUTPUT_BACKGROUND() {
 
-		//セーブデータ用スクリーンショット保存
-		SAVESNAP();
+		// 読みこんだグラフィックを画面左上に描画
+		background.DrawGraph(0, 0, true);
+		//ウインドウ風時の処理
+		if (ConfigData.soundnovel_winownovel == 1) {
+			static const auto windowColor = GetColor(0, 0, 0);
+			DrawBox(0, 400, 640, 480, windowColor, TRUE);
+		}
+		//文字を進める
+		CP++;
 
+	}
+
+	//スクリプトタグ処理(BGM再生)
+	void SCRIPT_OUTPUT_BACKGROUNDMUSIC() {
+		backgroundMusic.changeVolume(255 * ConfigData.bgm_vol / 100);
+		backgroundMusic.play(DX_PLAYTYPE_LOOP);
+		//文字を進める
 		CP++;
 	}
 
-}
+	//スクリプトタグ処理(SE再生)
+	void SCRIPT_OUTPUT_SOUNDEFFECT() {
+		soundEffect.stop();
+		soundEffect.changeVolume(255 * ConfigData.se_vol / 100);
+		soundEffect.play(DX_PLAYTYPE_BACK);
+		//文字を進める
+		CP++;
+	}
 
-//バックログ取得関数
-void BACKLOG_GET() {
-	if (0 < BACKLOG_COUNT) {
-		const int BacklogCount = (10 < BACKLOG_COUNT) ? 10 : BACKLOG_COUNT;
-		if (1 < BacklogCount) {
-			BACKLOG_BACKGROUND = BACKLOG[1];
-			for (int i = BacklogCount - 1; 1 < i; --i) {
-				BACKLOG[i] = DerivationGraph(0, 0, 640, 480, BACKLOG[i - 1]);
+	//スクリプトタグ処理(ゲーム画面のクリア処理)
+	void SCRIPT_OUTPUT_SCREENCLEAR() {
+
+		SetDrawScreen(DX_SCREEN_BACK);
+
+		incrementBackLogCount();
+
+		//バックログ取得関数
+		BACKLOG_GET();
+
+		// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+		ClearDrawScreen();
+		DrawPointY = 0;
+		DrawPointX = 0;
+		charactor.reset();
+		background.reset();
+		CP++;
+
+		SetDrawScreen(DX_SCREEN_FRONT);
+
+	}
+
+	//スクリプトタグ処理(ゲームオーバー)
+	void SCRIPT_OUTPUT_GAMEOVER() {
+		background.activeResource(GAMEOVER);
+		background.DrawGraph(0, 0, true);
+		if (ConfigData.soundnovel_winownovel == 1) {
+			static const auto windowColor = GetColor(0, 0, 0);
+			DrawBox(0, 400, 640, 480, windowColor, TRUE);
+		}
+		CP++;
+	}
+
+	//スクリプトタグ処理(エンディング)
+	void SCRIPT_OUTPUT_ENDING() {
+
+		PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
+		CP++;
+	}
+
+	//スクリプトタグ処理(BGM再生終了)
+	void SCRIPT_OUTPUT_BGMSTOP() {
+		backgroundMusic.stop();
+		backgroundMusic.reset();
+		CP++;
+	}
+
+	//スクリプトタグ処理(SE再生終了)
+	void SCRIPT_OUTPUT_SESTOP() {
+		soundEffect.stop();
+		CP++;
+	}
+
+	//選択肢ループ用描画処理(サウンドノベル風)
+	void SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL() {
+		if (ConfigData.soundnovel_winownovel == 0 && SAVE_CHOICE == 1) {
+			background.DrawGraph(0, 0, true);
+			charactor.DrawGraph(charactor_pos_x, charactor_pos_y, true);
+		}
+	}
+
+	//選択肢ループ用描画処理(ウインドウ風)
+	void SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL() {
+		if (ConfigData.soundnovel_winownovel == 1 && SAVE_CHOICE == 1) {
+			static const auto windowColor = GetColor(0, 0, 0);
+			background.DrawGraph(0, 0, true);
+			DxLib::DrawBox(0, 400, 640, 480, windowColor, TRUE);
+			charactor.DrawGraph(charactor_pos_x, 0, true);
+		}
+	}
+
+	//選択肢ループ用描画処理
+	void SCRIPT_OUTPUT_CHOICE_LOOP_DRAW() {
+
+		//選択肢ループ用描画処理(サウンドノベル風)
+		SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL();
+
+		//選択肢ループ用描画処理(ウインドウノベル風)
+		SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL();
+	}
+
+	//選択肢ファイルの読み込み(描画用)
+	void SCRIPT_OUTPUT_CHOICE_READ() {
+		if (1 <= EndFlag && EndFlag <= 7) {
+			for (int i : {0, 1}) {
+				Choices[i] = FileRead_open(ChoiceFiles[EndFlag - 1][i]);
+				FileRead_gets(ChoiceStrings[i], countof(ChoiceStrings[i]), Choices[i]);
 			}
-			BACKLOG[1] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-			SaveDrawScreen(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-		}
-		else {
-			SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-		}
-		BACKLOG_HANDLE = BACKLOG[0] = LoadGraph("DATA/BACKLOG/BACKLOG1.png");
-	}
-}
-
-//スクリプトタグ処理(ゲーム画面のクリア処理)
-void SCRIPT_OUTPUT_SCREENCLEAR() {
-
-	SetDrawScreen(DX_SCREEN_BACK);
-
-	BACKLOG_COUNT++;
-
-	//バックログ取得関数
-	BACKLOG_GET();
-
-	// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-	ClearDrawScreen();
-	DrawPointY = 0;
-	DrawPointX = 0;
-	CHARACTER = 0;
-	BACKGROUND = 0;
-	CP++;
-
-	SetDrawScreen(DX_SCREEN_FRONT);
-
-}
-
-//スクリプトタグ処理(少し待つ)
-void SCRIPT_OUTPUT_WAIT() {
-
-	//オート又は通常時、3秒待つ
-	if (skip_auto != 2) {
-		WaitTimer(1800);
-		CP++;
-	}
-
-	//スキップ時、3秒待たずに次へ
-	if (skip_auto == 2)
-		CP++;
-}
-
-//スクリプトタグ処理(ゲームオーバー)
-void SCRIPT_OUTPUT_GAMEOVER() {
-
-	BACKGROUND = GAMEOVER;
-	DrawGraph(0, 0, BACKGROUND, TRUE);
-
-	if (ConfigData.soundnovel_winownovel == 1) {
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-	}
-
-	CP++;
-}
-
-//スクリプトタグ処理(エンディング)
-void SCRIPT_OUTPUT_ENDING() {
-
-	PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
-	CP++;
-}
-
-//スクリプトタグ処理(BGM再生終了)
-void SCRIPT_OUTPUT_BGMSTOP() {
-
-	StopSoundMem(BACKGROUNDMUSIC);
-	BACKGROUNDMUSIC = 0;
-	CP++;
-}
-
-//スクリプトタグ処理(SE再生終了)
-void SCRIPT_OUTPUT_SESTOP() {
-
-	StopSoundMem(SOUNDEFFECT);
-	CP++;
-}
-
-//選択肢ループ用描画処理(サウンドノベル風)
-void SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL() {
-
-	if (ConfigData.soundnovel_winownovel == 0 && SAVE_CHOICE == 1) {
-
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-
-		DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER, TRUE);
-	}
-}
-
-//選択肢ループ用描画処理(ウインドウ風)
-void SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL() {
-
-	if (ConfigData.soundnovel_winownovel == 1 && SAVE_CHOICE == 1) {
-
-		int	Window_Color = GetColor(0, 0, 0);
-
-		DrawGraph(0, 0, BACKGROUND, TRUE);
-
-		DrawBox(0, 400, 640, 480, Window_Color, TRUE);
-
-		DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER, TRUE);
-	}
-}
-
-//選択肢ループ用描画処理
-void SCRIPT_OUTPUT_CHOICE_LOOP_DRAW() {
-
-	//選択肢ループ用描画処理(サウンドノベル風)
-	SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL();
-
-	//選択肢ループ用描画処理(ウインドウノベル風)
-	SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL();
-}
-
-//選択肢ファイルの読み込み(描画用)
-void SCRIPT_OUTPUT_CHOICE_READ() {
-	if (1 <= EndFlag && EndFlag <= 7) {
-		for (int i : {0, 1}) {
-			Choices[i] = FileRead_open(ChoiceFiles[EndFlag - 1][i]);
-			FileRead_gets(ChoiceStrings[i], countof(ChoiceStrings[i]), Choices[i]);
 		}
 	}
-}
 
-//セーブデータ用スクリーンショット取得(選択肢画面)
-void SCRIPT_OUTPUT_CHOICE_LOOP_SAVESNAP() {
+	//キー操作(選択肢画面用)
+	void SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE() {
 
-	if (SAVESNAP_CHOICE == 1) {
-
-		SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/SAVE/SAVESNAP_CHOICE.png", 0);
-
-		SAVESNAP_CHOICE = LoadGraph("DATA/SAVE/SAVESNAP_CHOICE.png", 0);
-	}
-}
-
-//キー操作(選択肢画面用)
-void SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE() {
-
-	if (Key[KEY_INPUT_DOWN] == 1) {
-		y += cursor_move_unit;
-		if (y == (choise_pos_y[1] + cursor_move_unit))                         // y座標が260なら(選択が一番下なら)
-			y = choise_pos_y[0];                        // 選択座標を一番上に
-	}
-	if (Key[KEY_INPUT_UP] == 1) {
-		y -= cursor_move_unit;
-		if (y == (choise_pos_y[0] - cursor_move_unit))
-			y = choise_pos_y[1];
-	}
-}
-
-//選択後の分岐処理(選択肢↑)
-void SCRIPT_OUTPUT_CHOICE_BRANCH_UP() {
-	if (1 <= EndFlag && EndFlag <= 7) {
-		SAVE_CHOICE = 0;
-		SAVESNAP_CHOICE = 0;
-		EndFlag *= 2;
-	}
-}
-
-//選択後の分岐処理(選択肢↓)
-void SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN() {
-	if (1 <= EndFlag && EndFlag <= 7) {
-		SAVE_CHOICE = 0;
-		SAVESNAP_CHOICE = 0;
-		EndFlag = EndFlag * 2 + 1;
-	}
-}
-
-//選択肢時のバックログ取得(選択肢の読み込み)
-void SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ() {
-	if (2 <= EndFlag && EndFlag <= 15) {
-		const int index = EndFlag / 2;
-		for (int i : {0, 1}) {
-			Choices[i] = FileRead_open(ChoiceFiles[index][i]);
-			FileRead_gets(ChoiceStrings[i], countof(ChoiceStrings[i]), Choices[i]);
+		if (Key[KEY_INPUT_DOWN] == 1) {
+			y += cursor_move_unit;
+			if (y == (choise_pos_y[1] + cursor_move_unit))                         // y座標が260なら(選択が一番下なら)
+				y = choise_pos_y[0];                        // 選択座標を一番上に
+		}
+		if (Key[KEY_INPUT_UP] == 1) {
+			y -= cursor_move_unit;
+			if (y == (choise_pos_y[0] - cursor_move_unit))
+				y = choise_pos_y[1];
 		}
 	}
-}
 
-//選択肢時のバックログ取得
-void SCRIPT_OUTPUT_CHOICE_BACKLOG() {
+	//選択後の分岐処理(選択肢↑)
+	void SCRIPT_OUTPUT_CHOICE_BRANCH_UP() {
+		if (1 <= EndFlag && EndFlag <= 7) {
+			SAVE_CHOICE = 0;
+			setSaveSnapChoice(false);
+			EndFlag *= 2;
+		}
+	}
 
-	SetDrawScreen(DX_SCREEN_BACK);
-
-	//選択肢ループ用描画処理(サウンドノベル風)
-	SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL();
-
-	//選択肢ループ用描画処理(サウンドノベル風)
-	SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL();
+	//選択後の分岐処理(選択肢↓)
+	void SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN() {
+		if (1 <= EndFlag && EndFlag <= 7) {
+			SAVE_CHOICE = 0;
+			setSaveSnapChoice(false);
+			EndFlag = EndFlag * 2 + 1;
+		}
+	}
 
 	//選択肢時のバックログ取得(選択肢の読み込み)
-	SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ();
+	void SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ() {
+		if (2 <= EndFlag && EndFlag <= 15) {
+			const int index = EndFlag / 2;
+			for (int i : {0, 1}) {
+				Choices[i] = FileRead_open(ChoiceFiles[index][i]);
+				FileRead_gets(ChoiceStrings[i], countof(ChoiceStrings[i]), Choices[i]);
+			}
+		}
+	}
 
-	//選択肢の描画
-	sentakusi(Cr, y);
+	//選択肢時のバックログ取得
+	void SCRIPT_OUTPUT_CHOICE_BACKLOG() {
 
-	//バックログ取得
-	BACKLOG_GET();
+		SetDrawScreen(DX_SCREEN_BACK);
 
-	ClearDrawScreen();
-	DrawPointY = 0;
-	DrawPointX = 0;
-	BACKGROUND = 0;
-	CHARACTER = 0;
+		//選択肢ループ用描画処理(サウンドノベル風)
+		SCRIPT_OUTPUT_CHOICE_LOOP_SOUNDNOVEL();
 
-	SetDrawScreen(DX_SCREEN_FRONT);
-}
+		//選択肢ループ用描画処理(サウンドノベル風)
+		SCRIPT_OUTPUT_CHOICE_LOOP_WINDOWNOVEL();
 
-//選択肢ループ
-void SCRIPT_OUTPUT_CHOICE_LOOP() {
-
-	//選択肢ファイルの読み込み(描画用
-	SCRIPT_OUTPUT_CHOICE_READ();
-
-	while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag != 99 && EndFlag != 99999 && SAVE_CHOICE != 0) {
-
-		//選択肢ループ用描画処理
-		SCRIPT_OUTPUT_CHOICE_LOOP_DRAW();
+		//選択肢時のバックログ取得(選択肢の読み込み)
+		SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ();
 
 		//選択肢の描画
 		sentakusi(Cr, y);
 
-		//ゲームメニュー
-		GAMEMENU();
+		//バックログ取得
+		BACKLOG_GET();
 
-		//ゲーム終了
-		GAME_FINISH();
+		ClearDrawScreen();
+		DrawPointY = 0;
+		DrawPointX = 0;
+		background.reset();
+		charactor.reset();
 
-		//セーブデータ用スクリーンショット取得
-		SCRIPT_OUTPUT_CHOICE_LOOP_SAVESNAP();
-
-		//マウス操作
-		Mouse_Move();
-
-		//キー操作関連
-		SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE();
-
-		//画面クリア処理
-		SCREEN_CLEAR();
-
-		if (y == choise_pos_y[0] && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos_y[0] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-			BACKLOG_COUNT++;
-
-			//選択肢時のバックログ取得
-			SCRIPT_OUTPUT_CHOICE_BACKLOG();
-
-			//選択後の分岐処理(選択肢↑)
-			SCRIPT_OUTPUT_CHOICE_BRANCH_UP();
-			CP++;
-			break;
-		}
-
-		if (y == choise_pos_y[1] && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos_y[1] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
-
-			BACKLOG_COUNT++;
-
-			//選択肢時のバックログ取得
-			SCRIPT_OUTPUT_CHOICE_BACKLOG();
-
-			//選択後の分岐処理(選択肢↑)
-			SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN();
-			CP++;
-			break;
-		}
-
-	}
-}
-
-//スクリプトタグ処理(選択肢処理)
-void SCRIPT_OUTPUT_CHOICE() {
-
-	int temp_CHARACTER = CHARACTER;
-	int temp_BACKGROUND = BACKGROUND;
-
-	y = choise_init_pos_y;
-
-	if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
-
-		SAVE_CHOICE = 1;
-		SAVESNAP_CHOICE = 1;
-
-		//選択肢ループ
-		SCRIPT_OUTPUT_CHOICE_LOOP();
+		SetDrawScreen(DX_SCREEN_FRONT);
 	}
 
-	if (EndFlag == 8 || EndFlag == 9 || EndFlag == 10 || EndFlag == 11 || EndFlag == 12 || EndFlag == 13 || EndFlag == 14 || EndFlag == 15)
-		CP++;
-}
+	//選択肢ループ
+	void SCRIPT_OUTPUT_CHOICE_LOOP() {
 
-//スクリプトタグ処理(終了文字)
-void SCRIPT_OUTPUT_END() {
-	SkipDataConv* conv = reinterpret_cast<SkipDataConv*>(&TextIgnoredFlag);
-	if (1 <= EndFlag && EndFlag <= countof(conv->arr)) {
-		conv->arr[EndFlag] = 1;
-	}
-	SKIP_READ_SAVE();
-	// 終了フラグを立てるおよび参照文字位置を一つ進める
-	EndFlag = 99999;
-	CP++;
-}
+		//選択肢ファイルの読み込み(描画用
+		SCRIPT_OUTPUT_CHOICE_READ();
 
-//立ち絵クリア処理
-void SCRIPT_OUTPUT_CHARACTER_REMOVE() {
+		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag != 99 && EndFlag != 99999 && SAVE_CHOICE != 0) {
 
-	//サウンドノベル風時の処理
-	if (ConfigData.soundnovel_winownovel == 0) {
-		CHARACTER_DUMMY = DerivationGraph(charactor_pos_x, charactor_pos_y, character_graph_size_x, character_graph_size_y, BACKGROUND);
-		DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER_DUMMY, TRUE);
-		CP++;
-	}
+			//選択肢ループ用描画処理
+			SCRIPT_OUTPUT_CHOICE_LOOP_DRAW();
 
-	//ウインドウ風時の処理
-	if (ConfigData.soundnovel_winownovel == 1) {
-		CHARACTER_DUMMY = DerivationGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, character_graph_size_x, character_graph_size_y, BACKGROUND);
-		DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER_DUMMY, TRUE);
-		CP++;
-	}
-}
+			//選択肢の描画
+			sentakusi(Cr, y);
 
-//キャラクター名描画処理
-void SCRIPT_OUTPUT_CHARACTER_NAME() {
+			//ゲームメニュー
+			GAMEMENU();
 
-	//サウンドノベル風時の処理
-	if (ConfigData.soundnovel_winownovel == 0) {
-		SP++;
-		CP++;
-	}
+			//ゲーム終了
+			GAME_FINISH();
 
-	//ウインドウ風時の処理
-	if (ConfigData.soundnovel_winownovel == 1) {
+			//セーブデータ用スクリーンショット取得
+			SCRIPT_OUTPUT_CHOICE_LOOP_SAVESNAP();
 
-		//キャラクター名を読み込む
-		static_assert(10 <= countof(CHARACTER_NAME) && 9 <= countof(String[0]), "array length must be over 10");
-		assert(countof(String[SP]) < CP + 10);
-		memcpy(CHARACTER_NAME, &String[SP][CP + 1], 9);
-		CHARACTER_NAME[9] = '\0';
+			//マウス操作
+			Mouse_Move();
 
-		//キャラクター名の背景
-		const int Window_Color = GetColor(0, 0, 0);
-		DrawBox(30, 360, 150, 385, Window_Color, TRUE);
+			//キー操作関連
+			SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE();
 
-		// １文字描画
-		DrawString(30, 360, CHARACTER_NAME, GetColor(255, 255, 255));
+			//画面クリア処理
+			SCREEN_CLEAR();
 
-		SP++;
-		CP++;
-	}
-}
+			if (y == choise_pos_y[0] && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos_y[0] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
-//文字列の描画
-void SCRIPT_OUTPUT_STRING_DRAW() {
-	//TODO: https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS/issues/3
-	// １文字分抜き出す
-	OneMojiBuf[0] = String[SP][CP];
-	OneMojiBuf[1] = String[SP][CP + 1];
-	OneMojiBuf[2] = '\0';
+				incrementBackLogCount();
 
-	if (ConfigData.soundnovel_winownovel == 1 && DrawPointY <= 399)
-		DrawPointY = 400;
+				//選択肢時のバックログ取得
+				SCRIPT_OUTPUT_CHOICE_BACKLOG();
 
-	if (ConfigData.soundnovel_winownovel == 0) {
-		// １文字描画
-		DrawString(DrawPointX * font_size, DrawPointY * font_size, OneMojiBuf, GetColor(255, 255, 255));
-	}
-
-	if (ConfigData.soundnovel_winownovel == 1) {
-		// １文字描画
-		DrawString(DrawPointX * font_size, DrawPointY, OneMojiBuf, GetColor(255, 255, 255));
-	}
-
-	// 参照文字位置を２バイト勧める
-	CP += 2;
-
-	// カーソルを一文字文進める
-	DrawPointX++;
-}
-
-//文字列の描画速度
-void SCRIPT_OUTPUT_STRING_DRAW_SPEED() {
-
-	//スキップ・オート変数がＯＦＦの場合
-	if (skip_auto == 0) {
-		// 少し待つ
-		WaitTimer(30 * ConfigData.string_speed / 100);
-	}
-
-	//スキップ・オート変数がＯＮの場合(オートモード)
-	if (skip_auto == 1) {
-		// 少し待つ
-		WaitTimer(30 * ConfigData.auto_speed / 100);
-	}
-
-	//スキップ・オート変数がＯＮの場合（スキップ）
-	if (skip_auto == 2) {
-		//速く処理
-		WaitTimer(10 * ConfigData.skip_speed / 100);
-	}
-}
-
-//文字列の改行
-void SCRIPT_OUTPUT_STRING_KAIGYO() {
-
-	// 画面からはみ出たら改行する
-	if (DrawPointX * font_size + font_size > 640)
-		Kaigyou();
-}
-
-//サウンドノベル風時の改ページ処理
-void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
-
-	//サウンドノベル風時の改ページ処理
-	if (ConfigData.soundnovel_winownovel == 0) {
-
-		if (DrawPointY * font_size + font_size > charactor_pos_y + font_size) {
-
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			BACKLOG_COUNT++;
-
-			//バックログ取得
-			BACKLOG_GET();
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-			SetDrawScreen(DX_SCREEN_FRONT);
-
-			WaitTimer(300);
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-
-			if (BACKGROUND != 0)
-				DrawGraph(0, 0, BACKGROUND, TRUE);
-
-			if (CHARACTER != 0)
-				DrawGraph(charactor_pos_x, charactor_pos_y, CHARACTER, TRUE);
-		}
-	}
-}
-
-//ウインドウ風時の改ページ処理
-void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
-
-	//ウインドウ風時の改ページ処理
-	if (ConfigData.soundnovel_winownovel == 1) {
-
-		if (DrawPointY > 480) {
-
-			SetDrawScreen(DX_SCREEN_BACK);
-
-			BACKLOG_COUNT++;
-
-			//バックログ取得
-			BACKLOG_GET();
-
-			// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
-			ClearDrawScreen();
-			DrawPointY = 0;
-			DrawPointX = 0;
-			CHARACTER = 0;
-			BACKGROUND = 0;
-			CP++;
-
-			SetDrawScreen(DX_SCREEN_FRONT);
-
-			WaitTimer(300);
-			ClearDrawScreen();
-			DrawPointY = 400;
-			DrawPointX = 0;
-
-			if (BACKGROUND != 0)
-				DrawGraph(0, 0, BACKGROUND, TRUE);
-
-			if (ConfigData.soundnovel_winownovel == 1) {
-
-				int	Window_Color = GetColor(0, 0, 0);
-
-				DrawBox(0, 400, 640, 480, Window_Color, TRUE);
+				//選択後の分岐処理(選択肢↑)
+				SCRIPT_OUTPUT_CHOICE_BRANCH_UP();
+				CP++;
+				break;
 			}
 
-			if (CHARACTER != 0)
-				DrawGraph(charactor_pos_x, charactor_pos_y - charactor_pos_y, CHARACTER, TRUE);
+			if (y == choise_pos_y[1] && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos_y[1] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+
+				incrementBackLogCount();
+
+				//選択肢時のバックログ取得
+				SCRIPT_OUTPUT_CHOICE_BACKLOG();
+
+				//選択後の分岐処理(選択肢↑)
+				SCRIPT_OUTPUT_CHOICE_BRANCH_DOWN();
+				CP++;
+				break;
+			}
+
 		}
 	}
-}
-static bool isdigit(char c) { return '0' <= c && c <= '9'; }
-static unsigned int ctoui(char c) { return c - '0'; }
-template<std::size_t LoadedArrayNum>
-static bool SelectLoadedResource(int& out, const int (&LoadedArray)[LoadedArrayNum], char c0, char c1) {
-	if (NULL == LoadedArray) return false;
-	if (isdigit(c0) && isdigit(c1)) {
-		const size_t CharactorNumber = (ctoui(c0) * 10) + ctoui(c1) - 1;
-		if (LoadedArrayNum <= CharactorNumber) return false;
-		out = LoadedArray[CharactorNumber];
-		return true;
-	}
-	return false;
-}
-//キャラクター描画処理
-void CHARACTER_DRAW() {
-	if (SelectLoadedResource(CHARACTER, CHARACTER_LOAD, String[SP][CP], String[SP][CP + 1])) {
-		CP += 2;
-	}
-}
 
-//背景描画処理
-void BACKGROUND_DRAW() {
-	if (SelectLoadedResource(BACKGROUND, BACKGROUND_LOAD, String[SP][CP], String[SP][CP + 1])) {
-		CP += 2;
-	}
-}
+	//スクリプトタグ処理(選択肢処理)
+	void SCRIPT_OUTPUT_CHOICE() {
 
-//BGM再生処理
-void BACKGROUNDMUSIC_START() {
-	if (SelectLoadedResource(BACKGROUNDMUSIC, BACKGROUNDMUSIC_LOAD, String[SP][CP], String[SP][CP + 1])) {
-		CP += 2;
-	}
-}
+		y = choise_init_pos_y;
 
-//SE再生処理
-void SOUNDEFFECT_START() {
-	if (SelectLoadedResource(SOUNDEFFECT, SOUNDEFFECT_LOAD, String[SP][CP], String[SP][CP + 1])) {
-		CP += 2;
-	}
-}
+		if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
 
-//動画再生処理
-void MOVIE_START() {
-	if (isdigit(String[SP][CP]) && isdigit(String[SP][CP + 1])) {
-		const size_t CharactorNumber = (ctoui(String[SP][CP]) * 10) + ctoui(String[SP][CP + 1]) - 1;
-		if (99 <= CharactorNumber) return;
-		char MovieFilePath[25] = {};
-#ifdef LINKS_C11_CRT_BOTH_SECURE_FUNCTIONS
-		if (-1 == sprintf_s(MovieFilePath, countof(MovieFilePath), "DATA/MOVIE/MOVIE%c%c.wmv", String[SP][CP], String[SP][CP + 1])) return;
-#else
-		if (0 > snprintf(MovieFilePath, countof(MovieFilePath), "DATA/MOVIE/MOVIE%c%c.wmv", String[SP][CP], String[SP][CP + 1]) return;
+			SAVE_CHOICE = 1;
+			setSaveSnapChoice(true);
+
+			//選択肢ループ
+			SCRIPT_OUTPUT_CHOICE_LOOP();
+		}
+
+		if (EndFlag == 8 || EndFlag == 9 || EndFlag == 10 || EndFlag == 11 || EndFlag == 12 || EndFlag == 13 || EndFlag == 14 || EndFlag == 15)
+			CP++;
+	}
+
+	//スクリプトタグ処理(終了文字)
+	void SCRIPT_OUTPUT_END() {
+		SkipDataConv* conv = reinterpret_cast<SkipDataConv*>(&TextIgnoredFlag);
+		if (1 <= EndFlag && EndFlag <= countof(conv->arr)) {
+			conv->arr[EndFlag] = 1;
+		}
+		SKIP_READ_SAVE();
+		// 終了フラグを立てるおよび参照文字位置を一つ進める
+		EndFlag = 99999;
+		CP++;
+	}
+
+	//立ち絵クリア処理
+	void SCRIPT_OUTPUT_CHARACTER_REMOVE() {
+		//サウンドノベル風時の処理
+		if (ConfigData.soundnovel_winownovel == 0) {
+			background.DrawRectGraph(charactor_pos_x, charactor_pos_y, charactor_pos_x, charactor_pos_y, character_graph_size_x, character_graph_size_y, true);
+		}
+		//ウインドウ風時の処理
+		else if (ConfigData.soundnovel_winownovel == 1) {
+			background.DrawRectGraph(charactor_pos_x, 0, charactor_pos_x, 0, character_graph_size_x, character_graph_size_y, true);
+		}
+		CP++;
+	}
+
+	//キャラクター名描画処理
+	void SCRIPT_OUTPUT_CHARACTER_NAME() {
+		//ウインドウ風時の処理
+		if (ConfigData.soundnovel_winownovel == 1) {
+			char CHARACTER_NAME[10] = {};
+			//キャラクター名を読み込む
+			static_assert(10 <= countof(CHARACTER_NAME) && 9 <= countof(String[0]), "array length must be over 10");
+			assert(countof(String[SP]) < CP + 10);
+			memcpy(CHARACTER_NAME, &String[SP][CP + 1], 9);
+			CHARACTER_NAME[9] = '\0';
+
+			//キャラクター名の背景
+			static const auto windowColor = GetColor(0, 0, 0);
+			DrawBox(30, 360, 150, 385, windowColor, TRUE);
+
+			static const auto charColor = GetColor(255, 255, 255);
+			// １文字描画
+			DrawString(30, 360, CHARACTER_NAME, charColor);
+
+			SP++;
+			CP++;
+		}
+		SP++;
+		CP++;
+	}
+
+	//文字列の描画
+	void SCRIPT_OUTPUT_STRING_DRAW() {
+		//TODO: https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS/issues/3
+		// １文字分抜き出す
+		OneMojiBuf[0] = String[SP][CP];
+		OneMojiBuf[1] = String[SP][CP + 1];
+		OneMojiBuf[2] = '\0';
+		static const auto charColor = GetColor(255, 255, 255);
+		if (ConfigData.soundnovel_winownovel == 0) {
+			// １文字描画
+			DrawString(DrawPointX * font_size, DrawPointY * font_size, OneMojiBuf, charColor);
+		}
+
+		if (ConfigData.soundnovel_winownovel == 1) {
+			if (DrawPointY <= 399) DrawPointY = 400;
+			// １文字描画
+			DrawString(DrawPointX * font_size, DrawPointY, OneMojiBuf, charColor);
+		}
+
+		// 参照文字位置を２バイト勧める
+		CP += 2;
+
+		// カーソルを一文字文進める
+		DrawPointX++;
+	}
+
+	//文字列の改行
+	void SCRIPT_OUTPUT_STRING_KAIGYO() {
+		// 画面からはみ出たら改行する
+		if (DrawPointX * font_size + font_size > 640) Kaigyou();
+	}
+
+	//サウンドノベル風時の改ページ処理
+	void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_SOUNDNOVEL() {
+
+		//サウンドノベル風時の改ページ処理
+		if (ConfigData.soundnovel_winownovel == 0) {
+
+			if (DrawPointY * font_size + font_size > charactor_pos_y + font_size) {
+
+				SetDrawScreen(DX_SCREEN_BACK);
+
+				incrementBackLogCount();
+
+				//バックログ取得
+				BACKLOG_GET();
+
+				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+				ClearDrawScreen();
+				DrawPointY = 0;
+				DrawPointX = 0;
+				charactor.reset();
+				background.reset();
+				CP++;
+
+				SetDrawScreen(DX_SCREEN_FRONT);
+
+				WaitTimer(300);
+				ClearDrawScreen();
+				DrawPointY = 0;
+				DrawPointX = 0;
+
+				background.DrawGraph(0, 0, true);
+				charactor.DrawGraph(charactor_pos_x, charactor_pos_y, true);
+			}
+		}
+	}
+
+	//ウインドウ風時の改ページ処理
+	void SCRIPT_OUTPUT_STRING_PAGE_CLEAR_WINODWNOVEL() {
+
+		//ウインドウ風時の改ページ処理
+		if (ConfigData.soundnovel_winownovel == 1) {
+
+			if (DrawPointY > 480) {
+
+				SetDrawScreen(DX_SCREEN_BACK);
+
+				incrementBackLogCount();
+
+				//バックログ取得
+				BACKLOG_GET();
+
+				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+				ClearDrawScreen();
+				DrawPointY = 0;
+				DrawPointX = 0;
+				charactor.reset();
+				background.reset();
+				CP++;
+
+				SetDrawScreen(DX_SCREEN_FRONT);
+
+				WaitTimer(300);
+				ClearDrawScreen();
+				DrawPointY = 400;
+				DrawPointX = 0;
+
+				background.DrawGraph(0, 0, true);
+				if (ConfigData.soundnovel_winownovel == 1) {
+					static const auto windowColor = GetColor(0, 0, 0);
+					DrawBox(0, 400, 640, 480, windowColor, TRUE);
+				}
+				charactor.DrawGraph(charactor_pos_x, 0, true);
+			}
+		}
+	}
+
+	//動画再生処理
+	void MOVIE_START() noexcept {
+		if (isdigit(String[SP][CP]) && isdigit(String[SP][CP + 1])) {
+			const size_t CharactorNumber = (ctoui(String[SP][CP]) * 10) + ctoui(String[SP][CP + 1]) - 1;
+			if (99 <= CharactorNumber) return;
+			try {
+				DxLib::PlayMovie(
+					fmt::format("DATA/MOVIE/MOVIE{0:c}{1:c}.wmv", String[SP][CP], String[SP][CP + 1]).c_str(),
+					1,
+					DX_MOVIEPLAYTYPE_BCANCEL
+				);
+			}
+#if defined(_MSC_VER) && defined(_DEBUG)
+			catch (const std::exception& er) {
+				//例外が投げられた場合特にできることがないので握りつぶす
+				OutputDebugStringA(er.what());
+			}
 #endif
-		PlayMovie(MovieFilePath, 1, DX_MOVIEPLAYTYPE_BCANCEL);
-		CP += 2;
+			catch (...) {}
+			CP += 2;
+		}
 	}
-}
 
-//コメント処理
-void COMMENT() {
+	//コメント処理
+	void COMMENT() {
 
-	switch (String[SP][CP]) {
+		switch (String[SP][CP]) {
 
 		case '/':
 
 			SP++;
 			CP = 0;
 			break;
+		}
 	}
 }
 
@@ -2933,48 +1748,34 @@ int SCRIPT_OUTPUT() {
 
 		//キャラクター描画処理
 	case 'C':
-
 		CP++;
-
-		CHARACTER_DRAW();
-
+		if(charactor.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
 
 		//背景描画処理
 	case 'B':
-
 		CP++;
-
-		BACKGROUND_DRAW();
-
+		if (background.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
 		break;
 
 		//BGM再生処理
 	case 'M':
-
 		CP++;
-
-		StopSoundMem(BACKGROUNDMUSIC);
-
-		BACKGROUNDMUSIC_START();
-
+		backgroundMusic.stop();
+		if (backgroundMusic.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
 		//BGM再生処理
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
 
 		//SE再生処理
 	case 'S':
-
 		CP++;
-
-		StopSoundMem(SOUNDEFFECT);
-
-		SOUNDEFFECT_START();
-
+		soundEffect.stop();
+		if (soundEffect.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
 		//SE再生処理
 		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
@@ -3127,10 +1928,10 @@ int SCREENSHOT() {
 	if (1 != CheckHitKey(KEY_INPUT_F12)) return 0;
 
 	if (SCREENSHOT_COUNT < 1 || 9 < SCREENSHOT_COUNT) {
-		LINKS_MessageBox_OK("これ以上スクリーンショットを取得できません");
+		MessageBoxOk("これ以上スクリーンショットを取得できません");
 	}
 	else {
-		static const char* const ScreenShotFileNames[] = {
+		static constexpr const char* const ScreenShotFileNames[] = {
 			"DATA/SCREENSHOT/SCREENSHOT01.png",
 			"DATA/SCREENSHOT/SCREENSHOT02.png",
 			"DATA/SCREENSHOT/SCREENSHOT03.png",
@@ -3142,7 +1943,7 @@ int SCREENSHOT() {
 			"DATA/SCREENSHOT/SCREENSHOT09.png",
 			"DATA/SCREENSHOT/SCREENSHOT10.png",
 		};
-		static const char* const ScreenShotMessages[] = {
+		static constexpr const char* const ScreenShotMessages[] = {
 			"スクリーンショット０１を取得しました！",
 			"スクリーンショット０２を取得しました！",
 			"スクリーンショット０３を取得しました！",
@@ -3156,7 +1957,7 @@ int SCREENSHOT() {
 		};
 		static_assert(countof(ScreenShotFileNames) == countof(ScreenShotMessages), "invalid array size.");
 		SaveDrawScreenToPNG(0, 0, 640, 480, ScreenShotFileNames[SCREENSHOT_COUNT], 0);
-		LINKS_MessageBox_OK(ScreenShotMessages[SCREENSHOT_COUNT]);
+		MessageBoxOk(ScreenShotMessages[SCREENSHOT_COUNT]);
 		++SCREENSHOT_COUNT;
 	}
 	WaitTimer(300);
@@ -3169,70 +1970,70 @@ void SHORTCUT_KEY() {
 	//セーブ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F1) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		SAVEDATA_SAVE();
 	}
 
 	//ロード
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F2) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		SAVEDATA_LOAD();
 	}
 
 	//セーブデータ削除
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F3) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		SAVEDATA_DELETE();
 	}
 
 	//既読スキップ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F4) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		SKIP_READ_CHECK();
 	}
 
 	//スキップ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F5) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		SKIP_START();
 	}
 
 	//オート
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F6) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		AUTO_START();
 	}
 
 	//スキップ&オート停止
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F7) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		AUTO_SKIP_STOP();
 	}
 
 	//バックログ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F8) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		BACKLOG_DRAW();
 	}
 
 	//設定
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F9) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		CONFIG();
 	}
 
 	//クイックセーブ
 	if (EndFlag != 99 && CheckHitKey(KEY_INPUT_F10) == 1) {
 		SHORTCUT_KEY_FLAG = 1;
-		GAMEMENU_COUNT = 0;
+		GAMEMENU_COUNT = false;
 		QUICKSAVE_SAVE();
 	}
 }

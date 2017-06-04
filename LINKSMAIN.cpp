@@ -3,7 +3,10 @@
 #include "stdio.h"
 #include "GAME.h"
 #include "DEF.h"
+#include "back_log.hpp"
 #include "resource.h"
+#include "save.hpp"
+#include "auto_skip.hpp"
 
 //DXライブラリ初期化前処理
 void DXLib_PREP() {
@@ -76,12 +79,9 @@ void TITLE_MENU_KEY_MOVE() {
 
 //タイトルメニュー終了処理
 void TITLE_MENU_END() {
-
-	SAVE = LINKS_MessageBox_YESNO("終了しますか？");
-
-	if (SAVE == IDYES)
+	if (IDYES == MessageBoxYesNo("終了しますか？")) {
 		EndFlag = 99999;
-
+	}
 	WaitTimer(300);
 }
 
@@ -154,7 +154,7 @@ void WORD_FORMAT() {
 }
 
 static void GameLoopType1(const int RouteNumber, int32_t& TextIgnoredFlag){
-	if (TextIgnoredFlag == 0) skip_auto = 0;
+	if (TextIgnoredFlag == 0) disableSkip();
 	SCRIPT_READ();
 	//Ａルートループ
 	while (ProcessMessage() == 0)
@@ -183,7 +183,7 @@ static void GameLoopType1(const int RouteNumber, int32_t& TextIgnoredFlag){
 }
 
 static void GameLoopType2(const int RouteNumber, const int32_t TextIgnoredFlag){
-	if (TextIgnoredFlag == 0) skip_auto = 0;
+	if (TextIgnoredFlag == 0) disableSkip();
 	SCRIPT_READ();
 	while (ProcessMessage() == 0)
 	{
@@ -249,12 +249,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	CONFIG_SAVE();
 
 	//バックログ画像の削除
-	BACKLOG_DELETE = "DATA/BACKLOG/BACKLOG1.png";
-	remove(BACKLOG_DELETE);
+	remove("DATA/BACKLOG/BACKLOG1.png");
 
 	//選択肢セーブスナップ削除
-	SAVESNAP_CHOICE_DELETE = "DATA/SAVE/SAVESNAP_CHOICE.png";
-	remove(SAVESNAP_CHOICE_DELETE);
+	remove("DATA/SAVE/SAVESNAP_CHOICE.png");
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 

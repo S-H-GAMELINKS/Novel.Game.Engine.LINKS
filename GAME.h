@@ -3,6 +3,7 @@
 
 #include <Windows.h>
 #include "DEF.h"
+#include "utility.hpp"
 #include <cstdint>
 
 //既読スキップ
@@ -44,8 +45,8 @@ struct alignas(4) ConfigData_t {
 	std::int32_t auto_speed_count;		//オート速度メーター情報
 	std::int32_t string_speed;			//文字列描画速度
 	std::int32_t string_speed_count;		//文字列描画速度メーター情報
-	std::int32_t soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報
-	std::int32_t mouse_key_move;			//マウス操作とキー操作の情報
+	std::int32_t soundnovel_winownovel;	//サウンドノベル風とウインドウ風描画の情報 true/false
+	std::int32_t mouse_key_move;			//マウス操作とキー操作の情報 true/false
 };
 
 
@@ -65,30 +66,19 @@ extern unsigned int Cr;
 //エンドフラグ
 extern int EndFlag;
 
+//ゲームメニュー変数
+extern bool GAMEMENU_COUNT;
+
 //既読スキップ変数
 extern SkipData_t TextIgnoredFlag;
 
 //設定用変数
 extern ConfigData_t ConfigData;
 
-//バックログ変数
-extern char *BACKLOG_DELETE;
-
-//セーブ用変数
-extern int SAVE, SAVE_CHOICE;
-extern char *SAVESNAP_CHOICE_DELETE;
-
-//スキップ・オートモード用変数
-extern int skip_auto;
-
 //キー操作
 extern int Key[256];
 extern int y;
-extern int SAVE_y;
 extern int GAME_y;
-
-//Yes/Noのメッセージボックス
-int LINKS_MessageBox_YESNO(LPCTSTR lpText);
 
 //各素材データ読込関数
 void MATERIAL_LOAD();
@@ -97,19 +87,13 @@ void MATERIAL_LOAD();
 int SCRIPT_READ();
 
 //矢印キー操作関数
-int MoveKey(int KeyStateBuf[]);
+int MoveKey(int (&KeyStateBuf)[256]);
 
 //タイトルメニューカーソル関数
 void title(int Cr, int y);
 
-//セーブロードメニューカーソル関数
-void SAVE_LOAD_MENU(int Cr, int SAVE_y);
-
 //ゲームメニューカーソル関数
 void GAME_MENU_CURSOR(int Cr, int GAME_y);
-
-//セーブデータロード関数
-int SAVEDATA_LOAD();
 
 //SKIP_READ LOAD関数
 int SKIP_READ_LOAD();
@@ -136,7 +120,7 @@ int GAMEMENU();
 void sentakusi(int Cr, int y);
 
 // 改行関数
-int Kaigyou(void);
+int Kaigyou();
 
 //スクリプトタグ処理関数
 int SCRIPT_OUTPUT();
@@ -156,13 +140,15 @@ int Mouse_Move();
 //コンフィグ(タイトル画面)
 void CONFIG();
 
-//終了ウインドウ
-int GAME_FINISH();
-
-//画面クリア処理
-void SCREEN_CLEAR();
-
 //各種F1～F11キー
 void SHORTCUT_KEY();
 
+//各処理後のゲーム画面の描画(サウンドノベル風)
+void SOUNDNOVEL() noexcept;
+
+//各処理後のゲーム画面の描画(ウインドウ風)
+void WINDOWNOVEL() noexcept;
+
+//ショートカットキー処理後の描画
+void SHORTCUT_KEY_DRAW() noexcept;
 #endif //LINKS_GAME_H_
