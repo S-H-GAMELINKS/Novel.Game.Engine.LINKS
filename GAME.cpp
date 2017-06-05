@@ -1749,7 +1749,7 @@ int SCRIPT_OUTPUT() {
 		//キャラクター描画処理
 	case 'C':
 		CP++;
-		if(charactor.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
+		if(charactor.select(String[SP][CP], String[SP][CP + 1])) CP++;
 		//キャラクター描画
 		SCRIPT_OUTPUT_CHARACTER_DRAW();
 		break;
@@ -1757,7 +1757,7 @@ int SCRIPT_OUTPUT() {
 		//背景描画処理
 	case 'B':
 		CP++;
-		if (background.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
+		if (background.select(String[SP][CP], String[SP][CP + 1])) CP++;
 		//背景描画
 		SCRIPT_OUTPUT_BACKGROUND();
 		break;
@@ -1766,7 +1766,7 @@ int SCRIPT_OUTPUT() {
 	case 'M':
 		CP++;
 		backgroundMusic.stop();
-		if (backgroundMusic.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
+		if (backgroundMusic.select(String[SP][CP], String[SP][CP + 1])) CP++;
 		//BGM再生処理
 		SCRIPT_OUTPUT_BACKGROUNDMUSIC();
 		break;
@@ -1775,7 +1775,7 @@ int SCRIPT_OUTPUT() {
 	case 'S':
 		CP++;
 		soundEffect.stop();
-		if (soundEffect.select(String[SP][CP], String[SP][CP + 1])) CP += 2;
+		if (soundEffect.select(String[SP][CP], String[SP][CP + 1])) CP++;
 		//SE再生処理
 		SCRIPT_OUTPUT_SOUNDEFFECT();
 		break;
