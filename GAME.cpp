@@ -164,7 +164,7 @@ int SCRIPT_READ() {
 	if (0 < EndFlag && EndFlag <= countof(ScriptFileNames)) {
 		// スクリプトファイルを開く
 		const int ScriptFile = FileRead_open(ScriptFileNames[EndFlag - 1]);
-		for (auto&& s : String) FileRead_scanf(ScriptFile, "%s", s);
+		for (auto&& s : String) FileRead_gets(s, countof(s), ScriptFile);
 		FileRead_close(ScriptFile);
 	}
 	return 0;
