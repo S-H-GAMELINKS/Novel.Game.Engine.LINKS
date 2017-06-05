@@ -52,7 +52,7 @@ int EndFlag = 99;
 bool GAMEMENU_COUNT;
 
 //既読スキップ変数
-SkipData_t TextIgnoredFlag = {};
+SkipData_t TextIgnoredFlags = {};
 
 //非アクティブ用変数
 static bool WindowActive = true;
@@ -62,7 +62,7 @@ static char OneMojiBuf[3];
 
 //キー操作
 int Key[256];
-int y = menu_init_pos_y;
+int TitleMenuPosY = menu_init_pos_y;
 int GAME_y = game_menu_base_pos_y;
 
 //設定用変数
@@ -279,23 +279,23 @@ void SHORTCUT_KEY_DRAW() noexcept {
 }
 
 //タイトルメニューカーソル関数
-void title(int Cr, int y) {
+void title(unsigned int color, int y) {
 
 	//カーソル
-	DrawString(menu_pos_x, y, "■", Cr);
+	DrawString(menu_pos_x, y, "■", color);
 
 	//各メニュー項目
-	DrawString(menu_pos_x + cursor_move_unit, title_menu_game_start_pos_y, "START", Cr);
-	DrawString(menu_pos_x + cursor_move_unit, title_menu_game_load_pos_y, "LOAD", Cr);
-	DrawString(menu_pos_x + cursor_move_unit, title_menu_game_config_pos_y, "CONFIG", Cr);
-	DrawString(menu_pos_x + cursor_move_unit, title_menu_quick_load_pos_y, "QUICKLOAD", Cr);
-	DrawString(menu_pos_x + cursor_move_unit, title_menu_continue_pos_y, "CONTINUE", Cr);
-	DrawString(menu_pos_x + cursor_move_unit, title_menu_game_quit_pos_y, "QUIT", Cr);
+	DrawString(menu_pos_x + cursor_move_unit, title_menu_game_start_pos_y, "START", color);
+	DrawString(menu_pos_x + cursor_move_unit, title_menu_game_load_pos_y, "LOAD", color);
+	DrawString(menu_pos_x + cursor_move_unit, title_menu_game_config_pos_y, "CONFIG", color);
+	DrawString(menu_pos_x + cursor_move_unit, title_menu_quick_load_pos_y, "QUICKLOAD", color);
+	DrawString(menu_pos_x + cursor_move_unit, title_menu_continue_pos_y, "CONTINUE", color);
+	DrawString(menu_pos_x + cursor_move_unit, title_menu_game_quit_pos_y, "QUIT", color);
 }
 
 //ゲームメニューカーソル関数
-void GAME_MENU_CURSOR(int Cr, int GAME_y) {
-	DrawString(save_base_pos_x - (cursor_move_unit * 6), GAME_y, "■", Cr);
+void GAME_MENU_CURSOR(unsigned int color, int y) {
+	DrawString(save_base_pos_x - (cursor_move_unit * 6), y, "■", color);
 }
 
 namespace {
@@ -303,7 +303,7 @@ namespace {
 	void Mouse_Move_TITLE(int MouseY) {
 		//タイトルメニュー
 		if (EndFlag == 99) {
-			y = (MouseY <= 329) ? 300
+			TitleMenuPosY = (MouseY <= 329) ? 300
 				: (MouseY <= 359) ? 330
 				: (MouseY <= 389) ? 360
 				: (MouseY <= 419) ? 390
@@ -335,7 +335,7 @@ namespace {
 	void Mouse_Move_CHOICE(int MouseY) {
 		//選択肢画面
 		if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
-			y = (MouseY <= 229) ? 200 : 230;
+			TitleMenuPosY = (MouseY <= 229) ? 200 : 230;
 		}
 	}
 
@@ -401,7 +401,7 @@ int SKIP_READ_LOAD()
 		return 0;
 	}
 #endif
-	fread(&TextIgnoredFlag, sizeof(SkipData_t), 1, fp);
+	fread(&TextIgnoredFlags, sizeof(SkipData_t), 1, fp);
 	return 0;
 }
 
@@ -420,7 +420,7 @@ int SKIP_READ_SAVE()
 			return 0;
 		}
 #endif
-		fwrite(&TextIgnoredFlag, sizeof(SkipData_t), 1, fp); // SkipData_t構造体の中身を出力
+		fwrite(&TextIgnoredFlags, sizeof(SkipData_t), 1, fp); // SkipData_t構造体の中身を出力
 		fclose(fp);//ファイルを閉じる
 
 	return 0;
@@ -637,10 +637,10 @@ namespace {
 		}
 	}
 
-	//コンフィグ(キー操作) 
+	//コンフィグ(キー操作)
 	void CONFIG_KEY_MOVE() {
 
-		//キー操作関連 
+		//キー操作関連
 		if (Key[KEY_INPUT_DOWN] == 1) {
 			GAME_y += game_menu_base_pos_y;
 			if (GAME_y == (game_menu_base_pos_y * 10))
@@ -654,10 +654,10 @@ namespace {
 		}
 	}
 
-	//コンフィグ(BGM音量調節) 
+	//コンフィグ(BGM音量調節)
 	void BGM_VOL_CHANGE() {
 
-		//ＢＧＭ音量調整 
+		//ＢＧＭ音量調整
 		if (GAME_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			WaitTimer(300);
@@ -686,10 +686,10 @@ namespace {
 
 	}
 
-	//コンフィグ(SE音量調整) 
+	//コンフィグ(SE音量調整)
 	void SE_VOL_CHANGE() {
 
-		//ＳＥ音量調整 
+		//ＳＥ音量調整
 		if (GAME_y == game_menu_base_pos_y * 2 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 2 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			WaitTimer(300);
@@ -717,10 +717,10 @@ namespace {
 		}
 	}
 
-	//コンフィグ(オート速度調整) 
+	//コンフィグ(オート速度調整)
 	void AUTO_SPEED_CHANGE() {
 
-		//オート速度調整 
+		//オート速度調整
 		if (GAME_y == game_menu_base_pos_y * 3 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 3 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			WaitTimer(300);
@@ -748,10 +748,10 @@ namespace {
 		}
 	}
 
-	//コンフィグ(スキップ速度調整) 
+	//コンフィグ(スキップ速度調整)
 	void SKIP_SPEED_CHANGE() {
 
-		//スキップ速度調整 
+		//スキップ速度調整
 		if (GAME_y == game_menu_base_pos_y * 4 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 4 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			WaitTimer(300);
@@ -780,10 +780,10 @@ namespace {
 		}
 	}
 
-	//コンフィグ(文字描画) 
+	//コンフィグ(文字描画)
 	void STRING_SPEED_CHANGE() {
 
-		//文字描画速度調整 
+		//文字描画速度調整
 		if (GAME_y == game_menu_base_pos_y * 5 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 5 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			WaitTimer(300);
@@ -811,10 +811,10 @@ namespace {
 		}
 	}
 
-	//コンフィグ(サウンドノベル風とウインドウ風) 
+	//コンフィグ(サウンドノベル風とウインドウ風)
 	void SOUNDNOVEL_WINDOWNOVEL_CHANGE() {
 
-		//サウンドノベル風とウインドウ風の切り替え 
+		//サウンドノベル風とウインドウ風の切り替え
 		if (GAME_y == game_menu_base_pos_y * 6 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 6 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			WaitTimer(300);
@@ -828,16 +828,16 @@ namespace {
 		}
 	}
 
-	//非アクティブ時の処理設定 
+	//非アクティブ時の処理設定
 	void WINDOWACTIVE() {
 
-		//非アクティブ時の処理の切り替え 
+		//非アクティブ時の処理の切り替え
 		if (GAME_y == game_menu_base_pos_y * 7 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 7 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			WaitTimer(300);
 			WindowActive = false;
 
-			//非アクティブ状態ではゲームを実行しない 
+			//非アクティブ状態ではゲームを実行しない
 			SetAlwaysRunFlag(WindowActive);
 		}
 
@@ -846,15 +846,15 @@ namespace {
 			WaitTimer(300);
 			WindowActive = true;
 
-			//非アクティブ状態でもゲームを実行 
+			//非アクティブ状態でもゲームを実行
 			SetAlwaysRunFlag(WindowActive);
 		}
 	}
 
-	//コンフィグ(マウス/キー操作) 
+	//コンフィグ(マウス/キー操作)
 	void MOUSE_KEY_MOVE() {
 
-		//マウス操作を有効に 
+		//マウス操作を有効に
 		if (GAME_y == game_menu_base_pos_y * 8 && CheckHitKey(KEY_INPUT_RIGHT) == 1 || GAME_y == game_menu_base_pos_y * 8 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 			WaitTimer(300);
@@ -862,7 +862,7 @@ namespace {
 			ConfigData.mouse_key_move = 1;
 		}
 
-		//キー操作を有効に 
+		//キー操作を有効に
 		if (GAME_y == game_menu_base_pos_y * 8 && CheckHitKey(KEY_INPUT_LEFT) == 1 || GAME_y == game_menu_base_pos_y * 8 && ((GetMouseInput() & MOUSE_INPUT_RIGHT) != 0)) {
 
 			WaitTimer(300);
@@ -881,7 +881,7 @@ namespace {
 
 			GAMEMENU_COUNT = true;
 			EndFlag = 99;
-			y = menu_init_pos_y;
+			TitleMenuPosY = menu_init_pos_y;
 			disableSkip();
 			charactor.reset();
 			background.reset();
@@ -937,7 +937,7 @@ int GAME_FINISH() {
 }
 
 namespace {
-	//各種設定情報描画 
+	//各種設定情報描画
 	void CONFIG_MENU() {
 		static constexpr const char* saveDataName[] = {
 			"ＢＧＭ音量", "ＳＥ音量", "オート速度", "スキップ速度", "文字描画速度", "描画方法", "非アクティブ時", "マウス/キー操作",
@@ -956,10 +956,10 @@ namespace {
 		DrawString(save_name_pos_x + cursor_move_unit * 8, game_menu_base_pos_y * 8, ((1 == ConfigData.mouse_key_move) ? "マウス操作" : "キー操作"), Cr);
 	}
 
-	//コンフィグ(タイトル/ゲームメニューへ戻る) 
+	//コンフィグ(タイトル/ゲームメニューへ戻る)
 	void CONFIG_TITLE_BACK() {
 
-		//タイトルに戻る/ゲームメニューに戻る 
+		//タイトルに戻る/ゲームメニューに戻る
 		if (GAME_y == game_menu_base_pos_y * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1 || GAME_y == game_menu_base_pos_y * 9 && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 			if (IDYES == MessageBoxYesNo("戻りますか？")) {
 
@@ -971,7 +971,7 @@ namespace {
 	}
 }
 
-//コンフィグ 
+//コンフィグ
 void CONFIG() {
 	if (IDYES == MessageBoxYesNo("設定を変更しますか？")) {
 
@@ -987,47 +987,47 @@ void CONFIG() {
 
 			GAME_MENU_CURSOR(Cr, GAME_y);
 
-			//各種設定情報描画 
+			//各種設定情報描画
 			CONFIG_MENU();
 
-			//BGM音量調節 
+			//BGM音量調節
 			BGM_VOL_CHANGE();
 
-			//SE音量調整 
+			//SE音量調整
 			SE_VOL_CHANGE();
 
-			//オート速度調整 
+			//オート速度調整
 			AUTO_SPEED_CHANGE();
 
-			//スキップ速度調整 
+			//スキップ速度調整
 			SKIP_SPEED_CHANGE();
 
-			//文字列描画速度 
+			//文字列描画速度
 			STRING_SPEED_CHANGE();
 
-			//サウンドノベル風とウインドウ風描画設定 
+			//サウンドノベル風とウインドウ風描画設定
 			SOUNDNOVEL_WINDOWNOVEL_CHANGE();
 
-			//非アクティブ時の処理設定 
+			//非アクティブ時の処理設定
 			WINDOWACTIVE();
 
-			//マウス操作とキー操作設定 
+			//マウス操作とキー操作設定
 			MOUSE_KEY_MOVE();
 
-			//タイトルに戻る 
+			//タイトルに戻る
 			CONFIG_TITLE_BACK();
 
-			//マウス操作関連 
+			//マウス操作関連
 			Mouse_Move();
 
-			//コンフィグ(キー操作) 
+			//コンフィグ(キー操作)
 			CONFIG_KEY_MOVE();
 
-			//画面クリア処理 
+			//画面クリア処理
 			SCREEN_CLEAR();
 		}
 
-		//ショートカットキー時の事後処理 
+		//ショートカットキー時の事後処理
 		SHORTCUT_KEY_DRAW();
 	}
 }
@@ -1178,14 +1178,14 @@ int GAMEMENU() {
 }
 
 //選択肢機能
-void sentakusi(int Cr, int y) {
+void sentakusi(unsigned int color, int y) {
 
 	//カーソルの描画
-	DrawString(choise_pos_x, y, "■", Cr);
+	DrawString(choise_pos_x, y, "■", color);
 
 	//選択肢の描画
 	for (std::size_t i : {0, 1}) {
-		DrawString(choise_pos_x + cursor_move_unit, choise_pos_y[i], ChoiceStrings[i], Cr);
+		DrawString(choise_pos_x + cursor_move_unit, choise_pos_y[i], ChoiceStrings[i], color);
 	}
 }
 
@@ -1391,14 +1391,14 @@ namespace {
 	void SCRIPT_OUTPUT_CHOICE_LOOP_KEY_MOVE() {
 
 		if (Key[KEY_INPUT_DOWN] == 1) {
-			y += cursor_move_unit;
-			if (y == (choise_pos_y[1] + cursor_move_unit))                         // y座標が260なら(選択が一番下なら)
-				y = choise_pos_y[0];                        // 選択座標を一番上に
+			TitleMenuPosY += cursor_move_unit;
+			if (TitleMenuPosY == (choise_pos_y[1] + cursor_move_unit))                         // TitleMenuPosY座標が260なら(選択が一番下なら)
+				TitleMenuPosY = choise_pos_y[0];                        // 選択座標を一番上に
 		}
 		if (Key[KEY_INPUT_UP] == 1) {
-			y -= cursor_move_unit;
-			if (y == (choise_pos_y[0] - cursor_move_unit))
-				y = choise_pos_y[1];
+			TitleMenuPosY -= cursor_move_unit;
+			if (TitleMenuPosY == (choise_pos_y[0] - cursor_move_unit))
+				TitleMenuPosY = choise_pos_y[1];
 		}
 	}
 
@@ -1446,7 +1446,7 @@ namespace {
 		SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ();
 
 		//選択肢の描画
-		sentakusi(Cr, y);
+		sentakusi(Cr, TitleMenuPosY);
 
 		//バックログ取得
 		BACKLOG_GET();
@@ -1472,7 +1472,7 @@ namespace {
 			SCRIPT_OUTPUT_CHOICE_LOOP_DRAW();
 
 			//選択肢の描画
-			sentakusi(Cr, y);
+			sentakusi(Cr, TitleMenuPosY);
 
 			//ゲームメニュー
 			GAMEMENU();
@@ -1492,7 +1492,7 @@ namespace {
 			//画面クリア処理
 			SCREEN_CLEAR();
 
-			if (y == choise_pos_y[0] && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos_y[0] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			if (TitleMenuPosY == choise_pos_y[0] && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == choise_pos_y[0] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 				incrementBackLogCount();
 
@@ -1505,7 +1505,7 @@ namespace {
 				break;
 			}
 
-			if (y == choise_pos_y[1] && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == choise_pos_y[1] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			if (TitleMenuPosY == choise_pos_y[1] && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == choise_pos_y[1] && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 
 				incrementBackLogCount();
 
@@ -1524,7 +1524,7 @@ namespace {
 	//スクリプトタグ処理(選択肢処理)
 	void SCRIPT_OUTPUT_CHOICE() {
 
-		y = choise_init_pos_y;
+		TitleMenuPosY = choise_init_pos_y;
 
 		if (EndFlag == 1 || EndFlag == 2 || EndFlag == 3 || EndFlag == 4 || EndFlag == 5 || EndFlag == 6 || EndFlag == 7) {
 
@@ -1541,7 +1541,7 @@ namespace {
 
 	//スクリプトタグ処理(終了文字)
 	void SCRIPT_OUTPUT_END() {
-		SkipDataConv* conv = reinterpret_cast<SkipDataConv*>(&TextIgnoredFlag);
+		SkipDataConv* conv = reinterpret_cast<SkipDataConv*>(&TextIgnoredFlags);
 		if (1 <= EndFlag && EndFlag <= countof(conv->arr)) {
 			conv->arr[EndFlag] = 1;
 		}
