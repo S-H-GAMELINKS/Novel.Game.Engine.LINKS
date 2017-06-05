@@ -121,16 +121,16 @@ void MATERIAL_LOAD() {
 	SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
 
 	//キャラクター画像読込
-	assert(charactor.load("DATA/CHARACTER/CHAR{0:02d}.png"));
+	LINKS_EXPECT_TRUE(charactor.load("DATA/CHARACTER/CHAR{0:02d}.png"));
 
 	//背景画像読込
-	assert(background.load("DATA/BACKGROUND/BG{0:02d}.png"));
+	LINKS_EXPECT_TRUE(background.load("DATA/BACKGROUND/BG{0:02d}.png"));
 
 	//ＢＧＭ読込
-	assert(backgroundMusic.load("DATA/BACKGROUNDMUSIC/BGM{0:02d}.ogg"));
+	LINKS_EXPECT_TRUE(backgroundMusic.load("DATA/BACKGROUNDMUSIC/BGM{0:02d}.ogg"));
 
 	//ＳＥ読込
-	assert(soundEffect.load("DATA/SOUNDEFFECT/SE{0:02d}.ogg"));
+	LINKS_EXPECT_TRUE(soundEffect.load("DATA/SOUNDEFFECT/SE{0:02d}.ogg"));
 
 	//ゲームオーバー画面
 	GAMEOVER = LoadGraph("DATA/BACKGROUND/GAMEOVER.png");
@@ -1570,8 +1570,8 @@ namespace {
 		if (ConfigData.soundnovel_winownovel == 1) {
 			char CHARACTER_NAME[10] = {};
 			//キャラクター名を読み込む
-			static_assert(10 <= countof(CHARACTER_NAME) && 9 <= countof(String[0]), "array length must be over 10");
-			assert(countof(String[SP]) < CP + 10);
+			static_assert(10 <= countof(CHARACTER_NAME) && 10 <= countof(String[0]), "array length must be over 10");
+			assert(0 < CP && std::size_t(CP + 10) <= countof(String[SP]));
 			memcpy(CHARACTER_NAME, &String[SP][CP + 1], 9);
 			CHARACTER_NAME[9] = '\0';
 

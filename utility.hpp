@@ -1,6 +1,13 @@
 ﻿#ifndef LINKS_UTILITY_HPP_
 #define LINKS_UTILITY_HPP_
 #include <Windows.h>
+#include <cassert>
+
+#ifdef NDEBUG
+#	define LINKS_EXPECT_TRUE(expression) expression
+#else
+#	define LINKS_EXPECT_TRUE(expression) assert(expression)
+#endif
 
 int MessageBoxYesNo(LPCTSTR lpText) noexcept;
 int MessageBoxOk(LPCTSTR lpText) noexcept;
