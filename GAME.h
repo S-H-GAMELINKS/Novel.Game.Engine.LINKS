@@ -70,14 +70,14 @@ extern int EndFlag;
 extern bool GAMEMENU_COUNT;
 
 //既読スキップ変数
-extern SkipData_t TextIgnoredFlag;
+extern SkipData_t TextIgnoredFlags;
 
 //設定用変数
 extern ConfigData_t ConfigData;
 
 //キー操作
 extern int Key[256];
-extern int y;
+extern int TitleMenuPosY;
 extern int GAME_y;
 
 //各素材データ読込関数
@@ -90,10 +90,10 @@ int SCRIPT_READ();
 int MoveKey(int (&KeyStateBuf)[256]);
 
 //タイトルメニューカーソル関数
-void title(int Cr, int y);
+void title(unsigned int color, int y);
 
 //ゲームメニューカーソル関数
-void GAME_MENU_CURSOR(int Cr, int GAME_y);
+void GAME_MENU_CURSOR(unsigned int color, int y);
 
 //SKIP_READ LOAD関数
 int SKIP_READ_LOAD();

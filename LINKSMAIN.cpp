@@ -69,11 +69,11 @@ void DXLib_POST_PREP() {
 void TITLE_MENU_KEY_MOVE() {
 
 	if (Key[KEY_INPUT_DOWN] == 1) {
-		y = (title_menu_game_quit_pos_y == y) ? title_menu_game_start_pos_y : y + cursor_move_unit;
+		TitleMenuPosY = (title_menu_game_quit_pos_y == TitleMenuPosY) ? title_menu_game_start_pos_y : TitleMenuPosY + cursor_move_unit;
 	}
 
 	if (Key[KEY_INPUT_UP] == 1) {
-		y = (title_menu_game_start_pos_y == y) ? title_menu_game_quit_pos_y : y - cursor_move_unit;
+		TitleMenuPosY = (title_menu_game_start_pos_y == TitleMenuPosY) ? title_menu_game_quit_pos_y : TitleMenuPosY - cursor_move_unit;
 	}
 }
 
@@ -88,22 +88,22 @@ void TITLE_MENU_END() {
 //タイトルメニュー(選択処理)
 void TITLE_MENU_CHOICE() {
 
-	if (y == title_menu_game_start_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == title_menu_game_start_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_game_start_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_start_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
 		EndFlag = 1;
 
-	if (y == title_menu_game_load_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == title_menu_game_load_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_game_load_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_load_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
 		SAVEDATA_LOAD();
 
-	if (y == title_menu_game_config_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == title_menu_game_config_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_game_config_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_config_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
 		CONFIG();
 
-	if (y == title_menu_quick_load_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == title_menu_quick_load_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_quick_load_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_quick_load_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
 		QUICKSAVE_LOAD();
 
-	if (y == title_menu_continue_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == title_menu_continue_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_continue_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_continue_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
 		CONTINUE_LOAD();
 
-	if (y == title_menu_game_quit_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || y == title_menu_game_quit_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_game_quit_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_quit_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
 		TITLE_MENU_END();
 }
 
@@ -119,7 +119,7 @@ void TITLE_MENU() {
 			DrawGraph(0, 0, TITLE, TRUE);
 
 			//タイトルメニュー表示
-			title(Cr, y);
+			title(Cr, TitleMenuPosY);
 
 			//スクリーンショット機能
 			SCREENSHOT();
@@ -209,7 +209,7 @@ static void GameLoopType2(const int RouteNumber, const int32_t TextIgnoredFlag){
 //ゲームのループ
 void GAME_LOOP() {
 	if (EndFlag < 1 || 15 < EndFlag) return;
-	SkipDataConv* conv = reinterpret_cast<SkipDataConv*>(&TextIgnoredFlag);
+	SkipDataConv* conv = reinterpret_cast<SkipDataConv*>(&TextIgnoredFlags);
 	if (/*1 <= EndFlag && */EndFlag <= 7) {
 		//main, A-F
 		GameLoopType1(EndFlag, conv->arr[EndFlag - 1]);
@@ -220,8 +220,7 @@ void GAME_LOOP() {
 	}
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-	LPSTR lpCmdLine, int nCmdShow)
+int WINAPI WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int /*nCmdShow*/)
 {
 	//DXライブラリ初期化前処理
 	DXLib_PREP();

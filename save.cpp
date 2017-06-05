@@ -158,10 +158,10 @@ namespace {
 	}
 
 	//セーブロードメニューカーソル関数
-	void SAVE_LOAD_MENU(int Cr, int SAVE_y) {
+	void SAVE_LOAD_MENU(unsigned int color, int y) {
 
 		//カーソルの描画
-		DrawString(save_base_pos_x, SAVE_y, "■", Cr);
+		DrawString(save_base_pos_x, y, "■", color);
 
 		SAVEDATA_KEY_MOVE();
 	}

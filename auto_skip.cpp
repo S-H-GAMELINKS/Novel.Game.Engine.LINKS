@@ -50,7 +50,7 @@ namespace {
 }
 //既読スキップ判定
 void SKIP_READ_CHECK() noexcept {
-	const SkipDataConv* conv = reinterpret_cast<const SkipDataConv*>(&TextIgnoredFlag);
+	const SkipDataConv* conv = reinterpret_cast<const SkipDataConv*>(&TextIgnoredFlags);
 	//既読データ読み込み時の判定
 	if (IDYES == SKIP_READ_MESSAGE() && 0 < EndFlag && EndFlag <= countof(conv->arr) && 1 == conv->arr[EndFlag - 1]) {
 		skip_auto = Skiptype::skip;
