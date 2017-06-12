@@ -494,6 +494,8 @@ namespace {
 			fclose(fp);//ファイルを閉じる
 		}
 
+		MessageBoxOk("セーブしました！");
+
 		return 0;
 
 	}
