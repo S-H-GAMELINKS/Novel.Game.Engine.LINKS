@@ -1,4 +1,9 @@
-﻿#include "resource_manager.hpp"
+﻿/*=============================================================================
+  Copyright (c) 2017 S.H.(GAMELINKS)
+  https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
+  This software is released under the MIT License, see LICENSE.
+=============================================================================*/
+#include "resource_manager.hpp"
 #include "utility.hpp"
 #include "fmt/fmt/format.h"
 #include <DxLib.h>

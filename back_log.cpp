@@ -1,4 +1,9 @@
-﻿#include "back_log.hpp"
+﻿/*=============================================================================
+  Copyright (c) 2017 S.H.(GAMELINKS)
+  https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
+  This software is released under the MIT License, see LICENSE.
+=============================================================================*/
+#include "back_log.hpp"
 #include "DEF.h"
 #include "utility.hpp"
 #include <DxLib.h>

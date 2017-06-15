@@ -1,4 +1,9 @@
-﻿#include "auto_skip.hpp"
+﻿/*=============================================================================
+  Copyright (c) 2017 S.H.(GAMELINKS)
+  https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
+  This software is released under the MIT License, see LICENSE.
+=============================================================================*/
+#include "auto_skip.hpp"
 #include "GAME.h"
 #include "save.hpp"
 
