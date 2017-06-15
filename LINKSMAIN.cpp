@@ -1,4 +1,8 @@
-﻿//ゲームリンクス開発 簡易ノベルゲームエンジン「ＬＩＮＫＳ」ver3.00
+﻿/*=============================================================================
+  Copyright (c) 2017 S.H.(GAMELINKS)
+  https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
+  This software is released under the MIT License, see LICENSE.
+=============================================================================*/
 #include "DxLib.h"
 #include "stdio.h"
 #include "GAME.h"

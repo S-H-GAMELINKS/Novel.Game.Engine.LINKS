@@ -1,4 +1,9 @@
-﻿//ライブラリとヘッダの読み込み
+﻿/*=============================================================================
+  Copyright (c) 2017 S.H.(GAMELINKS)
+  https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
+  This software is released under the MIT License, see LICENSE.
+=============================================================================*/
+//ライブラリとヘッダの読み込み
 #include "GAME.h"
 #include "DxLib.h"
 #include "DEF.h"
