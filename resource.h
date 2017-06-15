@@ -1,4 +1,9 @@
-﻿//{{NO_DEPENDENCIES}}
+﻿/*=============================================================================
+  Copyright (c) 2017 S.H.(GAMELINKS)
+  https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
+  This software is released under the MIT License, see LICENSE.
+=============================================================================*/
+//{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ で生成されたインクルード ファイル。
 // LINKS.rc で使用
 //

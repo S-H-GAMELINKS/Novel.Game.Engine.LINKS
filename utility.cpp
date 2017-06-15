@@ -1,4 +1,9 @@
-﻿#include "utility.hpp"
+﻿/*=============================================================================
+  Copyright (c) 2017 S.H.(GAMELINKS)
+  https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
+  This software is released under the MIT License, see LICENSE.
+=============================================================================*/
+#include "utility.hpp"
 #include <DxLib.h>
 int MessageBoxYesNo(LPCTSTR lpText) noexcept
 {

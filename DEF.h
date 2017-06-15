@@ -1,4 +1,9 @@
-﻿#ifndef LINKS_DEF_H_
+﻿/*=============================================================================
+  Copyright (c) 2017 S.H.(GAMELINKS)
+  https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
+  This software is released under the MIT License, see LICENSE.
+=============================================================================*/
+#ifndef LINKS_DEF_H_
 #define LINKS_DEF_H_
 
 #include <cstddef>

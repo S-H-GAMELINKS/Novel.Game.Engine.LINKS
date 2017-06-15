@@ -1,4 +1,9 @@
-﻿#ifndef LINKS_RESOURCE_MANAGER_HPP_
+﻿/*=============================================================================
+  Copyright (c) 2017 S.H.(GAMELINKS)
+  https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
+  This software is released under the MIT License, see LICENSE.
+=============================================================================*/
+#ifndef LINKS_RESOURCE_MANAGER_HPP_
 #define LINKS_RESOURCE_MANAGER_HPP_
 #include <cstddef>
 #ifdef __c2__
