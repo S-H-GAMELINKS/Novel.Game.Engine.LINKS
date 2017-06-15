@@ -1257,7 +1257,7 @@ namespace {
 		if (ConfigData.soundnovel_winownovel == 1) {
 			//背景画像を切り抜き、立ち絵の上にペースト
 			const int charactorDummy = background.DerivationGraph(charactor_pos_x, 0, character_graph_size_x, character_graph_size_y);
-			DxLib::DrawGraph(charactor_pos_x, charactor_pos_y, charactorDummy, true);
+			DxLib::DrawGraph(charactor_pos_x, 0, charactorDummy, true);
 			DxLib::DeleteGraph(charactorDummy);
 			// 読みこんだグラフィックを画面左上に描画
 			charactor.DrawGraph(charactor_pos_x, 0, true);
