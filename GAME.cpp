@@ -1936,7 +1936,7 @@ int FORMAT() {
 int SCREENSHOT() {
 	if (1 != CheckHitKey(KEY_INPUT_F12)) return 0;
 
-	if (SCREENSHOT_COUNT < 1 || 9 < SCREENSHOT_COUNT) {
+	if (SCREENSHOT_COUNT < 0 || 9 < SCREENSHOT_COUNT) {
 		MessageBoxOk("これ以上スクリーンショットを取得できません");
 	}
 	else {
