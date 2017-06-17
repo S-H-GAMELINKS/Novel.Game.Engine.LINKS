@@ -95,20 +95,30 @@ void TITLE_MENU_CHOICE() {
 	if (TitleMenuPosY == title_menu_game_start_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_start_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
 		EndFlag = 1;
 
-	if (TitleMenuPosY == title_menu_game_load_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_load_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_game_load_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_load_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 		SAVEDATA_LOAD();
+		WaitTimer(100);
+	}
 
-	if (TitleMenuPosY == title_menu_game_config_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_config_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_game_config_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_config_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 		CONFIG();
+		WaitTimer(100);
+	}
 
-	if (TitleMenuPosY == title_menu_quick_load_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_quick_load_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_quick_load_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_quick_load_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 		QUICKSAVE_LOAD();
+		WaitTimer(100);
+	}
 
-	if (TitleMenuPosY == title_menu_continue_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_continue_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_continue_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_continue_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
 		CONTINUE_LOAD();
+		WaitTimer(100);
+	}
 
-	if (TitleMenuPosY == title_menu_game_quit_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_quit_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0))
+	if (TitleMenuPosY == title_menu_game_quit_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1 || TitleMenuPosY == title_menu_game_quit_pos_y && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)){
 		TITLE_MENU_END();
+		WaitTimer(100);
+	}
 }
 
 //タイトルメニュー関数

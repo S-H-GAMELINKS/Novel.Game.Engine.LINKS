@@ -938,6 +938,7 @@ int GAME_FINISH() {
 			if (false == GAMEMENU_COUNT)
 				GAMEMENU_COUNT = true;
 		}
+		WaitTimer(300);
 	}
 
 	return 0;
@@ -974,6 +975,7 @@ namespace {
 				GAME_y = game_menu_base_pos_y;
 				Config = 0;
 			}
+			WaitTimer(300);
 		}
 	}
 }

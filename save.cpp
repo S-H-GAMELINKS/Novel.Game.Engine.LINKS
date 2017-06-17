@@ -197,6 +197,7 @@ namespace {
 
 				//セーブデータ１にセーブ
 				SAVEDATA_1_SAVE();
+				WaitTimer(300);
 			}
 
 			//セーブデータ２にセーブ
@@ -204,6 +205,7 @@ namespace {
 
 				//セーブデータ２にセーブ
 				SAVEDATA_2_SAVE();
+				WaitTimer(300);
 			}
 
 			//セーブデータ３にセーブ
@@ -211,6 +213,7 @@ namespace {
 
 				//セーブデータ３にセーブ
 				SAVEDATA_3_SAVE();
+				WaitTimer(300);
 			}
 
 			//画面に戻る
@@ -223,6 +226,7 @@ namespace {
 					SHORTCUT_KEY_DRAW();
 					break;
 				}
+				WaitTimer(100);
 			}
 		}
 	}
@@ -345,6 +349,7 @@ namespace {
 
 				//セーブデータ１をロード
 				SAVEDATA_1_LOAD();
+				WaitTimer(300);
 			}
 
 			//セーブデータ２のロード
@@ -352,6 +357,7 @@ namespace {
 
 				//セーブデータ2をロード
 				SAVEDATA_2_LOAD();
+				WaitTimer(300);
 			}
 
 			//セーブデータ３のロード
@@ -359,6 +365,7 @@ namespace {
 
 				//セーブデータ2をロード
 				SAVEDATA_3_LOAD();
+				WaitTimer(300);
 			}
 
 			//戻る
@@ -371,6 +378,7 @@ namespace {
 					SHORTCUT_KEY_DRAW();
 					break;
 				}
+				WaitTimer(100);
 			}
 		}
 	}
@@ -472,18 +480,21 @@ namespace {
 
 				//セーブデータ1削除処理
 				SAVEDATA_1_DELETE();
+				WaitTimer(300);
 			}
 
 			if (SAVE_y == (save_base_pos_y * 2) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 2) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
 				//セーブデータ2削除処理
 				SAVEDATA_2_DELETE();
+				WaitTimer(300);
 			}
 
 			if (SAVE_y == (save_base_pos_y * 3) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 3) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 
 				//セーブデータ3削除処理
 				SAVEDATA_3_DELETE();
+				WaitTimer(300);
 			}
 
 			if (SAVE_y == (save_base_pos_y * 4) && CheckHitKey(KEY_INPUT_RETURN) == 1 || SAVE_y == (save_base_pos_y * 4) && (GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
@@ -493,8 +504,10 @@ namespace {
 
 					//ショートカットキー時の事後処理
 					SHORTCUT_KEY_DRAW();
+					WaitTimer(300);
 					break;
 				}
+				WaitTimer(100);
 			}
 		}
 	}
