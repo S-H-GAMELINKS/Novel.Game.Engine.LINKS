@@ -497,9 +497,9 @@ namespace {
 #endif
 			fwrite(&Data, sizeof(Data), 1, fp); // SaveData_t構造体の中身を出力
 			fclose(fp);//ファイルを閉じる
-		}
 
-		MessageBoxOk("セーブしました！");
+			MessageBoxOk("セーブしました！");
+		}
 
 		return 0;
 
