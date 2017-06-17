@@ -990,7 +990,7 @@ void CONFIG() {
 
 		ClearDrawScreen();
 
-		WaitTimer(300);
+		WaitTimer(300);//キー判定消去待ち目的ではない(CONFIG画面描画の遅延処理)
 
 		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && Config == 1) {
 
@@ -1656,7 +1656,7 @@ namespace {
 
 				SetDrawScreen(DX_SCREEN_FRONT);
 
-				WaitTimer(300);
+				WaitTimer(300);//キー判定消去待ち目的ではない(自動改ページの遅延処理)
 				ClearDrawScreen();
 				DrawPointY = 0;
 				DrawPointX = 0;
@@ -1692,7 +1692,7 @@ namespace {
 
 				SetDrawScreen(DX_SCREEN_FRONT);
 
-				WaitTimer(300);
+				WaitTimer(300);//キー判定消去待ち目的ではない(自動改ページの遅延処理)
 				ClearDrawScreen();
 				DrawPointY = 400;
 				DrawPointX = 0;

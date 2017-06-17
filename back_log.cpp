@@ -56,7 +56,7 @@ void BACKLOG_DRAW() noexcept {
 	//バックログ参照メッセージ
 	if (backLogMessage() == IDYES) {
 
-		WaitTimer(600);
+		WaitTimer(600);//キー判定消去待ち目的ではない
 
 		LOG = 1;
 

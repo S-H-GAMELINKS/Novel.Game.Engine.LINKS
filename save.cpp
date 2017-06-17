@@ -47,7 +47,7 @@ namespace {
 		SAVESNAP3 = LoadGraph("DATA/SAVE/SAVESNAP3.png");
 		SAVETITLE = LoadGraph("DATA/BACKGROUND/SAVE.png");
 
-		WaitTimer(600);
+		WaitTimer(600);//キー判定消去待ち目的ではない(セーブデータ画面の描画遅延処理)
 	}
 
 	//セーブ後のメッセージ
@@ -226,7 +226,7 @@ namespace {
 					SHORTCUT_KEY_DRAW();
 					break;
 				}
-				WaitTimer(100);
+				WaitTimer(300);
 			}
 		}
 	}
@@ -378,7 +378,7 @@ namespace {
 					SHORTCUT_KEY_DRAW();
 					break;
 				}
-				WaitTimer(100);
+				WaitTimer(300);
 			}
 		}
 	}
@@ -504,10 +504,10 @@ namespace {
 
 					//ショートカットキー時の事後処理
 					SHORTCUT_KEY_DRAW();
-					WaitTimer(300);
+					WaitTimer(300);//キー判定消去待ち目的ではない
 					break;
 				}
-				WaitTimer(100);
+				WaitTimer(300);
 			}
 		}
 	}

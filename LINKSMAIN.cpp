@@ -63,7 +63,7 @@ void DXLib_POST_PREP() {
 
 	//OP画面の削除
 	ClearDrawScreen();
-	WaitTimer(600);
+	WaitTimer(100);
 
 	//設定の読込
 	CONFIG_LOAD();
