@@ -1595,6 +1595,8 @@ namespace {
 			SP++;
 			CP++;
 		}
+		else
+			SP++;
 	}
 
 	//文字列の描画
