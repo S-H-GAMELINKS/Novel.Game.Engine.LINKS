@@ -3,6 +3,8 @@
   https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
   This software is released under the MIT License, see LICENSE.
 =============================================================================*/
+#define WIN32_LEAN_AND_MEAN
+
 #include "save.hpp"
 #include "DEF.h"
 #include "utility.hpp"

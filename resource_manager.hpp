@@ -7,6 +7,7 @@
 #define LINKS_RESOURCE_MANAGER_HPP_
 #include <cstddef>
 #ifdef __c2__
+#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #endif
 #include <tchar.h>

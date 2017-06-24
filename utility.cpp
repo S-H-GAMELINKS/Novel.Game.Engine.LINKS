@@ -3,6 +3,8 @@
   https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS
   This software is released under the MIT License, see LICENSE.
 =============================================================================*/
+#define WIN32_LEAN_AND_MEAN
+
 #include "utility.hpp"
 #include <DxLib.h>
 int MessageBoxYesNo(LPCTSTR lpText) noexcept

@@ -6,6 +6,8 @@
 #ifndef LINKS_GAME_H_
 #define LINKS_GAME_H_
 
+#define WIN32_LEAN_AND_MEAN
+
 #include <Windows.h>
 #include "DEF.h"
 #include "utility.hpp"
