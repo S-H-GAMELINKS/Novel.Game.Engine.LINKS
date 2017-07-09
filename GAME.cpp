@@ -12,6 +12,9 @@
 #include <initializer_list>
 #include <cassert>
 #include <type_traits>
+#include <string>
+#include <vector>
+#include <fstream>
 #include "resource_manager.hpp"
 #include "back_log.hpp"
 #include "save.hpp"
@@ -25,7 +28,7 @@ int DrawPointX = 0, DrawPointY = 0;
 int SP = 0, CP = 0;
 
 //スクリプト用読込配列
-char String[script_line_num_lim][script_line_string_len_lim];
+static std::vector<std::string> String;
 
 //タイトル関連
 int TITLE;
@@ -39,8 +42,7 @@ static_assert(
 static int GAMEOVER;
 
 //選択肢読込変数
-static char ChoiceStrings[2][script_line_string_len_lim];
-static int Choices[2];
+static std::string ChoiceStrings[2];
 static constexpr const char* const ChoiceFiles[][2] = {
 	{ "DATA/STR/CHOICE/A.txt", "DATA/STR/CHOICE/B.txt" },
 	{ "DATA/STR/CHOICE/C.txt", "DATA/STR/CHOICE/D.txt" },
@@ -170,9 +172,9 @@ int SCRIPT_READ() {
 	};
 	if (0 < EndFlag && EndFlag <= countof(ScriptFileNames)) {
 		// スクリプトファイルを開く
-		const int ScriptFile = FileRead_open(ScriptFileNames[EndFlag - 1]);
-		for (auto&& s : String) FileRead_gets(s, countof(s), ScriptFile);
-		FileRead_close(ScriptFile);
+		String.clear();
+		std::ifstream file(ScriptFileNames[EndFlag - 1], std::ios::binary | std::ios_base::in);
+		for (std::string buf; std::getline(file, buf); ) String.emplace_back(std::move(buf));
 	}
 	return 0;
 }
@@ -1196,7 +1198,7 @@ void sentakusi(unsigned int color, int y) {
 
 	//選択肢の描画
 	for (std::size_t i : {0, 1}) {
-		DrawString(choise_pos_x + cursor_move_unit, choise_pos_y[i], ChoiceStrings[i], color);
+		DrawString(choise_pos_x + cursor_move_unit, choise_pos_y[i], ChoiceStrings[i].c_str(), color);
 	}
 }
 
@@ -1391,9 +1393,9 @@ namespace {
 	//選択肢ファイルの読み込み(描画用)
 	void SCRIPT_OUTPUT_CHOICE_READ() {
 		if (1 <= EndFlag && EndFlag <= 7) {
-			for (int i : {0, 1}) {
-				Choices[i] = FileRead_open(ChoiceFiles[EndFlag - 1][i]);
-				FileRead_gets(ChoiceStrings[i], countof(ChoiceStrings[i]), Choices[i]);
+			for (std::size_t i : {0, 1}) {
+				std::ifstream file(ChoiceFiles[EndFlag - 1][i], std::ios::binary | std::ios_base::in);
+				std::getline(file, ChoiceStrings[i]);
 			}
 		}
 	}
@@ -1435,9 +1437,9 @@ namespace {
 	void SCRIPT_OUTPUT_CHOICE_BACKLOG_CHOICE_READ() {
 		if (2 <= EndFlag && EndFlag <= 15) {
 			const int index = EndFlag / 2;
-			for (int i : {0, 1}) {
-				Choices[i] = FileRead_open(ChoiceFiles[index][i]);
-				FileRead_gets(ChoiceStrings[i], countof(ChoiceStrings[i]), Choices[i]);
+			for (std::size_t i : {0, 1}) {
+				std::ifstream file(ChoiceFiles[index][i], std::ios::binary | std::ios_base::in);
+				std::getline(file, ChoiceStrings[i]);
 			}
 		}
 	}
@@ -1581,8 +1583,7 @@ namespace {
 		if (ConfigData.soundnovel_winownovel == 1) {
 			char CHARACTER_NAME[10] = {};
 			//キャラクター名を読み込む
-			static_assert(10 <= countof(CHARACTER_NAME) && 10 <= countof(String[0]), "array length must be over 10");
-			assert(0 < CP && std::size_t(CP + 10) <= countof(String[SP]));
+			assert(0 < CP && std::size_t(CP + 10) <= String[SP].size());
 			memcpy(CHARACTER_NAME, &String[SP][CP + 1], 9);
 			CHARACTER_NAME[9] = '\0';
 
@@ -1591,7 +1592,6 @@ namespace {
 			DrawBox(30, 360, 150, 385, windowColor, TRUE);
 
 			static const auto charColor = GetColor(255, 255, 255);
-			// １文字描画
 			DrawString(30, 360, CHARACTER_NAME, charColor);
 
 			SP++;
@@ -1604,6 +1604,7 @@ namespace {
 	//文字列の描画
 	void SCRIPT_OUTPUT_STRING_DRAW() {
 		//TODO: https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS/issues/3
+		assert(std::size_t(CP + 1) <= String[SP].size());
 		// １文字分抜き出す
 		OneMojiBuf[0] = String[SP][CP];
 		OneMojiBuf[1] = String[SP][CP + 1];
@@ -1711,6 +1712,7 @@ namespace {
 
 	//動画再生処理
 	void MOVIE_START() noexcept {
+		assert(std::size_t(CP + 1) <= String[SP].size());
 		if (isdigit(String[SP][CP]) && isdigit(String[SP][CP + 1])) {
 			const size_t CharactorNumber = (ctoui(String[SP][CP]) * 10) + ctoui(String[SP][CP + 1]) - 1;
 			if (99 <= CharactorNumber) return;
@@ -1748,13 +1750,8 @@ namespace {
 
 //スクリプトタグ処理(メイン)関数
 int SCRIPT_OUTPUT() {
-
-	char  Moji;
-
-	// 文字の描画
-	Moji = String[SP][CP];
-
-	switch (Moji)
+	assert(std::size_t(CP + 1) <= String[SP].size());
+	switch (String[SP][CP])
 	{
 
 		//キャラクター描画処理
@@ -1918,6 +1915,17 @@ int SCRIPT_OUTPUT() {
 	return 0;
 }
 
+//参照文字列処理
+void WORD_FORMAT() {
+
+	// 参照文字列の終端まで行っていたら参照文字列を進める
+	if (String[SP].size() == CP)
+	{
+		SP++;
+		CP = 0;
+	}
+}
+
 //初期化
 int FORMAT() {
 
@@ -1928,9 +1936,6 @@ int FORMAT() {
 	// 参照文字位置をセット
 	SP = 0;	// １行目の
 	CP = 0;	// ０文字
-	for (int i : {0, 1}) {
-		FileRead_close(Choices[i]);
-	}
 	return 0;
 }
 

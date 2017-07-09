@@ -158,17 +158,6 @@ void TITLE_MENU() {
 	}
 }
 
-//参照文字列処理
-void WORD_FORMAT() {
-
-	// 参照文字列の終端まで行っていたら参照文字列を進める
-	if (String[SP][CP] == '\0')
-	{
-		SP++;
-		CP = 0;
-	}
-}
-
 static void GameLoopType1(const int RouteNumber, int32_t& TextIgnoredFlag){
 	if (TextIgnoredFlag == 0) disableSkip();
 	SCRIPT_READ();
