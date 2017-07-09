@@ -12,6 +12,9 @@
 #include <initializer_list>
 #include <cassert>
 #include <type_traits>
+#include <string>
+#include <vector>
+#include <fstream>
 #include "resource_manager.hpp"
 #include "back_log.hpp"
 #include "save.hpp"
@@ -25,7 +28,7 @@ int DrawPointX = 0, DrawPointY = 0;
 int SP = 0, CP = 0;
 
 //スクリプト用読込配列
-char String[script_line_num_lim][script_line_string_len_lim];
+static std::vector<std::string> String;
 
 //タイトル関連
 int TITLE;
@@ -170,9 +173,9 @@ int SCRIPT_READ() {
 	};
 	if (0 < EndFlag && EndFlag <= countof(ScriptFileNames)) {
 		// スクリプトファイルを開く
-		const int ScriptFile = FileRead_open(ScriptFileNames[EndFlag - 1]);
-		for (auto&& s : String) FileRead_gets(s, countof(s), ScriptFile);
-		FileRead_close(ScriptFile);
+		String.clear();
+		std::ifstream file(ScriptFileNames[EndFlag - 1], std::ios::binary | std::ios_base::in);
+		for (std::string buf; std::getline(file, buf); ) String.emplace_back(std::move(buf));
 	}
 	return 0;
 }
@@ -1581,8 +1584,7 @@ namespace {
 		if (ConfigData.soundnovel_winownovel == 1) {
 			char CHARACTER_NAME[10] = {};
 			//キャラクター名を読み込む
-			static_assert(10 <= countof(CHARACTER_NAME) && 10 <= countof(String[0]), "array length must be over 10");
-			assert(0 < CP && std::size_t(CP + 10) <= countof(String[SP]));
+			assert(0 < CP && std::size_t(CP + 10) <= String[SP].size());
 			memcpy(CHARACTER_NAME, &String[SP][CP + 1], 9);
 			CHARACTER_NAME[9] = '\0';
 
@@ -1591,7 +1593,6 @@ namespace {
 			DrawBox(30, 360, 150, 385, windowColor, TRUE);
 
 			static const auto charColor = GetColor(255, 255, 255);
-			// １文字描画
 			DrawString(30, 360, CHARACTER_NAME, charColor);
 
 			SP++;
