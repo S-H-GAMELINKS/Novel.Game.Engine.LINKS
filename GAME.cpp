@@ -1604,6 +1604,7 @@ namespace {
 	//文字列の描画
 	void SCRIPT_OUTPUT_STRING_DRAW() {
 		//TODO: https://github.com/S-H-GAMELINKS/Novel.Game.Engine.LINKS/issues/3
+		assert(std::size_t(CP + 1) <= String[SP].size());
 		// １文字分抜き出す
 		OneMojiBuf[0] = String[SP][CP];
 		OneMojiBuf[1] = String[SP][CP + 1];
@@ -1711,6 +1712,7 @@ namespace {
 
 	//動画再生処理
 	void MOVIE_START() noexcept {
+		assert(std::size_t(CP + 1) <= String[SP].size());
 		if (isdigit(String[SP][CP]) && isdigit(String[SP][CP + 1])) {
 			const size_t CharactorNumber = (ctoui(String[SP][CP]) * 10) + ctoui(String[SP][CP + 1]) - 1;
 			if (99 <= CharactorNumber) return;
@@ -1748,13 +1750,8 @@ namespace {
 
 //スクリプトタグ処理(メイン)関数
 int SCRIPT_OUTPUT() {
-
-	char  Moji;
-
-	// 文字の描画
-	Moji = String[SP][CP];
-
-	switch (Moji)
+	assert(std::size_t(CP + 1) <= String[SP].size());
+	switch (String[SP][CP])
 	{
 
 		//キャラクター描画処理
@@ -1922,7 +1919,7 @@ int SCRIPT_OUTPUT() {
 void WORD_FORMAT() {
 
 	// 参照文字列の終端まで行っていたら参照文字列を進める
-	if (String[SP][CP] == '\0')
+	if (String[SP].size() == CP)
 	{
 		SP++;
 		CP = 0;
