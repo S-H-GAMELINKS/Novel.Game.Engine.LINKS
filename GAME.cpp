@@ -173,8 +173,8 @@ int SCRIPT_READ() {
 	if (0 < EndFlag && EndFlag <= countof(ScriptFileNames)) {
 		// スクリプトファイルを開く
 		String.clear();
-		std::ifstream file(ScriptFileNames[EndFlag - 1], std::ios::binary | std::ios_base::in);
-		for (std::string buf; std::getline(file, buf); ) String.emplace_back(std::move(buf));
+		std::ifstream file(ScriptFileNames[EndFlag - 1], std::ios_base::in);
+		for (std::string buf; std::getline(file, buf); ) if(!buf.empty()) String.emplace_back(std::move(buf));
 	}
 	return 0;
 }
@@ -1394,7 +1394,7 @@ namespace {
 	void SCRIPT_OUTPUT_CHOICE_READ() {
 		if (1 <= EndFlag && EndFlag <= 7) {
 			for (std::size_t i : {0, 1}) {
-				std::ifstream file(ChoiceFiles[EndFlag - 1][i], std::ios::binary | std::ios_base::in);
+				std::ifstream file(ChoiceFiles[EndFlag - 1][i], std::ios_base::in);
 				std::getline(file, ChoiceStrings[i]);
 			}
 		}
@@ -1438,7 +1438,7 @@ namespace {
 		if (2 <= EndFlag && EndFlag <= 15) {
 			const int index = EndFlag / 2;
 			for (std::size_t i : {0, 1}) {
-				std::ifstream file(ChoiceFiles[index][i], std::ios::binary | std::ios_base::in);
+				std::ifstream file(ChoiceFiles[index][i], std::ios_base::in);
 				std::getline(file, ChoiceStrings[i]);
 			}
 		}
@@ -1919,7 +1919,7 @@ int SCRIPT_OUTPUT() {
 void WORD_FORMAT() {
 
 	// 参照文字列の終端まで行っていたら参照文字列を進める
-	if (String[SP].size() == CP)
+	if (0 < CP && String[SP].size() == std::size_t(CP))
 	{
 		SP++;
 		CP = 0;
