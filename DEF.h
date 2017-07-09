@@ -11,7 +11,6 @@
 // 文字のサイズ
 constexpr int font_size = 21;
 
-constexpr std::size_t script_line_string_len_lim = 1024;
 //タイトルメニュー位置
 constexpr int title_menu_game_start_pos_y = 300;
 constexpr int title_menu_game_load_pos_y = 330;
