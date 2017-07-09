@@ -1918,6 +1918,17 @@ int SCRIPT_OUTPUT() {
 	return 0;
 }
 
+//参照文字列処理
+void WORD_FORMAT() {
+
+	// 参照文字列の終端まで行っていたら参照文字列を進める
+	if (String[SP][CP] == '\0')
+	{
+		SP++;
+		CP = 0;
+	}
+}
+
 //初期化
 int FORMAT() {
 
