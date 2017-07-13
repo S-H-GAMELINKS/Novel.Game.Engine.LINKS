@@ -418,7 +418,7 @@ int SKIP_READ_LOAD()
 //SKIP_READ SAVE関数
 int SKIP_READ_SAVE()
 {
-		FILE *fp;
+	FILE *fp;
 #ifdef LINKS_HAS_FOPEN_S
 	const errno_t er = fopen_s(&fp, "DATA/SAVE/SKIP_READ.dat", "wb");
 	if (0 != er || nullptr == fp) {
