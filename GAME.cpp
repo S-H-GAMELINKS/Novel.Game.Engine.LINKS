@@ -230,10 +230,8 @@ void WINDOWNOVEL() noexcept {
 		DrawPointY = 400;
 		DrawPointX = 0;
 
-		if (SP != 0) {
-			SP = SP - 1;
-			CP = EOF;
-		}
+		if (SP != 0)
+			CP = 0;
 
 		if (SP == 0) {
 			SP = 0;
@@ -241,10 +239,8 @@ void WINDOWNOVEL() noexcept {
 		}
 
 		//選択肢ループの場合
-		if (SAVE_CHOICE == 1) {
-			SP = SP + 1;
+		if (SAVE_CHOICE == 1)
 			CP = 0;
-		}
 	}
 }
 
