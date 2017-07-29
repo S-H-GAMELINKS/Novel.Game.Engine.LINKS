@@ -129,6 +129,8 @@ void TITLE_MENU() {
 	//タイトルメニュー
 	if (EndFlag == 99) {
 
+		GAMEMENU_COUNT = false;
+
 		while (ProcessMessage() == 0 && MoveKey(Key) == 0 && EndFlag == 99) {
 
 			//タイトル表示
